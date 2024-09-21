@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {getInfo, getProduct} from '../redux/actions'
 import Header from '../components/Header'
-import Carousel from '../components/carousel/Carousel'
+import MyCarousel from '../components/carousel/Carousel'
 import Footer from '../components/Footer'
 
 
@@ -23,8 +23,8 @@ const Landing = () => {
     <Header/>
     <section className='px-3'>
       <div className='caption-title'>
-        <h1>{info.title}</h1>
-        <p>{info.description}</p>
+        <h1>{info?.title}</h1>
+        <p>{info?.description}</p>
         <p className='lead'>
           <Link className='btn btn-lg btn-ligth fw-bold border-white bg-white ' to='/error'>
             Vea más...
@@ -37,15 +37,15 @@ const Landing = () => {
     </div>
     <div className='my-1'></div>
     <section>
-    <Carousel info={products}/>
+    <MyCarousel info={products}/>
     <div className='container marketing'>
       <div className='row'>
         {products?.map((info)=>
         <div className='col-lg-4' key={info.id}>
-          <img className='bd-placeholder-img-fluid'  src={info.landing} alt='Imagen' style={{maxWidth:'20rem'}}/>
+          <img className='bd-placeholder-img-fluid'  src={info?.landing} alt='Imagen' style={{maxWidth:'20rem'}}/>
           <h2 className='fw-normal'>{info.title}</h2>
-          <p>{info.infoHeader}</p>
-          <p><Link className='btn btn-secondary' to={`/detalle/${info.id}`}>Ver detalles</Link></p>
+          <p>{info?.infoHeader}</p>
+          <p><Link className='btn btn-secondary' to={`/detalle/${info?.id}`}>Ver detalles</Link></p>
         </div>
         )}
       </div>

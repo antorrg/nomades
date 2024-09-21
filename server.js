@@ -24,7 +24,7 @@ configureCloudinary({
 });
 server.use(morgan("dev"));
 server.use(cors());
-server.use(helmet())
+//server.use(helmet())
 server.use(express.json());
 server.use(sm.validJson);
 server.use(express.static(path.join(dirname, 'dist')))
@@ -34,7 +34,7 @@ server.use(mainRouter)
 
 
 server.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    res.sendFile(path.join(dirname, 'dist', 'index.html'));
   });
 
 server.use(sm.lostRoute);
