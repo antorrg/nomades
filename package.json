@@ -12,9 +12,11 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "@vitejs/plugin-react": "^4.3.1",
     "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "cloudinary": "^2.5.0",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
@@ -41,8 +43,7 @@
     "sequelize": "^6.37.3",
     "sweetalert2": "^11.14.0",
     "uuid": "^10.0.0",
-    "vite": "^5.4.7",
-    "@vitejs/plugin-react": "^4.3.1"
+    "vite": "^5.4.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
@@ -55,6 +56,5 @@
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
     "nodemon": "^3.1.7"
-   
   }
 }

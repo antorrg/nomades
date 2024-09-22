@@ -17,8 +17,8 @@ const MyCarousel = ({ info }) => {
             <h3>{item.title}</h3>
             <p>{item.infoHeader}</p>
             <p>
-              <a className="btn btn-lg btn-primary" href={item.url} target="_blank" rel="noreferrer">
-                Visite el sitio
+              <a className="btn btn-lg btn-primary" href={`/detalle/${item.id}`} rel="noreferrer">
+                Vea mas...
               </a>
             </p>
           </Carousel.Caption>

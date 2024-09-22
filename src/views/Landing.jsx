@@ -26,7 +26,7 @@ const Landing = () => {
         <h1>{info?.title}</h1>
         <p>{info?.description}</p>
         <p className='lead'>
-          <Link className='btn btn-lg btn-ligth fw-bold border-white bg-white ' to='/error'>
+          <Link className='btn btn-lg btn-ligth fw-bold border-white bg-white ' to='/error'  state={{ status: 404, message: "Página no encontrada" }}>
             Vea más...
         </Link>
         </p>

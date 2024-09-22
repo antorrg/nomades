@@ -6,7 +6,8 @@ import * as View from './views/Index'
 
 function App() {
   const {authenticated, user, logout}= useAuth()
-
+ //console.log('validado? :', authenticated)
+ //console.log('user: ',user)
  useEffect(()=>{
   interceptor(logout)
  },[])

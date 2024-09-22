@@ -1,19 +1,24 @@
-import React from 'react'
+import {Link, useNavigate} from 'react-router-dom'
+import {useAuth} from '../Auth/AuthContext/AuthContext'
 
 const Header = () => {
+  const {authenticated, logout}= useAuth()
+  const navigate = useNavigate()
   return (
     <header className='mb-auto'>
       <div>
         <h3 className='float-md-start mb-0 caption-nav colon-link'>
             Nomades
-            <a className='nav-link' href='/error'>: </a>
+            <a className='nav-link' href='/login'>: </a>
             Cabañas de pastores
         </h3>
         <nav className='nav nav-masthead justify-content-center float-md-end caption-nav'>
             <a className='nav-link fw-bold py-1 px-0 active' aria-current='page' href='/'>Home</a>
-            <a className='nav-link fw-bold py-1 px-0 active' href='/error'>Login</a>
-            <a className='nav-link fw-bold py-1 px-0 active' href=''>Contacto</a>
-            <a className='nav-link fw-bold py-1 px-0 active' href=''>Acerca de </a>
+            {authenticated?
+            <button className='nav-link fw-bold py-1 px-0 active' onClick={()=>{navigate('/admin')}}>Admin</button> : null
+            }
+            <Link className='nav-link fw-bold py-1 px-0 active' to='/error' state={{ status: 404, message: "En contruccion" }}>Contacto</Link>
+            <Link className='nav-link fw-bold py-1 px-0 active' to='/error' state={{ status: 404, message: "En construccion (no sea impaciente carajo)" }}>Acerca de </Link>
         </nav>
      </div>
     </header>
