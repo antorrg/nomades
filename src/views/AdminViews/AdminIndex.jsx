@@ -1,7 +1,12 @@
-import MainView from "./MainView";
+import HelpView from "./HelpView";
 import ProductComp from "./ProductComp";
+import AdminNav from "./AdminNav";
+import WelcomeView from "./WelcomeView";
 
 export {
-    MainView,
+    HelpView,
     ProductComp,
+    AdminNav,
+    WelcomeView,
+    
 }

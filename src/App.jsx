@@ -5,15 +5,18 @@ import interceptor from './Interceptor'
 import * as View from './views/Index'
 
 function App() {
-  const {authenticated, user, logout}= useAuth()
+  const {authenticated, user, loading, logout}= useAuth()
  //console.log('validado? :', authenticated)
  //console.log('user: ',user)
  useEffect(()=>{
   interceptor(logout)
  },[])
 
-  const isAllowed = (roles) => {
-    return authenticated && roles.includes(user?.role);
+ if (loading) return <div>Loading...</div>
+
+ const isAllowed = (roles) => {
+   return authenticated && roles.includes(user?.role);
+    
   };
 
   return (
@@ -24,8 +27,12 @@ function App() {
       <Route path='/detalle/item/:id' element={<View.Item/>}/>
       <Route path='/contacto' element={<View.Contact/>}/>
       <Route path='/acerca' element={<View.About/>}/>
+      {authenticated? <Route path='/admin' element={ <View.Admin/>}/> : null}
+      {authenticated? <Route path='/admin/product' element={ <View.Admin/>}/> : null}
+      {authenticated? <Route path='/admin/product/:id' element={ <View.Admin/>}/> : null}
+      {authenticated? <Route path='/admin/user' element={ <View.Admin/>}/> : null}
+      {authenticated? <Route path='/admin/user/:id' element={ <View.Admin/>}/> : null}
       <Route path='/login' element={<View.Login/>}/>
-      <Route path='/admin' element={isAllowed(['Admin', 'Moderador', 'Super Admin']) ? <View.Admin/> : <Navigate to="/error" state={{ status: 403, message: "No tienes permiso para acceder a esta página" }}/>}/>
       <Route path='/error' element={<View.Error/>}/>
       <Route path='/*' element={<View.Error  state={{ status: 404, message: "Página no encontrada" }}/>}/>
     </Routes>

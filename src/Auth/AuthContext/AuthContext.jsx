@@ -6,6 +6,7 @@ const AuthContext = createContext();
 const AuthProvider = ({children,  initialAuthenticated = false, initialUser = null })=>{
     const [authenticated, setAuthenticated]= useState(initialAuthenticated);
     const [user, setUser]= useState(initialUser);
+    const [loading, setLoading] = useState(false)
 
 //*Con esta funcion prevenimos el deslogueo por refresh.
     useEffect(()=>{
@@ -15,6 +16,8 @@ const AuthProvider = ({children,  initialAuthenticated = false, initialUser = nu
             setAuthenticated(true)
             setUser(JSON.parse(storedUser))
         }
+         //window.location.reload();
+         setLoading(false)
     },[])
 
     const login = (userData, token) => { 
@@ -31,9 +34,10 @@ const AuthProvider = ({children,  initialAuthenticated = false, initialUser = nu
         setUser(null);
         //Limpiamos el token y el user
         localStorage.clear();
+        window.location.reload();
       }
     return(
-        <AuthContext.Provider value={{authenticated, user, login, logout}}>
+        <AuthContext.Provider value={{authenticated, user, loading, login, logout}}>
             {children}
         </AuthContext.Provider>
     )
