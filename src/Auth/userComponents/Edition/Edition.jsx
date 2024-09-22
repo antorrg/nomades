@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import style from './Edition.module.css'
-import { useAuth } from '../AuthContext/AuthContext';
+import { useAuth } from '../../AuthContext/AuthContext';
 
 const Edition = ({ allowedRoles = (allowedRoles), exception, text, onClick, className }) => {
   let customClass = className? className : style.button 

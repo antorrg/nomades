@@ -1,4 +1,14 @@
 
+.loginContainer {
+  margin-top:5%;
+  max-width: 25%
+}
+@media (max-width: 768px) {
+  .loginContainer {
+    min-width: 80%;
+    max-width: 90%;
+  }
+}
 
 
 .form-signin {

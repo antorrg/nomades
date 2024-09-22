@@ -51,8 +51,8 @@ const Login = () => {
   return (
   <div className="imageBack">
     <div className='coverBack'>
-      <div className="container-md modal-content colorBack rounded-4 shadow" style={{marginTop:'5%', maxWidth:'25%'}}>
-        <div className="form-signin m-auto">
+      <div className="container-md modal-content colorBack loginContainer rounded-4 shadow">
+        <div className="form-signin m-auto p-3">
           <section>
             <div className="d-flex justify-content-between align-items-center">
               <img className="mb-4" src="/vite.svg" alt="" width="72" height="57"/>

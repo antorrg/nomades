@@ -1,8 +1,11 @@
-import React from 'react'
+import * as Main from '../views/AdminViews/AdminIndex'
 
 const Contact = () => {
   return (
-    <div>Contact</div>
+    <div>
+      <Main.MainView/>
+      <Main.ProductComp/>
+      </div>
   )
 }
 
