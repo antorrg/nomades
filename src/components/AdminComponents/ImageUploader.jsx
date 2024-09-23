@@ -29,11 +29,12 @@ const ImageUploader = () => {
 
     const formData = new FormData();
     formData.append('image', file);
-
+    const token = localStorage.getItem('validToken')
     try {
-      const response = await axios.post('/api/upload-image', formData, {
+      const response = await axios.post('/api/v1/imgupload', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          'x-access-token':`${token}`
         }
       });
       setImageUrl(response.data.url);

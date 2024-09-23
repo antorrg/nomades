@@ -7,7 +7,7 @@ import setAuthHeader from '../userComponents/axiosUtils'
               const id = userData.id;
               const password = userData.password;
               try {
-                  const response = await axios.post(`/user`,{
+                  const response = await axios.post(`/api/v1/user/update`,{
                       id,
                       password,
                   }, setAuthHeader());
@@ -30,7 +30,7 @@ import setAuthHeader from '../userComponents/axiosUtils'
      //Lógica para guardar los cambios (puedes conectarlo a tus acciones de Redux)
     try {
       // Realiza la solicitud PUT con Axios
-        const response = await axios.put(`/user/${id}`,passChange, setAuthHeader());
+        const response = await axios.put(`/api/v1/user/update/${id}`,passChange, setAuthHeader());
                           
       if (response.status === 200) {
         showSuccess('Usuario actualizado con éxito. Inicie sesion nuevamente')
@@ -49,8 +49,8 @@ import setAuthHeader from '../userComponents/axiosUtils'
   };
 
   const onResetPass = async (id) => {
-    try {
-      const response = await axios.patch(`/user/${id}`, null, setAuthHeader());
+    try {//cambiar a post
+      const response = await axios.patch(`/api/v1/user/change/${id}`, null, setAuthHeader());
       if (response.status === 200) {
         showSuccess("Contraseña actualizada con exito");
         onClose(); // Cierra el modal después de guardar los cambios

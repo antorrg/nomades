@@ -10,14 +10,14 @@ export default async function createUser (userData, onClose) {
   const password = userData.password;
   const confirmPassword = userData.confirmPassword
   try {
-    const response = await axios.post(`/user/create`, {
+    const response = await axios.post(`api/v1/user/create`, {
         email,
         password,
     })
     if (response.status === 201) {
       //const token = response.data.token;
       const user = response.data.data;
-       showSuccess('User created successfully')
+       showSuccess('¡Usuario creado exitosamente')
         onClose()
         //console.log(user)
         return user;

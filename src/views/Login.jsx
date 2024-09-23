@@ -58,7 +58,7 @@ const Login = () => {
               <img className="mb-4" src="/vite.svg" alt="" width="72" height="57"/>
               <button type="button" onClick={closeLogin}className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <h1 className="h3 mb-3 fw-normal">Por favor validese</h1>
+            <h1 className="h3 mb-3 fw-normal">Inicie sesion</h1>
             <div className="form-floating">
                <input type="email" className="form-control" value={input.email} name="email" placeholder="name@example.com"onChange={(event) => handleChange(event)}/>
                <label for="floatingInput">Email address</label>
@@ -72,7 +72,7 @@ const Login = () => {
               </button>
               {error.password && <p className='errorMsg'>{error.password}</p>}
             </div>
-            <button className="btn btn-primary w-100 py-2" onClick={handleSubmit} disabled={permit}>Sign in</button>
+            <button className="btn btn-primary w-100 py-2" onClick={handleSubmit} disabled={permit}>Iniciar</button>
             <br></br>
             <br></br>
             <br></br>

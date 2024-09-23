@@ -13,7 +13,7 @@ const MyCarousel = ({ info }) => {
             src={item.landing}
             alt={item.title}
           />
-          <Carousel.Caption>
+          <Carousel.Caption className='carousel-caption'>
             <h3>{item.title}</h3>
             <p>{item.infoHeader}</p>
             <p>

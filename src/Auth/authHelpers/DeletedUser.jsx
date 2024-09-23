@@ -5,7 +5,7 @@ import setAuthHeader from '../userComponents/axiosUtils'
 
 export default async function onDeleteUser (id) {
     try {
-      const response = await axios.delete(`/user/${id}`, setAuthHeader());
+      const response = await axios.delete(`api/v1/user/${id}`, setAuthHeader());
       if (response.status === 200) {
         showSuccess("Usuario eliminado con exito");
         onClose(); // Cierra el modal después de guardar los cambios

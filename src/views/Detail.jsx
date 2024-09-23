@@ -22,7 +22,7 @@ const Detail = () => {
         <div className="row py-lg-5">
           <div className="col-lg-6 col-md-8 mx-auto">
             <h1 className="fw-light">Proyecto: {info?.title}</h1>
-            <p className="lead.text-muted">{info?.infoBody}</p>
+            <p className="lead text-muted">{info?.infoBody}</p>
             <Link className="btn btn-secondary my-2" to="/">
               Volver
             </Link>

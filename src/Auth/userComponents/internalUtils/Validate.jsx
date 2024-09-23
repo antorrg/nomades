@@ -10,20 +10,20 @@ const ValidLogin = (input) => {
   
   // Validaciones para el campo de email
   if (!input.email.trim()) {
-    errors.email = "This field cannot be empty";
+    errors.email = "Este campo no puede estar vacio";
   } else if (!validEmail.test(input.email.trim())) {
-    errors.email = "Invalid email format";
+    errors.email = "Formato de email invalido";
   } else if (input.email.length >= 50) {
-    errors.email = "The email is too long";
+    errors.email = "El email es muy largo";
   }
 
   // Validaciones para el campo de contraseña
   if (!input.password.trim()) {
-    errors.password = "This field cannot be empty";
+    errors.password = "Este campo no puede estar vacio";
   } else if (!validPass.test(input.password.trim())) {
-    errors.password = "Password must contain at least one uppercase letter and one digit";
+    errors.password = "La contrasena debe contener al menos una mayuscula y un numero";
   } else if (input.password.length < 8) {
-    errors.password = "Password must be at least 8 characters long";
+    errors.password = "La contrasena debe tener al menos 8 caracteres";
   }
 
   return errors;
@@ -42,23 +42,23 @@ const ValidCreate = (input) => {
     
     // Validaciones para el campo de email
     if (!input.email.trim()) {
-      errors.email = "This field cannot be empty";
+      errors.email = "Este campo no puede estar vacio";
     // } else if (avoidRepetition.length !== 0) {
     //   errors.email = "Please choose another email, it already exists";
     } else if (!validEmail.test(input.email.trim())) {
-      errors.email = "Invalid email format";
+      errors.email = "Formato de email invalido";
     } else if (input.email.length >= 50) {
-      errors.email = "The email is too long";
+      errors.email = "El email es muy largo";
     }
     // Validaciones para el campo de contraseña
     if (!input.password.trim()) {
-      errors.password = "This field cannot be empty";
+      errors.password = "Este campo no puede estar vacio";
     } else if (!validPass.test(input.password.trim())) {
-      errors.password = "Password must contain at least one uppercase letter and one digit";
+      errors.password = "La contrasena debe contener al menos una mayuscula y un numero";
     } else if (input.password.length < 8) {
-      errors.password = "Password must be at least 8 characters long";
+      errors.password = "La contrasena debe tener al menos 8 caracteres";
     } else if (input.password !== input.confirmPassword) {
-      errors.confirmPassword = "Passwords do not match";
+      errors.confirmPassword = "Las contrasenas no coinciden";
     }
     
   
@@ -74,11 +74,11 @@ const ValidPass = (input)=>{
     if (!input.newPassword.trim()) {
       errors.newPassword = "Este campo no puede estar vacio";
     } else if (!validatePassword.test(input.newPassword.trim())) {
-      errors.newPassword = "La contraseña debe contener al menos una mayuscula y un numero";
+      errors.newPassword = "La contrasena debe contener al menos una mayuscula y un numero";
     } else if (input.newPassword.length < 8) {
-      errors.newPassword = "La contraseña debe tener mas de 8 letras";
+      errors.newPassword = "La contrasena debe tener mas de 8 letras";
     } else if (input.newPassword !== input.confirmPassword) {
-      errors.confirmPassword = "Las contraseñas no coinciden";
+      errors.confirmPassword = "Las contrasenas no coinciden";
     }
     return errors;
 }

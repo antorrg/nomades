@@ -1,7 +1,7 @@
 import createUser from './CreateUser'
 import loginUser from './LoginUser'
 import { verifyPassword, changePassword, onResetPass } from './Password'
-import updateUser from './UpdateUser'
+import {updateUser, upgradeUser} from './UpdateUser'
 import onDeleteUser from './DeletedUser'
 
 
@@ -12,5 +12,6 @@ export {
   changePassword,
   onResetPass,
   updateUser,
+  upgradeUser,
   onDeleteUser,
 }

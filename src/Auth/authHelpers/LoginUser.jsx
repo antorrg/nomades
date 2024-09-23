@@ -19,13 +19,13 @@ export default async function loginUser (userData,login, succesLogin) {
           succesLogin()
           //console.log(token)
           //console.log("Token almacenado en localStorage:", localStorage.getItem('validToken'));
-            showSuccess('Login sucessfully')
+            showSuccess('¡Verificacion exitosa!')
             //console.log('token:',token)
             //console.log('user: ',user)
            return user;
         }
         } catch (error) {
-          showError('Login fallido')
+          showError('Verificacion fallida')
           HandlError(error);
           throw error;
         }
