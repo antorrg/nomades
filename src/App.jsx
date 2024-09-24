@@ -3,6 +3,7 @@ import {useAuth} from './Auth/AuthContext/AuthContext'
 import { useEffect } from 'react'
 import interceptor from './Interceptor'
 import * as View from './views/Index'
+import * as Ad from './views/AdminViews/AdminIndex'
 
 function App() {
   const {authenticated, user, loading, logout}= useAuth()
@@ -28,9 +29,10 @@ function App() {
       <Route path='/contacto' element={<View.Contact/>}/>
       <Route path='/acerca' element={<View.About/>}/>
       {authenticated? <Route path='/admin' element={ <View.Admin/>}/> : null}
-      {authenticated? <Route path='/admin/product' element={ <View.Admin/>}/> : null}
-      {authenticated? <Route path='/admin/product/:id' element={ <View.Admin/>}/> : null}
-      {authenticated? <Route path='/admin/user' element={ <View.Admin/>}/> : null}
+      {authenticated? <Route path='/admin/product' element={ <Ad.ProductComp/>}/> : null}
+      {authenticated? <Route path='/admin/product/:id' element={ <Ad.ProductComp/>}/> : null}
+      {authenticated? <Route path='/admin/product/item/:id' element={ <Ad.ProductComp/>}/> : null}
+      {authenticated? <Route path='/admin/user' element={ <Ad.UserComp/>}/> : null}
       {authenticated? <Route path='/admin/user/:id' element={ <View.Admin/>}/> : null}
       <Route path='/login' element={<View.Login/>}/>
       <Route path='/error' element={<View.Error/>}/>

@@ -4,18 +4,18 @@ const WelcomeView = () => {
     
   return (
     <div classname='container-sm'>
-      <div class="row justify-content-center">
-    <div class="col-6 col-sm-4">
-      <article class="blog-post">
-        <h2 class="display-5 link-body-emphasis mb-1">Bienvenido al panel de administrador</h2>
-        <p class="blog-post-meta">22 Septiembre de 2024 <a href="#">Mark</a></p>
+      <div className="row justify-content-center">
+    <div className="col-6 col-sm-4">
+      <article className="blog-post">
+        <h2 className="display-5 link-body-emphasis mb-1">Bienvenido al panel de administrador</h2>
+        <p className="blog-post-meta">22 Septiembre de 2024 <a href="#">Mark</a></p>
 
         <p>Este es el panel de administrador, aqui podrá mandarse todas las macanas que quiera bajo su exclusiva responsabilidad.</p>
         <hr/>
         <p>This is some additional paragraph placeholder content. It has been written to fill the available space and show how a longer snippet of text affects the surrounding content. We'll repeat it often to keep the demonstration flowing, so be on the lookout for this exact same string of text.</p>
         <h2>Blockquotes</h2>
         <p>This is an example blockquote in action:</p>
-        <blockquote class="blockquote">
+        <blockquote className="blockquote">
           <p>Quoted text goes here.</p>
         </blockquote>
         <p>This is some additional paragraph placeholder content. It has been written to fill the available space and show how a longer snippet of text affects the surrounding content. We'll repeat it often to keep the demonstration flowing, so be on the lookout for this exact same string of text.</p>
@@ -44,12 +44,12 @@ const WelcomeView = () => {
         <h2>Inline HTML elements</h2>
         <p>HTML defines a long list of available inline tags, a complete list of which can be found on the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">Mozilla Developer Network</a>.</p>
         <ul>
-          <li><strong>To bold text</strong>, use <code class="language-plaintext highlighter-rouge">&lt;strong&gt;</code>.</li>
-          <li><em>To italicize text</em>, use <code class="language-plaintext highlighter-rouge">&lt;em&gt;</code>.</li>
-          <li>Abbreviations, like <abbr title="HyperText Markup Language">HTML</abbr> should use <code class="language-plaintext highlighter-rouge">&lt;abbr&gt;</code>, with an optional <code class="language-plaintext highlighter-rouge">title</code> attribute for the full phrase.</li>
-          <li>Citations, like <cite>— Mark Otto</cite>, should use <code class="language-plaintext highlighter-rouge">&lt;cite&gt;</code>.</li>
-          <li><del>Deleted</del> text should use <code class="language-plaintext highlighter-rouge">&lt;del&gt;</code> and <ins>inserted</ins> text should use <code class="language-plaintext highlighter-rouge">&lt;ins&gt;</code>.</li>
-          <li>Superscript <sup>text</sup> uses <code class="language-plaintext highlighter-rouge">&lt;sup&gt;</code> and subscript <sub>text</sub> uses <code class="language-plaintext highlighter-rouge">&lt;sub&gt;</code>.</li>
+          <li><strong>To bold text</strong>, use <code className="language-plaintext highlighter-rouge">&lt;strong&gt;</code>.</li>
+          <li><em>To italicize text</em>, use <code className="language-plaintext highlighter-rouge">&lt;em&gt;</code>.</li>
+          <li>Abbreviations, like <abbr title="HyperText Markup Language">HTML</abbr> should use <code className="language-plaintext highlighter-rouge">&lt;abbr&gt;</code>, with an optional <code className="language-plaintext highlighter-rouge">title</code> attribute for the full phrase.</li>
+          <li>Citations, like <cite>— Mark Otto</cite>, should use <code className="language-plaintext highlighter-rouge">&lt;cite&gt;</code>.</li>
+          <li><del>Deleted</del> text should use <code className="language-plaintext highlighter-rouge">&lt;del&gt;</code> and <ins>inserted</ins> text should use <code className="language-plaintext highlighter-rouge">&lt;ins&gt;</code>.</li>
+          <li>Superscript <sup>text</sup> uses <code className="language-plaintext highlighter-rouge">&lt;sup&gt;</code> and subscript <sub>text</sub> uses <code className="language-plaintext highlighter-rouge">&lt;sub&gt;</code>.</li>
         </ul>
         <p>Most of these elements are styled by browsers with few modifications on our part.</p>
         <h2>Heading</h2>

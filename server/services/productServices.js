@@ -116,6 +116,9 @@ updProduct : async (id, newData) => {
             enable: Boolean(newData.enable),
             deleteAt: Boolean(newData.deleteAt)}
         const productUpd = await productFound.update(parsedData)
+        if (productUpd) {
+            cache.del('products');
+            }
         return productUpd;
     } catch (error) {throw error;}
 },

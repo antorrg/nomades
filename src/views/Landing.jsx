@@ -37,7 +37,7 @@ const Landing = () => {
     <div className='my-2'></div>
     <section>
     <Cp.MyCarousel info={products}/>
-    <Cp.Marketing products = {products}/>
+    <Cp.Marketing products = {products} param={'detalle'}/>
     </section>
     <Cp.Footer/>
     

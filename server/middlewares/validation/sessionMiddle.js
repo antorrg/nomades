@@ -36,7 +36,7 @@ const recoveryRole = (str, position)=>{
 export const generateToken = (user)=>{
         const intData = disguiseRole(user.role, 5)
         //console.log('estoy en el token: ', expiresIn)
-        const token = pkg.sign({userId: user.id, email:user.email, internalData:intData}, env.SecretKey, {expiresIn: '1h'});
+        const token = pkg.sign({userId: user.id, email:user.email, internalData:intData}, env.SecretKey, {expiresIn: '30m'});
         return token;
     };
 export const verifyToken = (req, res, next)=>{

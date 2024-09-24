@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, } from "react-router-dom";
 
-const Card = ({ item }) => {
+const Card = ({ item, subParam }) => {
+  
+
   return (
     <div className="col">
       <div className="card shadow-sm">
@@ -9,7 +11,7 @@ const Card = ({ item }) => {
           <p className="card-text">{item.text}</p>
           <div className="d-flex justify-content-between align-items-center">
             <div className="btn-group">
-              <Link className="btn btn-sm btn-outline-secondary" to={`/detalle/item/${item.id}`}>
+              <Link className="btn btn-sm btn-outline-secondary" to={`${subParam}/${item.id}`}>
                 Ver mas
               </Link>
             </div>
@@ -22,15 +24,4 @@ const Card = ({ item }) => {
 
 export default Card;
 
-//- const rows = chunk(items, 3);
-//           each row in rows
-//             .row.row-cols-1.row-cols-sm-2.row-cols-md-3.g-3
-//               each item in row
-//                 .col
-//                   .card.shadow-sm
-//                     img.card-img-top(src=item.img, alt='Card image')
-//                     .card-body
-//                       p.card-text= item.text
-//                       .d-flex.justify-content-between.align-items-center
-//                         .btn-group
-//                a.btn.btn-sm.btn-outline-secondary(href=`/detalles?img=${item.img}&id=${item.id}`) Ver mas
+//`/detalle/item/${item.id}`
