@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../../../redux/actions";
-import updateProduct from "./productEndpoint";
+import {updateProduct} from '../../../utils/productEndPoints';
+import showConfirmationDialog from '../../../Auth/userComponents/sweetAlert'
 import "./productstyle.css";
 import ImageUploader from "../../AdminComponents/ImageUploader";
 
@@ -58,8 +59,14 @@ const ProductEdition = () => {
 
   const handleSubmit = async() => {
     // Lógica para actualizar el producto
-    console.log("Producto actualizado:", product, id);
-    await updateProduct( id, product, onClose)
+    const confirmed = await showConfirmationDialog(
+          "¿Está seguro de actualizar el producto?"
+        );
+        if (confirmed) {
+          // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
+          await updateProduct( id, product, onClose)
+        }
+    
   };
   return (
     <div className="imageBack">

@@ -5,6 +5,7 @@ import AdminNav from "./AdminNav";
 import WelcomeView from "./WelcomeView";
 import ProductEdition from "../../components/album/ProductEdition/ProductEdition";
 import LandEdition from "../../components/AdminComponents/LandingEdition/LandEdition";
+import DetailCardUpd from "../../components/DetailCard/edition/DetaiCardUpd";
 
 export {
   HelpView,
@@ -14,4 +15,5 @@ export {
   WelcomeView,
   ProductEdition,
   LandEdition,
+  DetailCardUpd,
 };

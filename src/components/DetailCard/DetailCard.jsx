@@ -3,6 +3,7 @@ import Edition from '../../Auth/userComponents/Edition/Edition'
 import './DetailCard.css'
 
 const DetailCard = ({item, param}) => {
+  const navigate = useNavigate()
   const location = useLocation()
   // Verificar si la URL contiene "admin"
   const isAdminRoute = location.pathname.includes('admin');
@@ -17,7 +18,7 @@ const DetailCard = ({item, param}) => {
             <p className='text-muted'>{item?.text}</p>
             <Link className='btn btn-lg btn-primary mt-3 mx-auto w-50' to={`/${param}/${item?.ProductId}`}>Cerrar</Link>
             {isAdminRoute ?
-            <Edition allowedRoles={['Super Admin', 'Admin']} onClick={()=>{alert('Soy edicion')}} text={'Editar'} className={'btn btn-lg btn-primary mt-3 ms-2 mx-auto w-25'}/>
+            <Edition allowedRoles={['Super Admin', 'Admin']} onClick={()=>{navigate(`/admin/product/item/update/${item.id}`)}} text={'Editar'} className={'btn btn-lg btn-primary mt-3 ms-2 mx-auto w-25'}/>
             : null}
           </div>
         </div>
