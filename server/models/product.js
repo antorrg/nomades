@@ -9,10 +9,10 @@ export default (sequelize) => {
           },
         title: { type: DataTypes.STRING, allowNull: false },
         landing: { type: DataTypes.STRING, allowNull: false },
-        logo: {type: DataTypes.STRING,allowNull: false},
+        logo: {type: DataTypes.STRING,allowNull: true},
         info_header: {type:DataTypes.STRING, allowNull: false},
         info_body:{type: DataTypes.TEXT, allowNull: true},
-        url: { type: DataTypes.STRING, allowNull: false},
+        url: { type: DataTypes.STRING, allowNull: true},
         to_show: {
             type: DataTypes.BOOLEAN,
             defaultValue: true

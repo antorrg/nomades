@@ -18,7 +18,7 @@ const Header = () => {
             <button className='nav-link fw-bold py-1 px-0 active' onClick={()=>{navigate('/admin')}}>Admin</button> : null
             }
             <Link className='nav-link fw-bold py-1 px-0 active' to='/error' state={{ status: 404, message: "En contruccion" }}>Contacto</Link>
-            <Link className='nav-link fw-bold py-1 px-0 active' to='/error' state={{ status: 404, message: "En construccion (no sea impaciente carajo)" }}>Acerca de </Link>
+            <Link className='nav-link fw-bold py-1 px-0 active' to='/acerca'>Acerca de </Link>
         </nav>
      </div>
     </header>

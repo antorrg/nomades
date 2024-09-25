@@ -1,26 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { showSuccess, showError } from '../../Auth/userComponents/HandlerError';
 
-const ImageUploader = () => {
+const ImageUploader = ({ titleField, imageValue, onImageUpload}) => {
   const [file, setFile] = useState(null);
-  const [imageUrl, setImageUrl] = useState('');
-  const [previewUrl, setPreviewUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState(imageValue || ''); // Inicializa con imageValue
+  const [previewUrl, setPreviewUrl] = useState(imageValue || ''); // Inicializa con imageValue
+  const {alert, setAlert}= useState(false)
+
+
+  // Actualiza previewUrl si el prop imageValue cambia
+  useEffect(() => {
+    if (imageValue) {
+      setPreviewUrl(imageValue);
+    }
+  }, [imageValue]);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
     
-    // Crear una URL para previsualizar la imagen
     if (selectedFile) {
       const fileReader = new FileReader();
-      fileReader.onload = (e) => setPreviewUrl(e.target.result);
+      fileReader.onload = (e) => setPreviewUrl(e.target.result); // Previsualiza imagen seleccionada
       fileReader.readAsDataURL(selectedFile);
     }
   };
 
   const handleDelete = () => {
     setFile(null);
-    setPreviewUrl('');
+    setPreviewUrl(imageValue); // Restaura la imagen original si la hay
   };
 
   const handleSubmit = async (e) => {
@@ -29,39 +38,66 @@ const ImageUploader = () => {
 
     const formData = new FormData();
     formData.append('image', file);
-    const token = localStorage.getItem('validToken')
+    const token = localStorage.getItem('validToken');
     try {
+      // Simulación del envío del formulario
+      console.log('formData:', formData);
       const response = await axios.post('/api/v1/imgupload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'x-access-token':`${token}`
         }
       });
-      setImageUrl(response.data.url);
-      console.log('Imagen cargada. URL:', response.data.url);
+      // Simular la respuesta para la demo
+      if(response.status===200){
+      setImageUrl(response.data.url); // Actualiza imageUrl con la URL de la imagen cargada
+      onImageUpload(response.data.url)
+      showSuccess('Imagen Cargada exitosamente')
+      setAlert(true)
+      }
     } catch (error) {
       console.error('Error al cargar la imagen:', error);
     }
   };
 
   return (
-    <div>
-      <section>
-        <input type="file" onChange={handleFileChange} accept="image/*" />
-        {file && (
-          <>
-            <button type="button" onClick={handleDelete}>Borrar selección</button>
-            {previewUrl && <img src={previewUrl} alt="Preview" style={{maxWidth: '200px', marginTop: '10px'}} />}
-          </>
+    <div className='row'>
+      <div className='co-md-8 mb-3 me2'>
+        <section>
+          <label className='form-label'>{titleField}</label>
+          <input
+            type="file"
+            className='form-control'
+            onChange={handleFileChange}
+            accept="image/*"
+          />
+          {previewUrl && (
+            <>
+               {alert?
+                 <p className="text-success">Imagen cargada exitosamente</p>:
+                   <p className="text-success">Imagen cargada:</p>
+                  }
+              <img src={previewUrl} alt="Preview" style={{ maxWidth: '200px', marginTop: '10px' }} />
+              {file && (
+                <button type="button" className='btn btn-outline-danger mr-3' onClick={handleDelete}>
+                  Borrar selección
+                </button>
+              )}
+            </>
+          )}
+          <button onClick={handleSubmit} className='btn btn-outline-primary' disabled={!file}>
+            Subir
+          </button>
+        </section>
+
+        {imageUrl && !file && (
+          <div>
+          
+            <img src={imageUrl} alt="Uploaded" style={{ maxWidth: '20rem' }} />
+           
+          </div>
         )}
-        <button onClick={handleSubmit} disabled={!file}>Subir</button>
-      </section>
-      {imageUrl && (
-        <div>
-          <p>Imagen cargada:</p>
-          <img src={imageUrl} alt="Uploaded" style={{maxWidth: '20rem'}} />
-        </div>
-      )}
+      </div>
     </div>
   );
 };

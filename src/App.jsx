@@ -27,10 +27,11 @@ function App() {
       <Route path='/detalle/:id' element={<View.Detail/>}/>
       <Route path='/detalle/item/:id' element={<View.Item/>}/>
       <Route path='/contacto' element={<View.Contact/>}/>
-      <Route path='/acerca' element={<View.About/>}/>
+      <Route path='/acerca' element={<Ad.ProductEdition/>}/>
       {authenticated? <Route path='/admin' element={ <View.Admin/>}/> : null}
       {authenticated? <Route path='/admin/product' element={ <Ad.ProductComp/>}/> : null}
       {authenticated? <Route path='/admin/product/:id' element={ <Ad.ProductComp/>}/> : null}
+      {authenticated? <Route path='/admin/product/update/:id' element={ <Ad.ProductEdition/>}/> : null}
       {authenticated? <Route path='/admin/product/item/:id' element={ <View.Item/>}/> : null}
       {authenticated? <Route path='/admin/user' element={ <Ad.UserComp/>}/> : null}
       {authenticated? <Route path='/admin/user/:id' element={ <View.Admin/>}/> : null}
