@@ -1,7 +1,11 @@
-import React from 'react'
+import {useNavigate} from 'react-router-dom'
+import * as Ad from './AdminIndex'
 
-const HelpView = ({setHelp}) => {
+const HelpView = () => {
+  const navigate = useNavigate()
   return (
+    <>
+    <Ad.AdminNav/>
     <div className='container-sm'>
       <div className="accordion" id="accordionExample">
           <div className="accordion-item">
@@ -41,9 +45,11 @@ const HelpView = ({setHelp}) => {
             </div>
           </div>
         </div>
-        <button className="nav-link active text-start w-10 pt-20"  onClick={()=>{setHelp(false)}}>Volver</button>
+        <br></br>
+        <button className="nav-link active text-start w-10 pt-20"  onClick={()=>{navigate(-1)}}><h5>Volver</h5></button>
         
   </div>
+  </>
 
   )
 }

@@ -16,7 +16,7 @@ const Item = () => {
 
   return (
     <>
-    <DetailCard item={item}/>
+    <DetailCard item={item} param={'detalle'}/>
     </>
   )
 }

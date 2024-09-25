@@ -14,6 +14,15 @@ const Album = ({info, items, param, subParam}) => {
         <div className="row py-lg-5">
           <div className="col-lg-6 col-md-8 mx-auto">
             <h1 className="fw-light">Proyecto: {info?.title}</h1>
+            {isAdminRoute ?
+              <>
+              <h4>Meta informacion:</h4>
+              <p className="lead text-muted">{info?.infoHeader}</p>
+              <img className='bd-placeholder-img-fluid'  src={info?.landing} alt='Imagen' style={{maxWidth:'22rem'}}/>
+              <hr></hr>
+              <h4>Descripcion:</h4>
+              </>: null
+            }
             <p className="lead text-muted">{info?.infoBody}</p>
             <Link className="btn btn-secondary my-2" to={param}>
               Volver

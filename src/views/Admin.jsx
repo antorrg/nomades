@@ -21,9 +21,7 @@ const Admin = () => {
      <div >
      <Main.AdminNav setHelp={setHelp}/>
      {/* <Main.ProductComp/> */}
-     {help?
-     <Main.HelpView setHelp={setHelp}/> :
-     <Main.WelcomeView/>}
+     <Main.WelcomeView/>
       </div>
     </>
   );

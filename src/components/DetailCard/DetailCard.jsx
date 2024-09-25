@@ -1,8 +1,8 @@
-import {Link,useLocation} from 'react-router-dom'
+import {Link,useLocation, useNavigate} from 'react-router-dom'
 import Edition from '../../Auth/userComponents/Edition/Edition'
 import './DetailCard.css'
 
-const DetailCard = ({item}) => {
+const DetailCard = ({item, param}) => {
   const location = useLocation()
   // Verificar si la URL contiene "admin"
   const isAdminRoute = location.pathname.includes('admin');
@@ -15,10 +15,10 @@ const DetailCard = ({item}) => {
           <div className='modal-body p-5 text-center'>
             <img className='d-block.mx-auto mb-4' src={item?.img} alt="image not found"/>
             <p className='text-muted'>{item?.text}</p>
-            <Link className='btn btn-lg btn-primary mt-3 mx-auto w-50' to={`/detalle/${item?.ProductId}`}>Cerrar</Link>
+            <Link className='btn btn-lg btn-primary mt-3 mx-auto w-50' to={`/${param}/${item?.ProductId}`}>Cerrar</Link>
             {isAdminRoute ?
-            <Edition allowedRoles={['Super Admin', 'Admin']} onClick={()=>{alert('Soy edicion')}} text={'Editar'} className={'btn btn-primary my-2 ms-2'}/>
-            : false}
+            <Edition allowedRoles={['Super Admin', 'Admin']} onClick={()=>{alert('Soy edicion')}} text={'Editar'} className={'btn btn-lg btn-primary mt-3 ms-2 mx-auto w-25'}/>
+            : null}
           </div>
         </div>
       </div>

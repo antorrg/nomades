@@ -31,9 +31,10 @@ function App() {
       {authenticated? <Route path='/admin' element={ <View.Admin/>}/> : null}
       {authenticated? <Route path='/admin/product' element={ <Ad.ProductComp/>}/> : null}
       {authenticated? <Route path='/admin/product/:id' element={ <Ad.ProductComp/>}/> : null}
-      {authenticated? <Route path='/admin/product/item/:id' element={ <Ad.ProductComp/>}/> : null}
+      {authenticated? <Route path='/admin/product/item/:id' element={ <View.Item/>}/> : null}
       {authenticated? <Route path='/admin/user' element={ <Ad.UserComp/>}/> : null}
       {authenticated? <Route path='/admin/user/:id' element={ <View.Admin/>}/> : null}
+      {authenticated? <Route path='/admin/help' element={ <Ad.HelpView/>}/> : null}
       <Route path='/login' element={<View.Login/>}/>
       <Route path='/error' element={<View.Error/>}/>
       <Route path='/*' element={<View.Error  state={{ status: 404, message: "Página no encontrada" }}/>}/>

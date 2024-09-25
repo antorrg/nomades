@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {getProduct, getProductById} from "../../redux/actions";
 import GenericButton from '../../Auth/userComponents/GenericButton/GenericButton'
 import * as Comp from '../../components/IndexComponents'
+import * as Ad from './AdminIndex'
 
 const ProductComp = () => {
   const navigate = useNavigate()
@@ -26,13 +27,14 @@ const ProductComp = () => {
    
   return (
     <div>
-
+      <Ad.AdminNav/>
     <div className='container marketing'>
-      <h1>Soy productComp</h1>
       {id ?
       <Comp.Album info={info} items={items} param={'/admin/product'} subParam={'/admin/product/item'}/>
-      :
-      <Comp.Marketing products={products} param={'admin/product'}/>}
+      :<>
+       <div className='featurette-divider'></div>
+      <Comp.Marketing products={products} param={'admin/product'}/>
+      </>}
           <GenericButton className='btn btn-primary' onClick={()=>{navigate('/admin')}} buttonText={'Volver'}/>
     </div>
     </div>
