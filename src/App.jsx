@@ -34,8 +34,8 @@ function App() {
       {authenticated? <Route path='/admin/product/update/:id' element={ <Ad.ProductEdition/>}/> : null}
       {authenticated? <Route path='/admin/product/item/:id' element={ <View.Item/>}/> : null}
       {authenticated? <Route path='/admin/product/item/update/:id' element={ <Ad.DetailCardUpd/>}/> : null}
-      {authenticated? <Route path='/admin/user' element={ <Ad.UserComp/>}/> : null}
-      {authenticated? <Route path='/admin/user/:id' element={ <View.Admin/>}/> : null}
+      {authenticated? <Route path='/admin/users' element={ <Ad.UserComp/>}/> : null}
+      {authenticated? <Route path='/admin/users/:id' element={ <View.Admin/>}/> : null}
       {authenticated? <Route path='/admin/help' element={ <Ad.HelpView/>}/> : null}
       <Route path='/login' element={<View.Login/>}/>
       <Route path='/error' element={<View.Error/>}/>

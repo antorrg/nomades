@@ -1,6 +1,6 @@
 import HelpView from "./HelpView";
 import ProductComp from "./ProductComp";
-import UserComp from "./UserComp";
+import UserComp from "../AdminViews/userComponents/UserComp";
 import AdminNav from "./AdminNav";
 import WelcomeView from "./WelcomeView";
 import ProductEdition from "../../components/album/ProductEdition/ProductEdition";

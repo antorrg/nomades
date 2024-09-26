@@ -65,5 +65,11 @@ export default {
     const response = await sv.getAllUsers()
     res.status(200).json(response)
   }),
+  getUserByIdController : eh.catchAsync(async(req, res)=>{
+    const {id}= req.params
+    const response = await sv.getUsersById(id)
+    res.status(200).json(response)
+  }),
+  
   
 };

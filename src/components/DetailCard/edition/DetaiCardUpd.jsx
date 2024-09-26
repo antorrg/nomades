@@ -13,7 +13,7 @@ const DetailCardUpd = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const item = useSelector((state) => state.Item);
+  const item1 = useSelector((state) => state.Item);
   useEffect(()=>{
       dispatch(getItem(id))
   },[id])
@@ -22,31 +22,31 @@ const DetailCardUpd = () => {
     navigate(-1)
   }
 
-  const [product, setProduct] = useState({
+  const [item, setItem] = useState({
     text: "",
     img: "",
   });
 
   useEffect(() => {
-    if (item) {
-      setProduct({
-        text: item.text || "",
-        img: item.img || "",
+    if (item1) {
+      setItem({
+        text: item1.text || "",
+        img: item1.img || "",
       });
     }
-  }, [item]);
+  }, [item1]);
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProduct((prevProduct) => ({
-      ...prevProduct,
+    setItem((prevItem) => ({
+      ...prevItem,
       [name]: value,
     }));
   };
 
   const handleImageChange = (imageUrl) => {
-    setProduct((prevProduct) => ({
-      ...prevProduct,
+    setItem((prevItem) => ({
+      ...prevItem,
       img: imageUrl,
     }));
   };
@@ -58,7 +58,7 @@ const DetailCardUpd = () => {
         );
         if (confirmed) {
           // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-          await updateItem( id, product, onClose)
+          await updateItem( id, item, onClose)
         }
     
   };
@@ -87,7 +87,6 @@ const DetailCardUpd = () => {
                     type="text"
                     id="text"
                     name="text"
-                    rows="3"
                     value={item.text}
                     onChange={handleInputChange}
                   />

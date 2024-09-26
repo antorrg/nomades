@@ -1,12 +1,12 @@
 import axios from 'axios'
+import setAuthHeader from '../Auth/userComponents/axiosUtils';
+import { HandlError } from '../Auth/userComponents/HandlerError';
 
 export const LANDING = 'LANDING';
 export const PRODUCT = 'PRODUCT';
 export const PRODUCT_BY_ID = 'PRODUCT_BY_ID';
 export const ITEM = 'ITEM';
 export const CLEAN_STATE = 'CLEAN_STATE';
-export const LOGIN_USER = 'LOGIN_USER';
-export const ISN_AUTH = 'ISN_AUTH';
 export const ALL_USERS = 'ALL_USERS';
 export const USER_BY_ID = 'USER_BY_ID'
 
@@ -74,22 +74,12 @@ export const cleanState = ()=>{
     }); 
 }
 //*====== Variables de usuario. =======
-export const loginUser = (payload) => (dispatch) => {
-    return dispatch({
-      type: LOGIN_USER,
-      payload: payload,
-    });
-  };
-  export const isNotAuth = () => (dispatch) => {
-    return dispatch({
-      type: ISN_AUTH,
-      payload: [],
-    });
-  };
+
   export const getAllUsers = () => {
     return async (dispatch) => {
-      try {
-        const data = await axios("/user", setAuthHeader());
+      try { console.log('soy getAllUsers')
+        const data = await axios("/api/v1/user", setAuthHeader());
+        console.log('soy la data', data.data)
         return dispatch({
           type: ALL_USERS,
           payload: data.data,
@@ -101,7 +91,7 @@ export const loginUser = (payload) => (dispatch) => {
   };
   export const getById = (id) => async (dispatch) => {
     try {
-      const data = await axios(`/user/${id}`, setAuthHeader());
+      const data = await axios(`/api/v1/user/${id}`, setAuthHeader());
       return dispatch({
         type: USER_BY_ID,
         payload: data.data,

@@ -24,7 +24,7 @@ const AdminNav = () => {
   };
 
   const usuario = () => {
-    navigate('/admin/user');
+    navigate('/admin/users');
     cerrarOffcanvas();
   };
 

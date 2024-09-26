@@ -4,6 +4,9 @@ import {
     PRODUCT_BY_ID,
     CLEAN_STATE,
     ITEM,
+    ALL_USERS,
+    USER_BY_ID,
+
 } from './actions'
 
 const initialState = {
@@ -11,10 +14,10 @@ const initialState = {
     Products:[],
     ProductId:[],
     Item:[],
-    Users:[]
+    Users:[],
+    UserById: [],
 
 }
-
 
 const reducer = (state = initialState, {type, payload})=>{
     switch(type){
@@ -38,11 +41,23 @@ const reducer = (state = initialState, {type, payload})=>{
                 ...state,
                 Item:payload
             }
+        case ALL_USERS: 
+        console.log(payload)
+            return {
+                ...state,
+                Users: payload,
+            }
+        case USER_BY_ID:
+            return {
+                ...state,
+                UserById: payload,
+            }
         case CLEAN_STATE:
             return {
                 ...state,
                 Item:payload,
                 ProductId:payload,
+                UserById: payload,
             }
         default:
             return {

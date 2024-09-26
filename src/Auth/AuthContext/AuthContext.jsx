@@ -36,6 +36,7 @@ const AuthProvider = ({children,  initialAuthenticated = false, initialUser = nu
         localStorage.clear();
         window.location.reload();
       }
+     
     return(
         <AuthContext.Provider value={{authenticated, user, loading, login, logout}}>
             {children}

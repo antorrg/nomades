@@ -92,9 +92,7 @@ const ImageUploader = ({ titleField, imageValue, onImageUpload}) => {
 
         {imageUrl && !file && (
           <div>
-          
             <img src={imageUrl} alt="Uploaded" style={{ maxWidth: '20rem' }} />
-           
           </div>
         )}
       </div>
