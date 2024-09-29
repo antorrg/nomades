@@ -6,6 +6,8 @@ import WelcomeView from "./WelcomeView";
 import ProductEdition from "../../components/album/ProductEdition/ProductEdition";
 import LandEdition from "../../components/AdminComponents/LandingEdition/LandEdition";
 import DetailCardUpd from "../../components/DetailCard/edition/DetaiCardUpd";
+import UserEdition from "./userComponents/UserEdition";
+import UserCreate from "./userComponents/UserCreate"
 
 export {
   HelpView,
@@ -16,4 +18,7 @@ export {
   ProductEdition,
   LandEdition,
   DetailCardUpd,
+  UserEdition,
+  UserCreate,
+  
 };

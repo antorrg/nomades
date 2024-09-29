@@ -175,12 +175,12 @@ landingUpdate : eh.catchAsync((req, res, next)=>{
 
     next();
 }),
-middUuid: eh.catchAsync((req, res, next) => {
+middUuid: (req, res, next) => {
     const { id } = req.params;
     if (!id) {eh.throwError('Falta el id',400)}
     if (!uuidValidate(id)) {eh.throwError('Parametros no permitidos', 400)}
     next();
-    }),
+    },
 
 middIntId : eh.catchAsync((req, res, next) => {
         const {id} = req.params;

@@ -64,17 +64,19 @@ export default {
 
   getUsersById: async (id) => {
      // Intento obtener los datos del caché
-     let cachedUser = cache.get(`userById_${id}`);
-     if (cachedUser) {
-       return cachedUser;
-     }
+    //  let cachedUser = cache.get(`userById_${id}`);
+    //  if (cachedUser) {
+    //    return cachedUser;
+    //  }
     try {
       const userFound = await User.findByPk(id);
       if (!userFound) {eh.throwError('Usuario no hallado', 404)}
       const userDetail =  help.userParser(userFound, true, true);
-      cache.set(`userById_${id}`, userDetail);
+      //cache.set(`userById_${id}`, userDetail);
       return userDetail;
-    } catch (error) { throw error;}
+    } catch (error) { 
+      throw error;
+    }
   },
 
   userUpd: async (id, newData) => {

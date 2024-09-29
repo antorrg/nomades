@@ -62,11 +62,7 @@ const SignInForm = ({ onClose }) => {
 
   const permit =
     !input.email.trim() ||
-    !input.password.trim() ||
-    !input.confirmPassword.trim()||
-    error.email ||
-    error.password ||
-    error.confirmPassword;
+    error.email;
 
 
 

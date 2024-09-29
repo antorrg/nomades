@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Offcanvas, Dropdown } from 'react-bootstrap';
+import { Offcanvas, Dropdown, DropdownToggle } from 'react-bootstrap';
 import '../styles/admin.css';
 import { useAuth } from '../../Auth/AuthContext/AuthContext';
 import { showSuccess } from '../../Auth/userComponents/HandlerError';
@@ -43,7 +43,9 @@ const AdminNav = () => {
 
   const settings = () => console.log('settings');
 
-  const profile = () => console.log('perfil');
+  const profile = () => navigate(`/admin/users/profile/${user.id}`);
+
+  const createUser = () => navigate('/admin/users/create');
 
   const sessionCleaner = () => {
     showSuccess('Sesión cerrada');
@@ -88,14 +90,21 @@ const AdminNav = () => {
                     Producto
                   </button>
                 </li>
-                <li className="nav-item">
-                  <Edition
+                <Dropdown className="nav-item">
+                  {/* <Dropdown.Toggle className="nav-link d-block text-start w-100" id="dropdown-basic">
+                    Usuarios
+                  </Dropdown.Toggle> */}
+                   <Dropdown.Toggle as={Edition}
                     allowedRoles={['Super Admin', 'Admin']}
-                    onClick={usuario} // Cerramos el offcanvas en el click
                     text={'Usuarios'}
                     className="nav-link active d-block text-start w-100"
                   />
-                </li>
+                  <Dropdown.Menu className="dropdown-menu-dark text-small shadow">
+                    <Dropdown.Item onClick={usuario}>Ver usuarios</Dropdown.Item>
+                    <Dropdown.Divider />
+                    <Dropdown.Item onClick={createUser}>Crear Usuario</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
                 <li className="nav-item">
                   <button className="nav-link active d-block text-start w-100" onClick={ayuda}>
                     Ayuda ?

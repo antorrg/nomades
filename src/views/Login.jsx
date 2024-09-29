@@ -61,12 +61,12 @@ const Login = () => {
             <h1 className="h3 mb-3 fw-normal">Inicie sesion</h1>
             <div className="form-floating">
                <input type="email" className="form-control" value={input.email} name="email" placeholder="name@example.com"onChange={(event) => handleChange(event)}/>
-               <label for="floatingInput">Email address</label>
+               <label htmlFor="floatingInput">Email address</label>
                {error.email && <p className='errorMsg'>{error.email}</p>}
             </div>
-            <div class="form-floating d-flex justify-content-between align-items-center">
+            <div className="form-floating d-flex justify-content-between align-items-center">
               <input type={showPassword ? 'text' : 'password'} className="form-control" value={input.password} name="password" placeholder="Password" onChange={(event) => handleChange(event)} />
-              <label for="floatingPassword">Password</label>
+              <label htmlFor="floatingPassword">Password</label>
               <button type= 'button' onClick={()=>{setShowPassword(!showPassword)}} className='buttonEye'>
                 <i className={showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'}></i>
               </button>

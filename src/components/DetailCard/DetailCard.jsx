@@ -2,12 +2,12 @@ import {Link,useLocation, useNavigate} from 'react-router-dom'
 import Edition from '../../Auth/userComponents/Edition/Edition'
 import './DetailCard.css'
 
-const DetailCard = ({item, param}) => {
+const DetailCard = ({item}) => {
   const navigate = useNavigate()
   const location = useLocation()
   // Verificar si la URL contiene "admin"
   const isAdminRoute = location.pathname.includes('admin');
-  const route = isAdminRoute? `/${param}/${item?.ProductId}` : `/detalle/${item?.ProductId}`
+  const route = isAdminRoute? `/admin/product/${item?.ProductId}` : `/detalle/${item?.ProductId}`
 
   return (
     <div>

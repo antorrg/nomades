@@ -42,7 +42,6 @@ const reducer = (state = initialState, {type, payload})=>{
                 Item:payload
             }
         case ALL_USERS: 
-        console.log(payload)
             return {
                 ...state,
                 Users: payload,

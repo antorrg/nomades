@@ -11,12 +11,12 @@ const Item = () => {
   
   useEffect(()=>{
     dispatch(getItem(id))
-    return ()=>{cleanState()}
+    return ()=>{dispatch(cleanState())}
   },[id])
 
   return (
     <>
-    <DetailCard item={item} param={'detalle'}/>
+    <DetailCard item={item}/>
     </>
   )
 }

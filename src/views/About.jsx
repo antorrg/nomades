@@ -2,7 +2,13 @@ import React from 'react'
 
 const About = () => {
   return (
-    <div>About</div>
+    <div>
+      {/* <div className="session-warning">
+                    <p>Tu sesión expirará en {timeLeft} segundos.</p>
+      </div> */}
+     
+      About
+    </div>
   )
 }
 

@@ -50,18 +50,6 @@ const ValidCreate = (input) => {
     } else if (input.email.length >= 50) {
       errors.email = "El email es muy largo";
     }
-    // Validaciones para el campo de contraseña
-    if (!input.password.trim()) {
-      errors.password = "Este campo no puede estar vacio";
-    } else if (!validPass.test(input.password.trim())) {
-      errors.password = "La contrasena debe contener al menos una mayuscula y un numero";
-    } else if (input.password.length < 8) {
-      errors.password = "La contrasena debe tener al menos 8 caracteres";
-    } else if (input.password !== input.confirmPassword) {
-      errors.confirmPassword = "Las contrasenas no coinciden";
-    }
-    
-  
     return errors;
   };
 

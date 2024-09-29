@@ -18,6 +18,4 @@ userRouter.patch('/user/update/:id', auth.verifyToken, auth.checkRole([0, 9]), m
 userRouter.post('/user/change', auth.verifyToken, auth.checkRole([0, 9]), mdd.userResetPassMidd, ctr.resetPassCtr)
 userRouter.delete('/user/:id', auth.verifyToken, auth.checkRole([0, 9]), mdd.middUuid, ctr.delUserCtr)
 
-userRouter.get('/user', auth.verifyToken, ctr.getUserController)
-userRouter.get('/pepito', cont.getLandingController)
 export default userRouter;

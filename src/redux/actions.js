@@ -77,9 +77,8 @@ export const cleanState = ()=>{
 
   export const getAllUsers = () => {
     return async (dispatch) => {
-      try { console.log('soy getAllUsers')
+      try { 
         const data = await axios("/api/v1/user", setAuthHeader());
-        console.log('soy la data', data.data)
         return dispatch({
           type: ALL_USERS,
           payload: data.data,
@@ -89,7 +88,7 @@ export const cleanState = ()=>{
       }
     };
   };
-  export const getById = (id) => async (dispatch) => {
+  export const getUserById = (id) => async (dispatch) => {
     try {
       const data = await axios(`/api/v1/user/${id}`, setAuthHeader());
       return dispatch({

@@ -351,3 +351,105 @@ if (timeLeft > 0) {
 - Comparas el **tiempo actual** con el **`exp`** del token. Si la diferencia es positiva, aún tiene vida; si es negativa, el token ya ha expirado.
 
 Con esto puedes controlar la vida del token sin necesidad de usar `iat`.
+
+<hr>
+
+Sí, puedes implementar una funcionalidad que avise al usuario faltando 2 minutos antes de que la sesión expire y mostrar una cuenta regresiva. Para hacerlo, debes calcular cuándo restan 2 minutos para que el token expire, mostrar un aviso, y luego iniciar la cuenta regresiva.
+
+Te explico cómo podrías hacerlo:
+
+1. **Almacenar el tiempo restante**: Durante la autenticación o la carga del token desde `localStorage`, puedes calcular cuánto tiempo falta para que el token expire.
+  
+2. **Avisar faltando 2 minutos**: Utiliza un `setTimeout` para que, cuando queden 2 minutos (120000 ms), se muestre una alerta o un modal con la cuenta regresiva.
+
+3. **Iniciar la cuenta regresiva**: Cuando queden 2 minutos, puedes usar `setInterval` para mostrar una cuenta regresiva en tiempo real.
+
+### Ejemplo de código para integrarlo en tu `AuthProvider`:
+
+```javascript
+const AuthProvider = ({children, initialAuthenticated = false, initialUser = null }) => {
+    const [authenticated, setAuthenticated] = useState(initialAuthenticated);
+    const [user, setUser] = useState(initialUser);
+    const [loading, setLoading] = useState(false);
+    const [timeLeft, setTimeLeft] = useState(null);  // Tiempo restante para la cuenta regresiva
+    const [showWarning, setShowWarning] = useState(false); // Para mostrar la alerta de la sesión por expirar
+
+    const login = (userData, token) => { 
+        setAuthenticated(true);
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+        localStorage.setItem('validToken', token);
+    }
+
+    const logout = () => { 
+        setAuthenticated(false);
+        setUser(null);
+        localStorage.clear();
+        window.location.reload();
+    }
+
+    useEffect(() => {
+        const storedToken = localStorage.getItem('validToken');
+        const storedUser = localStorage.getItem('user');
+        
+        if (storedToken && storedUser) {
+            const tokenPayload = JSON.parse(atob(storedToken.split('.')[1])); // Decodificar el token
+            const currentTime = Date.now() / 1000; // Tiempo actual en segundos
+
+            if (tokenPayload.exp > currentTime) {
+                // Si el token no ha expirado
+                setAuthenticated(true);
+                setUser(JSON.parse(storedUser));
+
+                const timeToExpire = (tokenPayload.exp - currentTime) * 1000; // Diferencia en milisegundos
+                const timeBeforeWarning = timeToExpire - 120000; // Aviso 2 minutos antes
+
+                // Mostrar aviso faltando 2 minutos
+                setTimeout(() => {
+                    setShowWarning(true);
+                    let countdownTime = 120; // 120 segundos (2 minutos)
+                    
+                    // Iniciar cuenta regresiva
+                    const countdownInterval = setInterval(() => {
+                        countdownTime -= 1;
+                        setTimeLeft(countdownTime);
+
+                        if (countdownTime <= 0) {
+                            clearInterval(countdownInterval);
+                        }
+                    }, 1000); // Reducir cada segundo
+                }, timeBeforeWarning);
+
+                // Programar logout al finalizar el tiempo
+                setTimeout(() => {
+                    logout();
+                }, timeToExpire);
+            } else {
+                // Si el token ya ha expirado, limpiar la sesión
+                logout();
+            }
+        }
+        setLoading(false);
+    }, []);
+
+    return (
+        <AuthContext.Provider value={{ authenticated, user, loading, login, logout }}>
+            {children}
+            {showWarning && (
+                <div className="session-warning">
+                    <p>Tu sesión expirará en {timeLeft} segundos.</p>
+                </div>
+            )}
+        </AuthContext.Provider>
+    );
+}
+```
+
+### Explicación:
+
+1. **`setShowWarning`**: Se utiliza para mostrar una alerta o modal cuando faltan 2 minutos.
+2. **`setTimeout` para el aviso**: Cuando falten 2 minutos (`timeBeforeWarning`), se activa la cuenta regresiva.
+3. **Cuenta regresiva**: Utiliza un `setInterval` que actualiza el estado `timeLeft` cada segundo, lo que puedes usar para mostrar la cuenta regresiva en la interfaz.
+4. **Componente de alerta**: Dentro del `AuthProvider`, he agregado un simple aviso que muestra cuántos segundos quedan antes de que la sesión expire.
+
+Con esta implementación, puedes mostrar un mensaje o un modal que avise al usuario y muestre una cuenta regresiva faltando 2 minutos para que la sesión expire.

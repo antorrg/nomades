@@ -2,13 +2,25 @@ import React, { useState, useEffect } from 'react';
 import style from './Edition.module.css'
 import { useAuth } from '../../AuthContext/AuthContext';
 
-const Edition = ({ allowedRoles = (allowedRoles), exception, text, onClick, className }) => {
+const Edition = ({ allowedRoles = (allowedRoles), userEditId, text, onClick, className }) => {
   let customClass = className? className : style.button 
   const { user } = useAuth();
   const permit = user ? user.role : null;
   
   // Estado para indicar si la verificación de la excepción está en curso
   const [exceptionLoading, setExceptionLoading] = useState(true);
+  // Funcion para verificar si el usuario esta editando su perfil:
+  const allowing =(inf1, inf2)=>{
+    let result = false;
+    let userId= inf1 && inf1.id;
+    let editId= inf2 && inf2.id;
+    if(!userId || !editId){result = false;}
+    else if(userId ===editId){
+      result= true;
+    }else{result = false}
+    return result;
+  }
+  const exception = allowing(user.id, userEditId)
 
   useEffect(() => {
     // Simular una demora para la verificación de la excepción (por ejemplo, 1 segundo)

@@ -57,7 +57,7 @@ const showInfo = (mensaje) => {
 };
 const showWarn = (mensaje) => {
   toast.warn(mensaje, {
-    position: toast.POSITION.BOTTOM_RIGHT,
+    //position: toast.POSITION.BOTTOM_RIGHT,
     autoClose: 3000,
   });
 };
