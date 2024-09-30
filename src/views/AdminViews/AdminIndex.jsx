@@ -8,6 +8,7 @@ import LandEdition from "../../components/AdminComponents/LandingEdition/LandEdi
 import DetailCardUpd from "../../components/DetailCard/edition/DetaiCardUpd";
 import UserEdition from "./userComponents/UserEdition";
 import UserCreate from "./userComponents/UserCreate"
+import UserUpgrade from "./userComponents/UserUpgrade";
 
 export {
   HelpView,
@@ -20,5 +21,6 @@ export {
   DetailCardUpd,
   UserEdition,
   UserCreate,
+  UserUpgrade,
   
 };

@@ -10,6 +10,7 @@ const cache = new NodeCache({ stdTTL: 3600 }); // TTL (Time To Live) de una hora
 
 export default {
   userCreate: async (email1, password1, role1) => {
+    const finalPassword = password1? password1 : env.defaultPass
     try {
       const userFound = await User.findOne({
         where: {
@@ -17,7 +18,7 @@ export default {
         },});
       if (userFound) {eh.throwError('Este usuario ya existe', 400)}
       //preparacion de variables:
-      const hashedPassword = await bcrypt.hash(password1, 12);
+      const hashedPassword = await bcrypt.hash(finalPassword, 12);
       const nickname1 = email1.split("@")[0];
       
       const newUser = await User.create({
@@ -85,20 +86,36 @@ export default {
       if (!user) {eh.throwError('Usuario no hallado', 404)}
       const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion 
       const nickname1 =  newData.email.split("@")[0];
-      const newRole = help.revertScope(newData.role)
       const updInfo = {
         email: edit? user.email : newData.email,
         nickname: edit? user.nickname : nickname1,
         given_name: newData.given_name,
         picture: newData.picture,
-        role: edit? Number(user.role) : Number(newRole),
         country: newData.country,
-        enable: edit? true : Boolean(newData.enable),
       };
       const userUpdated = await user.update(updInfo);
-      if (userUpdated) {
-        cache.del(`userById_${id}`);
-      }
+      // if (userUpdated) {
+      //   cache.del(`userById_${id}`);
+      // }
+      return help.userParser(userUpdated, true, true);
+    } catch (error) { throw error; }
+  },
+  userUgr: async (id, newData) => {
+    console.log(Boolean(newData.enable))
+    try {
+      const user = await User.findByPk(id);
+      if (!user) {eh.throwError('Usuario no hallado', 404)}
+      const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion 
+      const newRole = help.revertScope(newData.role)
+      const formatEnable = edit? user.enable : newData.enable
+      const updInfo = {
+        role: edit? Number(user.role) : Number(newRole),
+        enable: Boolean(formatEnable),
+      };
+      const userUpdated = await user.update(updInfo);
+      // if (userUpdated) {
+      //   cache.del(`userById_${id}`);
+      // }
       return help.userParser(userUpdated, true, true);
     } catch (error) { throw error; }
   },

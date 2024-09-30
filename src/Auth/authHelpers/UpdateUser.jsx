@@ -3,14 +3,13 @@ import {HandlError,showSuccess, showError} from '../userComponents/HandlerError'
 import setAuthHeader from '../userComponents/axiosUtils'
 
 
-export async function upgradeUser (userId, editedUser, onClose) {
-  //console.log(userId)
+export async function upgradeUser (userId, user, onClose) {
     //cambiar rol y bloquear desbloquear usuario.
     try {
       // Realiza la solicitud PUT con Axios
-      const response = await axios.put(
-        `/api/v1/user/update/${userId}`,
-        editedUser,
+      const response = await axios.patch(
+        `/api/v1/user/upgrade/${userId}`,
+        user,
         setAuthHeader()
       );
       if (response.status === 200) {
@@ -26,12 +25,13 @@ export async function upgradeUser (userId, editedUser, onClose) {
   };
   export async function updateUser (userId, editedUser, onClose) {
     //console.log(userId)
+      const {email, picture, country, given_name}= editedUser
       //Lógica para actualizar perfil de usuario
       try {
         // Realiza la solicitud PUT con Axios
         const response = await axios.put(
-          `/api/v1/user/updprofile//${userId}`,
-          editedUser,
+          `/api/v1/user/updprofile/${userId}`,
+          {email, picture, country, given_name},
           setAuthHeader()
         );
         if (response.status === 200) {

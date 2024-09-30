@@ -1,8 +1,12 @@
 import {useEffect, useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import showConfirmationDialog from '../../../Auth/userComponents/sweetAlert'
 import { ValidCreate } from '../../../Auth/userComponents/internalUtils/Validate';
+import * as endpoint from '../../../Auth/authHelpers/Auth'
 
 const UserCreate = () => {
+    const navigate = useNavigate()
+    const onClose = ()=>{navigate('/admin')}
     const [input, setInput] = useState({
         email: ""
       });
@@ -31,8 +35,8 @@ const UserCreate = () => {
                   );
                   if (confirmed) {
                     // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-                    console.log(input)
-                    //await updateItem( id, user, onClose)
+                    await endpoint.createUser(input, onClose )
+                    
                   }
               
             };
@@ -51,7 +55,7 @@ const UserCreate = () => {
                  <label htmlFor="email" className="form-label">
                   Email:
                 </label>
-                <input className="form-control mb-3" type="email" id="email" name="email" autoComplete='on' value={input.email} onChange={handleChange}/>
+                <input className="form-control w-100 py-2 mb-3" type="email" id="email" name="email" autoComplete='on' value={input.email} onChange={handleChange}/>
                 {error.email && <p className='errorMsg'>{error.email}</p>}
                  </div>
                  <button className="btn btn-primary w-100 py-2 mb-3" onClick={handleSubmit} disabled={permit}>Crear</button>

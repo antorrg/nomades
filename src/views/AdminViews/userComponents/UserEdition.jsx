@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {useParams, useNavigate} from 'react-router-dom'
 import ImageUploader from '../../../components/AdminComponents/ImageUploader'
 import showConfirmationDialog from '../../../Auth/userComponents/sweetAlert'
-import UserCreate from './UserCreate'
+import * as endpoint from '../../../Auth/authHelpers/Auth'
 import {getUserById}from '../../../redux/actions'
 
 const UserEdition = () => {
@@ -62,7 +62,7 @@ const UserEdition = () => {
           );
           if (confirmed) {
             // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-            await updateItem( id, user, onClose)
+            await endpoint.updateUser( id, user, onClose)
           }
       
     };

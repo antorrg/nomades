@@ -4,6 +4,14 @@ import { validate as uuidValidate, version as uuidVersion } from 'uuid';
 //import { body, query,validationResult } from 'express-validator';
 
 export default {
+    createUser : eh.catchAsync(async (req, res, next)=>{
+        const{email}= req.body;
+        // Validar si existe el email y su formato usando una expresión regular
+        if(!email){eh.throwError('Falta el email', 400)};
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {eh.throwError('Formato de email invalido', 400)}
+        next()
+}),
 loginUser : eh.catchAsync(async (req, res, next)=>{
         const{email, password}= req.body;
         // Validar si existe el email y su formato usando una expresión regular

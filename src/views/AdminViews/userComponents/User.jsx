@@ -10,6 +10,7 @@ const User = ({ user, isSingleUser }) => {
   const goToDetail = () => navigate(`/admin/users/${user.id}`)
   const goToBack = () => navigate(-1)
   const goToEdition = () => navigate(`/admin/users/update/${user.id}`)
+  const goToUpgrade = ()=>navigate(`/admin/users/upgrade/${user.id}`)
 
   const userStatus = user.enable ? 'Activo' : 'Bloqueado'
 
@@ -22,7 +23,7 @@ const User = ({ user, isSingleUser }) => {
 
   return (
     <div className='col userStyle'>
-      <div className='card shadow-sm p-4'>
+      <div className='card shadow-sm p-3'>
         <img className='card-img-top' src={user.picture} alt={`${user.nickname}'s profile`} />
         <div className='card-body'>
           <dl className="user-info-list">
@@ -43,7 +44,7 @@ const User = ({ user, isSingleUser }) => {
               <>
                 <button className='btn btn-sm btn-outline-success' onClick={goToBack}>Volver</button>
                 <Edition 
-                  allowedRoles={["Super Admin", "Admin"]} 
+                  allowedRoles={["Super Admin", "Administrador"]} 
                   className='btn btn-sm btn-outline-success' 
                   userEditId={user.id} 
                   text={isProfileRoute ? "Contraseña" : "Reset Contr"} 
@@ -51,10 +52,10 @@ const User = ({ user, isSingleUser }) => {
                 />
                 {!isProfileRoute && (
                   <Edition 
-                    allowedRoles={["Super Admin", "Admin"]} 
+                    allowedRoles={["Super Admin", "Administrador"]} 
                     className='btn btn-sm btn-outline-danger' 
                     text="Rol-Bloqueo" 
-                    onClick={() => alert('bloquear, cambiar rol')}
+                    onClick={goToUpgrade}
                   />
                 )}
                 <button className='btn btn-sm btn-outline-primary' onClick={goToEdition}>Editar</button>
@@ -63,7 +64,7 @@ const User = ({ user, isSingleUser }) => {
               <>
                 <button className='btn btn-sm btn-outline-primary' onClick={goToDetail}>Detalles</button>
                 <Edition 
-                  allowedRoles={["Super Admin", "Admin"]} 
+                  allowedRoles={["Super Admin", "Administrador"]} 
                   className='btn btn-sm btn-outline-danger' 
                   text="Eliminar" 
                   onClick={() => alert('borrar')}

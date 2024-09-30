@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {AdminNav} from '../AdminIndex'
 import User from './User'
+import './userComponent.css'
 import {getAllUsers, getUserById, cleanState}from '../../../redux/actions'
 
 const UserComp = () => {
@@ -29,11 +30,13 @@ const UserComp = () => {
     <AdminNav/>
     {!id ?
     <>
-    <div className='album py-5 bg-light'>
+     <div className='container-user'>
+    <div className=' py-5 bg-light'>
       <div className='container'>
         {users?.map((user)=>
         <User key={user.id} user={user} isSingleUser={single}/>
         )}
+      </div>
       </div>
     </div></>
     :

@@ -7,13 +7,12 @@ import setAuthHeader from '../userComponents/axiosUtils'
 
 export default async function createUser (userData, onClose) {
     const email = userData.email;
-  const password = userData.password;
-  const confirmPassword = userData.confirmPassword
+ 
   try {
     const response = await axios.post(`api/v1/user/create`, {
         email,
-        password,
-    })
+      
+    }, setAuthHeader())
     if (response.status === 201) {
       //const token = response.data.token;
       const user = response.data.data;
