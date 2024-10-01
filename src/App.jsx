@@ -44,6 +44,7 @@ function App() {
       {authenticated? <Route path='/admin/users' element={ <Ad.UserComp/>}/> : null}
       {authenticated? <Route path='/admin/users/create' element={ <Ad.UserCreate/>}/> : null}
       {authenticated? <Route path='/admin/users/upgrade/:id' element={ <Ad.UserUpgrade/>}/> : null}
+      {authenticated? <Route path='/admin/users/updateinfo/:id' element={ <Ad.EditPassword/>}/> : null}
       {authenticated? <Route path='/admin/users/:id' element={ <Ad.UserComp/>}/> : null}
       {authenticated? <Route path='/admin/users/update/:id' element={ <Ad.UserEdition/>}/> : null}
       {authenticated? <Route path='/admin/users/profile/:id' element={ <Ad.UserComp/>}/> : null}

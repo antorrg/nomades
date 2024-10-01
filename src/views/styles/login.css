@@ -9,7 +9,16 @@
     max-width: 90%;
   }
 }
-
+.passContainer {
+  margin-top:5%;
+  max-width: 35%
+}
+@media (max-width: 768px) {
+  .passContainer {
+    min-width: 80%;
+    max-width: 90%;
+  }
+}
 
 .form-signin {
   max-width: 400px;

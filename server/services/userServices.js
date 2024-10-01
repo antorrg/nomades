@@ -141,11 +141,12 @@ export default {
       const hashedPassword = await bcrypt.hash(password, 12);
       const newData = { password: hashedPassword };
       const newUser = await user.update(newData);
-      if (newUser) {cache.del(`userById_${id}`)}
+      //if (newUser) {cache.del(`userById_${id}`)}
       return "Contraseña actualizada exitosamente";
     } catch (error) { throw error; }
   },
   userResetPass: async (id) => {
+    console.log('soy el id:', id)
     const password = `${env.defaultPass}`
     try {
       const user = await User.findByPk(id);
@@ -155,7 +156,7 @@ export default {
       const hashedPassword = await bcrypt.hash(password, 12);
       const newData = { password: hashedPassword };
       const newUser = await user.update(newData);
-      if (newUser) {cache.del(`userById_${id}`)}
+      if (newUser) //{cache.del(`userById_${id}`)}
       return "Contraseña reiniciada exitosamente";
     } catch (error) { throw error; }
   },
@@ -171,7 +172,7 @@ export default {
       };
       const userUpdated = await user.update(updInfo);
       if (userUpdated) {
-        cache.del(`userById_${id}`);
+        //cache.del(`userById_${id}`);
       }
       return help.userParser(userUpdated, true, true);
     } catch (error) { throw error; }
@@ -184,7 +185,7 @@ export default {
       const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion 
       if(edit){eh.throwError('No se puede eliminar a este usuario', 403)}
       await user.destroy(id);
-      cache.del(`userById_${id}`)
+      //cache.del(`userById_${id}`)
       return { message: "Usuario borrado exitosamente" };
     } catch (error) { throw error;}
   },

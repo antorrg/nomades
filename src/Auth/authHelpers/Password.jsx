@@ -48,11 +48,11 @@ import setAuthHeader from '../userComponents/axiosUtils'
      }
   };
 
-  const onResetPass = async (id) => {
+  const onResetPass = async (id, onClose) => {
     try {//cambiar a post
-      const response = await axios.patch(`/api/v1/user/change/${id}`, null, setAuthHeader());
+      const response = await axios.post(`/api/v1/user/change`, {id}, setAuthHeader());
       if (response.status === 200) {
-        showSuccess("Contraseña actualizada con exito");
+        showSuccess("Contraseña reiniciada con exito");
         onClose(); // Cierra el modal después de guardar los cambios
       } else if (response.status === 400) {
         showError("Error al actualizar la contraseña");

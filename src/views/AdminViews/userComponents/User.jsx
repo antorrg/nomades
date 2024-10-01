@@ -1,5 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import Edition from '../../../Auth/userComponents/Edition/Edition'
+import * as us from "../../../Auth/authHelpers/Auth"
+import showConfirmationDialog from "../../../Auth/userComponents/sweetAlert";
 import './user.css'
 
 const User = ({ user, isSingleUser }) => {
@@ -11,7 +13,35 @@ const User = ({ user, isSingleUser }) => {
   const goToBack = () => navigate(-1)
   const goToEdition = () => navigate(`/admin/users/update/${user.id}`)
   const goToUpgrade = ()=>navigate(`/admin/users/upgrade/${user.id}`)
+  const onClose = ()=>navigate('/admin')
+  const deleteUser = ()=>{userDelete()}
+  const goToPassUpd = ()=>{
+    if(isProfileRoute){
+    navigate(`/admin/users/updateinfo/${user.id}`)
+    }else{
+      resetPassword()
+    }
+  }
+ const resetPassword = async ()=>{
+  const confirmed = await showConfirmationDialog(
+    "¿Quiere reiniciar su contraseña?"
+  );
+  if (confirmed) {
+    // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
+    us.onResetPass(user.id, onClose);
+  }
+ }
 
+ const userDelete = async ()=>{
+  const confirmed = await showConfirmationDialog(
+    "¿Quiere eliminar su usuario? \n¡Esta accion no podra deshacerse!"
+    
+  );
+  if (confirmed) {
+    // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
+    us.onDeleteUser(user.id, onClose);
+  }
+ }
   const userStatus = user.enable ? 'Activo' : 'Bloqueado'
 
   const renderUserInfo = (label, value) => (
@@ -48,7 +78,7 @@ const User = ({ user, isSingleUser }) => {
                   className='btn btn-sm btn-outline-success' 
                   userEditId={user.id} 
                   text={isProfileRoute ? "Contraseña" : "Reset Contr"} 
-                  onClick={() => alert(isProfileRoute ? 'cambiar password' : 'reset password')}
+                  onClick={goToPassUpd} 
                 />
                 {!isProfileRoute && (
                   <Edition 
@@ -67,7 +97,7 @@ const User = ({ user, isSingleUser }) => {
                   allowedRoles={["Super Admin", "Administrador"]} 
                   className='btn btn-sm btn-outline-danger' 
                   text="Eliminar" 
-                  onClick={() => alert('borrar')}
+                  onClick={deleteUser}
                 />
               </>
             )}

@@ -9,6 +9,7 @@ import DetailCardUpd from "../../components/DetailCard/edition/DetaiCardUpd";
 import UserEdition from "./userComponents/UserEdition";
 import UserCreate from "./userComponents/UserCreate"
 import UserUpgrade from "./userComponents/UserUpgrade";
+import EditPassword from "./userComponents/EditPassword";
 
 export {
   HelpView,
@@ -22,5 +23,5 @@ export {
   UserEdition,
   UserCreate,
   UserUpgrade,
-  
+  EditPassword,
 };
