@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import {useAuth} from '../Auth/AuthContext/AuthContext'
 import {useNavigate}from "react-router-dom" ;
-import { ValidLogin } from '../Auth/userComponents/internalUtils/Validate';
+import { ValidLogin } from '../Auth/generalComponents/internalUtils/Validate';
 import {loginUser} from '../Auth/authHelpers/Auth'
 import './styles/login.css'
 import './styles/forms.css'

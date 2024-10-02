@@ -1,4 +1,5 @@
 import {useNavigate} from 'react-router-dom'
+import { Accordion, Button } from 'react-bootstrap';
 import * as Ad from './AdminIndex'
 
 const HelpView = () => {
@@ -6,49 +7,42 @@ const HelpView = () => {
   return (
     <>
     <Ad.AdminNav/>
-    <div className='container-sm'>
-      <div className="accordion" id="accordionExample">
-          <div className="accordion-item">
-            <h4 className="accordion-header">
-              <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Acerca de la portada:
-              </button>
-            </h4>
-            <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-              <div className="accordion-body">
-                <strong>Este es el primer item para configurar y mantener.</strong> En el encontramos la imagen de portada, 
-              </div>
-            </div>
-          </div>
-          <div className="accordion-item">
-            <h4 className="accordion-header">
-              <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Acerca de Usuarios
-              </button>
-            </h4>
-            <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-              <div className="accordion-body">
-                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-              </div>
-            </div>
-          </div>
-          <div className="accordion-item">
-            <h4 className="accordion-header">
-              <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Accordion Item #3
-              </button>
-            </h4>
-            <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-              <div className="accordion-body">
-                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-              </div>
-            </div>
-          </div>
-        </div>
-        <br></br>
-        <button className="nav-link active text-start w-10 pt-20"  onClick={()=>{navigate(-1)}}><h5>Volver</h5></button>
-        
-  </div>
+    <div className="container-sm">
+      <Accordion defaultActiveKey="0">
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>Acerca de la portada:</Accordion.Header>
+          <Accordion.Body>
+            <strong>Este es el primer ítem para configurar y mantener.</strong> 
+            En este encontramos la imagen de portada.
+          </Accordion.Body>
+        </Accordion.Item>
+
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>Acerca de Usuarios</Accordion.Header>
+          <Accordion.Body>
+            <strong>Este es el cuerpo del segundo ítem del acordeón.</strong> 
+            Está oculto por defecto hasta que el plugin de colapsado añade las clases apropiadas. 
+            Puedes modificar esto con CSS personalizado o sobrescribiendo las variables por defecto.
+          </Accordion.Body>
+        </Accordion.Item>
+
+        <Accordion.Item eventKey="2">
+          <Accordion.Header>Ítem #3</Accordion.Header>
+          <Accordion.Body>
+            <strong>Este es el cuerpo del tercer ítem del acordeón.</strong> 
+            Puedes modificar cualquier parte de esto con CSS o sobrescribiendo las variables por defecto.
+            También es importante notar que puedes colocar casi cualquier HTML dentro del 
+            <code>.accordion-body</code>.
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+
+      <br />
+
+      <Button className="nav-link active text-start w-10 pt-20" onClick={() => navigate(-1)}>
+        <h5>Volver</h5>
+      </Button>
+    </div>
   </>
 
   )

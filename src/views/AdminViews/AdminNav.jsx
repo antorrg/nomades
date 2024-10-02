@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Offcanvas, Dropdown, DropdownToggle } from 'react-bootstrap';
-import '../styles/admin.css';
-import { useAuth } from '../../Auth/AuthContext/AuthContext';
-import { showSuccess } from '../../Auth/userComponents/HandlerError';
-import { useNavigate, Link } from 'react-router-dom';
-import Edition from '../../Auth/userComponents/Edition/Edition';
+import React, { useState } from "react";
+import { Offcanvas, Dropdown, DropdownToggle } from "react-bootstrap";
+import "../styles/admin.css";
+import { useAuth } from "../../Auth/AuthContext/AuthContext";
+import { showSuccess } from "../../Auth/generalComponents/HandlerError";
+import { useNavigate, Link } from "react-router-dom";
+import Edition from "../../Auth/generalComponents/Edition/Edition";
 
 const AdminNav = () => {
   const { user, logout } = useAuth();
@@ -19,37 +19,37 @@ const AdminNav = () => {
 
   // Funciones ejecutadas en la navbar:
   const productos = () => {
-    navigate('/admin/product');
+    navigate("/admin/product");
     cerrarOffcanvas();
   };
 
   const usuario = () => {
-    navigate('/admin/users');
+    navigate("/admin/users");
     cerrarOffcanvas();
   };
 
   const ayuda = () => {
-    navigate('/admin/help');
+    navigate("/admin/help");
     cerrarOffcanvas();
   };
 
-  const action = () => console.log('action');
+  const action = () => console.log("action");
 
-  const anotherAction = () => console.log('another action');
+  const anotherAction = () => console.log("another action");
 
-  const algoMas = () => console.log('algo mas');
+  const algoMas = () => console.log("algo mas");
 
-  const newProduct = () => navigate('/admin/product/create');
+  const newProduct = () => navigate("/admin/product/create");
 
-  const settings = () => console.log('settings');
+  const settings = () => console.log("settings");
 
   const profile = () => navigate(`/admin/users/profile/${user.id}`);
 
-  const createUser = () => navigate('/admin/users/create');
+  const createUser = () => navigate("/admin/users/create");
 
   const sessionCleaner = () => {
-    showSuccess('Sesión cerrada');
-    navigate('/');
+    showSuccess("Sesión cerrada");
+    navigate("/");
     setTimeout(() => {
       logout();
     }, 1500);
@@ -57,7 +57,10 @@ const AdminNav = () => {
 
   return (
     <>
-      <nav className="navbar navbar-dark bg-dark" aria-label="Dark offcanvas navbar">
+      <nav
+        className="navbar navbar-dark bg-dark"
+        aria-label="Dark offcanvas navbar"
+      >
         <div className="container-fluid">
           <button
             className="navbar-toggler me-auto"
@@ -70,7 +73,7 @@ const AdminNav = () => {
           <Link className="navbar-brand text-start" to="/">
             Ir a página principal
           </Link>
-          
+
           <Offcanvas
             show={showOffcanvas} // Controla si se muestra el offcanvas
             onHide={cerrarOffcanvas}
@@ -80,13 +83,18 @@ const AdminNav = () => {
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id="offcanvasNavbarDarkLabel">
-                <Link className="nav-link active" to="/admin">Administrador</Link>
+                <Link className="nav-link active" to="/admin">
+                  Administrador
+                </Link>
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body className="admin-content">
               <ul className="navbar-nav justify-content-start flex-grow-1 ps-3">
                 <li className="nav-item">
-                  <button className="nav-link active d-block text-start w-100" onClick={productos}>
+                  <button
+                    className="nav-link active d-block text-start w-100"
+                    onClick={productos}
+                  >
                     Producto
                   </button>
                 </li>
@@ -94,46 +102,76 @@ const AdminNav = () => {
                   {/* <Dropdown.Toggle className="nav-link d-block text-start w-100" id="dropdown-basic">
                     Usuarios
                   </Dropdown.Toggle> */}
-                   <Dropdown.Toggle as={Edition}
-                    allowedRoles={['Super Admin', 'Admin']}
-                    text={'Usuarios'}
+                  <Dropdown.Toggle
+                    as={Edition}
+                    allowedRoles={["Super Admin", "Admin"]}
+                    text={"Usuarios"}
                     className="nav-link active d-block text-start w-100"
                   />
                   <Dropdown.Menu className="dropdown-menu-dark text-small shadow">
-                    <Dropdown.Item onClick={usuario}>Ver usuarios</Dropdown.Item>
+                    <Dropdown.Item onClick={usuario}>
+                      Ver usuarios
+                    </Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item onClick={createUser}>Crear Usuario</Dropdown.Item>
+                    <Dropdown.Item onClick={createUser}>
+                      Crear Usuario
+                    </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
                 <li className="nav-item">
-                  <button className="nav-link active d-block text-start w-100" onClick={ayuda}>
+                  <button
+                    className="nav-link active d-block text-start w-100"
+                    onClick={ayuda}
+                  >
                     Ayuda ?
                   </button>
                 </li>
                 <Dropdown className="nav-item">
-                  <Dropdown.Toggle className="nav-link d-block text-start w-100" id="dropdown-basic">
+                  <Dropdown.Toggle
+                    className="nav-link d-block text-start w-100"
+                    id="dropdown-basic"
+                  >
                     Portada
                   </Dropdown.Toggle>
                   <Dropdown.Menu className="dropdown-menu-dark text-small shadow">
                     <Dropdown.Item onClick={action}>Portada...</Dropdown.Item>
-                    <Dropdown.Item onClick={anotherAction}>Videos</Dropdown.Item>
+                    <Dropdown.Item onClick={anotherAction}>
+                      Videos
+                    </Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item onClick={algoMas}>Something else here</Dropdown.Item>
+                    <Dropdown.Item onClick={algoMas}>
+                      Something else here
+                    </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </ul>
               <hr />
               <Dropdown align="end">
-                <Dropdown.Toggle as="a" className="d-flex align-items-center text-white text-decoration-none nav-link">
-                  <img src={user.picture} alt="Not found" width="32" height="32" className="rounded-circle me-2" />
-                  <strong>{user.given_name ? user.given_name : user.nickname}</strong>
+                <Dropdown.Toggle
+                  as="a"
+                  className="d-flex align-items-center text-white text-decoration-none nav-link"
+                >
+                  <img
+                    src={user.picture}
+                    alt="Not found"
+                    width="32"
+                    height="32"
+                    className="rounded-circle me-2"
+                  />
+                  <strong>
+                    {user.given_name ? user.given_name : user.nickname}
+                  </strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="dropdown-menu-dark text-small shadow">
-                  <Dropdown.Item onClick={newProduct}>Nuevo proyecto...</Dropdown.Item>
+                  <Dropdown.Item onClick={newProduct}>
+                    Nuevo producto...
+                  </Dropdown.Item>
                   <Dropdown.Item onClick={settings}>Settings</Dropdown.Item>
                   <Dropdown.Item onClick={profile}>Perfil</Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item onClick={sessionCleaner}>Cerrar sesión</Dropdown.Item>
+                  <Dropdown.Item onClick={sessionCleaner}>
+                    Cerrar sesión
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Offcanvas.Body>
@@ -145,7 +183,6 @@ const AdminNav = () => {
 };
 
 export default AdminNav;
-
 
 // import React, { useState, useEffect, useRef } from 'react';
 // import { Offcanvas } from 'bootstrap';
@@ -297,7 +334,7 @@ export default AdminNav;
 //                     <Dropdown.Item onClick={algoMas}>Something else here</Dropdown.Item>
 //                   </Dropdown.Menu>
 //                 </Dropdown>
-            
+
 //               </ul>
 //               <hr />
 //             <Dropdown align="end">

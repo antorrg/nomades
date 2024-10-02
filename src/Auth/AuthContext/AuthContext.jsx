@@ -12,8 +12,6 @@ const AuthProvider = ({children,  initialAuthenticated = false, initialUser = nu
     const [showWarning, setShowWarning] = useState(false); // Para mostrar la alerta de la sesión por expirar
 
     const login = (userData, token) => { 
-        //console.log('user: ', userData)
-        //console.log('tok', token)
         setAuthenticated(true);
         setUser(userData);
         localStorage.setItem('user', JSON.stringify(userData))

@@ -6,7 +6,7 @@ import help from "./helpers.js";
 const cache = new NodeCache({ stdTTL: 1800 }); // TTL (Time To Live) de media hora
 
 export default {
-createProduct : async (title1, landing1, logo1, info_header1, info_body1, url1, items1 ) => {
+createProduct : async (title1, landing1, info_header1, info_body1, items1 ) => {
     let transaction;
     try {
         transaction = await sequelize.transaction();
@@ -19,10 +19,8 @@ createProduct : async (title1, landing1, logo1, info_header1, info_body1, url1, 
         const newProduct = await Product.create({
             title:title1,
             landing: landing1,
-            logo:logo1,
             info_header:info_header1,
             info_body:info_body1,
-            url:url1,
         },{transaction});  
         const createdItems = await Promise.all(
             items1.map(async(item)=> {

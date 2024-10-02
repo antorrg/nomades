@@ -100,26 +100,7 @@ export default {
       return help.userParser(userUpdated, true, true);
     } catch (error) { throw error; }
   },
-  userUgr: async (id, newData) => {
-    console.log(Boolean(newData.enable))
-    try {
-      const user = await User.findByPk(id);
-      if (!user) {eh.throwError('Usuario no hallado', 404)}
-      const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion 
-      const newRole = help.revertScope(newData.role)
-      const formatEnable = edit? user.enable : newData.enable
-      const updInfo = {
-        role: edit? Number(user.role) : Number(newRole),
-        enable: Boolean(formatEnable),
-      };
-      const userUpdated = await user.update(updInfo);
-      // if (userUpdated) {
-      //   cache.del(`userById_${id}`);
-      // }
-      return help.userParser(userUpdated, true, true);
-    } catch (error) { throw error; }
-  },
-
+ 
   verifyPass: async (id, password) => {
     try {
       const user = await User.findByPk(id);
@@ -161,6 +142,15 @@ export default {
     } catch (error) { throw error; }
   },
   userUpgrade: async (id, newData) => {
+    const parseEnable = (value)=>{
+      if (typeof value === 'boolean') {
+        return value;
+      }
+      if (typeof value === 'string') {
+        return value.toLowerCase() === 'true';
+      }
+      return Boolean(value);
+    }
     try {
       const user = await User.findByPk(id);
       if (!user) {eh.throwError('Usuario no hallado', 404)}
@@ -168,7 +158,7 @@ export default {
       const newRole = help.revertScope(newData.role)
       const updInfo = {
         role: edit? Number(user.role) : Number(newRole),
-        enable: edit? true : Boolean(newData.enable),
+        enable: edit? true : parseEnable(newData.enable),
       };
       const userUpdated = await user.update(updInfo);
       if (userUpdated) {

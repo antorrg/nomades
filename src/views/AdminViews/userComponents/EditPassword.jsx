@@ -1,20 +1,24 @@
-import { ValidPass } from "../../../Auth/userComponents/internalUtils/Validate";
+import { ValidPass } from "../../../Auth/generalComponents/internalUtils/Validate";
 import { useAuth } from "../../../Auth/AuthContext/AuthContext";
 import * as us from "../../../Auth/authHelpers/Auth";
 import { useState } from "react";
-import showConfirmationDialog from "../../../Auth/userComponents/sweetAlert";
-import GenericButton from "../../../Auth/userComponents/GenericButton/GenericButton";
+import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
+import GenericButton from "../../../Auth/generalComponents/GenericButton/GenericButton";
 import { useNavigate, useParams } from "react-router-dom";
-import '../../styles/login.css'
-import '../../styles/forms.css'
+import "../../styles/login.css";
+import "../../styles/forms.css";
 
 const EditPassword = () => {
-  const {logout}= useAuth()
-  const {id}= useParams()
-  const navigate =useNavigate()
-  const closeLogin = ()=>{navigate(-1)}
-  const onClose = ()=>{navigate(-1)}
-    const [showPassword, setShowPassword] = useState(false);
+  const { logout } = useAuth();
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const closeLogin = () => {
+    navigate(-1);
+  };
+  const onClose = () => {
+    navigate(-1);
+  };
+  const [showPassword, setShowPassword] = useState(false);
   const [showPassword1, setShowPassword1] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
 
@@ -97,34 +101,42 @@ const EditPassword = () => {
 
   return (
     <div className="imageBack">
-    <div className='coverBack'>
-      <div className="container-md modal-content colorBack passContainer rounded-4 shadow">
-        <div className="form-signin m-auto p-3">
-       <section>
-       <div className="d-flex justify-content-between align-items-center">
-         <h5>Editar contraseña:</h5>
-         <button type="button" onClick={closeLogin}className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-          <label className="mb-3">Introduzca su contraseña actual:</label>
-        <div className="form-floating d-flex justify-content-between align-items-center">
-           <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Contraseña actual"
-                value={inputPass.password}
-                name="password"
-                autoComplete="off"
-                onChange={(event) => handleChangePass(event)}
+      <div className="coverBack">
+        <div className="container-md modal-content colorBack passContainer rounded-4 shadow">
+          <div className="form-signin m-auto p-3">
+            <section>
+              <div className="d-flex justify-content-between align-items-center">
+                <h5>Editar contraseña:</h5>
+                <button
+                  type="button"
+                  onClick={closeLogin}
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <label className="mb-3">Introduzca su contraseña actual:</label>
+              <div className="form-floating d-flex justify-content-between align-items-center">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Contraseña actual"
+                  value={inputPass.password}
+                  name="password"
+                  autoComplete="off"
+                  onChange={(event) => handleChangePass(event)}
                 />
-              <button
-                type="button"
-                onClick={() => {
-                  setShowPassword(!showPassword);
-                }}
-                style={{backgroundColor:'transparent'}}
-                className='buttonEye'
-              >
-                <i className={showPassword ? "bi bi-eye-slash" : "bi bi-eye"}></i>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowPassword(!showPassword);
+                  }}
+                  style={{ backgroundColor: "transparent" }}
+                  className="buttonEye"
+                >
+                  <i
+                    className={showPassword ? "bi bi-eye-slash" : "bi bi-eye"}
+                  ></i>
+                </button>
               </div>
               <GenericButton
                 type="submit"
@@ -133,7 +145,6 @@ const EditPassword = () => {
                 buttonText={"Verificar contraseña"}
                 disabled={!inputPass.password}
               />
-            
 
               {/* Campos para el nuevo password */}
               {!disabledInput ? (
@@ -141,54 +152,57 @@ const EditPassword = () => {
               ) : null}
               <label>Intoduzca su nueva contraseña:</label>
               <div className="form-floating d-flex justify-content-between align-items-center">
-              <input
-                type={showPassword1 ? "text" : "password"}
-                placeholder="Nuevo password"
-                value={input.newPassword}
-                name="newPassword"
-                autoComplete="off"
-                onChange={(event) => handleChange(event)}
-                disabled={disabledInput} // Deshabilitar si la contraseña actual no está verificada
-              />
-              <button
-                type="button"
-                onClick={() => {
-                  setShowPassword1(!showPassword1);
-                  
-                }}
-                style={{backgroundColor:'transparent'}}
-                className='buttonEye'
-              >
-                <i className={showPassword1 ? "bi bi-eye-slash" : "bi bi-eye"}></i>
-              </button>
-              {error.newPassword && (
-                <p className='errorMsg'>{error.newPassword}</p>
-              )}
+                <input
+                  type={showPassword1 ? "text" : "password"}
+                  placeholder="Nuevo password"
+                  value={input.newPassword}
+                  name="newPassword"
+                  autoComplete="off"
+                  onChange={(event) => handleChange(event)}
+                  disabled={disabledInput} // Deshabilitar si la contraseña actual no está verificada
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowPassword1(!showPassword1);
+                  }}
+                  style={{ backgroundColor: "transparent" }}
+                  className="buttonEye"
+                >
+                  <i
+                    className={showPassword1 ? "bi bi-eye-slash" : "bi bi-eye"}
+                  ></i>
+                </button>
+                {error.newPassword && (
+                  <p className="errorMsg">{error.newPassword}</p>
+                )}
               </div>
               <label>Confirme su nueva contraseña:</label>
               <div className="form-floating d-flex justify-content-between align-items-center">
-              <input
-                type={showPassword2 ? "text" : "password"}
-                placeholder="Confirmar nuevo password"
-                value={input.confirmPassword}
-                name="confirmPassword"
-                autoComplete="off"
-                onChange={(event) => handleChange(event)}
-                disabled={disabledInput} // Deshabilitar si la contraseña actual no está verificada
-              />
-              <button
-                type="button"
-                onClick={() => {
-                  setShowPassword2(!showPassword2);
-                }}
-                style={{backgroundColor:'transparent'}}
-                className='buttonEye'
-              >
-                <i className={showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'}></i>
-              </button>
-              {error.confirmPassword && (
-                <p className='errorMsg'>{error.password}</p>
-              )}
+                <input
+                  type={showPassword2 ? "text" : "password"}
+                  placeholder="Confirmar nuevo password"
+                  value={input.confirmPassword}
+                  name="confirmPassword"
+                  autoComplete="off"
+                  onChange={(event) => handleChange(event)}
+                  disabled={disabledInput} // Deshabilitar si la contraseña actual no está verificada
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowPassword2(!showPassword2);
+                  }}
+                  style={{ backgroundColor: "transparent" }}
+                  className="buttonEye"
+                >
+                  <i
+                    className={showPassword ? "bi bi-eye-slash" : "bi bi-eye"}
+                  ></i>
+                </button>
+                {error.confirmPassword && (
+                  <p className="errorMsg">{error.password}</p>
+                )}
               </div>
               <GenericButton
                 type="submit"
@@ -202,7 +216,7 @@ const EditPassword = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EditPassword
+export default EditPassword;

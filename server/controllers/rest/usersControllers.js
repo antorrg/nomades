@@ -53,7 +53,7 @@ export default {
   changeStateUserCtr: eh.catchAsync(async (req, res) => {
     const { id } = req.params;
     const newData = req.body;
-    const response = await sv.userUgr(id, newData);
+    const response = await sv.userUpgrade(id, newData);
     res.status(200).json(response);
   }),
   delUserCtr: eh.catchAsync(async (req, res) => {

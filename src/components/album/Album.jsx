@@ -1,7 +1,8 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Edition from "../../Auth/userComponents/Edition/Edition";
+import showConfirmationDialog from '../../Auth/generalComponents/sweetAlert'
+import Edition from "../../Auth/generalComponents/Edition/Edition";
 import * as Cmt from "../IndexComponents";
-
+import GenericButton from "../../Auth/generalComponents/GenericButton/GenericButton";
 
 const Album = ({ info, items, param, subParam }) => {
   const location = useLocation();
@@ -9,17 +10,26 @@ const Album = ({ info, items, param, subParam }) => {
   // Verificar si la URL contiene "admin"
   const isAdminRoute = location.pathname.includes("admin");
 
- 
-
   const toEdition = () => {
     navigate(`${param}/update/${info.id}`);
   };
-  const itemCreate = ()=>{
-    navigate(`/admin/product/item/create/${info.id}`)
-  }
+  const itemCreate = () => {
+    navigate(`/admin/product/item/create/${info.id}`);
+  };
+  const deleteProduct = async() => {
+    const confirmed = await showConfirmationDialog(
+      "¿Quiere eliminar este producto?"
+    );
+    if (confirmed) {
+      // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
+      //await deleteProduct(item.id);
+      console.log('soy el producto a borrar: ',info.id)
+      
+    }
+  };
 
   return (
-      <>
+    <>
       <section className="py-5 text-center container">
         <div className="row py-lg-5">
           <div className="col-lg-6 col-md-8 mx-auto">
@@ -44,18 +54,23 @@ const Album = ({ info, items, param, subParam }) => {
             </Link>
             {isAdminRoute ? (
               <>
-              <Edition
-                allowedRoles={["Super Admin", "Admin"]}
-                onClick={toEdition}
-                text={"Editar"}
-                className="btn btn-primary my-2 ms-2"
-              />
-              <Edition
-                allowedRoles={["Super Admin", "Admin"]}
-                onClick={itemCreate}
-                text={"Crear Item"}
-                className="btn btn-outline-success my-2 ms-2"
-              />
+                <Edition
+                  allowedRoles={["Super Admin", "Admin"]}
+                  onClick={toEdition}
+                  text={"Editar"}
+                  className="btn btn-primary my-2 ms-2"
+                />
+                <Edition
+                  allowedRoles={["Super Admin", "Admin"]}
+                  onClick={itemCreate}
+                  text={"Crear Item"}
+                  className="btn btn-outline-success my-2 ms-2"
+                />
+                <GenericButton
+                  className="btn btn-outline-danger my-2 ms-2"
+                  buttonText={"Eliminar producto"}
+                  onClick={deleteProduct }
+                />
               </>
             ) : (
               false
@@ -72,14 +87,8 @@ const Album = ({ info, items, param, subParam }) => {
           </div>
         </div>
       </section>
-      </>
+    </>
   );
 };
 
 export default Album;
-
-//Separamos la query del params y hacemos dos variables:
-// const queryParams = new URLSearchParams(location.search);
-// const type = queryParams.get("type"); //Obtener el type "user" o "car"
-// const id = location.pathname.split("/").pop(); // Obtener el ID de la URL
-//console.log(id)

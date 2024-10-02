@@ -6,10 +6,11 @@ import * as View from './views/Index'
 import * as Ad from './views/AdminViews/AdminIndex'
 
 function App() {
-  const {authenticated, user, loading, logout}= useAuth()
+  const {authenticated, logout}= useAuth()
   const navigate = useNavigate()
  //console.log('validado? :', authenticated)
  //console.log('user: ',user)
+ 
  const redirectToError = useCallback((status, message) => {
   navigate('/error', { state: { status, message }})
 }, [navigate])
@@ -20,12 +21,7 @@ function App() {
 )
  },[logout, redirectToError])
 
- if (loading) return <div>Loading...</div>
 
-//  const isAllowed = (roles) => {
-//    return authenticated && roles.includes(user?.role);
-    
-//   };
 
   return (
     <>

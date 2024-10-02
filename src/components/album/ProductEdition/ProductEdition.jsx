@@ -2,25 +2,23 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../../../redux/actions";
-import {updateProduct} from '../../../utils/productEndPoints';
-import showConfirmationDialog from '../../../Auth/userComponents/sweetAlert'
+import { updateProduct } from "../../../utils/productEndPoints";
+import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 import "./productstyle.css";
-import ImageUploader from "../../AdminComponents/ImageUploader";
-
-
+import ImageUploader from "../../../utils/ImageUploader";
 
 const ProductEdition = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   const page = useSelector((state) => state.ProductId);
-  useEffect(()=>{
-      dispatch(getProductById(id))
-  },[id])
-  
-  const onClose = ()=>{
-    navigate(-1)
-  }
+  useEffect(() => {
+    dispatch(getProductById(id));
+  }, [id]);
+
+  const onClose = () => {
+    navigate(-1);
+  };
 
   const [product, setProduct] = useState({
     title: "",
@@ -41,7 +39,7 @@ const ProductEdition = () => {
       });
     }
   }, [page.info]);
-  
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProduct((prevProduct) => ({
@@ -57,16 +55,15 @@ const ProductEdition = () => {
     }));
   };
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     // Lógica para actualizar el producto
     const confirmed = await showConfirmationDialog(
-          "¿Está seguro de actualizar el producto?"
-        );
-        if (confirmed) {
-          // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-          await updateProduct( id, product, onClose)
-        }
-    
+      "¿Está seguro de actualizar el producto?"
+    );
+    if (confirmed) {
+      // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
+      await updateProduct(id, product, onClose);
+    }
   };
   return (
     <div className="imageBack">
@@ -124,7 +121,6 @@ const ProductEdition = () => {
                     rows="3"
                     value={product.info_body}
                     onChange={handleInputChange}
-                  
                   />
                 </div>
                 <div className="mb-3">
@@ -137,7 +133,6 @@ const ProductEdition = () => {
                     name="enable"
                     value={product.enable ? "true" : "false"}
                     onChange={handleInputChange}
-                    
                   >
                     <option value="true">True</option>
                     <option value="false">False</option>
@@ -155,7 +150,7 @@ const ProductEdition = () => {
                   <button
                     className="btn btn-primary mb-3"
                     onClick={() => {
-                      onClose()
+                      onClose();
                     }}
                   >
                     Cancelar

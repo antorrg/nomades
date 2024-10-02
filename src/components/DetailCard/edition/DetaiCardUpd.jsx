@@ -2,25 +2,23 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem } from "../../../redux/actions";
-import {updateItem} from "../../../utils/productEndPoints";
-import showConfirmationDialog from '../../../Auth/userComponents/sweetAlert'
+import { updateItem } from "../../../utils/productEndPoints";
+import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 import "./detailCardUpd.css";
-import ImageUploader from "../../AdminComponents/ImageUploader";
-
-
+import ImageUploader from "../../../utils/ImageUploader";
 
 const DetailCardUpd = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   const item1 = useSelector((state) => state.Item);
-  useEffect(()=>{
-      dispatch(getItem(id))
-  },[id])
-  
-  const onClose = ()=>{
-    navigate(-1)
-  }
+  useEffect(() => {
+    dispatch(getItem(id));
+  }, [id]);
+
+  const onClose = () => {
+    navigate(-1);
+  };
 
   const [item, setItem] = useState({
     text: "",
@@ -35,7 +33,7 @@ const DetailCardUpd = () => {
       });
     }
   }, [item1]);
-  
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setItem((prevItem) => ({
@@ -51,16 +49,15 @@ const DetailCardUpd = () => {
     }));
   };
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     // Lógica para actualizar el producto
     const confirmed = await showConfirmationDialog(
-          "¿Está seguro de actualizar este item?"
-        );
-        if (confirmed) {
-          // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-          await updateItem( id, item, onClose)
-        }
-    
+      "¿Está seguro de actualizar este item?"
+    );
+    if (confirmed) {
+      // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
+      await updateItem(id, item, onClose);
+    }
   };
   return (
     <div className="imageBack">
@@ -68,7 +65,11 @@ const DetailCardUpd = () => {
         <div className="container-md modal-content colorBack formProductContainer rounded-4 shadow">
           <div className="container mt-5">
             <h1>Actualizacion de item</h1>
-            <section className="needs-validation" id="updateItemForm" noValidate>
+            <section
+              className="needs-validation"
+              id="updateItemForm"
+              noValidate
+            >
               <div className="row">
                 <div className="col-md-6 mb-3">
                   <ImageUploader
@@ -91,7 +92,7 @@ const DetailCardUpd = () => {
                     onChange={handleInputChange}
                   />
                 </div>
-                
+
                 <div className="d-flex flex-row me-3">
                   <button
                     className="btn btn-primary mb-3 me-2"
@@ -104,7 +105,7 @@ const DetailCardUpd = () => {
                   <button
                     className="btn btn-primary mb-3"
                     onClick={() => {
-                      onClose()
+                      onClose();
                     }}
                   >
                     Cancelar
