@@ -2,18 +2,24 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Edition from "../../Auth/userComponents/Edition/Edition";
 import * as Cmt from "../IndexComponents";
 
+
 const Album = ({ info, items, param, subParam }) => {
   const location = useLocation();
   const navigate = useNavigate();
   // Verificar si la URL contiene "admin"
   const isAdminRoute = location.pathname.includes("admin");
 
+ 
+
   const toEdition = () => {
     navigate(`${param}/update/${info.id}`);
   };
+  const itemCreate = ()=>{
+    navigate(`/admin/product/item/create/${info.id}`)
+  }
 
   return (
-    <div>
+      <>
       <section className="py-5 text-center container">
         <div className="row py-lg-5">
           <div className="col-lg-6 col-md-8 mx-auto">
@@ -37,12 +43,20 @@ const Album = ({ info, items, param, subParam }) => {
               Volver
             </Link>
             {isAdminRoute ? (
+              <>
               <Edition
                 allowedRoles={["Super Admin", "Admin"]}
                 onClick={toEdition}
                 text={"Editar"}
                 className="btn btn-primary my-2 ms-2"
               />
+              <Edition
+                allowedRoles={["Super Admin", "Admin"]}
+                onClick={itemCreate}
+                text={"Crear Item"}
+                className="btn btn-outline-success my-2 ms-2"
+              />
+              </>
             ) : (
               false
             )}
@@ -58,7 +72,7 @@ const Album = ({ info, items, param, subParam }) => {
           </div>
         </div>
       </section>
-    </div>
+      </>
   );
 };
 

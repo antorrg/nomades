@@ -39,7 +39,7 @@ const AdminNav = () => {
 
   const algoMas = () => console.log('algo mas');
 
-  const newProduct = () => console.log('nuevo producto');
+  const newProduct = () => navigate('/admin/product/create');
 
   const settings = () => console.log('settings');
 

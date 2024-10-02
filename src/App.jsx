@@ -38,8 +38,10 @@ function App() {
       {authenticated? <Route path='/admin' element={ <View.Admin/>}/> : null}
       {authenticated? <Route path='/admin/product' element={ <Ad.ProductComp/>}/> : null}
       {authenticated? <Route path='/admin/product/:id' element={ <Ad.ProductComp/>}/> : null}
+      {authenticated? <Route path='/admin/product/create' element={ <Ad.ProductCreate/>}/> : null}
       {authenticated? <Route path='/admin/product/update/:id' element={ <Ad.ProductEdition/>}/> : null}
       {authenticated? <Route path='/admin/product/item/:id' element={ <View.Item/>}/> : null}
+      {authenticated? <Route path='/admin/product/item/create/:id' element={ <Ad.ItemCreate/>}/> : null}
       {authenticated? <Route path='/admin/product/item/update/:id' element={ <Ad.DetailCardUpd/>}/> : null}
       {authenticated? <Route path='/admin/users' element={ <Ad.UserComp/>}/> : null}
       {authenticated? <Route path='/admin/users/create' element={ <Ad.UserCreate/>}/> : null}

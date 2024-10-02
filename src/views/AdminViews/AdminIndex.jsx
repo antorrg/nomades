@@ -10,6 +10,8 @@ import UserEdition from "./userComponents/UserEdition";
 import UserCreate from "./userComponents/UserCreate"
 import UserUpgrade from "./userComponents/UserUpgrade";
 import EditPassword from "./userComponents/EditPassword";
+import ProductCreate from "../../components/album/ProductEdition/ProductCreate";
+import ItemCreate from "../../components/album/ProductEdition/ItemCreate";
 
 export {
   HelpView,
@@ -24,4 +26,6 @@ export {
   UserCreate,
   UserUpgrade,
   EditPassword,
+  ProductCreate,
+  ItemCreate,
 };
