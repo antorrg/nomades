@@ -15,7 +15,7 @@ const DetailCard = ({ item }) => {
     <div>
       <div
         className="modal modal-tour position-static d-block modal-custom py-5"
-        tabindex="-1"
+        tabIndex="-1"
         role="dialog"
         id="modalTour"
       >
@@ -29,7 +29,7 @@ const DetailCard = ({ item }) => {
               />
               <p className="text-muted">{item?.text}</p>
               <Link
-                className="btn btn-lg btn-primary mt-3 mx-auto w-50"
+                className="btn btn-lg btn-secondary mt-3 mx-auto w-25"
                 to={route}
               >
                 Cerrar
