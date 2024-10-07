@@ -1,4 +1,5 @@
 import {useEffect} from 'react'
+import { Helmet } from 'react-helmet-async';
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {getInfo, getProduct} from '../redux/actions'
@@ -20,6 +21,12 @@ const Landing = () => {
 
   return (
     <>
+     <Helmet>
+        <title>Nomades Cabañas de pastores</title>
+        <meta name="description" content={info.info_header} />
+        <meta name="keywords" content="cabañas, pastores, vagon" />
+        {/* Puedes agregar más etiquetas meta aquí */}
+      </Helmet>
     <div className='min-vh-100 cover-container1 d-flex w-100 p-3 mx-auto flex-column' style={{backgroundImage:`url(${info.image}||https://img.freepik.com/foto-gratis/cascada-barco-limpio-china-natural_1417-1356.jpg)`}}>
     <Cp.Header/>
     <SessionWarning expirationTime={expirationTime}/>

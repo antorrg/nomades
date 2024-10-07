@@ -58,7 +58,6 @@ const SessionWarning = ({ expirationTime }) => {
         if (updatedTimeLeft <= 0) {
             clearInterval(countdownInterval);
         }
-
         return updatedTimeLeft;
       });
     }, 1000);
@@ -69,13 +68,11 @@ const SessionWarning = ({ expirationTime }) => {
   if (!showWarning || timeLeft === null) return null;
 
   return (
-    // <div className='caption-title'>
     <div className="alert alert-warning position-fixed start-50 translate-middle-x p-3" role="alert" style={{ backgroundColor: '#fef3c7',zIndex:'1500'}}>
       <p className="fw-bold">Advertencia!!</p>
       <p>Su sesión expirará en <strong>{timeLeft}</strong> segundos.</p>
       <p> Guarde todos sus trabajos para no perder datos.</p>
     </div>
-//   </div>
   );
 };
 
