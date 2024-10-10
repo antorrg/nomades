@@ -1,15 +1,20 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import Edition from "../../Auth/generalComponents/Edition/Edition";
-import "./DetailCard.css";
+import {useEffect} from 'react'
+import { Link, useNavigate, useParams } from "react-router-dom";
+import {useDispatch, useSelector } from 'react-redux'
+import {getItem} from '../../../redux/actions'
+import Edition from "../../../Auth/generalComponents/Edition/Edition";
+import "../../../views/styles/item.css"
 
-const DetailCard = ({ item }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  // Verificar si la URL contiene "admin"
-  const isAdminRoute = location.pathname.includes("admin");
-  const route = isAdminRoute
-    ? `/admin/product/${item?.ProductId}`
-    : `/detalle/${item?.ProductId}`;
+
+const AdminItem = () => {
+ const dispatch = useDispatch()
+ const navigate = useNavigate()
+ const {id} = useParams()
+ const item = useSelector((state)=>state.Item)
+
+ useEffect(()=>{
+   dispatch(getItem(id))
+ },[id])
 
   return (
     <div>
@@ -30,11 +35,10 @@ const DetailCard = ({ item }) => {
               <p className="text-muted">{item?.text}</p>
               <Link
                 className="btn btn-lg btn-secondary mt-3 mx-auto w-25"
-                to={route}
+                to={`/admin/product/${item?.ProductId}`}
               >
                 Cerrar
               </Link>
-              {isAdminRoute ? (
                 <Edition
                   allowedRoles={["Super Admin", "Admin"]}
                   onClick={() => {
@@ -43,7 +47,6 @@ const DetailCard = ({ item }) => {
                   text={"Editar"}
                   className={"btn btn-lg btn-primary mt-3 ms-2 mx-auto w-25"}
                 />
-              ) : null}
             </div>
           </div>
         </div>
@@ -52,4 +55,4 @@ const DetailCard = ({ item }) => {
   );
 };
 
-export default DetailCard;
+export default AdminItem;

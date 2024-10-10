@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getItem } from "../../../redux/actions";
-import { updateItem } from "../../../utils/productEndPoints";
-import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
+import { getItem } from "../../../../redux/actions";
+import { updateItem } from "../../../../utils/productEndPoints";
+import showConfirmationDialog from "../../../../Auth/generalComponents/sweetAlert";
 import "./detailCardUpd.css";
-import ImageUploader from "../../../utils/ImageUploader";
+import ImageUploader from "../../../../utils/ImageUploader";
 
 const DetailCardUpd = () => {
   const dispatch = useDispatch();

@@ -3,71 +3,73 @@ import SessionWarning from './SessionWarning';
 
 const AuthContext = createContext();
 
-const AuthProvider = ({ children, initialAuthenticated = false, initialUser = null }) => {
-  const [authenticated, setAuthenticated] = useState(initialAuthenticated);
-  const [user, setUser] = useState(initialUser);
-  const [loading, setLoading] = useState(true); // Inicialmente en true para cargar el contexto
+const AuthProvider = ({ children }) => {
+  const [authenticated, setAuthenticated] = useState(undefined);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [expirationTime, setExpirationTime] = useState(null);
-  console.log(expirationTime)
-  // Manejo del login
+
   const login = (userData, token) => {
     setAuthenticated(true);
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
     localStorage.setItem('validToken', token);
 
-    // Decodificar el token para obtener el tiempo de expiración
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
     setExpirationTime(tokenPayload.exp);
   };
 
-  // Manejo del logout
   const logout = () => {
     setAuthenticated(false);
     setUser(null);
-    // Limpiar el token y el user en localStorage
     localStorage.removeItem('user');
     localStorage.removeItem('validToken');
-    window.location.reload();
+    // Considerar usar navigate en lugar de window.location.reload()
   };
 
-  // Prevenir el deslogueo por refresh
   useEffect(() => {
-    const storedToken = localStorage.getItem('validToken');
-    const storedUser = localStorage.getItem('user');
+    const checkAuth = async () => {
+      const storedToken = localStorage.getItem('validToken');
+      const storedUser = localStorage.getItem('user');
 
-    if (storedToken && storedUser) {
-      try {
-        const tokenPayload = JSON.parse(atob(storedToken.split('.')[1]));
-        const currentTime = Date.now() / 1000; // Tiempo actual en segundos
+      if (storedToken && storedUser) {
+        try {
+          const tokenPayload = JSON.parse(atob(storedToken.split('.')[1]));
+          const currentTime = Date.now() / 1000;
 
-        if (tokenPayload.exp > currentTime) {
-          // Si el token no ha expirado
-          setAuthenticated(true);
-          setUser(JSON.parse(storedUser));
+          if (tokenPayload.exp > currentTime) {
+            setAuthenticated(true);
+            setUser(JSON.parse(storedUser));
+            setExpirationTime(tokenPayload.exp);
 
-          // Calcular el tiempo restante y programar el logout
-          const timeToExpire = (tokenPayload.exp - currentTime) * 1000;
-          console.log('para expirar', timeToExpire)
-          setExpirationTime(tokenPayload.exp);
-          setTimeout(() => {
+            const timeToExpire = (tokenPayload.exp - currentTime) * 1000;
+            //console.log('para expirar', timeToExpire)
+            setTimeout(() => {
+              logout();
+            }, timeToExpire);
+          } else {
             logout();
-          }, timeToExpire);
-        } else {
-          logout(); // Token expirado
+          }
+        } catch (error) {
+          console.error('Error al decodificar el token o al parsear el usuario', error);
+          logout();
         }
-      } catch (error) {
-        console.error('Error al decodificar el token o al parsear el usuario', error);
-        logout(); // En caso de error, forzar logout
+      } else {
+        setAuthenticated(false);
       }
-    }
 
-    setLoading(false); // Finalizar la carga una vez procesado el token
+      setLoading(false);
+    };
 
+    checkAuth();
   }, []);
 
+  if (loading) {
+    return null; // O un componente de carga si lo prefieres
+  }
+
   return (
-    <AuthContext.Provider value={{ authenticated, user, loading, login, logout, expirationTime }}>
+    <AuthContext.Provider value={{ authenticated, user, login, logout, expirationTime }}>
       {children}
       {expirationTime && <SessionWarning expirationTime={expirationTime} />}
     </AuthContext.Provider>
@@ -75,11 +77,14 @@ const AuthProvider = ({ children, initialAuthenticated = false, initialUser = nu
 };
 
 const useAuth = () => {
-  return useContext(AuthContext);
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 };
 
 export { AuthProvider, useAuth };
-
 
 // import {createContext, useContext} from 'react'
 // import {useState, useEffect} from 'react'

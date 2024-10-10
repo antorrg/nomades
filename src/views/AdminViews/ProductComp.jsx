@@ -26,14 +26,11 @@ const ProductComp = () => {
 
   return (
     <div>
-      <Ad.AdminNav />
       <div className="container marketing">
         {id ? (
-          <Comp.Album
+          <Ad.AlbumAdmin
             info={info}
             items={items}
-            param={"/admin/product"}
-            subParam={"/admin/product/item"}
           />
         ) : (
           <>

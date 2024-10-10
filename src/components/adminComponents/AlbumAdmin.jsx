@@ -1,17 +1,15 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import showConfirmationDialog from '../../Auth/generalComponents/sweetAlert'
 import Edition from "../../Auth/generalComponents/Edition/Edition";
-import * as Cmt from "../IndexComponents";
 import GenericButton from "../../Auth/generalComponents/GenericButton/GenericButton";
 
-const Album = ({ info, items, param, subParam }) => {
-  const location = useLocation();
+const Album = ({ info, items }) => {
+ 
   const navigate = useNavigate();
-  // Verificar si la URL contiene "admin"
-  const isAdminRoute = location.pathname.includes("admin");
+
 
   const toEdition = () => {
-    navigate(`${param}/update/${info.id}`);
+    navigate(`/admin/product/update/${info.id}`);
   };
   const itemCreate = () => {
     navigate(`/admin/product/item/create/${info.id}`);
@@ -27,6 +25,17 @@ const Album = ({ info, items, param, subParam }) => {
       
     }
   };
+   const delItem = async(id)=>{
+    const confirmed = await showConfirmationDialog(
+      "¿Quiere eliminar este item?"
+    );
+    if (confirmed) {
+      // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
+      //await deleteProduct(item.id);
+      console.log('soy el item a borrar: ',id)
+      
+    }
+   }
 
   return (
     <>
@@ -40,20 +49,14 @@ const Album = ({ info, items, param, subParam }) => {
                   alt="Imagen"
                   style={{ maxWidth: "22rem" }}
                 />
-            {isAdminRoute ? (
-              <>
-                <h4>Meta informacion:</h4>
+                <h4>Info posicionamiento:</h4>
                 <p className="lead text-muted">{info?.infoHeader}</p>
                 <hr></hr>
                 <h4>Descripcion:</h4>
-              </>
-            ) : null}
             <p className="lead text-muted">{info?.infoBody}</p>
-            <Link className="btn btn-secondary my-2" to={param}>
+            <Link className="btn btn-secondary my-2" to='/admin/product'>
               Volver
             </Link>
-            {isAdminRoute ? (
-              <>
                 <Edition
                   allowedRoles={["Super Admin", "Admin"]}
                   onClick={toEdition}
@@ -71,10 +74,6 @@ const Album = ({ info, items, param, subParam }) => {
                   buttonText={"Eliminar producto"}
                   onClick={deleteProduct }
                 />
-              </>
-            ) : (
-              false
-            )}
           </div>
         </div>
       </section>
@@ -82,7 +81,26 @@ const Album = ({ info, items, param, subParam }) => {
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {items?.map((item) => (
-              <Cmt.Card item={item} key={item.id} subParam={subParam} />
+                <div className="col" key={item.id}>
+                <div className="card shadow-sm">
+                  <img className="card-img-top" src={item.img} alt="Card image" />
+                  <div className="card-body">
+                    <p className="card-text">{item.text}</p>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div className="btn-group">
+                        <Link className="btn btn-sm btn-outline-secondary me-3" to={`/admin/product/item/${item.id}`}>
+                          Ver mas
+                        </Link>
+                        <Edition 
+                            allowedRoles={["Super Admin", "Admin"]}
+                            onClick={()=>{delItem(item.id)}}
+                            text={"Borrar"}
+                            className="btn btn-sm btn-outline-danger"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>

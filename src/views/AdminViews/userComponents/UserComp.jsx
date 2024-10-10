@@ -27,7 +27,7 @@ const UserComp = () => {
 
   return (
     <>
-    <AdminNav/>
+    {/* <AdminNav/> */}
     {!id ?
     <>
      <div className='container-user'>

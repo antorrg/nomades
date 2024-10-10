@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
 import "./styles/admin.css";
 import * as Main from "./AdminViews/AdminIndex";
 import {useAuth} from '../Auth/AuthContext/AuthContext'
@@ -13,9 +14,7 @@ const Admin = () => {
     <>
       <div>
         <Main.AdminNav setHelp={setHelp} />
-        {/* <Main.ProductComp/> */}
-        <SessionWarning expirationTime={expirationTime}/>
-        <Main.WelcomeView />
+        <Outlet/>
       </div>
     </>
   );

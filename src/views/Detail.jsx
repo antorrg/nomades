@@ -18,7 +18,7 @@ const Detail = () => {
   return (
     <div>
       <Cmt.Header />
-     <Cmt.Album info={info} items={items} param={'/'} subParam={'/detalle/item'}/>
+     <Cmt.Album info={info} items={items}/>
       <Cmt.Footer />
     </div>
   );
