@@ -1,0 +1,32 @@
+.coverAbout {
+    margin-top:0;
+    z-index: 10;
+    padding: 0.2rem;
+    color: black; /* Asegúrate de que el texto sea visible */
+  min-height: 100vh; /* Asegura que ocupe al menos la altura completa de la pantalla */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  }
+.aboutContainer {
+    left:0;
+    margin-top:5%;
+    max-width: 80%;
+    display: flex;
+    align-items: center;
+    
+  }
+  .about-h1 {
+    font-size: 4em;
+  }
+  @media (max-width: 768px) {
+    .aboutContainer {
+      min-width: 80%;
+      max-width: 90%;
+    }
+    .about-h1 {
+        font-size: 3em;
+        
+      }
+  }

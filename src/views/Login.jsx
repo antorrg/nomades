@@ -3,12 +3,13 @@ import {useAuth} from '../Auth/AuthContext/AuthContext'
 import {useNavigate}from "react-router-dom" ;
 import { ValidLogin } from '../Auth/generalComponents/internalUtils/Validate';
 import {loginUser} from '../Auth/authHelpers/Auth'
+import AlertLogin from '../components/AlertLogin'
 import './styles/login.css'
 import './styles/forms.css'
 
 const Login = () => {
   const navigate = useNavigate()
-  const {login, authenticated, user}=useAuth();
+  const {login, authenticated, logout}=useAuth();
   const [showPassword, setShowPassword]= useState(false)
 
   const closeLogin = ()=>{navigate('/')}
@@ -49,10 +50,14 @@ const Login = () => {
 
    
   return (
+    <>
   <div className="imageBack">
     <div className='coverBack'>
       <div className="container-md modal-content colorBack loginContainer rounded-4 shadow">
         <div className="form-signin m-auto p-3">
+          {authenticated?
+          <AlertLogin logout={logout}/>
+          :
           <section>
             <div className="d-flex justify-content-between align-items-center">
               <img className="mb-4" src="/vite.svg" alt="" width="72" height="57"/>
@@ -77,10 +82,12 @@ const Login = () => {
             <br></br>
             <br></br>
           </section>
+                  }
         </div>
       </div>
     </div>
   </div>
+  </>
   );
 };
 
