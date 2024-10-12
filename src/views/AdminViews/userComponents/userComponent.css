@@ -1,12 +1,15 @@
-.container-user {
+.contain-user {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
+
 @media (max-width: 768px) {
-    .container-user {
+    .contain-user {
       min-width: 80%;
       max-width: 85%;
       margin:0.5rem;

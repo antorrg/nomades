@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react'
 import {useParams} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import {AdminNav} from '../AdminIndex'
 import User from './User'
 import './userComponent.css'
 import {getAllUsers, getUserById, cleanState}from '../../../redux/actions'
@@ -27,18 +26,18 @@ const UserComp = () => {
 
   return (
     <>
-    {/* <AdminNav/> */}
     {!id ?
-    <>
-     <div className='container-user'>
-    <div className=' py-5 bg-light'>
-      <div className='container'>
+     <div className='container-fluid'>
+     <div className='row'> 
+       {/* <div className='contain-user'> */}
         {users?.map((user)=>
-        <User key={user.id} user={user} isSingleUser={single}/>
+        <div key={user.id} className="col-12 col-md-6 col-lg-3 my-2 me-2 mb-2">
+        <User user={user} isSingleUser={single} />
+        </div>
         )}
       </div>
       </div>
-    </div></>
+      
     :
     <>
     <div className="imageBack">

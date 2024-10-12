@@ -6,7 +6,7 @@ const ImageUploader = ({ titleField, imageValue, onImageUpload }) => {
   const [file, setFile] = useState(null);
   const [imageUrl, setImageUrl] = useState(imageValue || ""); // Inicializa con imageValue
   const [previewUrl, setPreviewUrl] = useState(imageValue || ""); // Inicializa con imageValue
-  const { alert, setAlert } = useState(false);
+  const [ alert, setAlert ] = useState(false);
 
   // Actualiza previewUrl si el prop imageValue cambia
   useEffect(() => {
@@ -75,7 +75,7 @@ const ImageUploader = ({ titleField, imageValue, onImageUpload }) => {
               {alert ? (
                 <p className="text-success">Imagen cargada exitosamente</p>
               ) : (
-                <p className="text-success">Imagen cargada:</p>
+                <p className="text-success">Imagen existente:</p>
               )}
               <img
                 src={previewUrl}

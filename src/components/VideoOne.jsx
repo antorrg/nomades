@@ -1,6 +1,19 @@
-import React from 'react'
+import React from 'react';
+import YouTube from 'react-youtube';
 
 const VideoOne = () => {
+  const opts = {
+    height: '390',
+    width: '640',
+    playerVars: {
+      autoplay: 0,
+    },
+  };
+
+  const onReady = (event) => {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo();
+  };
   return (
     <div className='container'>
         VideoOne
@@ -10,7 +23,7 @@ const VideoOne = () => {
         <p className="lead">Algun video de youtube que pueda describir y llamar la atencion del cliente con la publicacion acerca de las cabañitas.</p>
       </div>
       <div className="col-md-7">
-        <img src='https://res.cloudinary.com/dt1lpgumr/image/upload/c_scale,w_auto/f_auto,q_auto/caba%C3%83%C2%B1a19.webp?_a=BAMAH2TE0' alt='Not found' style={{width:'600px', height:'450px'}}/>
+      <YouTube videoId="oRH5lH7F7TY" opts={opts} onReady={onReady} />
       </div>
     </div>
     </div>

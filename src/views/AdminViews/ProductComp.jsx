@@ -14,6 +14,7 @@ const ProductComp = () => {
   const info = response.info;
   const items = response.items;
   const { id } = useParams();
+  const goBack = ()=>navigate(-1)
 
   useEffect(() => {
     if (id) {
@@ -41,7 +42,7 @@ const ProductComp = () => {
         <GenericButton
           className="btn btn-secondary mt-3 mb-3"
           onClick={() => {
-            navigate("/admin");
+            navigate(-1);
           }}
           buttonText={"Volver"}
         />

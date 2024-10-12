@@ -54,7 +54,7 @@ const User = ({ user, isSingleUser }) => {
 
   return (
     <div className="col userStyle">
-      <div className="card shadow-sm p-3">
+      <div className="card shadow-sm p-2">
         <img
           className="card-img-top"
           src={user.picture}

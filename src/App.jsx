@@ -45,7 +45,7 @@ function App() {
         <Route path='/admin/product/create' element={<Ad.ProductCreate/>}/>
         <Route path='/admin/product/update/:id' element={<Ad.ProductEdition/>}/>
         <Route path='/admin/product/item/:id' element={<Ad.AdminItem/>}/>
-        <Route path='/admin/product/item/create/:id' element={<Ad.AdminItem/>}/>
+        <Route path='/admin/product/item/create/:id' element={<Ad.ItemCreate/>}/>
         <Route path='/admin/product/item/update/:id' element={ <Ad.DetailCardUpd/>}/>
         <Route path='/admin/users' element={ <Ad.UserComp/>}/>
         <Route path='/admin/users/create' element={<Ad.UserCreate/>}/>
