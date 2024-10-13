@@ -6,6 +6,7 @@ import Landing from './Landing'
 import Login from './Login'
 import Admin from './Admin'
 import Error from './Error'
+import OurWork from './OurWork'
 
 export {
     About,
@@ -15,5 +16,6 @@ export {
     Item,
     Landing,
     Login,
-    Error
+    Error,
+    OurWork
 }

@@ -34,6 +34,7 @@ function App() {
       <Route path='/detalle/item/:id' element={<View.Item/>}/>
       <Route path='/contacto' element={<View.Contact/>}/>
       <Route path='/acerca' element={<View.About/>}/>
+      <Route path='/nuestro-trabajo' element={<View.OurWork/>}/>
       <Route path='/admin' element={
         <ProtectedRoute>
         <View.Admin />

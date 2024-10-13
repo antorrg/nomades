@@ -24,6 +24,7 @@ const AuthProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem('user');
     localStorage.removeItem('validToken');
+    window.location.reload()
     // Considerar usar navigate en lugar de window.location.reload()
   };
 

@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {Header} from '../components/IndexComponents'
 import './styles/contact.css'
 import { ValidContact } from '../Auth/generalComponents/internalUtils/Validate'
 
@@ -47,6 +48,7 @@ const [error, setError] = useState({
 
   return (
     <div className="imageBack">
+       <Header/>
     <div className="coverMail">
       <div className="container-md modal-content colorBack contactContainer rounded-4 shadow">
         <div className="container mt-5">
