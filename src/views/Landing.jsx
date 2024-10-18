@@ -33,7 +33,7 @@ const Landing = () => {
         <p className='cover-p'>{info?.description}</p>
         <p className='lead'>
           <Link className='btn btn-lg btn-ligth fw-bold border-white bg-white ' to='/nuestro-trabajo'  state={{ status: 404, message: "Página no encontrada" }}>
-            Vea más...
+            Nuestro trabajo...
         </Link>
         </p>
       </div>

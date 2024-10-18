@@ -34,7 +34,7 @@ const AdminItem = () => {
               />
               <p className="text-muted">{item?.text}</p>
               <Link
-                className="btn btn-lg btn-secondary mt-3 mx-auto w-25"
+                className="btn btn-md btn-secondary mt-3 mx-auto w-25"
                 to={`/admin/product/${item?.ProductId}`}
               >
                 Cerrar
@@ -45,7 +45,7 @@ const AdminItem = () => {
                     navigate(`/admin/product/item/update/${item.id}`);
                   }}
                   text={"Editar"}
-                  className={"btn btn-lg btn-primary mt-3 ms-2 mx-auto w-25"}
+                  className={"btn btn-md btn-primary mt-3 ms-2 mx-auto w-25"}
                 />
             </div>
           </div>
