@@ -21,6 +21,8 @@ const {
     Product,
     Item,
     Landing,
+    Image,
+    Media
 }= sequelize.models;
 
 //Asociations:
@@ -32,5 +34,7 @@ export {
     Product,
     Item,
     Landing,
+    Image,
+    Media,
     sequelize,
 }

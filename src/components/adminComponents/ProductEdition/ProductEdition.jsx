@@ -4,14 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductById } from "../../../redux/actions";
 import { updateProduct } from "../../../utils/productEndPoints";
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
+import { Form } from "react-bootstrap";
 import "./productstyle.css";
 import ImageUploader from "../../../utils/ImageUploader";
+import ImageSelector from "../../../utils/ImageSelector";
 
 const ProductEdition = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   const page = useSelector((state) => state.ProductId);
+  const [imgUrl, setImgUrl] = useState(false)
   useEffect(() => {
     dispatch(getProductById(id));
   }, [id]);
@@ -26,6 +29,7 @@ const ProductEdition = () => {
     info_header: "",
     info_body: "",
     enable: false,
+    saver: false,
   });
 
   useEffect(() => {
@@ -36,6 +40,7 @@ const ProductEdition = () => {
         info_header: page.info.infoHeader || "",
         info_body: page.info.infoBody || "",
         enable: page.info.enable || false,
+        saver: page.info.saver || false,
       });
     }
   }, [page.info]);
@@ -44,7 +49,7 @@ const ProductEdition = () => {
     const { name, value } = e.target;
     setProduct((prevProduct) => ({
       ...prevProduct,
-      [name]: value,
+      [name]: value === "true" ? true : value === "false" ? false : value,
     }));
   };
 
@@ -54,7 +59,13 @@ const ProductEdition = () => {
       landing: imageUrl,
     }));
   };
-
+  const handleSwitchChange = (e) => {
+    const { checked, id } = e.target;
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      [id]: checked,
+    }));
+  };
   const handleSubmit = async () => {
     // Lógica para actualizar el producto
     const confirmed = await showConfirmationDialog(
@@ -62,7 +73,8 @@ const ProductEdition = () => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      await updateProduct(id, product, onClose);
+      console.log(product)
+      //await updateProduct(id, product, onClose);
     }
   };
   return (
@@ -73,12 +85,28 @@ const ProductEdition = () => {
             <h1>Actualizacion de producto</h1>
             <section className="needs-validation" id="updateForm" noValidate>
               <div className="row">
+                {imgUrl ?
+                <div className="col-md-6 mb-3">
+                  <ImageSelector onImageSelect={handleImageChange}/>
+                </div>
+                :
                 <div className="col-md-6 mb-3">
                   <ImageUploader
                     titleField={"Imagen portada:"}
                     imageValue={product.landing}
                     onImageUpload={handleImageChange}
                   />
+                  </div>
+                  }
+                </div>
+                <div className="mb-3 form-check form-switch">
+                    <Form.Check 
+                      type="switch"
+                      id="imgUrlSwitch"
+                      checked={imgUrl}
+                      label="Active para elegir imagen guardada"
+                      onChange={()=>{setImgUrl(prev => !prev)}}
+                    />
                 </div>
                 <div className="col-md-6 mb-3"></div>
                 <div className="mb-3">
@@ -137,6 +165,15 @@ const ProductEdition = () => {
                     <option value="true">True</option>
                     <option value="false">False</option>
                   </select>
+                 </div>
+                 <div className="mb-3 form-check form-switch">
+                    <Form.Check 
+                      type="switch"
+                      id="saver"
+                      checked={product.saver}
+                      label="Active para conservar imagen antigua"
+                      onChange={handleSwitchChange}
+                    />
                 </div>
                 <div className="d-flex flex-row me-3">
                   <button
@@ -156,7 +193,6 @@ const ProductEdition = () => {
                     Cancelar
                   </button>
                 </div>
-              </div>
             </section>
           </div>
         </div>

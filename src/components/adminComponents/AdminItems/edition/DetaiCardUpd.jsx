@@ -3,14 +3,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem } from "../../../../redux/actions";
 import { updateItem } from "../../../../utils/productEndPoints";
+import { Form } from "react-bootstrap";
 import showConfirmationDialog from "../../../../Auth/generalComponents/sweetAlert";
 import "./detailCardUpd.css";
 import ImageUploader from "../../../../utils/ImageUploader";
+import ImageSelector from "../../../../utils/ImageSelector";
 
 const DetailCardUpd = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
+  const [imgUrl, setImgUrl] = useState(false)
   const item1 = useSelector((state) => state.Item);
   useEffect(() => {
     dispatch(getItem(id));
@@ -23,6 +26,7 @@ const DetailCardUpd = () => {
   const [item, setItem] = useState({
     text: "",
     img: "",
+    saver: false,
   });
 
   useEffect(() => {
@@ -30,6 +34,7 @@ const DetailCardUpd = () => {
       setItem({
         text: item1.text || "",
         img: item1.img || "",
+        saver: item1.saver || false,
       });
     }
   }, [item1]);
@@ -46,6 +51,13 @@ const DetailCardUpd = () => {
     setItem((prevItem) => ({
       ...prevItem,
       img: imageUrl,
+    }));
+  };
+  const handleSwitchChange = (e) => {
+    const { checked, id } = e.target;
+    setItem((prevItem) => ({
+      ...prevItem,
+      [id]: checked,
     }));
   };
 
@@ -71,12 +83,27 @@ const DetailCardUpd = () => {
               noValidate
             >
               <div className="row">
+              {imgUrl ?
+              <div className="col-md-6 mb-3">
+                  <ImageSelector onImageSelect={handleImageChange}/>
+                </div>
+                :
                 <div className="col-md-6 mb-3">
                   <ImageUploader
                     titleField={"Imagen:"}
                     imageValue={item.img}
                     onImageUpload={handleImageChange}
                   />
+                </div>
+                }
+                <div className="mb-3 form-check form-switch">
+                    <Form.Check 
+                      type="switch"
+                      id="imgUrlSwitch"
+                      checked={imgUrl}
+                      label="Active para elegir imagen guardada"
+                      onChange={()=>{setImgUrl(prev => !prev)}}
+                    />
                 </div>
                 <div className="col-md-6 mb-3"></div>
                 <div className="mb-3">
@@ -91,6 +118,15 @@ const DetailCardUpd = () => {
                     value={item.text}
                     onChange={handleInputChange}
                   />
+                </div>
+                <div className="mb-3 form-check form-switch">
+                    <Form.Check 
+                      type="switch"
+                      id="saver"
+                      checked={item.saver}
+                      label="Active para conservar imagen antigua"
+                      onChange={handleSwitchChange}
+                    />
                 </div>
 
                 <div className="d-flex flex-row me-3">

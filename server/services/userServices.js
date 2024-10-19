@@ -1,5 +1,6 @@
 import { User } from "../db.js";
 import eh from '../utils/errorHandlers.js'
+import { oldImagesHandler } from "./storage.js";
 import bcrypt from "bcrypt";
 import jwt from '../middlewares/validation/index.js'
 import env from "../envConfig.js";
@@ -20,7 +21,7 @@ export default {
       //preparacion de variables:
       const hashedPassword = await bcrypt.hash(finalPassword, 12);
       const nickname1 = email1.split("@")[0];
-      
+
       const newUser = await User.create({
         email: email1,
         password:  hashedPassword,
@@ -75,17 +76,22 @@ export default {
       const userDetail =  help.userParser(userFound, true, true);
       //cache.set(`userById_${id}`, userDetail);
       return userDetail;
-    } catch (error) { 
+    } catch (error) {
       throw error;
     }
   },
 
   userUpd: async (id, newData) => {
+    let imageStore = "";
+    const options = help.optionImage(newData.saver)
     try {
       const user = await User.findByPk(id);
       if (!user) {eh.throwError('Usuario no hallado', 404)}
-      const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion 
+      const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion
       const nickname1 =  newData.email.split("@")[0];
+      //Verifica si se esta actualizando la imagen
+      if (newData.picture !== user.picture) {
+              imageStore = user.picture}
       const updInfo = {
         email: edit? user.email : newData.email,
         nickname: edit? user.nickname : nickname1,
@@ -94,18 +100,20 @@ export default {
         country: newData.country,
       };
       const userUpdated = await user.update(updInfo);
-      // if (userUpdated) {
-      //   cache.del(`userById_${id}`);
-      // }
+      const pictureOld = await oldImagesHandler(imageStore, options)
+      if(pictureOld.success===false){eh.throwError('Error al procesar imagen antigua', 500)}
+      //       if (userUpdated) {
+      //    cache.del(`userById_${id}`);
+      //  }
       return help.userParser(userUpdated, true, true);
     } catch (error) { throw error; }
   },
- 
+
   verifyPass: async (id, password) => {
     try {
       const user = await User.findByPk(id);
       if (!user) { eh.throwError('Usuario no hallado', 404)}
-      const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion 
+      const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion
       if(edit){eh.throwError('No se puede cambiar la contraseña a este usuario. Accion no permitida', 403)}
       const passwordMatch = await bcrypt.compare(password, user.password);
       if (!passwordMatch) { eh.throwError('Contraseña incorrecta!', 400)}
@@ -117,7 +125,7 @@ export default {
     try {
       const user = await User.findByPk(id);
       if (!user) { eh.throwError('Usuario no hallado', 404)}
-      const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion 
+      const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion
       if(edit){eh.throwError('No se puede cambiar la contraseña a este usuario. Accion no permitida', 403)}
       const hashedPassword = await bcrypt.hash(password, 12);
       const newData = { password: hashedPassword };
@@ -132,7 +140,7 @@ export default {
     try {
       const user = await User.findByPk(id);
       if (!user) { eh.throwError('Usuario no hallado', 404)}
-      const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion 
+      const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion
       if(edit){eh.throwError('No se puede cambiar la contraseña a este usuario. Accion no permitida', 403)}
       const hashedPassword = await bcrypt.hash(password, 12);
       const newData = { password: hashedPassword };
@@ -154,7 +162,7 @@ export default {
     try {
       const user = await User.findByPk(id);
       if (!user) {eh.throwError('Usuario no hallado', 404)}
-      const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion 
+      const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion
       const newRole = help.revertScope(newData.role)
       const updInfo = {
         role: edit? Number(user.role) : Number(newRole),
@@ -172,7 +180,7 @@ export default {
     try {
       const user = await User.findByPk(id);
       if (!user) { eh.throwError('Usuario no hallado', 404)}
-      const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion 
+      const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion
       if(edit){eh.throwError('No se puede eliminar a este usuario', 403)}
       await user.destroy(id);
       //cache.del(`userById_${id}`)

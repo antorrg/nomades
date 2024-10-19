@@ -131,6 +131,15 @@ const parsed = (data)=>{
         enable: data.enable
     }
 }
+const optionImage = (save)=>{
+    if(save==='true'|| save === true){
+        return true
+    }else if(save==='false'|| save === false){
+        return false;
+    }else{
+        return false;
+    }
+}
 export default {
 productCleaner,
 aux,
@@ -142,8 +151,8 @@ revertScope,
 emptyUser,
 protectProtocol,
 dataEmptyLanding,
-cleanerLanding
-
+cleanerLanding,
+optionImage,
 };
  
 

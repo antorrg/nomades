@@ -1,5 +1,6 @@
 import { Product, Item, sequelize } from "../db.js";
 import eh from '../utils/errorHandlers.js'
+import { oldImagesHandler, deleteFromCloudinary } from "./storage.js";
 import NodeCache from "node-cache";
 import help from "./helpers.js";
 
@@ -101,9 +102,14 @@ getDetail : async (id) => {
     } catch (error) {throw error;}
 },
 updProduct : async (id, newData) => {
+    const options = help.optionImage(newData.saver)
+    let imageStore = "";
     try {
         const productFound = await Product.findByPk(id);
         if(!productFound){eh.throwError('Error inesperado, dato no hallado!',404)}
+        if(productFound.landing !== newData.landing){
+            imageStore = productFound.landing
+        }
         const parsedData = {
             title: newData.title,
             logo: newData.logo,
@@ -114,6 +120,8 @@ updProduct : async (id, newData) => {
             enable: Boolean(newData.enable),
             deleteAt: Boolean(newData.deleteAt)}
         const productUpd = await productFound.update(parsedData)
+        const pictureOld = await oldImagesHandler(imageStore, options)
+        if(pictureOld.success===false){eh.throwError('Error al procesar imagen antigua', 500)}
         if (productUpd) {
             cache.del('products');
             }
@@ -122,14 +130,21 @@ updProduct : async (id, newData) => {
 },
 
 updItem: async (id, newData)=>{
+    const options = help.optionImage(newData.saver)
+    let imageStore = "";
     try {
         const itemFound = await Item.findByPk(id);
     if(!itemFound){eh.throwError('Error inesperado, item no hallado!',404)}
+    if(itemFound.img !== newData.img){
+        imageStore = itemFound.img;
+    }
     const parsedData = {
         img: newData.img,
         text: newData.text,
         enable: Boolean(newData.enable)}
     const itemUpd = itemFound.update(parsedData)
+    const pictureOld = await oldImagesHandler(imageStore, options)
+     if(pictureOld.success===false){eh.throwError('Error al procesar imagen antigua', 500)}
     return itemUpd
     } catch (error) {throw error;}
 },
@@ -138,30 +153,103 @@ delProduct: async (id) => {
     let transaction;
     try {
         transaction = await sequelize.transaction();
-        // Encontrar el Home por ID
+        
+        // Buscar el Producto
         const product = await Product.findByPk(id, { transaction });
-        if (!product) {eh.throwError('Producto no hallado', 404)}
+        if (!product) {
+            eh.throwError('Producto no hallado', 404);
+        }
 
-        // Borrar los Items asociados
+        // Obtener todas las imágenes de items antes del borrado
+        const itemImages = await imageItemCapture(id);
+        
+        // Borrar todos los Items asociados
         await Item.destroy({
-            where: { ProductId: id }, transaction});
+            where: { ProductId: id },
+            transaction
+        });
 
-        // Borrar el Home
+        // Borrar el Producto
         await product.destroy({ transaction });
+
+        // Después de operaciones exitosas en DB, borrar imágenes de Cloudinary
+        const deletePromises = [
+            // Borrar imagen principal del producto
+            deleteFromCloudinary(product.landing),
+            // Borrar todas las imágenes de items
+            ...itemImages.map(imgUrl => deleteFromCloudinary(imgUrl))
+        ];
+
+        const results = await Promise.allSettled(deletePromises);
+        
+        // Verificar si hubo fallos en los borrados
+        const fallosEnBorrado = results.filter(result => result.status === 'rejected');
+        if (fallosEnBorrado.length > 0) {
+            console.error('Algunas imágenes no se pudieron borrar de Cloudinary:', fallosEnBorrado);
+            // Puedes querer registrar estos fallos pero no fallar toda la operación
+        }
+
         await transaction.commit();
-        return { message: 'Producto y sus items asociados borrados exitosamente' };
+        return { 
+            message: 'Producto y sus items asociados borrados exitosamente',
+            imagenesBorradas: results.filter(r => r.status === 'fulfilled').length
+        };
+
     } catch (error) {
-        if (transaction) { await transaction.rollback(); }; throw error;}
+        if (transaction) {
+            await transaction.rollback();
+        }
+        throw error;
+    }
 },
+
 delItem: async (id) => {
+    let transaction;
     try {
-        // Encontrar el Home por ID
+        transaction = await sequelize.transaction();
+
+        // Buscar el Item
         const item = await Item.findByPk(id);
-        if (!item) {eh.throwError('Item no hallado', 404)}
-        // Borrar los Items asociados
-        await item.destroy();
-        return { message: 'Item borrado exitosamente' };
+        if (!item) {
+            eh.throwError('Item no hallado', 404);
+        }
+
+        // Borrar el Item de la base de datos
+        await item.destroy({ transaction });
+
+        // Borrar la imagen de Cloudinary
+        const resultadoCloudinary = await deleteFromCloudinary(item.img);
+        if (!resultadoCloudinary) {
+            // Registrar el error pero no fallar la operación
+            console.error('Advertencia: No se pudo borrar la imagen de Cloudinary:', item.img);
+        }
+
+        await transaction.commit();
+        return {
+            message: 'Item borrado exitosamente',
+            imagenBorrada: !!resultadoCloudinary
+        };
+
     } catch (error) {
-        throw error;}
-},
+        if (transaction) {
+            await transaction.rollback();
+        }
+        throw error;
+    }
+}
 };
+async function imageItemCapture (id){
+    try {
+        const data = await Item.findAll({
+            where:{
+                ProductId : id,
+                attributes: ['img']
+            },
+        })
+        if(!data){eh.throwError('Error inesperado', 500)}
+        return data.map(item => item.img);
+    } catch (error) {
+        throw error
+    }
+   
+}

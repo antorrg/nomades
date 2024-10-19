@@ -33,6 +33,7 @@ export const updateItem = async (id, item, onClose) => {
       setAuthHeader()
     );
     if (response.status === 200) {
+      //await axios(`/api/v1//media/imgs/${imgId}`)
       showSuccess("Item actualizado correctamente");
       await onClose(); // Cierra el modal después de guardar los cambios
     }

@@ -47,6 +47,42 @@ async function uploadToCloudinary(file) {
     throw error;
   }
 }
+// Función para extraer el public_id de una URL de Cloudinary
+function extractPublicIdFromUrl(url) {
+  try {
+    // La URL de Cloudinary sigue este patrón:
+    // https://res.cloudinary.com/[cloud_name]/image/upload/v[version]/[public_id].[format]
+    const urlParts = url.split('/');
+    const lastPart = urlParts[urlParts.length - 1];
+    // Eliminamos la extensión del archivo
+    const publicId = lastPart.split('.')[0];
+    return publicId;
+  } catch (error) {
+    throw new Error('URL de Cloudinary inválida');
+  }
+}
+
+// Función para eliminar imagen de Cloudinary
+async function deleteFromCloudinary(imageUrl) {
+  try {
+    const publicId = extractPublicIdFromUrl(imageUrl);
+    
+    const result = await cloudinary.uploader.destroy(publicId);
+    
+    if (result.result === 'ok') {
+      return {
+        success: true,
+        message: 'Imagen eliminada correctamente',
+        result
+      };
+    } else {
+      throw new Error('No se pudo eliminar la imagen');
+    }
+  } catch (error) {
+    throw new Error(`Error al eliminar la imagen: ${error.message}`);
+  }
+}
+
 
 const controllerUploader = async (req, res) => {
   if (!req.file) {
@@ -85,7 +121,7 @@ const configureCloudinary = async (config) => {
   // }
 }
 
-export { upload, controllerUploader, configureCloudinary };
+export { upload, controllerUploader, configureCloudinary, deleteFromCloudinary };
 
 //ejemplo url: app.post('/prueba', upload.single('image'), controllerUploader)
 

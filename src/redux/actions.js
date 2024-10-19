@@ -9,6 +9,7 @@ export const ITEM = "ITEM";
 export const CLEAN_STATE = "CLEAN_STATE";
 export const ALL_USERS = "ALL_USERS";
 export const USER_BY_ID = "USER_BY_ID";
+export const IMAGES = "IMAGES";
 
 //*%%%%%%% Rutas libres %%%%%%%%
 export const getInfo = () => {
@@ -95,4 +96,17 @@ export const getUserById = (id) => async (dispatch) => {
   } catch (error) {
     HandlError(error);
   }
+};
+export const getStoredImgs = () => {
+  return async (dispatch) => {
+    try {
+      const data = await axios("/api/v1/media/imgs");
+      return dispatch({
+        type: IMAGES,
+        payload: data.data,
+      });
+    } catch (error) {
+      HandlError(error);
+    }
+  };
 };

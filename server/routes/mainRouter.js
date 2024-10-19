@@ -1,6 +1,6 @@
 import express from 'express'
 import pageRouter from './pageMvcRouter.js'
-import adminRouter from './adminMvcRouter.js'
+import mediaRouter from './mediaRouter.js'
 import productRouter from './productRouterRest.js'
 import userRouter from './userRouterRest.js'
 import landingRouter from './landingRouter.js'
@@ -20,6 +20,8 @@ mainRouter.use('/api/v1', productRouter)
 mainRouter.use('/api/v1', landingRouter)
 
 mainRouter.use('/api/v1', userRouter)
+
+mainRouter.use('/api/v1/', mediaRouter)
 
 //mainRouter.use(mid.lostRoute)
 

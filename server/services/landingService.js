@@ -1,5 +1,6 @@
 import {Landing} from '../db.js'
 import eh from '../utils/errorHandlers.js'
+import { oldImagesHandler } from "./storage.js";
 import help from './helpers.js'
 
 //ejemplo de implementacion eh.throwError('mensaje', 404)
@@ -56,10 +57,17 @@ export default {
         }
     },
     updLanding : async(id, newData)=>{
+        const options = help.optionImage(newData.saver)
+        let imageStore = "";
         try {
             const page = await Landing.findByPk(id)
             if(!page){eh.throwError('No hallado', 404)}
+            if(page.image !== newData.image){
+                imageStore = page.image;
+            }
             const newPage = await page.update(newData)
+            const pictureOld = await oldImagesHandler(imageStore, options)
+             if(pictureOld.success===false){eh.throwError('Error al procesar imagen antigua', 500)}
             return newPage;
         } catch (error) {
             throw error;
