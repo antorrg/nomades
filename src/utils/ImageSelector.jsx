@@ -8,7 +8,7 @@ const ImageSelector = ({ onImageSelect }) => {
     const dispatch = useDispatch()
   const storedImages = useSelector((state) => state.Images); // Accede a las imágenes almacenadas en Redux
   const [selectedImage, setSelectedImage] = useState("");
-
+  
   useEffect(()=>{
     dispatch(getStoredImgs())
   },[])

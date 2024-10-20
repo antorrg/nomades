@@ -12,7 +12,7 @@ const oldImagesHandler = (imageUrl, isRedirect)=>{
 // Funcion para guardar imagen de Storage
 const resaveImageFromStorage = async(imageUrl)=>{
   try {
-    // Verificar si el usuario ya existe
+    //verificar si la imagen existe
     const image = await Image.findOne({where: {imageUrl : imageUrl}})
     if (image)   eh.throwError("Esta imagen ya fue guardada", 400);
    
@@ -23,6 +23,7 @@ const resaveImageFromStorage = async(imageUrl)=>{
     if (!docRef.id) {
       eh.throwError("Error inesperado en el servidor", 500);
     }
+    
     return docRef
   } catch (error) {
     throw error;
@@ -30,11 +31,14 @@ const resaveImageFromStorage = async(imageUrl)=>{
 };
 
 
-const deleteImage = async(id)=>{
+const deleteImage = async(imageUrl)=>{
   try {
-    const image = await Image.findByPk(id);
+    const image = await Image.findOne({
+      where: {imageUrl:imageUrl}
+    });
     if (!image) { eh.throwError('Usuario no hallado', 404)}
-    await image.destroy(id);
+    
+    await image.destroy();
     return { message: "Imagen borrada exitosamente" };
   } catch (error) { throw error;}
 }

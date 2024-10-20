@@ -1,6 +1,6 @@
 import { Product, Item, sequelize } from "../db.js";
 import eh from '../utils/errorHandlers.js'
-import { oldImagesHandler, deleteFromCloudinary } from "./storage.js";
+import * as cloud from "./storage.js";
 import NodeCache from "node-cache";
 import help from "./helpers.js";
 
@@ -103,6 +103,7 @@ getDetail : async (id) => {
 },
 updProduct : async (id, newData) => {
     const options = help.optionImage(newData.saver)
+    const useImgs = help.optionImage(newData.useImg)
     let imageStore = "";
     try {
         const productFound = await Product.findByPk(id);
@@ -110,6 +111,7 @@ updProduct : async (id, newData) => {
         if(productFound.landing !== newData.landing){
             imageStore = productFound.landing
         }
+        if(useImgs){await cloud.deleteImage(newData.landing)}; 
         const parsedData = {
             title: newData.title,
             logo: newData.logo,
@@ -120,7 +122,7 @@ updProduct : async (id, newData) => {
             enable: Boolean(newData.enable),
             deleteAt: Boolean(newData.deleteAt)}
         const productUpd = await productFound.update(parsedData)
-        const pictureOld = await oldImagesHandler(imageStore, options)
+        const pictureOld = await cloud.oldImagesHandler(imageStore, options)
         if(pictureOld.success===false){eh.throwError('Error al procesar imagen antigua', 500)}
         if (productUpd) {
             cache.del('products');
@@ -131,19 +133,19 @@ updProduct : async (id, newData) => {
 
 updItem: async (id, newData)=>{
     const options = help.optionImage(newData.saver)
+    const useImgs = help.optionImage(newData.useImg)
     let imageStore = "";
     try {
         const itemFound = await Item.findByPk(id);
     if(!itemFound){eh.throwError('Error inesperado, item no hallado!',404)}
-    if(itemFound.img !== newData.img){
-        imageStore = itemFound.img;
-    }
+    if(itemFound.img !== newData.img){imageStore = itemFound.img}
+    if(useImgs){await cloud.deleteImage(newData.img)}
     const parsedData = {
         img: newData.img,
         text: newData.text,
         enable: Boolean(newData.enable)}
     const itemUpd = itemFound.update(parsedData)
-    const pictureOld = await oldImagesHandler(imageStore, options)
+    const pictureOld = await cloud.oldImagesHandler(imageStore, options, )
      if(pictureOld.success===false){eh.throwError('Error al procesar imagen antigua', 500)}
     return itemUpd
     } catch (error) {throw error;}
@@ -175,9 +177,9 @@ delProduct: async (id) => {
         // Después de operaciones exitosas en DB, borrar imágenes de Cloudinary
         const deletePromises = [
             // Borrar imagen principal del producto
-            deleteFromCloudinary(product.landing),
+            cloud.deleteFromCloudinary(product.landing),
             // Borrar todas las imágenes de items
-            ...itemImages.map(imgUrl => deleteFromCloudinary(imgUrl))
+            ...itemImages.map(imgUrl => cloud.deleteFromCloudinary(imgUrl))
         ];
 
         const results = await Promise.allSettled(deletePromises);
@@ -218,7 +220,7 @@ delItem: async (id) => {
         await item.destroy({ transaction });
 
         // Borrar la imagen de Cloudinary
-        const resultadoCloudinary = await deleteFromCloudinary(item.img);
+        const resultadoCloudinary = await cloud.deleteFromCloudinary(item.img);
         if (!resultadoCloudinary) {
             // Registrar el error pero no fallar la operación
             console.error('Advertencia: No se pudo borrar la imagen de Cloudinary:', item.img);

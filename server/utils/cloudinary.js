@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
 import path from 'path';
+import eh from '../utils/errorHandlers.js'
 
 // Configuración de Multer
  const storage = multer.memoryStorage();
@@ -70,13 +71,14 @@ async function deleteFromCloudinary(imageUrl) {
     const result = await cloudinary.uploader.destroy(publicId);
     
     if (result.result === 'ok') {
+      console.log('eliminacion: ')
       return {
         success: true,
         message: 'Imagen eliminada correctamente',
         result
       };
     } else {
-      throw new Error('No se pudo eliminar la imagen');
+     throw new Error(error.message)
     }
   } catch (error) {
     throw new Error(`Error al eliminar la imagen: ${error.message}`);

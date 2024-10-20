@@ -1,5 +1,5 @@
 import express from 'express'
-import ctr from '../controllers/rest/productControllers.js'
+import ctr from '../controllers/productControllers.js'
 import mdd from '../middlewares/middlewares.js'
 import auth from '../middlewares/validation/index.js'
 

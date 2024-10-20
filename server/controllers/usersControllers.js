@@ -1,12 +1,12 @@
-import eh from "../../utils/errorHandlers.js";
-import sv from "../../services/userServices.js";
-import * as vld from "../../middlewares/validation/sessionMiddle.js";
+import eh from "../utils/errorHandlers.js";
+import sv from "../services/userServices.js";
+import * as vld from "../middlewares/validation/sessionMiddle.js";
 
 export default {
-  userCreateController: eh.catchAsync(async(req, res)=>{
-    const {email}=req.body;
-    const response = await sv.userCreate(email)
-    res.status(201).json(response)
+  userCreateController: eh.catchAsync(async (req, res) => {
+    const { email } = req.body;
+    const response = await sv.userCreate(email);
+    res.status(201).json(response);
   }),
   loginController: eh.catchAsync(async (req, res) => {
     const { email, password } = req.body;
@@ -25,7 +25,7 @@ export default {
       res.status(200).json("Sesion cerrada");
     });
   }),
- 
+
   updUserCtr: eh.catchAsync(async (req, res) => {
     const { id } = req.params;
     const newData = req.body;
@@ -61,15 +61,14 @@ export default {
     const response = await sv.userDel(id);
     res.status(200).json(response);
   }),
-  getUserController : eh.catchAsync(async(req, res)=>{//provisiorio
-    const response = await sv.getAllUsers()
-    res.status(200).json(response)
+  getUserController: eh.catchAsync(async (req, res) => {
+    //provisiorio
+    const response = await sv.getAllUsers();
+    res.status(200).json(response);
   }),
-  getUserByIdController : eh.catchAsync(async(req, res)=>{
-    const {id}= req.params
-    const response = await sv.getUsersById(id)
-    res.status(200).json(response)
+  getUserByIdController: eh.catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const response = await sv.getUsersById(id);
+    res.status(200).json(response);
   }),
-  
-  
 };

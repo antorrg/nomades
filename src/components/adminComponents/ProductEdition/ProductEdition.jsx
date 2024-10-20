@@ -30,6 +30,7 @@ const ProductEdition = () => {
     info_body: "",
     enable: false,
     saver: false,
+    useImg: false,
   });
 
   useEffect(() => {
@@ -41,6 +42,7 @@ const ProductEdition = () => {
         info_body: page.info.infoBody || "",
         enable: page.info.enable || false,
         saver: page.info.saver || false,
+        useImg: page.info.useImg || false,
       });
     }
   }, [page.info]);
@@ -66,6 +68,22 @@ const ProductEdition = () => {
       [id]: checked,
     }));
   };
+
+  const handleImgUrlSwitchChange = () => {
+    setImgUrl(prev => {
+      const newValue = !prev; // Invertir el estado actual de imgUrl
+  
+      // Actualizar useImg según el nuevo valor de imgUrl
+      setProduct(prevProduct => ({
+        ...prevProduct,
+        useImg: newValue, // Establecer useImg en true o false
+      }));
+  
+      return newValue; // Retornar el nuevo valor de imgUrl
+    });
+  };
+  
+
   const handleSubmit = async () => {
     // Lógica para actualizar el producto
     const confirmed = await showConfirmationDialog(
@@ -73,8 +91,7 @@ const ProductEdition = () => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      console.log(product)
-      //await updateProduct(id, product, onClose);
+      await updateProduct(id, product, onClose);
     }
   };
   return (
@@ -105,7 +122,7 @@ const ProductEdition = () => {
                       id="imgUrlSwitch"
                       checked={imgUrl}
                       label="Active para elegir imagen guardada"
-                      onChange={()=>{setImgUrl(prev => !prev)}}
+                      onChange={handleImgUrlSwitchChange}
                     />
                 </div>
                 <div className="col-md-6 mb-3"></div>

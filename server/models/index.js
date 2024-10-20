@@ -4,6 +4,8 @@ import Item from './item.js'
 import LandingPage from './landing.js'
 import Image from './images.js'
 import Media from './media.js'
+import About from './about.js'
+import Work from './work.js'
 
 
 export default {
@@ -12,6 +14,8 @@ export default {
     Item,
     LandingPage,
     Image,
-    Media
+    Media,
+    About,
+    Work
 
 }

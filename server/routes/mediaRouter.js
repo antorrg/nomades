@@ -1,5 +1,5 @@
 import express from 'express'
-import media from '../controllers/rest/mediaControllers.js'
+import media from '../controllers/mediaControllers.js'
 
 const mediaRouter = express.Router()
 

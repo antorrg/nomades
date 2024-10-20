@@ -35,7 +35,7 @@ updUserMidd : (req, res, next) => {
     if (!newData || Object.keys(newData).length === 0) {eh.throwError('Faltan elementos!!', 400)}
 
     // Puedes agregar validaciones adicionales para los campos esperados en newData
-    const requiredFields = ['email', 'given_name', 'picture', 'country', 'saver'];
+    const requiredFields = ['email', 'given_name', 'picture', 'country',];
     const missingFields = requiredFields.filter(field => !(field in newData));
     if (missingFields.length > 0) {eh.throwError(`Parametros faltantes: ${missingFields.join(', ')}`, 400)}
     next();
@@ -110,7 +110,7 @@ updateItem : (req, res, next) => {
         if (id && !idIsNumber) {eh.throwError('Parametros no permitidos', 400)}
         if (!newData || Object.keys(newData).length === 0) {eh.throwError('Faltan elementos!!', 400)}
     
-        const requiredFields = ['img', 'text', 'id', 'saver'];
+        const requiredFields = ['img', 'text', 'id', 'saver', 'useImg'];
         const missingFields = requiredFields.filter(field => !(field in newData));
         if (missingFields.length > 0) {eh.throwError(`Parametros faltantes: ${missingFields.join(', ')}`, 400)}
         next();
@@ -153,7 +153,7 @@ updProduct: (req, res, next)=>{
     if (id && !idIsNumber) {eh.throwError('Parametros no permitidos', 400)}
 
     if (!newData || Object.keys(newData).length === 0) {eh.throwError('Faltan elementos!!', 400)}
-    const requiredFields = ['title', 'landing', 'info_header', 'info_body', 'saver',];
+    const requiredFields = ['title', 'landing', 'info_header', 'info_body', 'saver', 'useImg'];
     const missingFields = requiredFields.filter(field => !(field in newData));
     if (missingFields.length > 0) {eh.throwError(`Parametros faltantes: ${missingFields.join(', ')}`, 400)}
 
@@ -177,7 +177,25 @@ landingUpdate : (req, res, next)=>{
     if (id && !idIsNumber) {eh.throwError('Parametros no permitidos', 400)}
 
     if (!newData || Object.keys(newData).length === 0) {eh.throwError('Faltan elementos!!', 400)}
-    const requiredFields = ['title', 'image', 'info_header', 'description', 'enable', 'saver'];
+    const requiredFields = ['title', 'image', 'info_header', 'description', 'enable', 'saver', 'useImg'];
+    const missingFields = requiredFields.filter(field => !(field in newData));
+    if (missingFields.length > 0) {eh.throwError(`Parametros faltantes: ${missingFields.join(', ')}`, 400)}
+
+    next();
+},
+aboutWorkCreate : (req, res, next)=>{
+    const newData = req.body;
+    if (!newData || Object.keys(newData).length === 0) {eh.throwError('Faltan elementos!!', 400)}
+    const requiredFields = ['title', 'image', 'text',];
+    const missingFields = requiredFields.filter(field => !(field in newData));
+    if (missingFields.length > 0) {eh.throwError(`Parametros faltantes: ${missingFields.join(', ')}`, 400)}
+
+    next();
+},
+aboutWorkUpd : (req, res, next)=>{
+    const newData = req.body;
+    if (!newData || Object.keys(newData).length === 0) {eh.throwError('Faltan elementos!!', 400)}
+    const requiredFields = ['title', 'image', 'text', 'enable', 'saver', 'useImg'];
     const missingFields = requiredFields.filter(field => !(field in newData));
     if (missingFields.length > 0) {eh.throwError(`Parametros faltantes: ${missingFields.join(', ')}`, 400)}
 

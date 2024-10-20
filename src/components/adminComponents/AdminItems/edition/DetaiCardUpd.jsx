@@ -27,6 +27,7 @@ const DetailCardUpd = () => {
     text: "",
     img: "",
     saver: false,
+    useImg: false,
   });
 
   useEffect(() => {
@@ -35,6 +36,7 @@ const DetailCardUpd = () => {
         text: item1.text || "",
         img: item1.img || "",
         saver: item1.saver || false,
+        useImg: item1.useImg || false,
       });
     }
   }, [item1]);
@@ -60,6 +62,20 @@ const DetailCardUpd = () => {
       [id]: checked,
     }));
   };
+  const handleImgUrlSwitchChange = () => {
+    setImgUrl(prev => {
+      const newValue = !prev; // Invertir el estado actual de imgUrl
+  
+      // Actualizar useImg según el nuevo valor de imgUrl
+      setItem(prevItem => ({
+        ...prevItem,
+        useImg: newValue, // Establecer useImg en true o false
+      }));
+  
+      return newValue; // Retornar el nuevo valor de imgUrl
+    });
+  };
+  
 
   const handleSubmit = async () => {
     // Lógica para actualizar el producto
@@ -69,6 +85,7 @@ const DetailCardUpd = () => {
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
       await updateItem(id, item, onClose);
+      
     }
   };
   return (
@@ -102,7 +119,7 @@ const DetailCardUpd = () => {
                       id="imgUrlSwitch"
                       checked={imgUrl}
                       label="Active para elegir imagen guardada"
-                      onChange={()=>{setImgUrl(prev => !prev)}}
+                      onChange={handleImgUrlSwitchChange}
                     />
                 </div>
                 <div className="col-md-6 mb-3"></div>

@@ -22,7 +22,9 @@ const {
     Item,
     Landing,
     Image,
-    Media
+    Media,
+    About,
+    Work,
 }= sequelize.models;
 
 //Asociations:
@@ -36,5 +38,7 @@ export {
     Landing,
     Image,
     Media,
+    About,
+    Work,
     sequelize,
 }

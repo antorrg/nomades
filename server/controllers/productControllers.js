@@ -1,10 +1,9 @@
-import eh from "../../utils/errorHandlers.js"
-import serv from "../../services/productServices.js";
+import eh from "../utils/errorHandlers.js";
+import serv from "../services/productServices.js";
 
 export default {
   createController: eh.catchAsync(async (req, res) => {
-    const { title, landing, info_header, info_body, items } =
-      req.body;
+    const { title, landing, info_header, info_body, items } = req.body;
     const response = await serv.createProduct(
       title,
       landing,
@@ -49,10 +48,10 @@ export default {
 
   getProductHand: eh.catchAsync(async (req, res) => {
     const response = await serv.getProduct();
-    if(response.cache===true){
-      res.status(203).json(response.products)
-    }else{
-    res.status(200).json(response.products);
+    if (response.cache === true) {
+      res.status(203).json(response.products);
+    } else {
+      res.status(200).json(response.products);
     }
   }),
 
