@@ -10,6 +10,11 @@ export const CLEAN_STATE = "CLEAN_STATE";
 export const ALL_USERS = "ALL_USERS";
 export const USER_BY_ID = "USER_BY_ID";
 export const IMAGES = "IMAGES";
+export const WORKS = "WORKS";
+export const WORK_BY_ID = "WORK_BY_ID";
+export const ABOUT = "ABOUT";
+
+    
 
 //*%%%%%%% Rutas libres %%%%%%%%
 export const getInfo = () => {
@@ -34,6 +39,7 @@ export const getProduct = () => {
         payload: data.data,
       });
     } catch (error) {
+      HandlError(error) 
       console.error(error);
     }
   };
@@ -48,6 +54,7 @@ export const getProductById = (id) => {
         payload: data.data,
       });
     } catch (error) {
+      HandlError(error) 
       console.error(error);
     }
   };
@@ -61,6 +68,7 @@ export const getItem = (id) => {
         payload: data.data,
       });
     } catch (error) {
+      HandlError(error) 
       console.error(error);
     }
   };
@@ -71,6 +79,22 @@ export const cleanState = () => {
     payload: [],
   };
 };
+
+export const getWorks = () => {
+  return async (dispatch) => {
+    try {
+      const data = await axios("/api/v1/work");
+      return dispatch({
+        type: WORKS,
+        payload: data.data,
+      });
+    } catch (error) {
+      HandlError(error) 
+      console.error(error);
+    }
+  };
+};
+
 //*====== Variables de usuario. =======
 
 export const getAllUsers = () => {
@@ -100,13 +124,28 @@ export const getUserById = (id) => async (dispatch) => {
 export const getStoredImgs = () => {
   return async (dispatch) => {
     try {
-      const data = await axios("/api/v1/media/imgs");
+      const data = await axios("/api/v1/media/imgs", setAuthHeader());
       return dispatch({
         type: IMAGES,
         payload: data.data,
       });
     } catch (error) {
       HandlError(error);
+    }
+  };
+};
+
+export const getWorkById = (id) => {
+  return async (dispatch) => {
+    try {
+      const data = await axios(`/api/v1/work/${id}`, setAuthHeader());
+      return dispatch({
+        type: WORK_BY_ID,
+        payload: data.data,
+      });
+    } catch (error) {
+      HandlError(error) 
+      console.error(error);
     }
   };
 };

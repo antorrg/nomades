@@ -7,6 +7,9 @@ import {
     ALL_USERS,
     USER_BY_ID,
     IMAGES,
+    WORKS,
+    WORK_BY_ID,
+    ABOUT
 
 } from './actions'
 
@@ -18,6 +21,9 @@ const initialState = {
     Users:[],
     UserById: [],
     Images : [],
+    Works : [],
+    WorkById: [],
+    About: [],
 
 }
 
@@ -59,11 +65,27 @@ const reducer = (state = initialState, {type, payload})=>{
                 Item:payload,
                 ProductId:payload,
                 UserById: payload,
+                WorkById : payload,
             }
         case IMAGES:
             return {
                 ...state,
                 Images: payload,
+            }
+        case WORKS : 
+            return {
+                ...state,
+                Works : payload,
+            }
+        case WORK_BY_ID:
+            return {
+                ...state,
+                WorkById : payload,
+            }
+        case ABOUT:
+            return {
+                ...state,
+                About: payload,
             }
         default:
             return {

@@ -23,7 +23,7 @@ mainRouter.use("/api/v1", landingRouter);
 
 mainRouter.use("/api/v1", userRouter);
 
-mainRouter.use("/api/v1/", mediaRouter);
+mainRouter.use("/api/v1", mediaRouter);
 
 mainRouter.use("/api/v1", aboutRouter)
 

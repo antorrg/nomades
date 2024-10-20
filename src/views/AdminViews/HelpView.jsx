@@ -6,7 +6,6 @@ const HelpView = () => {
   const navigate = useNavigate()
   return (
     <>
-    <Ad.AdminNav/>
     <div className="container-sm">
       <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey="0">

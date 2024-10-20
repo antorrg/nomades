@@ -19,7 +19,7 @@ aboutRouter.post('/work/create', auth.verifyToken, midd.aboutWorkCreate, ctr.wor
 
 aboutRouter.get('/work', ctr.workGet)
 
-aboutRouter.get('/work/:id', midd.middIntId, ctr.workById)
+aboutRouter.get('/work/:id', auth.verifyToken, midd.middIntId, ctr.workById)
 
 aboutRouter.put('/work/:id', auth.verifyToken, midd.middIntId, midd.aboutWorkUpd, ctr.workUpd)
 

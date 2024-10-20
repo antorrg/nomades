@@ -36,7 +36,16 @@ const deleteImage = async(imageUrl)=>{
     const image = await Image.findOne({
       where: {imageUrl:imageUrl}
     });
-    if (!image) { eh.throwError('Usuario no hallado', 404)}
+    if (!image) { eh.throwError('Imagen no hallada', 404)}
+    
+    await image.destroy();
+    return { message: "Imagen borrada exitosamente" };
+  } catch (error) { throw error;}
+}
+const delImageById = async(id)=>{
+  try {
+    const image = await Image.findByPk(id);
+    if (!image) { eh.throwError('Imagen no hallada', 404)}
     
     await image.destroy();
     return { message: "Imagen borrada exitosamente" };
@@ -57,4 +66,5 @@ oldImagesHandler,
 deleteImage,
 deleteFromCloudinary,
 getImages,
+delImageById,
 }

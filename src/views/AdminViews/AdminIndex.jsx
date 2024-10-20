@@ -14,6 +14,9 @@ import UserUpgrade from "./userComponents/UserUpgrade";
 import EditPassword from "./userComponents/EditPassword";
 import ProductCreate from "../../components/adminComponents/ProductEdition/ProductCreate";
 import ItemCreate from "../../components/adminComponents/ProductEdition/ItemCreate";
+import ImagesComponent from "../../components/adminComponents/MediaStorage/ImagesComponent";
+
+
 
 export {
   HelpView,
@@ -32,4 +35,6 @@ export {
   EditPassword,
   ProductCreate,
   ItemCreate,
+  ImagesComponent,
+  
 };

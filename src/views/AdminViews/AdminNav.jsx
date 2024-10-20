@@ -28,6 +28,11 @@ const AdminNav = () => {
     cerrarOffcanvas();
   };
 
+  const images = () => {
+    navigate("/admin/media/images");
+    cerrarOffcanvas();
+  };
+
   const ayuda = () => {
     navigate("/admin/help");
     cerrarOffcanvas();
@@ -118,6 +123,14 @@ const AdminNav = () => {
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+                <li className="nav-item">
+                  <button
+                    className="nav-link active d-block text-start w-100"
+                    onClick={images}
+                  >
+                    Imagenes guardadas
+                  </button>
+                </li>
                 <li className="nav-item">
                   <button
                     className="nav-link active d-block text-start w-100"

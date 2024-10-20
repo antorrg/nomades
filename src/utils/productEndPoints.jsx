@@ -1,9 +1,5 @@
 import axios from "axios";
-import {
-  HandlError,
-  showSuccess,
-  showError,
-} from "../Auth/generalComponents/HandlerError";
+import * as toast from "../Auth/generalComponents/HandlerError";
 import setAuthHeader from "../Auth/generalComponents/axiosUtils";
 
 export const updateProduct = async (id, product, onClose) => {
@@ -15,17 +11,16 @@ export const updateProduct = async (id, product, onClose) => {
       setAuthHeader()
     );
     if (response.status === 200) {
-      showSuccess("Producto actualizado correctamente");
+      toast.showSuccess("Producto actualizado correctamente");
       await onClose(); // Cierra el modal después de guardar los cambios
     }
   } catch (error) {
-    HandlError(error);
+    toast.HandlError(error);
     console.error("Error al actualizar el producto:", error);
   }
 };
 
 export const updateItem = async (id, item, onClose) => {
-  console.log(id);
   try {
     const response = await axios.put(
       `/api/v1/product/item/${id}`,
@@ -34,11 +29,11 @@ export const updateItem = async (id, item, onClose) => {
     );
     if (response.status === 200) {
       //await axios(`/api/v1//media/imgs/${imgId}`)
-      showSuccess("Item actualizado correctamente");
+      toast.showSuccess("Item actualizado correctamente");
       await onClose(); // Cierra el modal después de guardar los cambios
     }
   } catch (error) {
-    HandlError({ error: error.message });
+    toast.HandlError({ error: error.message });
     console.error("Error al actualizar el item:", error);
   }
 };
@@ -50,11 +45,11 @@ export const createProduct = async (product, onClose) => {
       setAuthHeader()
     );
     if (response.status === 201) {
-      showSuccess("Producto creado correctamente");
+      toast.showSuccess("Producto creado correctamente");
       await onClose(); // Cierra el modal después de guardar los cambios
     }
   } catch (error) {
-    HandlError(error);
+    toast.HandlError(error);
     //console.error("Error al crear el producto:", error);
   }
 };
@@ -67,11 +62,11 @@ export const createItem = async (item, onClose) => {
       setAuthHeader()
     );
     if (response.status === 201) {
-      showSuccess("Item creado correctamente");
+      toast.showSuccess("Item creado correctamente");
       await onClose(); // Cierra el modal después de guardar los cambios
     }
   } catch (error) {
-    HandlError({ error: error.message });
+    toast.HandlError({ error: error.message });
     console.error("Error al crear el item:", error);
   }
 };
@@ -84,11 +79,11 @@ export const deleteProduct = async (id) => {
       setAuthHeader()
     );
     if (response.status === 200) {
-      showSuccess("Producto borrado correctamente");
+      toast.showSuccess("Producto borrado correctamente");
       await onClose(); // Cierra el modal después de guardar los cambios
     }
   } catch (error) {
-    HandlError(error);
+    toast.HandlError(error);
   }
 };
 export const deleteItem = async (id) => {
@@ -99,10 +94,25 @@ export const deleteItem = async (id) => {
       setAuthHeader()
     );
     if (response.status === 200) {
-      showSuccess("Item eliminado correctamente");
+      toast.showSuccess("Item eliminado correctamente");
       await onClose(); // Cierra el modal después de guardar los cambios
     }
   } catch (error) {
-    HandlError(error);
+    toast.HandlError(error);
+  }
+};
+export const deleteImage = async (id) => {
+  console.log(id);
+  try {
+    const response = await axios.delete(
+      `/api/v1/media/imgs/${id}`,
+      setAuthHeader()
+    );
+    if (response.status === 200) {
+      toast.showSuccess("Imagen eliminada correctamente");
+      //await onClose(); // Cierra el modal después de guardar los cambios
+    }
+  } catch (error) {
+    toast.HandlError(error);
   }
 };

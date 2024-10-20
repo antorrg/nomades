@@ -8,7 +8,7 @@ export default {
   }),
   deleteImagesController: eh.catchAsync(async (req, res) => {
     const { id } = req.params;
-    const response = await imgs.deleteImage(id);
+    const response = await imgs.delImageById(id);
     res.status(200).json(response);
   }),
 };
