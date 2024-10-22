@@ -10,8 +10,8 @@ const LocalDb = `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`
 export default {
  Port: PORT,
  Status: process.env.NODE_ENV==='development'? 'development' : process.env.NODE_ENV==='test'? 'testing': process.env.NODE_ENV==='preview'? 'preview' :'production',
- ConnectDb : process.env.NODE_ENV==='development'? LocalDb :RENDER_DB ,
- optionRender: process.env.NODE_ENV==='development'? false : true,
+ ConnectDb : process.env.NODE_ENV==='development'? LocalDb :process.env.NODE_ENV==='production'? RENDER_DB : LocalDb,
+ optionRender: process.env.NODE_ENV==='production'? true : false,
  SecretKey: SECRET_KEY,
  UserEmail : S_USER_EMAIL,
  UserPass : S_USER_PASS,

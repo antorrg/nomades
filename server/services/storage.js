@@ -29,28 +29,16 @@ const resaveImageFromStorage = async(imageUrl)=>{
     throw error;
   }
 };
-
-
-const deleteImage = async(imageUrl)=>{
+const deleteImage = async(data, isId)=>{
   try {
-    const image = await Image.findOne({
-      where: {imageUrl:imageUrl}
-    });
+    const image = isId? await Image.findByPk(data) : await Image.findOne({where: {imageUrl:data}})
     if (!image) { eh.throwError('Imagen no hallada', 404)}
-    
     await image.destroy();
-    return { message: "Imagen borrada exitosamente" };
+    return "Imagen borrada exitosamente";
   } catch (error) { throw error;}
+  
 }
-const delImageById = async(id)=>{
-  try {
-    const image = await Image.findByPk(id);
-    if (!image) { eh.throwError('Imagen no hallada', 404)}
-    
-    await image.destroy();
-    return { message: "Imagen borrada exitosamente" };
-  } catch (error) { throw error;}
-}
+
 const getImages = async()=>{
   try {
     const images = await Image.findAll()
@@ -61,10 +49,23 @@ const getImages = async()=>{
     throw error;
   }
 }
+// Funciones utilitarias para el borrado de imagen en la base de datos
+const byUrl = async (data)=>{
+  const image = await Image.findOne({
+    where: {imageUrl:data}
+  });
+  if (!image) { eh.throwError('Imagen no hallada', 404)}
+  return image
+  }
+  const byId = async (data)=>{
+  const image = await Image.findByPk(data);
+  if (!image) { eh.throwError('Imagen no hallada', 404)}
+  return image
+  }
+
 export {
 oldImagesHandler,
 deleteImage,
 deleteFromCloudinary,
 getImages,
-delImageById,
 }

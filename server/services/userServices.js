@@ -82,7 +82,7 @@ export default {
   },
 
   userUpd: async (id, newData) => {
-    let imageStore = "";
+    //let imageStore = "";
     const options = help.optionImage(newData.saver)
     try {
       const user = await User.findByPk(id);
@@ -90,8 +90,8 @@ export default {
       const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion
       const nickname1 =  newData.email.split("@")[0];
       //Verifica si se esta actualizando la imagen
-      if (newData.picture !== user.picture) {
-              imageStore = user.picture}
+      // if (newData.picture !== user.picture) {
+      //         imageStore = user.picture}
       const updInfo = {
         email: edit? user.email : newData.email,
         nickname: edit? user.nickname : nickname1,
@@ -100,11 +100,12 @@ export default {
         country: newData.country,
       };
       const userUpdated = await user.update(updInfo);
-      const pictureOld = await oldImagesHandler(imageStore, options)
-      if(pictureOld.success===false){eh.throwError('Error al procesar imagen antigua', 500)}
+      //const pictureOld = await oldImagesHandler(imageStore, options)
+      //if(pictureOld.success===false){eh.throwError('Error al procesar imagen antigua', 500)}
       //       if (userUpdated) {
       //    cache.del(`userById_${id}`);
       //  }
+     
       return help.userParser(userUpdated, true, true);
     } catch (error) { throw error; }
   },

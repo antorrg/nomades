@@ -111,7 +111,7 @@ updProduct : async (id, newData) => {
         if(productFound.landing !== newData.landing){
             imageStore = productFound.landing
         }
-        if(useImgs){await cloud.deleteImage(newData.landing)}; 
+        if(useImgs){await cloud.deleteImage(newData.landing, false)}; 
         const parsedData = {
             title: newData.title,
             logo: newData.logo,
@@ -139,7 +139,7 @@ updItem: async (id, newData)=>{
         const itemFound = await Item.findByPk(id);
     if(!itemFound){eh.throwError('Error inesperado, item no hallado!',404)}
     if(itemFound.img !== newData.img){imageStore = itemFound.img}
-    if(useImgs){await cloud.deleteImage(newData.img)}
+    if(useImgs){await cloud.deleteImage(newData.img, false)}
     const parsedData = {
         img: newData.img,
         text: newData.text,

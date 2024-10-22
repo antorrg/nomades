@@ -44,7 +44,12 @@ const [error, setError] = useState({
                       error.message;
 
   const onClose = ()=>navigate(-1)
-
+  const handleWhatsApp = () => {
+    const phoneNumber = '5492226556123' // Reemplaza con tu número (incluye código de país)
+    const message = '¡Hola! Me gustaría obtener más información.' // Mensaje predeterminado
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+    window.open(whatsappUrl, '_blank')
+  }
 
   return (
     <div className="imageBack">
@@ -122,6 +127,14 @@ const [error, setError] = useState({
                 >
                   Cancelar
                 </button>
+                <button
+                className="btn btn-success mb-3 ms-5 me-2"
+                type="button"
+                onClick={handleWhatsApp}
+              >
+                <i className="bi bi-whatsapp me-1"></i>
+                WhatsApp
+              </button>
               </div>
             </div>
           </section>
