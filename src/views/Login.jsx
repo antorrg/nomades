@@ -60,7 +60,7 @@ const Login = () => {
           :
           <section>
             <div className="d-flex justify-content-between align-items-center">
-              <img className="mb-4" src="/vite.svg" alt="" width="72" height="57"/>
+              <img className="mb-4" src="/nomadesFav.png" alt="" width="95" height="57"/>
               <button type="button" onClick={closeLogin}className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <h1 className="h3 mb-3 fw-normal">Inicie sesion</h1>

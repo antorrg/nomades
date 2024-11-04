@@ -38,19 +38,40 @@ const AdminNav = () => {
     cerrarOffcanvas();
   };
 
-  const action = () => console.log("action");
+  const action = () => {
+    console.log("action")
+    cerrarOffcanvas()
+  };
 
-  const anotherAction = () => console.log("another action");
+  const anotherAction = () => {
+    console.log("another action")
+    cerrarOffcanvas()
+  };
 
-  const algoMas = () => console.log("algo mas");
+  const algoMas = () => {
+    console.log("algo mas")
+    cerrarOffcanvas()
+  };
 
-  const newProduct = () => navigate("/admin/product/create");
+  const newProduct = () => {
+    navigate("/admin/product/create")
+    cerrarOffcanvas()
+  };
 
-  const settings = () => console.log("settings");
+  const settings = () => {
+    console.log("settings")
+    cerrarOffcanvas()
+  };
 
-  const profile = () => navigate(`/admin/users/profile/${user.id}`);
+  const profile = () => {
+    navigate(`/admin/users/profile/${user.id}`)
+    cerrarOffcanvas()
+  };
 
-  const createUser = () => navigate("/admin/users/create");
+  const createUser = () => {
+    navigate("/admin/users/create")
+    cerrarOffcanvas()
+  };
 
   const sessionCleaner = () => {
     showSuccess("Sesión cerrada");
