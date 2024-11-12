@@ -38,8 +38,8 @@ const AdminNav = () => {
     cerrarOffcanvas();
   };
 
-  const action = () => {
-    console.log("action")
+  const actionTabs = () => {
+    navigate("/admin/page");
     cerrarOffcanvas()
   };
 
@@ -160,24 +160,14 @@ const AdminNav = () => {
                     Ayuda ?
                   </button>
                 </li>
-                <Dropdown className="nav-item">
-                  <Dropdown.Toggle
-                    className="nav-link d-block text-start w-100"
-                    id="dropdown-basic"
+                <li className="nav-item">
+                  <button
+                    className="nav-link active d-block text-start w-100"
+                    onClick={actionTabs}
                   >
-                    Portada
-                  </Dropdown.Toggle>
-                  <Dropdown.Menu className="dropdown-menu-dark text-small shadow">
-                    <Dropdown.Item onClick={action}>Portada...</Dropdown.Item>
-                    <Dropdown.Item onClick={anotherAction}>
-                      Videos
-                    </Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item onClick={algoMas}>
-                      Something else here
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                    Portada /Media
+                  </button>
+                  </li>
               </ul>
               <hr />
               <Dropdown align="end">

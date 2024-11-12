@@ -15,6 +15,7 @@ import EditPassword from "./userComponents/EditPassword";
 import ProductCreate from "../../components/adminComponents/ProductEdition/ProductCreate";
 import ItemCreate from "../../components/adminComponents/ProductEdition/ItemCreate";
 import ImagesComponent from "../../components/adminComponents/MediaStorage/ImagesComponent";
+import TabsPage from "../../components/adminComponents/TabsConfiguration/TabsPage";
 
 
 
@@ -36,5 +37,6 @@ export {
   ProductCreate,
   ItemCreate,
   ImagesComponent,
+  TabsPage
   
 };

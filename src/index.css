@@ -19,6 +19,13 @@ body {
   color: black; /* Asegúrate de que el texto sea visible */
 min-height: 100vh; /* Asegura que ocupe al menos la altura completa de la pantalla */
 }
+.colorAdmin {
+  background-color: rgb(204, 202, 202);
+}
+.colorTab {
+  background-color: #fdfdfd;
+}
+
 /*
  * Header
  */
