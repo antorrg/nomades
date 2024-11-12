@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import TabsLayout from './TabsLayout';
-import * as Comp from './TabsComponents/Index'
+import * as Comp from './Index'
 
 
 const TabsPage = () => {
-  const [activeTab, setActiveTab] = useState('producto');
+  const [activeTab, setActiveTab] = useState('portada');
   
 
   const handleTabChange = (tabName) => {
@@ -23,17 +23,17 @@ const TabsPage = () => {
       handleTabChange={handleTabChange}
       sessionCleaner={sessionCleaner}
     >
-      {activeTab === 'producto' && (
-        <Comp.Producto/>
-      )}
-      {activeTab === 'user' && (
-        <Comp.User/>
-      )}
       {activeTab === 'portada' && (
         <Comp.Portada/>
       )}
+      {activeTab === 'work' && (
+        <Comp.AdminAlbumWork/>
+      )}
+      {activeTab === 'about' && (
+        <Comp.Producto/>
+      )}
       {activeTab === 'imagenes' && (
-        <Comp.Imagenes/>
+        <Comp.ImagesComponent/>
       )}
       {activeTab === 'videos' && (
         <Comp.Videos/>

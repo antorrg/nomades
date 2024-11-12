@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getItem } from "../../../redux/actions";
+import {getWorkById } from "../../../redux/actions";
 import { updateItem } from "../../../utils/productEndPoints";
 import { Form } from "react-bootstrap";
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
@@ -15,9 +15,10 @@ const OurWorkEdit = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [imgUrl, setImgUrl] = useState(false)
-    const item1 = useSelector((state) => state.Item);
+    const item1 = useSelector((state) => state.WorkById);
+
     useEffect(() => {
-      dispatch(getItem(id));
+      dispatch(getWorkById(id));
     }, [id]);
   
     const onClose = () => {
@@ -28,6 +29,7 @@ const OurWorkEdit = () => {
       title: "",
       text: "",
       image: "",
+      enable: true,
       saver: false,
       useImg: false,
     });
@@ -35,9 +37,10 @@ const OurWorkEdit = () => {
     useEffect(() => {
       if (item1) {
         setItem({
-          title: item1.text || "",
+          title: item1.title || "",
           text: item1.text || "",
           image: item1.image || "",
+          enable: item1.enable || true,
           saver: item1.saver || false,
           useImg: item1.useImg || false,
         });
@@ -87,7 +90,9 @@ const OurWorkEdit = () => {
       );
       if (confirmed) {
         // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-        await updateItem(id, item, onClose);
+        //await updateItem(id, item, onClose);
+        alert('actualizando...')
+        console.log('work: ', item)
         
       }
     };
@@ -96,7 +101,7 @@ const OurWorkEdit = () => {
     <div className="coverBack">
       <div className="container-md modal-content colorBack formProductContainer rounded-4 shadow">
         <div className="container mt-5">
-          <h1>Edicion de articulos</h1>
+          <h1>Nuestro trabajo</h1>
           <section
             className="needs-validation"
             id="updateItemForm"
@@ -161,6 +166,15 @@ const OurWorkEdit = () => {
                     onChange={handleSwitchChange}
                   />
               </div>
+              <div className="mb-3 form-check form-switch">
+                  <Form.Check 
+                    type="switch"
+                    id="enable"
+                    checked={item.enable}
+                    label="Desactive para no mostrar"
+                    onChange={handleSwitchChange}
+                  />
+              </div>
 
               <div className="d-flex flex-row me-3">
                 <button
@@ -172,7 +186,7 @@ const OurWorkEdit = () => {
                   Actualizar
                 </button>
                 <button
-                  className="btn btn-primary mb-3"
+                  className="btn btn-secondary mb-3"
                   onClick={() => {
                     onClose();
                   }}

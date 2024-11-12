@@ -57,6 +57,8 @@ function App() {
         <Route path='/admin/users/profile/:id' element={ <Ad.UserComp/>}/> 
         <Route path='/admin/media/images' element={ <Ad.ImagesComponent/>}/>
         <Route path= '/admin/page' element={<Ad.TabsPage/>}/>
+        <Route path= '/admin/work/create' element={<Ad.TabsPage/>}/>
+        <Route path= '/admin/work/update/:id' element={<Ad.OurWorkEdit/>}/>
         <Route path='/admin/help' element={ <Ad.HelpView/>}/> 
       </Route>
       <Route path='/login' element={<View.Login/>}/>

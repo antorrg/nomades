@@ -16,7 +16,7 @@ import ProductCreate from "../../components/adminComponents/ProductEdition/Produ
 import ItemCreate from "../../components/adminComponents/ProductEdition/ItemCreate";
 import ImagesComponent from "../../components/adminComponents/MediaStorage/ImagesComponent";
 import TabsPage from "../../components/adminComponents/TabsConfiguration/TabsPage";
-
+import OurWorkEdit from "../../components/adminComponents/AdminWork/OurWorkEdit";
 
 
 export {
@@ -37,6 +37,7 @@ export {
   ProductCreate,
   ItemCreate,
   ImagesComponent,
-  TabsPage
+  TabsPage,
+  OurWorkEdit,
   
 };
