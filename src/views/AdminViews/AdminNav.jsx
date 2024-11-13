@@ -116,21 +116,29 @@ const AdminNav = () => {
             </Offcanvas.Header>
             <Offcanvas.Body className="admin-content">
               <ul className="navbar-nav justify-content-start flex-grow-1 ps-3">
-                <li className="nav-item">
+              <li className="nav-item">
                   <button
                     className="nav-link active d-block text-start w-100"
                     onClick={productos}
                   >
-                    Producto
+                    Productos
+                  </button>
+                  
+                </li>
+                <li className="nav-item">
+                  <button
+                    className="nav-link active d-block text-start w-100"
+                    onClick={newProduct}
+                  >
+                    Crear producto
                   </button>
                 </li>
+                <hr></hr>
+                
                 <Dropdown className="nav-item">
-                  {/* <Dropdown.Toggle className="nav-link d-block text-start w-100" id="dropdown-basic">
-                    Usuarios
-                  </Dropdown.Toggle> */}
                   <Dropdown.Toggle
                     as={Edition}
-                    allowedRoles={["Super Admin", "Admin"]}
+                    allowedRoles={["Super Admin", "Administrador"]}
                     text={"Usuarios"}
                     className="nav-link active d-block text-start w-100"
                   />
@@ -144,20 +152,13 @@ const AdminNav = () => {
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-                <li className="nav-item">
-                  <button
-                    className="nav-link active d-block text-start w-100"
-                    onClick={images}
-                  >
-                    Imagenes guardadas
-                  </button>
-                </li>
+                <hr></hr>
                 <li className="nav-item">
                   <button
                     className="nav-link active d-block text-start w-100"
                     onClick={actionTabs}
                   >
-                    Portada /Media
+                    Portada / Config.
                   </button>
                   </li>
                   <li className="nav-item">
@@ -187,10 +188,6 @@ const AdminNav = () => {
                   </strong>
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="dropdown-menu-dark text-small shadow">
-                  <Dropdown.Item onClick={newProduct}>
-                    Nuevo producto...
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={settings}>Settings</Dropdown.Item>
                   <Dropdown.Item onClick={profile}>Perfil</Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item onClick={sessionCleaner}>

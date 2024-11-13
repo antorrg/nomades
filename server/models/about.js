@@ -22,6 +22,10 @@ export default (sequelize) => {
         enable:{
           type: DataTypes.BOOLEAN,
           defaultValue:true
-      } 
+         },
+         imgShow:{
+          type: DataTypes.BOOLEAN,
+          defaultValue:true
+         }  
     },{timestamps: false});
 };

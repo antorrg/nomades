@@ -22,7 +22,7 @@ export default {
         try {
             const article = await About.findAll()
             if(!article){eh.throwError('Error server', 500)}
-            if(article.length===0){return [{id: 1, title: 'No hay titulo', text: 'No hay texto', image: ''}]}
+            if(article.length===0){return [{id: 1, title: 'No hay titulo', text: 'No hay texto', image: '', enable: false, imgShow: false}]}
             return article;
         } catch (error) {
         throw error;
@@ -41,6 +41,7 @@ export default {
         const options = help.optionImage(newData.saver)
         const useImgs = help.optionImage(newData.useImg)
         const enabledParsed = help.optionImage(newData.enable)
+        const imgShowParsed = help.optionImage(newData.imgShow)
         let imageStore = "";
         try {
             const article = await About.findByPk(id)
@@ -51,7 +52,8 @@ export default {
                 title: newData.title,
                 text: newData.text,
                 image: newData.image,
-                enable: enabledParsed
+                enable: enabledParsed,
+                imgShow: imgShowParsed,
             }
             const updarticle = article.update(newarticle)
             const pictureOld = await cloud.oldImagesHandler(imageStore, options)

@@ -7,6 +7,8 @@ const OurWork = () => {
   const dispatch = useDispatch();
   const featurettes = useSelector((state) => state.Works);
 
+  const featurettesToShow = featurettes.filter(item => item.enable);
+  
   useEffect(()=>{
     dispatch(getWorks())
   },[])
@@ -20,7 +22,7 @@ const OurWork = () => {
       </div>
      <div className="aboutContainer colorBack rounded-4 shadow">
       <div className="modal-content p-2">
-        {featurettes?.map((item, index) => (
+        {featurettesToShow?.map((item, index) => (
           <div key={index}>
             <div className="row featurette">
               {/* Alterna el orden usando order-md-2 solo en imágenes impares */}

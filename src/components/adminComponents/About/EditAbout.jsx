@@ -1,0 +1,34 @@
+import React from 'react'
+
+const DinamicAbout = ({items}) => {
+    const aboutUs = items;
+  return (
+    <div className="aboutContainer colorBack rounded-4 shadow">
+      <div className="modal-content p-2">
+        {aboutUs?.map((item, index) => (
+          <div key={index}>
+            <div className="row featurette">
+              {/* Alterna el orden usando order-md-2 solo en imágenes impares */}
+              <div className={`col-md-7 ${index % 2 !== 0 ? 'order-md-2' : ''}`}>
+                <h4 className="featurette-heading fw-normal lh-1">{item.title}</h4>
+                <p className="lead">{item.text}</p>
+              </div>
+              {item.imgShow?
+              <div className={`col-md-5 ${index % 2 !== 0 ? 'order-md-1' : ''}`}>
+                <img
+                  className="bd-placeholder-img bd-placeholder-img-sm featurette-image img-fluid mx-auto mt-3"
+                  src={item.image}
+                  alt="Not found"
+                  style={{maxWidth: '10rem'}}
+                />
+              </div>: null}
+            </div>
+            <hr className="featurette-divider" />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default DinamicAbout

@@ -1,9 +1,24 @@
-import React from "react";
+import {useEffect} from "react";
 import { Header } from "../components/IndexComponents";
+import { useDispatch, useSelector } from "react-redux";
+import { getAbout } from "../redux/actions";
 import { Link } from "react-router-dom";
+import {DinamicAbout} from "../components/IndexComponents"
 import "./styles/about.css";
 
 const About = () => {
+  const dispatch = useDispatch()
+  //const items = useSelector((state)=>state.About)
+
+  useEffect(()=>{
+    dispatch(getAbout())
+  },[])
+  const items= ''
+  // const items = [
+  //   {id:1, title: 'titulo de ejemplo', text: 'texto de ejemplo para llenar el lugar', image: '/fondoImg.png', enable: false, imgShow: false},
+  //   {id:1, title: 'titulo de ejemplo', text: 'texto de ejemplo para llenar el lugar aoidfpoiasd a`podif aspodi apsdoifasd poiads fpoisda psdaoifhsdapfo sadpods fpsdh sdpoifj sadpoid sp98eehfdjcxñlkjja', image: '/fondoImg.png', enable: true, imgShow: true}
+  // ]
+
   return (
     <div className="imageBack">
       <Header />
@@ -14,9 +29,13 @@ const About = () => {
           <div className="modal-content p-2">
           <div className="container-lg modal-content colorBack contactContainer rounded-4 shadow">
             <div className="container mt-5">
-              <p className='cover-p'>
-                Somos "Nomades, Cabañas de Pastores", un emprendimiento que comenzo hace algun tiempo y fue tomando forma con los años.
-              </p>
+              {(!items || items === undefined || items === null)?
+               <p className='cover-p'>
+               Somos "Nomades, Cabañas de Pastores", un emprendimiento que comenzo hace algun tiempo y fue tomando forma con los años.
+             </p>
+              :
+              <DinamicAbout items={items}/>
+             }
               <Link className="btn btn-secondary mb-3" to={'/'}>Volver</Link>
             </div>
             <hr></hr>

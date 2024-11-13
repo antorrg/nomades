@@ -4,5 +4,6 @@ import Footer from "./Footer";
 import MyCarousel from "./carousel/Carousel";
 import Marketing from "./Marketing";
 import VideoOne from "./VideoOne";
+import DinamicAbout from "./DinamicAbout";
 
-export { Album, Header, Footer, MyCarousel, Marketing, VideoOne};
+export { Album, Header, Footer, MyCarousel, Marketing, VideoOne, DinamicAbout};
