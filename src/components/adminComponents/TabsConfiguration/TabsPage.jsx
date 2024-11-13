@@ -24,7 +24,7 @@ const TabsPage = () => {
       sessionCleaner={sessionCleaner}
     >
       {activeTab === 'portada' && (
-        <Comp.Portada/>
+        <Comp.LandingView/>
       )}
       {activeTab === 'work' && (
         <Comp.AdminAlbumWork/>

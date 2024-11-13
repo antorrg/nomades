@@ -1,5 +1,6 @@
 import {
     LANDING,
+    LANDING_BY_ID,
     PRODUCT,
     PRODUCT_BY_ID,
     CLEAN_STATE,
@@ -15,6 +16,7 @@ import {
 
 const initialState = {
     Landing:[],
+    LandingById: [],
     Products:[],
     ProductId:[],
     Item:[],
@@ -33,6 +35,11 @@ const reducer = (state = initialState, {type, payload})=>{
             return {
                 ...state,
                 Landing: payload,
+            }
+        case LANDING_BY_ID:
+            return {
+                ...state,
+                LandingById: payload,
             }
         case PRODUCT:
             return {
@@ -66,6 +73,7 @@ const reducer = (state = initialState, {type, payload})=>{
                 ProductId:payload,
                 UserById: payload,
                 WorkById : payload,
+                LandingById : payload,
             }
         case IMAGES:
             return {

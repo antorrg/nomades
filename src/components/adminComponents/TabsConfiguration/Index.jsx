@@ -6,14 +6,15 @@ import User from './TabsComponents/User'
 import Videos from './TabsComponents/Videos'
 import AdminAlbumWork from '../AdminWork/AdminAlbumWork'
 import ImagesComponent from '../MediaStorage/ImagesComponent'
+import LandingView from '../LandingComponents/LandingView'
 
 export {
     Config,
-    Imagenes,
     Portada,
     Producto,
     User,
     Videos,
     AdminAlbumWork,
     ImagesComponent,
+    LandingView,
 }

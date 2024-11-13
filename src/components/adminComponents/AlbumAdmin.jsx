@@ -92,7 +92,7 @@ const Album = ({ info, items }) => {
                           Ver mas
                         </Link>
                         <Edition 
-                            allowedRoles={["Super Admin", "Admin"]}
+                            allowedRoles={["Super Admin", "Administrador"]}
                             onClick={()=>{delItem(item.id)}}
                             text={"Borrar"}
                             className="btn btn-sm btn-outline-danger"/>

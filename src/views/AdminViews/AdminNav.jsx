@@ -155,19 +155,19 @@ const AdminNav = () => {
                 <li className="nav-item">
                   <button
                     className="nav-link active d-block text-start w-100"
-                    onClick={ayuda}
-                  >
-                    Ayuda ?
-                  </button>
-                </li>
-                <li className="nav-item">
-                  <button
-                    className="nav-link active d-block text-start w-100"
                     onClick={actionTabs}
                   >
                     Portada /Media
                   </button>
                   </li>
+                  <li className="nav-item">
+                  <button
+                    className="nav-link active d-block text-start w-100"
+                    onClick={ayuda}
+                  >
+                    Ayuda ?
+                  </button>
+                </li>
               </ul>
               <hr />
               <Dropdown align="end">

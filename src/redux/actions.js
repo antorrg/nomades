@@ -3,6 +3,7 @@ import setAuthHeader from "../Auth/generalComponents/axiosUtils";
 import { HandlError } from "../Auth/generalComponents/HandlerError";
 
 export const LANDING = "LANDING";
+export const LANDING_BY_ID = 'LANDING_BY_ID';
 export const PRODUCT = "PRODUCT";
 export const PRODUCT_BY_ID = "PRODUCT_BY_ID";
 export const ITEM = "ITEM";
@@ -26,6 +27,20 @@ export const getInfo = () => {
         payload: data.data,
       });
     } catch (error) {
+      console.error(error);
+    }
+  };
+};
+export const getInfoById = (id) => {
+  return async (dispatch) => {
+    try {
+      const data = await axios(`/api/v1/land/${id}`, setAuthHeader());
+      return dispatch({
+        type: LANDING_BY_ID,
+        payload: data.data,
+      });
+    } catch (error) {
+      HandlError(error) 
       console.error(error);
     }
   };
@@ -94,6 +109,20 @@ export const getWorks = () => {
     }
   };
 };
+export const getWorkById = (id) => {
+  return async (dispatch) => {
+    try {
+      const data = await axios(`/api/v1/work/${id}`, setAuthHeader());
+      return dispatch({
+        type: WORK_BY_ID,
+        payload: data.data,
+      });
+    } catch (error) {
+      HandlError(error) 
+      console.error(error);
+    }
+  };
+};
 
 //*====== Variables de usuario. =======
 
@@ -135,17 +164,3 @@ export const getStoredImgs = () => {
   };
 };
 
-export const getWorkById = (id) => {
-  return async (dispatch) => {
-    try {
-      const data = await axios(`/api/v1/work/${id}`, setAuthHeader());
-      return dispatch({
-        type: WORK_BY_ID,
-        payload: data.data,
-      });
-    } catch (error) {
-      HandlError(error) 
-      console.error(error);
-    }
-  };
-};

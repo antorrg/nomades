@@ -17,7 +17,7 @@ import ItemCreate from "../../components/adminComponents/ProductEdition/ItemCrea
 import ImagesComponent from "../../components/adminComponents/MediaStorage/ImagesComponent";
 import TabsPage from "../../components/adminComponents/TabsConfiguration/TabsPage";
 import OurWorkEdit from "../../components/adminComponents/AdminWork/OurWorkEdit";
-
+import CreateLanding from "../../components/adminComponents/LandingComponents/LandingEdition/CreateLanding";
 
 export {
   HelpView,
@@ -39,5 +39,6 @@ export {
   ImagesComponent,
   TabsPage,
   OurWorkEdit,
+  CreateLanding,
   
 };

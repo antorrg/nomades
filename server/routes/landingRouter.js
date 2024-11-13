@@ -13,4 +13,6 @@ landingRouter.delete('/land/:id', ctr.deleteLandingController)
 
 landingRouter.get('/land', ctr.getLandingController)
 
+landingRouter.get('/land/:id', ctr.detailLandingController)
+
 export default landingRouter;
