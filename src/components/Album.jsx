@@ -28,7 +28,7 @@ const Album = ({ info, items }) => {
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {items?.map((item) => (
-                 <div className="col">
+                 <div key={item.id} className="col">
                  <div className="card shadow-sm">
                    <img className="card-img-top" src={item.img} alt="Card image" />
                    <div className="card-body">

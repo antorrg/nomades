@@ -4,7 +4,7 @@ const productCleaner = (data, isObj)=>{
 }
 
 const cleaner = (cont, bl)=>{
-     const items  = cont.Items.map((it)=> aux(it, false))
+     const items  = bl? cont.Items.map((it)=> aux(it, false)): null
     const info = {
         id:cont.id,
         title:cont.title,

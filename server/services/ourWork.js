@@ -43,11 +43,13 @@ export default {
         const options = help.optionImage(newData.saver)
         const useImgs = help.optionImage(newData.useImg)
         const enabledParsed = help.optionImage(newData.enable)
-        let imageStore = "";
         try {
             const work = await Work.findByPk(id)
             if(!work){eh.throwError('Articulo no hallado',404)}
-            if(work.image !== newData.image){imageStore = work.image}
+
+            //Capturar imagen y resolver posible actualizacion
+            const originalImage = itemFound.img;
+            const isImageChanged = originalImage !== newData.img;
             if(useImgs){await cloud.deleteImage(newData.image)}
             const newWork = {
                 title: newData.title,
@@ -56,8 +58,9 @@ export default {
                 enable: enabledParsed
             }
             const updWork = work.update(newWork)
-            const pictureOld = await cloud.oldImagesHandler(imageStore, options)
-            if(pictureOld.success===false){eh.throwError('Error al procesar imagen antigua', 500)}
+            if (isImageChanged) {
+                await cloud.processImageUpdate(isImageChanged, newData.img, options);
+            }
             return updWork;
         } catch (error) {
         throw error;

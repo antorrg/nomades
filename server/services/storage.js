@@ -49,23 +49,25 @@ const getImages = async()=>{
     throw error;
   }
 }
-// Funciones utilitarias para el borrado de imagen en la base de datos
-const byUrl = async (data)=>{
-  const image = await Image.findOne({
-    where: {imageUrl:data}
-  });
-  if (!image) { eh.throwError('Imagen no hallada', 404)}
-  return image
-  }
-  const byId = async (data)=>{
-  const image = await Image.findByPk(data);
-  if (!image) { eh.throwError('Imagen no hallada', 404)}
-  return image
-  }
 
+
+  const processImageUpdate = async (currentImage, newImage, options) => {
+    try {
+        if (currentImage !== newImage) {
+            const oldImageResult = await oldImagesHandler(currentImage, options);
+            if (!oldImageResult.success) {
+                eh.throwError('Error al procesar imagen antigua', 500);
+            }
+        }
+    } catch (error) {
+        console.error(error.message)
+        throw error;
+    }
+};
 export {
 oldImagesHandler,
 deleteImage,
 deleteFromCloudinary,
 getImages,
+processImageUpdate
 }

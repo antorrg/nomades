@@ -62,10 +62,7 @@ getProduct : async () => {
                               }
                         }// Devolver los datos en caché si existen}
         const dataFound = await Product.findAll({
-             include :[{
-                model: Item,
-                attributes:['id', 'img', 'text', 'ProductId'],
-           },],
+            raw:true
         })
         if(!dataFound){eh.throwError('Dato no hallado', 404)}
         if(dataFound.length === 0)return help.dataEmptyPage()
@@ -79,9 +76,6 @@ getProduct : async () => {
 getById : async (id) => {
     try {
         const data = await Product.findByPk(id,{
-            where:{
-                deleteAt:false,
-            },
                 include : [{
                     model: Item,
                     attributes: ['id', 'img', 'text', 'ProductId'],
@@ -94,8 +88,7 @@ getById : async (id) => {
 },
 getDetail : async (id) => {
     try {
-        const itemFound = await Item.findByPk(id,{
-            where: {enable:true,}});
+        const itemFound = await Item.findByPk(id)
         if(!itemFound){eh.throwError('Dato no hallado', 404)}
         const item = help.aux(itemFound, true)
         return item;
@@ -104,13 +97,13 @@ getDetail : async (id) => {
 updProduct : async (id, newData) => {
     const options = help.optionImage(newData.saver)
     const useImgs = help.optionImage(newData.useImg)
-    let imageStore = "";
     try {
         const productFound = await Product.findByPk(id);
         if(!productFound){eh.throwError('Error inesperado, dato no hallado!',404)}
-        if(productFound.landing !== newData.landing){
-            imageStore = productFound.landing
-        }
+        //Capturar imagen y resolver posible actualizacion
+        const originalImage = productFound.landing;
+        const isImageChanged = originalImage !== newData.landing;
+
         if(useImgs){await cloud.deleteImage(newData.landing, false)}; 
         const parsedData = {
             title: newData.title,
@@ -121,9 +114,13 @@ updProduct : async (id, newData) => {
             url: newData.url,
             enable: Boolean(newData.enable),
             deleteAt: Boolean(newData.deleteAt)}
+
         const productUpd = await productFound.update(parsedData)
-        const pictureOld = await cloud.oldImagesHandler(imageStore, options)
-        if(pictureOld.success===false){eh.throwError('Error al procesar imagen antigua', 500)}
+
+        if (isImageChanged) {
+            await cloud.processImageUpdate(isImageChanged, newData.landing, options);
+        }
+
         if (productUpd) {
             cache.del('products');
             }
@@ -134,19 +131,26 @@ updProduct : async (id, newData) => {
 updItem: async (id, newData)=>{
     const options = help.optionImage(newData.saver)
     const useImgs = help.optionImage(newData.useImg)
-    let imageStore = "";
     try {
         const itemFound = await Item.findByPk(id);
     if(!itemFound){eh.throwError('Error inesperado, item no hallado!',404)}
-    if(itemFound.img !== newData.img){imageStore = itemFound.img}
+    //Capturar imagen y resolver posible actualizacion
+    const originalImage = itemFound.img;
+    const isImageChanged = originalImage !== newData.img;
+
     if(useImgs){await cloud.deleteImage(newData.img, false)}
+
     const parsedData = {
         img: newData.img,
         text: newData.text,
         enable: Boolean(newData.enable)}
-    const itemUpd = itemFound.update(parsedData)
-    const pictureOld = await cloud.oldImagesHandler(imageStore, options, )
-     if(pictureOld.success===false){eh.throwError('Error al procesar imagen antigua', 500)}
+
+    const itemUpd = await itemFound.update(parsedData)
+
+    if (isImageChanged) {
+        await cloud.processImageUpdate(isImageChanged, newData.img, options);
+    }
+
     return itemUpd
     } catch (error) {throw error;}
 },
