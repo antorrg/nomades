@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom'
+import {useAuth} from '../../../Auth/AuthContext/AuthContext'
+import { showSuccess } from '../../../Auth/generalComponents/HandlerError';
+import showConfirmationDialog from '../../../Auth/generalComponents/sweetAlert';
 import TabsLayout from './TabsLayout';
 import * as Comp from './Index'
 
 
 const TabsPage = () => {
+  const {logout }= useAuth()
+  const navigate = useNavigate();
+
   const [activeTab, setActiveTab] = useState('portada');
   
 
@@ -11,10 +18,19 @@ const TabsPage = () => {
     setActiveTab(tabName);
   };
 
-  const sessionCleaner = () => {
-    console.log('Cerrando sesión...');
-    alert('¡Le erraste loco...!')
-  };
+  const sessionCleaner = async()=>{
+    const confirmed = await showConfirmationDialog(
+      "¿Está seguro de cerrar sesión?"
+    );
+    if (confirmed) {
+      // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
+      showSuccess("Sesión cerrada");
+      navigate("/");
+      setTimeout(() => {
+        logout();
+      }, 1000);
+    }
+  }
 
   return (
     <>

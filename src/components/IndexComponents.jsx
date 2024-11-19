@@ -5,5 +5,19 @@ import MyCarousel from "./carousel/Carousel";
 import Marketing from "./Marketing";
 import VideoOne from "./VideoOne";
 import DinamicAbout from "./DinamicAbout";
+import VideoTwo from "./VideoTwo";
+import Facebook from "./Facebook";
+import Instagram from "./Instagram";
 
-export { Album, Header, Footer, MyCarousel, Marketing, VideoOne, DinamicAbout};
+export { 
+    Album, 
+    Header, 
+    Footer, 
+    MyCarousel, 
+    Marketing, 
+    VideoOne, 
+    DinamicAbout,
+    VideoTwo,
+    Facebook,
+    Instagram,
+};

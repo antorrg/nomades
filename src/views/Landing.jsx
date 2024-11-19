@@ -47,8 +47,18 @@ const Landing = () => {
     <Cp.Marketing products = {products} param={'detalle'}/>
     <hr></hr>
     <Cp.VideoOne/>
+    <hr></hr>
     </section>
     <section>
+    <Cp.Facebook/>
+    <hr></hr>
+    </section>
+    <section>
+      <Cp.Instagram/>
+      <hr></hr>
+    </section>
+    <section>
+      <Cp.VideoTwo/>
     </section>
     <Cp.Footer/>
     

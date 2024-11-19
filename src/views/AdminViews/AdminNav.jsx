@@ -5,6 +5,7 @@ import { useAuth } from "../../Auth/AuthContext/AuthContext";
 import { showSuccess } from "../../Auth/generalComponents/HandlerError";
 import { useNavigate, Link } from "react-router-dom";
 import Edition from "../../Auth/generalComponents/Edition/Edition";
+import showConfirmationDialog from "../../Auth/generalComponents/sweetAlert";
 
 const AdminNav = () => {
   const { user, logout } = useAuth();
@@ -73,13 +74,20 @@ const AdminNav = () => {
     cerrarOffcanvas()
   };
 
-  const sessionCleaner = () => {
-    showSuccess("Sesión cerrada");
-    navigate("/");
-    setTimeout(() => {
-      logout();
-    }, 1500);
-  };
+
+  const sessionCleaner = async()=>{
+    const confirmed = await showConfirmationDialog(
+      "¿Está seguro de cerrar sesión?"
+    );
+    if (confirmed) {
+      // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
+      showSuccess("Sesión cerrada");
+      navigate("/");
+      setTimeout(() => {
+        logout();
+      }, 1000);
+    }
+  }
 
   return (
     <>
@@ -168,6 +176,15 @@ const AdminNav = () => {
                   >
                     Ayuda ?
                   </button>
+                  </li>
+                  <hr></hr>
+                  <li className="nav-item">
+                  <button
+                    className="nav-link active d-block text-start w-100"
+                    onClick={sessionCleaner}
+                  >
+                    Cerrar sesión
+                  </button>
                 </li>
               </ul>
               <hr />
@@ -189,10 +206,6 @@ const AdminNav = () => {
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="dropdown-menu-dark text-small shadow">
                   <Dropdown.Item onClick={profile}>Perfil</Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item onClick={sessionCleaner}>
-                    Cerrar sesión
-                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Offcanvas.Body>

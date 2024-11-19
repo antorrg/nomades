@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "cross-env NODE_ENV=development concurrently \"vite preview\" \"nodemon server.js\"",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
-    "test:cov" :"cross-env NODE_ENV=test jest --detectOpenHandles run: 01 run: 10 --coverage",
+    "test:cov": "cross-env NODE_ENV=test jest --detectOpenHandles run: 01 run: 10 --coverage",
     "start": "cross-env NODE_ENV=production node server.js"
   },
   "dependencies": {
@@ -35,6 +35,7 @@
     "pg-hstore": "^2.3.4",
     "postgres": "^3.4.4",
     "react": "^18.3.1",
+    "react-beautiful-dnd": "^13.1.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",

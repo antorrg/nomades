@@ -1,7 +1,9 @@
 import React from 'react';
 import { Nav, Container, Row } from 'react-bootstrap';
 
+
 const TabsLayout = ({ activeTab, handleTabChange, sessionCleaner, children }) => {
+ 
   return (
     <div>
       <div className="coverBack">
