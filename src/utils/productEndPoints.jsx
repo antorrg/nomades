@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as toast from "../Auth/generalComponents/HandlerError";
-import setAuthHeader from "../Auth/generalComponents/axiosUtils";
+import {setAuthHeader} from "../Auth/generalComponents/axiosUtils";
 
 export const updateProduct = async (id, product, onClose) => {
   console.log(id);

@@ -1,5 +1,5 @@
 import axios from "axios";
-import setAuthHeader from "../Auth/generalComponents/axiosUtils";
+import {setAuthHeader, adminValidator} from "../Auth/generalComponents/axiosUtils";
 import { HandlError } from "../Auth/generalComponents/HandlerError";
 
 export const LANDING = "LANDING";
@@ -15,13 +15,13 @@ export const WORKS = "WORKS";
 export const WORK_BY_ID = "WORK_BY_ID";
 export const ABOUT = "ABOUT";
 
-    
+   
 
 //*%%%%%%% Rutas libres %%%%%%%%
-export const getInfo = () => {
+export const getInfo = (isAdmin) => {
   return async (dispatch) => {
     try {
-      const data = await axios("/api/v1/land");
+      const data = await axios("/api/v1/land", adminValidator(isAdmin));
       return dispatch({
         type: LANDING,
         payload: data.data,
@@ -45,10 +45,10 @@ export const getInfoById = (id) => {
     }
   };
 };
-export const getProduct = () => {
+export const getProduct = (isAdmin) => {
   return async (dispatch) => {
     try {
-      const data = await axios("/api/v1/product");
+      const data = await axios("/api/v1/product", adminValidator(isAdmin));
       return dispatch({
         type: PRODUCT,
         payload: data.data,
@@ -60,10 +60,10 @@ export const getProduct = () => {
   };
 };
 
-export const getProductById = (id) => {
+export const getProductById = (id, isAdmin) => {
   return async (dispatch) => {
     try {
-      const data = await axios(`/api/v1/product/${id}`);
+      const data = await axios(`/api/v1/product/${id}`, adminValidator(isAdmin));
       return dispatch({
         type: PRODUCT_BY_ID,
         payload: data.data,
@@ -74,10 +74,10 @@ export const getProductById = (id) => {
     }
   };
 };
-export const getItem = (id) => {
+export const getItem = (id, isAdmin) => {
   return async (dispatch) => {
     try {
-      const data = await axios(`/api/v1/product/item/${id}`);
+      const data = await axios(`/api/v1/product/item/${id}`, adminValidator(isAdmin));
       return dispatch({
         type: ITEM,
         payload: data.data,
@@ -95,10 +95,10 @@ export const cleanState = () => {
   };
 };
 
-export const getWorks = () => {
+export const getWorks = (isAdmin) => {
   return async (dispatch) => {
     try {
-      const data = await axios("/api/v1/work");
+      const data = await axios("/api/v1/work", adminValidator(isAdmin));
       return dispatch({
         type: WORKS,
         payload: data.data,
@@ -123,10 +123,10 @@ export const getWorkById = (id) => {
     }
   };
 };
-export const getAbout = () => {
+export const getAbout = (isAdmin) => {
   return async (dispatch) => {
     try {
-      const data = await axios("/api/v1/about");
+      const data = await axios("/api/v1/about", adminValidator(isAdmin));
       return dispatch({
         type: ABOUT,
         payload: data.data,

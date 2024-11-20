@@ -179,8 +179,8 @@ const ProductEdition = () => {
                     value={product.enable ? "true" : "false"}
                     onChange={handleInputChange}
                   >
-                    <option value="true">True</option>
-                    <option value="false">False</option>
+                    <option value="true">Mostrar</option>
+                    <option value="false">No mostrar</option>
                   </select>
                  </div>
                  <div className="mb-3 form-check form-switch">
@@ -194,7 +194,7 @@ const ProductEdition = () => {
                 </div>
                 <div className="d-flex flex-row me-3">
                   <button
-                    className="btn btn-primary mb-3 me-2"
+                    className="btn btn-md btn-primary mb-3 me-2"
                     type="button"
                     id="submitButton"
                     onClick={handleSubmit}
@@ -202,7 +202,7 @@ const ProductEdition = () => {
                     Actualizar
                   </button>
                   <button
-                    className="btn btn-primary mb-3"
+                    className="btn btn-md btn-secondary mb-3"
                     onClick={() => {
                       onClose();
                     }}

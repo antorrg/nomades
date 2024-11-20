@@ -11,10 +11,10 @@ const LandingView = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const info = useSelector((state)=>state.Landing)
-
+  const isAdmin = true
 
  useEffect(()=>{
-   dispatch(getInfo())
+   dispatch(getInfo(isAdmin))
  },[])
 
   return (

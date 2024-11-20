@@ -53,32 +53,35 @@ try {
 } catch (error) {throw error;}
 },
 
-getProduct : async () => {
+getProduct : async (admin) => {
     try {
         let products = cache.get('products');
-        if (products) {
+        if (products &&!admin) {
                        return {products: products,
                                cache: true 
                               }
                         }// Devolver los datos en caché si existen}
         const dataFound = await Product.findAll({
-            raw:true
+            raw:true,
+            where: admin ? {} :{ enable: true },
         })
         if(!dataFound){eh.throwError('Dato no hallado', 404)}
         if(dataFound.length === 0)return help.dataEmptyPage()
         const data = help.productCleaner(dataFound, false)
-        cache.set('products', data);
+        if(!admin){cache.set('products', data);}
         return {products: data,
                 cache: false
                 }
     } catch (error) {throw error;}
 },
-getById : async (id) => {
+getById : async (id,admin) => {
     try {
         const data = await Product.findByPk(id,{
+            
                 include : [{
+                    where: admin ? {} :{ enable: true },
                     model: Item,
-                    attributes: ['id', 'img', 'text', 'ProductId'],
+                    attributes: ['id', 'img', 'text', 'ProductId', 'enable'],
                 }]
         })
         if(!data){eh.throwError('Dato no hallado', 404)}
@@ -131,6 +134,8 @@ updProduct : async (id, newData) => {
 updItem: async (id, newData)=>{
     const options = help.optionImage(newData.saver)
     const useImgs = help.optionImage(newData.useImg)
+    const parsedEnable = help.optionImage(newData.enable)
+    console.log(parsedEnable)
     try {
         const itemFound = await Item.findByPk(id);
     if(!itemFound){eh.throwError('Error inesperado, item no hallado!',404)}
@@ -143,14 +148,14 @@ updItem: async (id, newData)=>{
     const parsedData = {
         img: newData.img,
         text: newData.text,
-        enable: Boolean(newData.enable)}
+        enable: Boolean(parsedEnable)}
 
     const itemUpd = await itemFound.update(parsedData)
 
     if (isImageChanged) {
         await cloud.processImageUpdate(isImageChanged, newData.img, options);
     }
-
+    cache.del('products')
     return itemUpd
     } catch (error) {throw error;}
 },
@@ -196,6 +201,7 @@ delProduct: async (id) => {
         }
 
         await transaction.commit();
+        cache.del('products')
         return { 
             message: 'Producto y sus items asociados borrados exitosamente',
             imagenesBorradas: results.filter(r => r.status === 'fulfilled').length

@@ -24,7 +24,8 @@ export default {
     res.status(200).json(response);
   }),
   getLandingController: eh.catchAsync(async (req, res) => {
-    const response = await sv.getOneLanding();
+    const admin = req.admin;
+    const response = await sv.getOneLanding(admin);
     res.status(200).json(response);
   }),
   detailLandingController: eh.catchAsync(async (req, res) => {

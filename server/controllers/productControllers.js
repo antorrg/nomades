@@ -47,7 +47,8 @@ export default {
   }),
 
   getProductHand: eh.catchAsync(async (req, res) => {
-    const response = await serv.getProduct();
+    const admin = req.admin;
+    const response = await serv.getProduct(admin);
     if (response.cache === true) {
       res.status(203).json(response.products);
     } else {
@@ -57,13 +58,16 @@ export default {
 
   getProductById: eh.catchAsync(async (req, res) => {
     const { id } = req.params;
-    const response = await serv.getById(id);
+    const admin = req.admin;
+   console.log('soy el admin: ',admin)
+    const response = await serv.getById(id, admin);
     res.status(200).json(response);
   }),
 
   getItemById: eh.catchAsync(async (req, res) => {
     const { id } = req.params;
-    const response = await serv.getDetail(id);
+    const admin = req.admin;
+    const response = await serv.getDetail(id, admin);
     res.status(200).json(response);
   }),
 };

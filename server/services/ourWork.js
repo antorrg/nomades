@@ -20,9 +20,12 @@ export default {
         throw error;
         }
     },
-    getWork : async()=>{
+    getWork : async(admin)=>{
         try {
-            const work = await Work.findAll()
+            const work = await Work.findAll({
+                raw:true,
+                where: admin ? {} :{ enable: true },
+            })
             if(!work){eh.throwError('Error server', 500)}
             if(work.length===0){return [{id: 1, title: 'No hay titulo', text: 'No hay texto', image: ''}]}
             return work;

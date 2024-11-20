@@ -12,7 +12,7 @@ productRouter.delete('/product/:id', auth.verifyToken, auth.checkRole([0,9]), ct
 productRouter.post('/product/item/create', auth.verifyToken, auth.checkRole([0,2,9]), ctr.createItemController)
 productRouter.put('/product/item/:id', auth.verifyToken, auth.checkRole([0,2,9]), ctr.detailUpdController)
 productRouter.delete('/product/item/:id', auth.verifyToken, auth.checkRole([0,2,9]), ctr.delItemController)
-productRouter.get('/product', ctr.getProductHand)// experimental, debe borrarse
-productRouter.get('/product/:id', ctr.getProductById)// experimental, debe borrarse
-productRouter.get('/product/item/:id', ctr.getItemById)// experimental, debe borrarse
+productRouter.get('/product', auth.setAdminVar, ctr.getProductHand)// Ruta libre, solo verifica
+productRouter.get('/product/:id', auth.setAdminVar, ctr.getProductById)// Ruta libre, solo verifica
+productRouter.get('/product/item/:id', auth.setAdminVar, ctr.getItemById)// Ruta libre, solo verifica
 export default productRouter;

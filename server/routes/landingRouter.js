@@ -11,7 +11,7 @@ landingRouter.put('/land/:id', ctr.updLandingController)
 
 landingRouter.delete('/land/:id', ctr.deleteLandingController)
 
-landingRouter.get('/land', ctr.getLandingController)
+landingRouter.get('/land', auth.setAdminVar, ctr.getLandingController)//Ruta libre, solo verifica
 
 landingRouter.get('/land/:id', ctr.detailLandingController)
 

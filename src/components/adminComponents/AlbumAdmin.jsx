@@ -58,13 +58,13 @@ const Album = ({ info, items }) => {
               Volver
             </Link>
                 <Edition
-                  allowedRoles={["Super Admin", "Admin"]}
+                  allowedRoles={["Super Admin", "Administrador"]}
                   onClick={toEdition}
                   text={"Editar"}
                   className="btn btn-primary my-2 ms-2"
                 />
                 <Edition
-                  allowedRoles={["Super Admin", "Admin"]}
+                  allowedRoles={["Super Admin", "Administrador"]}
                   onClick={itemCreate}
                   text={"Crear Item"}
                   className="btn btn-outline-success my-2 ms-2"

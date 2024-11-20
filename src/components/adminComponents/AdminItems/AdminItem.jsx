@@ -40,7 +40,7 @@ const AdminItem = () => {
                 Cerrar
               </Link>
                 <Edition
-                  allowedRoles={["Super Admin", "Admin"]}
+                  allowedRoles={["Super Admin", "Administrador"]}
                   onClick={() => {
                     navigate(`/admin/product/item/update/${item.id}`);
                   }}

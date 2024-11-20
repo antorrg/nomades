@@ -171,12 +171,12 @@ const ProductCreate = () => {
                   buttonText="Agregar Item"
                 />
                 <GenericButton
-                  className="btn btn-secondary mb-3 me-2"
+                  className="btn btn-md btn-secondary mb-3 me-2"
                   buttonText="Cancelar"
                   onClick={onClose}
                 />
                 <GenericButton
-                  className="btn btn-primary mb-3 me-2"
+                  className="btn btn-md btn-primary mb-3 me-2"
                   type="button"
                   onClick={handleSubmit}
                   buttonText="Enviar"

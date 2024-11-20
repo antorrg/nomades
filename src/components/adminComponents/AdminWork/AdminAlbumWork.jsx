@@ -7,9 +7,10 @@ import {getWorks} from '../../../redux/actions'
 const AdminAlbumWork = () => {
     const dispatch = useDispatch();
     const featurettes = useSelector((state) => state.Works);
-  
+    const isAdmin = true
+    
     useEffect(()=>{
-      dispatch(getWorks())
+      dispatch(getWorks(isAdmin))
     },[])
   
 

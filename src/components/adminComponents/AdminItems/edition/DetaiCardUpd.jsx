@@ -26,6 +26,7 @@ const DetailCardUpd = () => {
   const [item, setItem] = useState({
     text: "",
     img: "",
+    enable:false,
     saver: false,
     useImg: false,
   });
@@ -35,6 +36,7 @@ const DetailCardUpd = () => {
       setItem({
         text: item1.text || "",
         img: item1.img || "",
+        enable:item1.enable || false,
         saver: item1.saver || false,
         useImg: item1.useImg || false,
       });
@@ -136,6 +138,19 @@ const DetailCardUpd = () => {
                     onChange={handleInputChange}
                   />
                 </div>
+                <label htmlFor="enable" className="form-label">
+                    Mostrar al publico
+                  </label>
+                  <select
+                    className="form-select mb-2"
+                    id="enable"
+                    name="enable"
+                    value={item.enable}
+                    onChange={handleInputChange}
+                  >
+                    <option value="true">Mostrar</option>
+                    <option value="false">No mostrar</option>
+                  </select>
                 <div className="mb-3 form-check form-switch">
                     <Form.Check 
                       type="switch"
@@ -148,7 +163,7 @@ const DetailCardUpd = () => {
 
                 <div className="d-flex flex-row me-3">
                   <button
-                    className="btn btn-primary mb-3 me-2"
+                    className="btn btn-md btn-primary mb-3 me-2"
                     type="button"
                     id="submitButton"
                     onClick={handleSubmit}
@@ -156,7 +171,7 @@ const DetailCardUpd = () => {
                     Actualizar
                   </button>
                   <button
-                    className="btn btn-primary mb-3"
+                    className="btn btn-md btn-secondary mb-3"
                     onClick={() => {
                       onClose();
                     }}

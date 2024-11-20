@@ -7,7 +7,7 @@ const aboutRouter = express.Router()
 
 aboutRouter.post('/about/create', auth.verifyToken, midd.aboutWorkCreate, ctr.aboutCreate)
 
-aboutRouter.get('/about', ctr.aboutGet)
+aboutRouter.get('/about', auth.setAdminVar, ctr.aboutGet)
 
 aboutRouter.get('/about/:id', midd.middIntId, ctr.aboutById)
 
@@ -17,7 +17,7 @@ aboutRouter.delete('/about/:id', auth.verifyToken, midd.middIntId, ctr.aboutDele
 
 aboutRouter.post('/work/create', auth.verifyToken, midd.aboutWorkCreate, ctr.workCreate)
 
-aboutRouter.get('/work', ctr.workGet)
+aboutRouter.get('/work', auth.setAdminVar, ctr.workGet)
 
 aboutRouter.get('/work/:id', auth.verifyToken, midd.middIntId, ctr.workById)
 

@@ -10,7 +10,8 @@ export default {
         res.status(201).json(response)
     }),
     workGet  : eh.catchAsync(async(req, res)=>{
-        const response = await work.getWork()
+        const admin = req.admin;
+        const response = await work.getWork(admin)
         res.status(200).json(response)
     }),
     workById : eh.catchAsync(async(req, res)=>{
@@ -36,7 +37,8 @@ export default {
 
     }),
     aboutGet : eh.catchAsync(async(req, res)=>{
-        const response = await about.getAbout()
+        const admin = req.admin;
+        const response = await about.getAbout(admin)
         res.status(200).json(response)
     }),
     aboutById : eh.catchAsync(async(req, res)=>{

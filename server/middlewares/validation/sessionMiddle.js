@@ -62,6 +62,31 @@ export const verifyToken = (req, res, next)=>{
         })
        
     };
+
+    export const setAdminVar = async (req, res, next) => {
+        let token = req.headers['x-access-token'] || req.headers.Authorization;
+    
+        if (!token) {
+            req.admin = false;
+            return next();
+        }
+    
+        if (token.startsWith('bearer ')) {
+            token = token.slice(7, token.length).trim();
+        
+        }
+    
+        try {
+            const decoded = await pkg.verify(token, env.SecretKey); // Decodifica el token
+            req.admin = true;
+            req.user = decoded;
+        } catch (err) {
+            req.admin = false; // Token inválido
+        }
+    
+        next();
+    };
+    
 export const checkRole = (allowedRoles) => {
         return (req, res, next) => {
           const {userRole}= req.userInfo;

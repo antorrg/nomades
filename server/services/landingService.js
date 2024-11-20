@@ -23,10 +23,11 @@ export default {
             throw error;
         }
     },
-    getLandings : async()=>{
+    getLandings : async(admin)=>{
         try {
             const pageFound = await Landing.findAll({
                 raw: true,
+                where: admin ? {} :{ enable: true },
             })
             if(!pageFound ){eh.throwError('Elemento no encontrado', 404)}
             console.log(pageFound)

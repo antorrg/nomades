@@ -18,9 +18,12 @@ export default {
         throw error;
         }
     },
-    getAbout : async()=>{
+    getAbout : async(admin)=>{
         try {
-            const article = await About.findAll()
+            const article = await About.findAll({
+                raw:true,
+                where: admin ? {} :{ enable: true },
+            })
             if(!article){eh.throwError('Error server', 500)}
             if(article.length===0){return [{id: 1, title: 'No hay titulo', text: 'No hay texto', image: '', enable: false, imgShow: false}]}
             return article;
