@@ -5,7 +5,7 @@ import { getProductById } from "../../../redux/actions";
 import { updateProduct } from "../../../utils/productEndPoints";
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 import { Form } from "react-bootstrap";
-import "./productstyle.css";
+//import "./productstyle.css";
 import ImageUploader from "../../../utils/ImageUploader";
 import ImageSelector from "../../../utils/ImageSelector";
 

@@ -26,7 +26,7 @@ const AdminAlbumWork = () => {
             {featurettes?.map((work) => (
                 <div className="col" key={work.id}>
                 <div className="card shadow-sm">
-                <img className="card-img-top" src={work.image} alt="Card image" />
+                <img className="card-img-top" src={work.image} alt="Card image" style={{ maxWidth: "100%", height:'auto' }}/>
                 <div className="card-body">
                     <p className="card-text">{work.title}</p>
                     <hr></hr>

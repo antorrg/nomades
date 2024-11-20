@@ -46,6 +46,7 @@ export default {
         const options = help.optionImage(newData.saver)
         const useImgs = help.optionImage(newData.useImg)
         const enabledParsed = help.optionImage(newData.enable)
+        let imageUrl= ''
         try {
             const work = await Work.findByPk(id)
             if(!work){eh.throwError('Articulo no hallado',404)}
@@ -53,6 +54,7 @@ export default {
             //Capturar imagen y resolver posible actualizacion
             const originalImage = itemFound.img;
             const isImageChanged = originalImage !== newData.img;
+            isImageChanged ? imageUrl = originalImage: ''
             if(useImgs){await cloud.deleteImage(newData.image)}
             const newWork = {
                 title: newData.title,
@@ -62,7 +64,7 @@ export default {
             }
             const updWork = work.update(newWork)
             if (isImageChanged) {
-                await cloud.processImageUpdate(isImageChanged, newData.img, options);
+                await cloud.oldImagesHandler(imageUrl, options);
             }
             return updWork;
         } catch (error) {
@@ -73,16 +75,12 @@ export default {
         try {
             const work = await Work.findByPk(id)
             if(!work){eh.throwError('Articulo no hallado',404)}
+            const imageUrl = work.image;
             await work.destroy();
-            const resultadoCloudinary = await cloud.deleteFromCloudinary(work.image);
-             if (!resultadoCloudinary) {
-            // Registrar el error pero no fallar la operación
-            console.error('Advertencia: No se pudo borrar la imagen de Cloudinary:', work.image);
-             }
-             return {
-                message: 'Item borrado exitosamente',
-                imagenBorrada: !!resultadoCloudinary
-            };
+            await cloud.deleteFromCloudinary(imageUrl);
+            
+             return  'Item borrado exitosamente'
+            
         } catch (error) {
         throw error;
         }

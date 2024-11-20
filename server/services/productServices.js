@@ -100,12 +100,14 @@ getDetail : async (id) => {
 updProduct : async (id, newData) => {
     const options = help.optionImage(newData.saver)
     const useImgs = help.optionImage(newData.useImg)
+    let imageUrl= ''
     try {
         const productFound = await Product.findByPk(id);
         if(!productFound){eh.throwError('Error inesperado, dato no hallado!',404)}
         //Capturar imagen y resolver posible actualizacion
         const originalImage = productFound.landing;
         const isImageChanged = originalImage !== newData.landing;
+        isImageChanged? imageUrl= originalImage: ""
 
         if(useImgs){await cloud.deleteImage(newData.landing, false)}; 
         const parsedData = {
@@ -121,7 +123,7 @@ updProduct : async (id, newData) => {
         const productUpd = await productFound.update(parsedData)
 
         if (isImageChanged) {
-            await cloud.processImageUpdate(isImageChanged, newData.landing, options);
+            await cloud.oldImagesHandler(imageUrl, options);
         }
 
         if (productUpd) {
@@ -135,13 +137,14 @@ updItem: async (id, newData)=>{
     const options = help.optionImage(newData.saver)
     const useImgs = help.optionImage(newData.useImg)
     const parsedEnable = help.optionImage(newData.enable)
-    console.log(parsedEnable)
+    let imageUrl = ''
     try {
         const itemFound = await Item.findByPk(id);
     if(!itemFound){eh.throwError('Error inesperado, item no hallado!',404)}
     //Capturar imagen y resolver posible actualizacion
     const originalImage = itemFound.img;
     const isImageChanged = originalImage !== newData.img;
+    isImageChanged? imageUrl= originalImage: ""
 
     if(useImgs){await cloud.deleteImage(newData.img, false)}
 
@@ -153,7 +156,7 @@ updItem: async (id, newData)=>{
     const itemUpd = await itemFound.update(parsedData)
 
     if (isImageChanged) {
-        await cloud.processImageUpdate(isImageChanged, newData.img, options);
+        await cloud.oldImagesHandler(imageUrl, options);
     }
     cache.del('products')
     return itemUpd

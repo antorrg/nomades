@@ -1,0 +1,2 @@
+// Informacion para la ayuda: 
+ export const imageSelector = "Las imagenes pueden seleccionarse de una que este guardada o bien puede elegir una nueva, no olvide en el caso de seleccionar una imagen nueva que deberá subirla y esperar el mensaje de confirmación para que pueda ser parte de la actualización del formulario."

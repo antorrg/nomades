@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {Header} from '../components/IndexComponents'
-import './styles/contact.css'
+//import './styles/contact.css'
 import { ValidContact } from '../Auth/generalComponents/internalUtils/Validate'
 
 const Contact = () => {

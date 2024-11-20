@@ -3,17 +3,21 @@ import { useNavigate } from "react-router-dom";
 import GenericButton from "../../../Auth/generalComponents/GenericButton/GenericButton";
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 import ImageUploader from "../../../utils/ImageUploader";
+import ImageSelector from "../../../utils/ImageSelector";
+import { Form } from "react-bootstrap";
 import { createProduct } from "../../../utils/productEndPoints";
-import "./productstyle.css";
+//import "./productstyle.css";
 
 const ProductCreate = () => {
   const navigate = useNavigate();
   const onClose = () => navigate("/admin");
+  const [imgUrl, setImgUrl] = useState(false)
   const [product, setProduct] = useState({
     title: "",
     landing: "",
     info_header: "",
     info_body: "",
+    useImg: false,
     items: [{ img: "", text: "" }],
   });
 
@@ -63,6 +67,19 @@ const ProductCreate = () => {
     }));
   };
 
+  const handleImgUrlSwitchChange = () => {
+    setImgUrl(prev => {
+      const newValue = !prev; // Invertir el estado actual de imgUrl
+  
+      // Actualizar useImg según el nuevo valor de imgUrl
+      setProduct(prevProduct => ({
+        ...prevProduct,
+        useImg: newValue, // Establecer useImg en true o false
+      }));
+  
+      return newValue; // Retornar el nuevo valor de imgUrl
+    });
+  };
   const handleSubmit = async () => {
     const confirmed = await showConfirmationDialog(
       "¿Está seguro de crear el producto?"
@@ -73,7 +90,10 @@ const ProductCreate = () => {
       createProduct(product, onClose);
     }
   };
-
+  const permit = !product.title.trim()||
+                !product.info_body.trim()||
+                !product.info_header.trim()
+  
   return (
     <div className="imageBack">
       <div className="coverBack">
@@ -81,6 +101,11 @@ const ProductCreate = () => {
           <div className="container mt-5">
             <h3>Creación de Producto: </h3>
             <section className="needs-validation" id="updateForm" noValidate>
+              {imgUrl ?
+                <div className="col-md-6 mb-3">
+                  <ImageSelector onImageSelect={handleImageChange}/>
+                </div>
+                :
               <div className="col-md-6 mb-3">
                 <ImageUploader
                   titleField="Imagen principal:"
@@ -88,6 +113,16 @@ const ProductCreate = () => {
                   onImageUpload={(url) => handleImageChange("landing", url)}
                 />
               </div>
+                }
+              <div className="mb-3 form-check form-switch">
+                    <Form.Check 
+                      type="switch"
+                      id="imgUrlSwitch"
+                      checked={imgUrl}
+                      label="Active para elegir imagen guardada"
+                      onChange={handleImgUrlSwitchChange}
+                    />
+                </div>
               <div className="mb-3">
                 <label htmlFor="title" className="form-label">
                   Título:
@@ -180,6 +215,7 @@ const ProductCreate = () => {
                   type="button"
                   onClick={handleSubmit}
                   buttonText="Enviar"
+                  disabled={permit}
                 />
               </div>
             </section>

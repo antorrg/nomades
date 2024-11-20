@@ -5,7 +5,7 @@ import {getWorkById } from "../../../redux/actions";
 import { updateItem } from "../../../utils/productEndPoints";
 import { Form } from "react-bootstrap";
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
-import "../AdminItems/edition/detailCardUpd.css"
+//import "../AdminItems/edition/detailCardUpd.css"
 import ImageUploader from "../../../utils/ImageUploader";
 import ImageSelector from "../../../utils/ImageSelector";
 

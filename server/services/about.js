@@ -45,10 +45,15 @@ export default {
         const useImgs = help.optionImage(newData.useImg)
         const enabledParsed = help.optionImage(newData.enable)
         const imgShowParsed = help.optionImage(newData.imgShow)
+
         let imageStore = "";
         try {
             const article = await About.findByPk(id)
             if(!article){eh.throwError('Articulo no hallado',404)}
+
+            const isImageChanged = originalImage !== newData.img;
+            isImageChanged? imageStore = originalImage: ""
+
             if(article.image !== newData.image){imageStore = article.image}
             if(useImgs){await cloud.deleteImage(newData.image)}
             const newarticle = {
@@ -59,8 +64,10 @@ export default {
                 imgShow: imgShowParsed,
             }
             const updarticle = article.update(newarticle)
-            const pictureOld = await cloud.oldImagesHandler(imageStore, options)
-            if(pictureOld.success===false){eh.throwError('Error al procesar imagen antigua', 500)}
+
+            if (isImageChanged) {
+               await cloud.oldImagesHandler(imageUrl, options);
+             }
             return updarticle;
         } catch (error) {
         throw error;
@@ -70,16 +77,13 @@ export default {
         try {
             const article = await About.findByPk(id)
             if(!article){eh.throwError('Articulo no hallado',404)}
+            const imageUrl = article.image;
+
             await article.destroy();
-            const resultadoCloudinary = await cloud.deleteFromCloudinary(article.image);
-             if (!resultadoCloudinary) {
-            // Registrar el error pero no fallar la operación
-            console.error('Advertencia: No se pudo borrar la imagen de Cloudinary:', article.image);
-             }
-             return {
-                message: 'Item borrado exitosamente',
-                imagenBorrada: !!resultadoCloudinary
-            };
+
+            await cloud.oldImagesHandler(imageUrl, false)
+           
+             return 'Item borrado exitosamente';
         } catch (error) {
         throw error;
         }

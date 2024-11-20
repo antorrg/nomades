@@ -2,6 +2,7 @@ import {useNavigate} from 'react-router-dom'
 import { Accordion, Button } from 'react-bootstrap';
 import * as Ad from './AdminIndex'
 
+
 const HelpView = () => {
   const navigate = useNavigate()
   return (
@@ -37,10 +38,8 @@ const HelpView = () => {
       </Accordion>
 
       <br />
-
-      <Button className="nav-link active text-start w-10 pt-20" onClick={() => navigate(-1)}>
-        <h5>Volver</h5>
-      </Button>
+      <button className='btn btn-sm btn-secondary' onClick={() => navigate(-1)}>Volver</button>
+      <Ad.InfoFormField />
     </div>
   </>
 

@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Edition from "../../../Auth/generalComponents/Edition/Edition";
 import * as us from "../../../Auth/authHelpers/Auth";
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
-import "./user.css";
+//import "./user.css";
 
 const User = ({ user, isSingleUser }) => {
   const navigate = useNavigate();

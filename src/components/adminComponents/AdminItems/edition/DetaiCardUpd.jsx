@@ -5,7 +5,7 @@ import { getItem } from "../../../../redux/actions";
 import { updateItem } from "../../../../utils/productEndPoints";
 import { Form } from "react-bootstrap";
 import showConfirmationDialog from "../../../../Auth/generalComponents/sweetAlert";
-import "./detailCardUpd.css";
+//import "./detailCardUpd.css";
 import ImageUploader from "../../../../utils/ImageUploader";
 import ImageSelector from "../../../../utils/ImageSelector";
 

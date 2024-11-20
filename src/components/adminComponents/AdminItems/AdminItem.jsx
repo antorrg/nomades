@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import {useDispatch, useSelector } from 'react-redux'
 import {getItem} from '../../../redux/actions'
 import Edition from "../../../Auth/generalComponents/Edition/Edition";
-import "../../../views/styles/item.css"
+//import "../../../views/styles/item.css"
 
 
 const AdminItem = () => {

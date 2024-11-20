@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAbout } from "../redux/actions";
 import { Link } from "react-router-dom";
 import {DinamicAbout} from "../components/IndexComponents"
-import "./styles/about.css";
+//import "./styles/about.css";
 
 const About = () => {
   const dispatch = useDispatch()

@@ -5,7 +5,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 const Facebook = () => {
     const [socialPosts, setSocialPosts] = React.useState([
         { id: 'post1', type: 'facebook', url: 'https://fb.watch/vQGCkbbS_y/' },
-        { id: 'post2', type: 'facebook', url: 'https://fb.watch/vQGCkbbS_y/' },
+        // { id: 'post2', type: 'facebook', url: 'https://fb.watch/vQGCkbbS_y/' },
         { id: 'post2', type: 'instagram', url: 'https://www.instagram.com/reel/DCUGr7JMud4/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==' },
       ]);
     
@@ -21,6 +21,7 @@ const Facebook = () => {
       };
     
       return (
+        <div class="ratio ratio-16x9">
         <DragDropContext onDragEnd={handleDragEnd}>
           <Droppable droppableId="social-posts">
             {(provided) => (
@@ -36,8 +37,7 @@ const Facebook = () => {
                         {post.type === 'facebook' && (
                           <iframe
                             src={`https://www.facebook.com/plugins/post.php?href=${encodeURIComponent(post.url)}&show_text=true&width=500&height=300&appId`}
-                            width="500"
-                            height="300"
+                           
                             style={{ border: 'none', overflow: 'hidden' }}
                             scrolling="no"
                             frameBorder="0"
@@ -54,6 +54,7 @@ const Facebook = () => {
             )}
           </Droppable>
         </DragDropContext>
+        </div>
       );
 }
 

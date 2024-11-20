@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {useDispatch, useSelector } from 'react-redux'
 import {getInfo} from '../../../redux/actions'
 import Edition from "../../../Auth/generalComponents/Edition/Edition";
-import "../../../views/styles/item.css"
+//import "../../../views/styles/item.css"
 
 
 
@@ -20,7 +20,7 @@ const LandingView = () => {
   return (
     <section className="container">
     <div className=" py-5 bg-light row py-lg-5">
-      <div className="col-lg-6 col-md-8 mx-auto text-center">
+      <div className="col-lg-6 col-md-8 col-sm-12 mx-auto text-center">
         <h2 className="fw-light">Gestion de portada:</h2>
         <div className=''>
           {(!info.id)?
@@ -35,7 +35,7 @@ const LandingView = () => {
               className="bd-placeholder-img-fluid mb-3"
               src={info?.image}
               alt="Imagen"
-              style={{ maxWidth: "22rem" }}
+              style={{ maxWidth: "100%", height:'auto' }}
             />
             <h4>Info posicionamiento:</h4>
             <p className="lead text-muted">{info?.info_header}</p>

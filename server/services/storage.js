@@ -20,7 +20,7 @@ const resaveImageFromStorage = async(imageUrl)=>{
     const docRef = await Image.create({
       imageUrl: imageUrl
     });
-    if (!docRef.id) {
+    if (!docRef) {
       eh.throwError("Error inesperado en el servidor", 500);
     }
     
@@ -51,14 +51,12 @@ const getImages = async()=>{
 }
 
 
-  const processImageUpdate = async (currentImage, newImage, options) => {
+  const processImageUpdate = async (currentImage, options) => {
     try {
-        if (currentImage !== newImage) {
             const oldImageResult = await oldImagesHandler(currentImage, options);
-            if (!oldImageResult.success) {
+            if (!oldImageResult) {
                 eh.throwError('Error al procesar imagen antigua', 500);
             }
-        }
     } catch (error) {
         console.error(error.message)
         throw error;

@@ -18,6 +18,7 @@ import ImagesComponent from "../../components/adminComponents/MediaStorage/Image
 import TabsPage from "../../components/adminComponents/TabsConfiguration/TabsPage";
 import OurWorkEdit from "../../components/adminComponents/AdminWork/OurWorkEdit";
 import CreateLanding from "../../components/adminComponents/LandingComponents/LandingEdition/CreateLanding";
+import InfoFormField from "./InfoFormField";
 
 export {
   HelpView,
@@ -40,5 +41,6 @@ export {
   TabsPage,
   OurWorkEdit,
   CreateLanding,
+  InfoFormField,
   
 };

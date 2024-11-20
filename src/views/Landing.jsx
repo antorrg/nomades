@@ -50,11 +50,7 @@ const Landing = () => {
     <hr></hr>
     </section>
     <section>
-    <Cp.Facebook/>
-    <hr></hr>
-    </section>
-    <section>
-      <Cp.Instagram/>
+      <Cp.VideoThree/>
       <hr></hr>
     </section>
     <section>

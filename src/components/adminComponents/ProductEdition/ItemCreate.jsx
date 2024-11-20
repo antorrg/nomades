@@ -4,7 +4,7 @@ import GenericButton from "../../../Auth/generalComponents/GenericButton/Generic
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 import ImageUploader from "../../../utils/ImageUploader";
 import { createItem } from "../../../utils/productEndPoints";
-import "./productstyle.css";
+//import "./productstyle.css";
 
 const ItemCreate = () => {
   const { id } = useParams();

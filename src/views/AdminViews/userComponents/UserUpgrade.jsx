@@ -99,7 +99,7 @@ const UserUpgrade = () => {
 
                 <div className="d-flex flex-row me-3">
                   <button
-                    className="btn btn-primary mb-3 me-2"
+                    className="btn btn-md btn-primary mb-3 me-2"
                     type="button"
                     id="submitButton"
                     onClick={handleSubmit}
@@ -107,7 +107,7 @@ const UserUpgrade = () => {
                     Actualizar
                   </button>
                   <button
-                    className="btn btn-primary mb-3"
+                    className="btn btn-md btn-secondary mb-3"
                     onClick={() => {
                       onClose();
                     }}

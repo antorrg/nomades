@@ -62,16 +62,17 @@ export default {
     },
     updLanding : async(id, newData)=>{
         const options = help.optionImage(newData.saver)
-        let imageStore = "";
+        let imageUrl = "";
         try {
             const page = await Landing.findByPk(id)
             if(!page){eh.throwError('No hallado', 404)}
-            if(page.image !== newData.image){
-                imageStore = page.image;
-            }
+
+           const isImageChanged = page.image !== newData.image;
+             isImageChanged? imageUrl= page.image: "";
+
             const newPage = await page.update(newData)
-            const pictureOld = await oldImagesHandler(imageStore, options)
-             if(pictureOld.success===false){eh.throwError('Error al procesar imagen antigua', 500)}
+
+           if(isImageChanged){ await oldImagesHandler(imageUrl,options )}
             return newPage;
         } catch (error) {
             throw error;
@@ -81,7 +82,12 @@ export default {
         try {
             const page = await Landing.findByPk(id)
             if(!page){eh.throwError('No hallado', 404)}
+
+            const imageUrl = page.image;
             await page.destroy(page)
+            
+            await oldImagesHandler(imageUrl, false);
+
             return 'Portada borrada exitosamente';
         } catch (error) {
             throw error;

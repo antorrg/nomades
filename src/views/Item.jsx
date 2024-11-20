@@ -2,7 +2,7 @@ import {useEffect} from 'react'
 import {useParams, Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {getItem, cleanState} from '../redux/actions'
-import './styles/item.css'
+//import './styles/item.css'
 
 
 const Item = () => { 

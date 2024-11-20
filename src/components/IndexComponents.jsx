@@ -6,6 +6,7 @@ import Marketing from "./Marketing";
 import VideoOne from "./VideoOne";
 import DinamicAbout from "./DinamicAbout";
 import VideoTwo from "./VideoTwo";
+import VideoThree from './VideoThree'
 import Facebook from "./Facebook";
 import Instagram from "./Instagram";
 
@@ -20,4 +21,5 @@ export {
     VideoTwo,
     Facebook,
     Instagram,
+    VideoThree
 };
