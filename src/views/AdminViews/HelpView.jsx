@@ -39,7 +39,7 @@ const HelpView = () => {
 
       <br />
       <button className='btn btn-sm btn-secondary' onClick={() => navigate(-1)}>Volver</button>
-      <Ad.InfoFormField />
+      <Ad.InfoFormField  action={'hover'}/>
     </div>
   </>
 

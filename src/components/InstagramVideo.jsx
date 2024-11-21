@@ -4,13 +4,11 @@ import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as Arr from '../utils/SlickCarousel'
-import {useDispatch, useSelector} from 'react-redux'
-import { getMedia  } from '../redux/actions';
 
-const InstagramVideo = () => {
-  const dispatch = useDispatch()
-  const info = useSelector((state)=>state.Media)
-  const videoList = info.filter(video => video.type === 'instagram');
+
+const InstagramVideo = ({media}) => {
+  
+  const videoList = media.filter(video => video.type === 'instagram');
   let videos = videoList[0] || {
     id: '02',
     type: 'instagram',
@@ -21,38 +19,14 @@ const InstagramVideo = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [mainVideo, setMainVideo] = useState(videos);
 
-  useEffect(()=>{
-    dispatch(getMedia())
-  },[])
+  
   useEffect(() => {
     if (isLoading && videoList.length > 0) {
       setMainVideo(videoList[0]);
       setIsLoading(false); // Marcar que ya no estamos cargando
     }
   }, [videoList, isLoading])
-  // const videoList = [
-  //   {
-  //     id: 'post1',
-  //     type: 'instagram',
-  //     title: 'Instagram',
-  //     text: 'Haga click en el boton verde para seleccionar el video principal',
-  //     url: 'https://www.instagram.com/reel/DCUGr7JMud4/',
-  //   },
-  //   {
-  //     id: 'post2',
-  //     type: 'instagram',
-  //     title: 'Instagram',
-  //     text: 'Este seria el texto del segundo video, solo conserve en este caso el titulo',
-  //     url: 'https://www.instagram.com/reel/DCmIOYeIUai/',
-  //   },
-  //   {
-  //     id: 'post3',
-  //     type: 'instagram',
-  //     title: 'Pepe',
-  //     text: 'No deberia haber cambiado el titulo, pero es solo para probar la funcionalidad.',
-  //     url: 'https://www.instagram.com/reel/DCb1HKOIhgS/',
-  //   },
-  // ];
+
 
   const handleVideoSelect = (video) => {
     setMainVideo(video);
@@ -124,3 +98,26 @@ const InstagramVideo = () => {
 };
 
 export default InstagramVideo;
+  // const videoList = [
+  //   {
+  //     id: 'post1',
+  //     type: 'instagram',
+  //     title: 'Instagram',
+  //     text: 'Haga click en el boton verde para seleccionar el video principal',
+  //     url: 'https://www.instagram.com/reel/DCUGr7JMud4/',
+  //   },
+  //   {
+  //     id: 'post2',
+  //     type: 'instagram',
+  //     title: 'Instagram',
+  //     text: 'Este seria el texto del segundo video, solo conserve en este caso el titulo',
+  //     url: 'https://www.instagram.com/reel/DCmIOYeIUai/',
+  //   },
+  //   {
+  //     id: 'post3',
+  //     type: 'instagram',
+  //     title: 'Pepe',
+  //     text: 'No deberia haber cambiado el titulo, pero es solo para probar la funcionalidad.',
+  //     url: 'https://www.instagram.com/reel/DCb1HKOIhgS/',
+  //   },
+  // ];

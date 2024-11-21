@@ -2,7 +2,7 @@ import {useEffect} from 'react'
 import { Helmet } from 'react-helmet-async';
 import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {getInfo, getProduct} from '../redux/actions'
+import {getInfo, getProduct, getMedia} from '../redux/actions'
 import * as Cp from '../components/IndexComponents'
 
 
@@ -11,11 +11,13 @@ const Landing = () => {
   const dispatch = useDispatch()
   const info = useSelector((state)=>state.Landing)
   const products = useSelector((state)=>state.Products)
+  const media = useSelector((state)=>state.Media)
   useEffect(()=>{
     dispatch(getInfo())
     dispatch(getProduct())
+    dispatch(getMedia())
   },[])
-  //console.log('soy info',info)
+  
 
   return (
     <>
@@ -48,15 +50,15 @@ const Landing = () => {
     <hr></hr>
     </section>
     <section>
-      <Cp.FacebookVideo/>
+      <Cp.FacebookVideo media={media}/>
       <hr></hr>
     </section>
     <section>
-      <Cp.InstagramVideo/>
+      <Cp.InstagramVideo media={media}/>
       <hr></hr>
     </section>
     <section>
-      <Cp.YouTubeVideo/>
+      <Cp.YouTubeVideo media={media}/>
     </section>
     <Cp.Footer/>
     

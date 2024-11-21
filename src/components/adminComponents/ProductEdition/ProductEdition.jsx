@@ -5,9 +5,11 @@ import { getProductById } from "../../../redux/actions";
 import { updateProduct } from "../../../utils/productEndPoints";
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 import { Form } from "react-bootstrap";
+import * as Ad from "../../../views/AdminViews/AdminIndex"
 //import "./productstyle.css";
 import ImageUploader from "../../../utils/ImageUploader";
 import ImageSelector from "../../../utils/ImageSelector";
+import * as Inf from '../../../infoHelpers'
 
 const ProductEdition = () => {
   const dispatch = useDispatch();
@@ -144,6 +146,7 @@ const ProductEdition = () => {
                   <label htmlFor="info_header" className="form-label">
                     Info posicionamiento:
                   </label>
+                  <Ad.InfoFormField action={'hover'} info={Inf.aboutSeo}/>
                   <textarea
                     className="form-control"
                     type="text"

@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { OverlayTrigger, Popover, Button } from 'react-bootstrap';
 
-const InfoFormField = ({title, info, place}) => {
-    const finalTitle = title? title : 'Información'
+const InfoFormField = ({title, info, place, color, action}) => {
+    const finalTitle = title? title : null
     const finalInfo = info? info : 'Para que esto funcione encerrar todo en un div con "className="form-group".'
     const finalPlace = place? place : 'right'
+    const finalColor = color? color : 'none'
+    const finalTrigger = action ? action : 'click'
   return (
 
         <>
         <OverlayTrigger
-          trigger="click"
+          trigger={finalTrigger}
           placement={finalPlace}
           rootClose
           overlay={
@@ -21,8 +23,8 @@ const InfoFormField = ({title, info, place}) => {
             </Popover>
           }
         >
-          <Button variant="secondary" className="ms-2">
-            ?
+          <Button variant={finalColor} className="ms-2">
+            <h5>?</h5>
           </Button>
         </OverlayTrigger>
         </>
