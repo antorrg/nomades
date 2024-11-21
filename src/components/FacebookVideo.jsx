@@ -18,15 +18,17 @@ const FacebookVideo = () => {
     text: 'Aguarde un momento...',
     url: '',
       }
+  const [isLoading, setIsLoading] = useState(true);
   const [mainVideo, setMainVideo] = useState(videos);
   useEffect(()=>{
     dispatch(getMedia())
   },[])
   useEffect(() => {
-    if (videoList.length > 0) {
-      setMainVideo(videoList[0]); // Cambia automáticamente al primer video cargado
+    if (isLoading && videoList.length > 0) {
+      setMainVideo(videoList[0]);
+      setIsLoading(false); // Marcar que ya no estamos cargando
     }
-  }, [videoList]);
+  }, [videoList, isLoading]);
   // const videoList = [
   //   {
   //     id: 'fb1',
