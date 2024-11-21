@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Ratio, Button } from 'react-bootstrap';
+import Slider from 'react-slick'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import * as Arr from '../utils/SlickCarousel'
 
-const VideoThree = () => {
+const InstagramVideo = () => {
   const [mainVideo, setMainVideo] = useState({
     id: 'post1',
     type: 'instagram',
+    title: 'Instagram',
+    text: 'Haga click en el boton verde para seleccionar el video principal.',
     url: 'https://www.instagram.com/reel/DCUGr7JMud4/',
   });
 
@@ -12,16 +18,22 @@ const VideoThree = () => {
     {
       id: 'post1',
       type: 'instagram',
+      title: 'Instagram',
+      text: 'Haga click en el boton verde para seleccionar el video principal',
       url: 'https://www.instagram.com/reel/DCUGr7JMud4/',
     },
     {
       id: 'post2',
       type: 'instagram',
+      title: 'Instagram',
+      text: 'Este seria el texto del segundo video, solo conserve en este caso el titulo',
       url: 'https://www.instagram.com/reel/DCmIOYeIUai/',
     },
     {
       id: 'post3',
       type: 'instagram',
+      title: 'Pepe',
+      text: 'No deberia haber cambiado el titulo, pero es solo para probar la funcionalidad.',
       url: 'https://www.instagram.com/reel/DCb1HKOIhgS/',
     },
   ];
@@ -39,13 +51,13 @@ const VideoThree = () => {
   return (
     <Container>
       {/* Video Principal */}
-      <Row className="featurette">
+      <Row className="featurette mt-5">
         <Col xs={12} md={5}>
           <h2 className="featurette-heading fw-normal lh-1">
-            Instagram
+            {mainVideo.title}
             </h2>
           <p className="lead">
-            Haga click en el boton verde para seleccionar el video principal.
+            {mainVideo.text}
             </p>
         </Col>
         <Col xs={12} md={7}>
@@ -61,9 +73,10 @@ const VideoThree = () => {
       </Row>
 
       {/* Lista de Miniaturas */}
-      <Row className="mt-4 d-flex overflow-auto">
+      <Row className="mt-4">
+        <Slider {...Arr.sliderSettings}>
         {videoList.map((video) => (
-          <Col
+          <div
             key={video.id}
             xs={5}
             md={3}
@@ -86,11 +99,12 @@ const VideoThree = () => {
             >
               Ver video
             </Button>
-          </Col>
+          </div>
         ))}
+        </Slider>
       </Row>
     </Container>
   );
 };
 
-export default VideoThree;
+export default InstagramVideo;

@@ -46,15 +46,17 @@ const Landing = () => {
     <Cp.MyCarousel info={products}/>
     <Cp.Marketing products = {products} param={'detalle'}/>
     <hr></hr>
-    <Cp.VideoOne/>
-    <hr></hr>
     </section>
     <section>
-      <Cp.VideoThree/>
+      <Cp.FacebookVideo/>
       <hr></hr>
     </section>
     <section>
-      <Cp.SocialVideo/>
+      <Cp.InstagramVideo/>
+      <hr></hr>
+    </section>
+    <section>
+      <Cp.YouTubeVideo/>
     </section>
     <Cp.Footer/>
     

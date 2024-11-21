@@ -11,4 +11,24 @@ export default {
     const response = await imgs.deleteImage(id, true);
     res.status(200).json(response);
   }),
+  createMediaController: eh.catchAsync(async (req, res)=>{
+
+  }),
+  getMediaController: eh.catchAsync(async (req, res)=>{
+
+  }),
+  getAdminMediaController: eh.catchAsync(async (req, res)=>{
+
+  }),
+  getByIdMediaController: eh.catchAsync(async (req, res)=>{
+    const {id}=req.params;
+
+  }),
+  updateMediaController: eh.catchAsync(async (req, res)=>{
+      const {id}= req.params;
+      const newData = req.body;
+  }),
+  deleteMediaController: eh.catchAsync(async (req, res)=>{
+    const {id} = req.params;
+  }),
 };

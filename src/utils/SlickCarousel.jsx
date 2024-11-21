@@ -1,3 +1,6 @@
+import Slider from 'react-slick'
+
+
 export const CustomPrevArrow = ({ onClick }) => (
     <button
       className="custom-arrow prev-arrow"
@@ -36,3 +39,26 @@ export const CustomPrevArrow = ({ onClick }) => (
     </button>
   );
   
+  export const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    prevArrow: <CustomPrevArrow />,
+    nextArrow: <CustomNextArrow />,
+    responsive: [
+      {
+        breakpoint: 768, // Tablets
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 576, // Phones
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
+  };
