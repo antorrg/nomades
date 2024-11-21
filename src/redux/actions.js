@@ -14,7 +14,8 @@ export const IMAGES = "IMAGES";
 export const WORKS = "WORKS";
 export const WORK_BY_ID = "WORK_BY_ID";
 export const ABOUT = "ABOUT";
-
+export const MEDIA = 'MEDIA';
+export const MEDIA_AD = 'MEDIA_AD';
    
 
 //*%%%%%%% Rutas libres %%%%%%%%
@@ -59,6 +60,21 @@ export const getProduct = (isAdmin) => {
     }
   };
 };
+
+export const getMedia = ()=>{
+  return async (dispatch)=>{
+    try {
+      const data = await axios(`/api/v1/media/videos`);
+      return dispatch({
+        type: MEDIA,
+        payload: data.data,
+      });
+    } catch (error) {
+      HandlError(error) 
+      console.error(error);
+    }
+  }
+}
 
 export const getProductById = (id, isAdmin) => {
   return async (dispatch) => {
@@ -178,3 +194,17 @@ export const getStoredImgs = () => {
   };
 };
 
+export const getAdminMedia = ()=>{
+  return async (dispatch)=>{
+    try {
+      const data = await axios(`/api/v1/media/admin/videos`, setAuthHeader());
+      return dispatch({
+        type: MEDIA_AD,
+        payload: data.data,
+      });
+    } catch (error) {
+      HandlError(error) 
+      console.error(error);
+    }
+  }
+}

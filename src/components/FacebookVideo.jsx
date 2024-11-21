@@ -1,42 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Ratio, Button } from 'react-bootstrap';
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as Arr from '../utils/SlickCarousel'
+import {useDispatch, useSelector} from 'react-redux'
+import { getMedia  } from '../redux/actions';
 
 const FacebookVideo = () => {
-  const [mainVideo, setMainVideo] = useState({
-    id: 'fb1',
+  const dispatch = useDispatch()
+  const info = useSelector((state)=>state.Media)
+  const videoList = info.filter(video => video.type === 'facebook');
+  let videos = videoList[0] || {
+    id: '01',
     type: 'facebook',
     title: 'Facebook',
-    text: 'Haga click en el boton verde para seleccionar el video principal.',
-    url: 'https://fb.watch/vQGCkbbS_y/',
-  });
-
-  const videoList = [
-    {
-      id: 'fb1',
-      type: 'facebook',
-      title: 'Facebook',
-      text: 'Haga click en el boton verde para seleccionar el video principal.',
-      url: 'https://fb.watch/vQGCkbbS_y/',
-    },
-    {
-      id: 'fb2',
-      type: 'facebook',
-      title: 'Facebook',
-      text: 'Haga click en el boton verde para seleccionar el video principal.',
-      url: 'https://www.facebook.com/reel/1274719967241755',
-    },
-    {
-      id: 'fb3',
-      type: 'facebook',
-      title: 'Facebook',
-      text: 'Haga click en el boton verde para seleccionar el video principal.',
-      url: 'https://fb.watch/v_aDfl8zZa/',
-    },
-  ];
+    text: 'Aguarde un momento...',
+    url: '',
+      }
+  const [mainVideo, setMainVideo] = useState(videos);
+  useEffect(()=>{
+    dispatch(getMedia())
+  },[])
+  useEffect(() => {
+    if (videoList.length > 0) {
+      setMainVideo(videoList[0]); // Cambia automáticamente al primer video cargado
+    }
+  }, [videoList]);
+  // const videoList = [
+  //   {
+  //     id: 'fb1',
+  //     type: 'facebook',
+  //     title: 'Facebook',
+  //     text: 'Haga click en el boton verde para seleccionar el video principal.',
+  //     url: 'https://fb.watch/vQGCkbbS_y/',
+  //   },
+  //   {
+  //     id: 'fb2',
+  //     type: 'facebook',
+  //     title: 'Facebook',
+  //     text: 'Haga click en el boton verde para seleccionar el video principal.',
+  //     url: 'https://www.facebook.com/reel/1274719967241755',
+  //   },
+  //   {
+  //     id: 'fb3',
+  //     type: 'facebook',
+  //     title: 'Facebook',
+  //     text: 'Haga click en el boton verde para seleccionar el video principal.',
+  //     url: 'https://fb.watch/v_aDfl8zZa/',
+  //   },
+  // ];
 
   const handleVideoSelect = (video) => {
     setMainVideo(video);

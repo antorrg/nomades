@@ -1,5 +1,6 @@
 import eh from "../utils/errorHandlers.js";
 import * as imgs from "../services/storage.js";
+import serv from "../services/mediaServices.js"
 
 export default {
   getImagesController: eh.catchAsync(async (req, res) => {
@@ -12,16 +13,23 @@ export default {
     res.status(200).json(response);
   }),
   createMediaController: eh.catchAsync(async (req, res)=>{
-
+    const newData = req.body;
+    const response = await serv.createMedia(newData)
+    res.status(201).json(response)
   }),
   getMediaController: eh.catchAsync(async (req, res)=>{
-
+    const isAdmin = false;
+    const response = await serv.getMedia(isAdmin)
+    res.status(200).json(response)
   }),
   getAdminMediaController: eh.catchAsync(async (req, res)=>{
-
+    const isAdmin = true;
+    const response = await serv.getMedia(isAdmin)
+    res.status(200).json(response)
   }),
   getByIdMediaController: eh.catchAsync(async (req, res)=>{
     const {id}=req.params;
+    
 
   }),
   updateMediaController: eh.catchAsync(async (req, res)=>{

@@ -1,38 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Ratio, Button } from 'react-bootstrap';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as Arr from '../utils/SlickCarousel';
+import {useDispatch, useSelector} from 'react-redux'
+import { getMedia  } from '../redux/actions';
 
 const YouTubeVideo = () => {
-  const [mainVideo, setMainVideo] = useState({
-    id: '6',
-    title: 'Video principal',
-    description: 'Este es el video principal seleccionado.',
-    url: 'https://youtu.be/oRH5lH7F7TY',
-  });
+  const dispatch = useDispatch()
+  const info = useSelector((state)=>state.Media)
+  const videoList = info.filter(video => video.type === 'youTube');
+  let videos = videoList[0] || {
+        id: '0',
+        title: 'Videos de you tube',
+        description: 'Aguarde un momento...',
+        url: '',
+      }
+  const [mainVideo, setMainVideo] = useState(videos);
 
-  const videoList = [
-    {
-      id: '6',
-      title: 'Video 1',
-      description: 'Descripción del video 1.',
-      url: 'https://youtu.be/oRH5lH7F7TY',
-    },
-    {
-      id: '7',
-      title: 'Video 2',
-      description: 'Descripción del video 2.',
-      url: 'https://youtu.be/AHzxeA2aEk0',
-    },
-    {
-      id: '8',
-      title: 'Video 3',
-      description: 'Descripción del video 3.',
-      url: 'https://youtu.be/0apXgMZ52nM?si=2rnv_tCySeZ8RoPD',
-    },
-  ];
+useEffect(()=>{
+  dispatch(getMedia())
+},[])
+useEffect(() => {
+  if (videoList.length > 0) {
+    setMainVideo(videoList[0]); // Cambia automáticamente al primer video cargado
+  }
+}, [videoList]);
+  // const videoList = [
+  //   {
+  //     id: '6',
+  //     title: 'Video 1',
+  //     description: 'Descripción del video 1.',
+  //     url: 'https://youtu.be/oRH5lH7F7TY',
+  //   },
+  //   {
+  //     id: '7',
+  //     title: 'Video 2',
+  //     description: 'Descripción del video 2.',
+  //     url: 'https://youtu.be/AHzxeA2aEk0',
+  //   },
+  //   {
+  //     id: '8',
+  //     title: 'Video 3',
+  //     description: 'Descripción del video 3.',
+  //     url: 'https://youtu.be/0apXgMZ52nM?si=2rnv_tCySeZ8RoPD',
+  //   },
+  // ];
 
   const handleVideoSelect = (video) => {
     setMainVideo(video);
