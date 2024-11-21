@@ -4,6 +4,21 @@ import {setAuthHeader} from "../Auth/generalComponents/axiosUtils";
 
 //Endpoinst landing page:
 
+export const sendEmail = async (body, onClose) => { //Envio de emails del visitante
+  try {
+    const response = await axios.post(
+      `/api/v1/land/emails`,
+      body,
+    );
+    if (response.status === 200) {
+      toast.showSuccess("Email enviado correctamente");
+      await onClose(); // Cierra el modal después de guardar los cambios
+    }
+  } catch (error) {
+    toast.HandlError(error);
+  }
+};
+
 export const updateLanding = async (id, product, onClose) => {
     console.log(id);
     try {

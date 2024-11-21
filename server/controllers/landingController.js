@@ -1,4 +1,5 @@
 import sv from "../services/landingService.js";
+import sm from "../services/mailerService.js"
 import eh from "../utils/errorHandlers.js";
 
 export default {
@@ -33,4 +34,9 @@ export default {
     const response = await sv.getLandById(id);
     res.status(200).json(response);
   }),
+  emailLandingController : eh.catchAsync(async(req, res)=>{//Controlador de envio de emails
+    const {email, issue, message}=req.body;
+    const response = await sm.senderMail(email, issue, message)
+    res.status(200).json(response)
+  })
 };

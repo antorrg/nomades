@@ -11,11 +11,8 @@ const mainRouter = express.Router();
 //mainRouter.use(mid.sanitizeBody);
 //mainRouter.use(mid.sanitizeQuery);
 
-mainRouter.post(
-  "/api/v1/imgupload",
-  upload.single("image"),
-  controllerUploader
-); //Ruta de subida de imagenes
+mainRouter.post("/api/v1/imgupload",upload.single("image"),controllerUploader); //Ruta de subida de imagenes
+
 
 mainRouter.use("/api/v1", productRouter);
 

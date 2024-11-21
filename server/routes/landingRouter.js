@@ -7,6 +7,8 @@ const landingRouter = express.Router()
 
 landingRouter.post('/land', ctr.createLandingController)
 
+landingRouter.post("/land/emails", ctr.emailLandingController); //Ruta de subida de imagenes
+
 landingRouter.put('/land/:id', ctr.updLandingController)
 
 landingRouter.delete('/land/:id', ctr.deleteLandingController)
