@@ -54,7 +54,7 @@ const Landing = () => {
       <hr></hr>
     </section>
     <section>
-      <Cp.VideoTwo/>
+      <Cp.SocialVideo/>
     </section>
     <Cp.Footer/>
     

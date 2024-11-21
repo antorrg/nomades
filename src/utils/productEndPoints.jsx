@@ -101,6 +101,7 @@ export const deleteItem = async (id) => {
     toast.HandlError(error);
   }
 };
+//Endpoints media
 export const deleteImage = async (id) => {
   console.log(id);
   try {

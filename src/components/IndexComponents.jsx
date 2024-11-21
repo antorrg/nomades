@@ -5,7 +5,7 @@ import MyCarousel from "./carousel/Carousel";
 import Marketing from "./Marketing";
 import VideoOne from "./VideoOne";
 import DinamicAbout from "./DinamicAbout";
-import VideoTwo from "./VideoTwo";
+import SocialVideo from "./SocialVideo";
 import VideoThree from './VideoThree'
 import Facebook from "./Facebook";
 import Instagram from "./Instagram";
@@ -18,7 +18,7 @@ export {
     Marketing, 
     VideoOne, 
     DinamicAbout,
-    VideoTwo,
+    SocialVideo,
     Facebook,
     Instagram,
     VideoThree
