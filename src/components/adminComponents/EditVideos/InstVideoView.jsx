@@ -1,12 +1,13 @@
 import React, { useState, useEffect  } from 'react';
 import { Container, Row, Col, Ratio, Button } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as Arr from '../../../utils/SlickCarousel'
 
 const InstVideoView = ({media}) => {
+  const navigate = useNavigate();
   const videoList = media.filter(video => video.type === 'instagram');
   let videos = videoList[0] || {
     id: '02',
@@ -45,7 +46,7 @@ const InstVideoView = ({media}) => {
             className="mt-2 me-3 w-20"
             variant="outline-primary"
             size="sm"
-            onClick={() => console.log(editar)}
+            onClick={() => navigate('/admin/media/create?type=facebook')}
           >
             Crear
           </Button>
@@ -99,7 +100,7 @@ const InstVideoView = ({media}) => {
                 className="mt-2 me-3 w-20"
                 variant="outline-primary"
                 size="sm"
-                onClick={() => console.log(editar)}
+                onClick={() => navigate(`/admin/media/update/${video.id}?type=instagram`)}
               >
                 Editar
               </Button>
@@ -107,7 +108,7 @@ const InstVideoView = ({media}) => {
                 className="mt-2 me-3 w-20"
                 variant="outline-danger"
                 size="sm"
-                onClick={() => console.log("borrado")}
+                onClick={() => console.log('borrar')}
               >
                 Eliminar
               </Button>

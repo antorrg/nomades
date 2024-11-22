@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Ratio, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as Arr from "../../../utils/SlickCarousel";
 
 const YouTubeVideoView = ({ media }) => {
+  const navigate = useNavigate()
+
   const videoList = media.filter((video) => video.type === "youTube");
   let videos = videoList[0] || {
     id: "0",
@@ -44,7 +46,7 @@ const YouTubeVideoView = ({ media }) => {
             className="mt-2 me-3 w-20"
             variant="outline-primary"
             size="sm"
-            onClick={() => console.log(editar)}
+            onClick={() => navigate('/admin/media/create?type=youtube')}
           >
             Crear
           </Button>
@@ -88,7 +90,7 @@ const YouTubeVideoView = ({ media }) => {
                 className="mt-2 me-3 w-20"
                 variant="outline-primary"
                 size="sm"
-                onClick={() => console.log(editar)}
+                onClick={() => navigate(`/admin/media/update/${video.id}?type=youtube`)}
               >
                 Editar
               </Button>

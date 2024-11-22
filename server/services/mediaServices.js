@@ -4,6 +4,7 @@ import help from "./helpers.js";
 
 export default {
     createMedia : async(newData)=>{
+        const parsedEnable = help.optionImage(newData.enable)
         try {
             const media = await Media.findOne({
                 where:{title: newData.title}
@@ -14,7 +15,7 @@ export default {
                 type: newData.type,
                 text : newData.text,
                 url : newData.url,
-                enable: true,
+                enable: Boolean(parsedEnable),
             });
             return newMedia;
         } catch (error) {

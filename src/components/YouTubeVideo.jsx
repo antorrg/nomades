@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Ratio, Button } from 'react-bootstrap';
+import {useAuth} from '../Auth/AuthContext/AuthContext'
+import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,6 +9,8 @@ import * as Arr from '../utils/SlickCarousel';
 
 
 const YouTubeVideo = ({media}) => {
+  const {authenticated}= useAuth()
+  const navigate = useNavigate()
   
   const videoList = media.filter(video => video.type === 'youTube');
   let videos = videoList[0] || {
@@ -43,6 +47,15 @@ useEffect(() => {
       {/* Video principal */}
       <Row className="featurette mt-5">
         <Col xs={12} md={5}>
+        {authenticated?
+        <Button
+            className="mt-2 me-3 w-20"
+            variant="outline-primary"
+            size="sm"
+            onClick={() => navigate('/admin/media/create?type=youtube')}
+          >
+            Crear
+          </Button>:null}
           <h2 className="featurette-heading fw-normal lh-1">{mainVideo.title}</h2>
           <p className="lead">{mainVideo.description}</p>
         </Col>

@@ -61,6 +61,8 @@ function App() {
         <Route path= '/admin/work/update/:id' element={<Ad.OurWorkEdit/>}/>
         <Route path= '/admin/land/create' element={<Ad.CreateLanding/>}/>
         <Route path= '/admin/land/update/:id' element={<Ad.LandEdition/>}/>
+        <Route path= '/admin/media/create' element={<Ad.MediaCreate/>}/>
+        <Route path= '/admin/media/update/:id' element={<Ad.MediaUpdate/>}/>
         <Route path='/admin/help' element={ <Ad.HelpView/>}/> 
       </Route>
       <Route path='/login' element={<View.Login/>}/>

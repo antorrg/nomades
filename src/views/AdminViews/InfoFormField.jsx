@@ -6,7 +6,7 @@ const InfoFormField = ({title, info, place, color, action}) => {
     const finalInfo = info? info : 'Para que esto funcione encerrar todo en un div con "className="form-group".'
     const finalPlace = place? place : 'right'
     const finalColor = color? color : 'none'
-    const finalTrigger = action ? action : 'click'
+    const finalTrigger = action ? [action, 'focus'] : ['click', 'focus']
   return (
 
         <>

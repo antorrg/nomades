@@ -19,6 +19,8 @@ import TabsPage from "../../components/adminComponents/TabsConfiguration/TabsPag
 import OurWorkEdit from "../../components/adminComponents/AdminWork/OurWorkEdit";
 import CreateLanding from "../../components/adminComponents/LandingComponents/LandingEdition/CreateLanding";
 import InfoFormField from "./InfoFormField";
+import MediaCreate from "../../components/adminComponents/EditVideos/MediaCreate";
+import MediaUpdate from "../../components/adminComponents/EditVideos/MediaUpdate";
 
 
 export {
@@ -43,5 +45,7 @@ export {
   OurWorkEdit,
   CreateLanding,
   InfoFormField,
+  MediaCreate,
+  MediaUpdate,
   
 };
