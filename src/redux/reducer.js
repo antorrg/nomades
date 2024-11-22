@@ -13,6 +13,7 @@ import {
     ABOUT, 
     MEDIA,
     MEDIA_AD,
+    MEDIA_BY_ID
 
 } from './actions'
 
@@ -30,6 +31,7 @@ const initialState = {
     About: [],
     Media: [],
     MediaAd:[],
+    MediaById:[],
 
 }
 
@@ -78,7 +80,8 @@ const reducer = (state = initialState, {type, payload})=>{
                 UserById: [],
                 WorkById : [],
                 LandingById : [],
-                MediaAd: []
+                MediaAd: [],
+                MediaById:[]
             }
         case IMAGES:
             return {
@@ -110,6 +113,11 @@ const reducer = (state = initialState, {type, payload})=>{
                 ...state,
                 MediaAd: payload,
             }
+            case MEDIA_BY_ID:
+                return {
+                    ...state,
+                    MediaById: payload,
+                }
         default:
             return {
                 ...state,

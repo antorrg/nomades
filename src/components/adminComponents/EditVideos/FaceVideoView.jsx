@@ -93,7 +93,7 @@ const FaceVideoView = ({media}) => {
                 className="mt-2 me-3 w-20"
                 variant="outline-primary"
                 size="sm"
-                onClick={() => navigate(`/admin/media/update/${video.id}?facebook`)}
+                onClick={() => navigate(`/admin/media/update/${video.id}?type=facebook`)}
               >
                 Editar
               </Button>

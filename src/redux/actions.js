@@ -16,6 +16,7 @@ export const WORK_BY_ID = "WORK_BY_ID";
 export const ABOUT = "ABOUT";
 export const MEDIA = 'MEDIA';
 export const MEDIA_AD = 'MEDIA_AD';
+export const MEDIA_BY_ID = 'MEDIA_BY_ID'
    
 
 //*%%%%%%% Rutas libres %%%%%%%%
@@ -207,4 +208,18 @@ export const getAdminMedia = ()=>{
       console.error(error);
     }
   }
-}
+};
+export const getMediaById = (id) => {
+  return async (dispatch) => {
+    try {
+      const data = await axios(`/api/v1/media/videos/${id}`, setAuthHeader());
+      return dispatch({
+        type: MEDIA_BY_ID,
+        payload: data.data,
+      });
+    } catch (error) {
+      HandlError(error) 
+      console.error(error);
+    }
+  };
+};

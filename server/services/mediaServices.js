@@ -2,6 +2,8 @@ import { Media } from "../db.js";
 import eh from '../utils/errorHandlers.js'
 import help from "./helpers.js";
 
+
+
 export default {
     createMedia : async(newData)=>{
         const parsedEnable = help.optionImage(newData.enable)
@@ -36,21 +38,45 @@ export default {
     },
     getMediaById : async(id)=>{
         try {
-            
+            const media = await Media.findByPk(id,{
+                raw:true,
+            })
+            if(!media){eh.throwError('Elemento no hallado', 404)}
+            return media;
         } catch (error) {
             throw error;
         }
     },
     updateMedia : async(id, newData)=>{
+        const parsedEnable = help.optionImage(newData.enable)
         try {
-            
+            const media = await Media.findByPk(id,)
+            if(!media){eh.throwError('Elemento no hallado', 404)}
+            const newMedia = {
+                title: newData.title,
+                type: newData.type,
+                text : newData.text,
+                url : newData.url,
+                enable: Boolean(parsedEnable),
+            }
+            await media.update(newMedia)
+            // Verificar si algún valor cambió
+            const updatedColumns = media.changed();
+            if (!updatedColumns || updatedColumns.length === 0) {
+                eh.throwError('No hubo cambios en el registro', 400);
+            }
+
+            return 'Item actualizado correctamente';
         } catch (error) {
             throw error;
         }
     },
     deleteMedia : async(id)=>{
         try {
-            
+            const media = await Media.findByPk(id,)
+            if(!media){eh.throwError('Elemento no hallado', 404)}
+            await media.destroy()
+            return 'Item borrado exitosamente'
         } catch (error) {
             throw error;
         }

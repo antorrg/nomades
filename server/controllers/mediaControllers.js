@@ -29,14 +29,18 @@ export default {
   }),
   getByIdMediaController: eh.catchAsync(async (req, res)=>{
     const {id}=req.params;
-    
-
+    const response = await serv.getMediaById(id)
+    res.status(200).json(response)
   }),
   updateMediaController: eh.catchAsync(async (req, res)=>{
       const {id}= req.params;
       const newData = req.body;
+      const response = await serv.updateMedia(id, newData)
+      res.status(200).json(response)
   }),
   deleteMediaController: eh.catchAsync(async (req, res)=>{
     const {id} = req.params;
+    const response = await serv.deleteMedia(id)
+      res.status(200).json(response)
   }),
 };

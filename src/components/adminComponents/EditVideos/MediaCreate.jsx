@@ -12,6 +12,7 @@ const MediaCreate = () => {
   
     const queryParams = new URLSearchParams(location.search);
     const videoType = queryParams.get("type"); //Obtener el type
+   
 
     const validator = {
         youtube: val.youtube,
@@ -28,7 +29,7 @@ const MediaCreate = () => {
       title: "",
       url: "",
       type: `${videoType}`,
-      description: "",
+      text: "",
       enable: true,
     });
     const [error, setError] = useState({
@@ -63,7 +64,7 @@ const MediaCreate = () => {
         console.log('soy el nuevo item: ',item);
       }
     };
-    const permit = (!item.url.trim() ||!item.title.trim() || !item.description.trim() || error.url)? true : false;
+    const permit = (!item.url.trim() ||!item.title.trim() || !item.text.trim() || error.url)? true : false;
   return (
     <div className="imageBack">
     <div className="coverBack">
@@ -101,15 +102,15 @@ const MediaCreate = () => {
               />
             </div>
             <div className="mb-3">
-              <label htmlFor="description" className="form-label">
+              <label htmlFor="text" className="form-label">
                 Descripción:
               </label>
               <textarea
                 className="form-control"
-                id="description"
-                name="description"
+                id="text"
+                name="text"
                 rows="3"
-                value={item.description}
+                value={item.text}
                 onChange={handleItemChange}
                 required
               />
@@ -135,7 +136,6 @@ const MediaCreate = () => {
                 className="btn btn-md btn-secondary mb-3 me-2"
                 onClick={itemOnClose}
               >Cancelar</button>
-             
             </div>
           </section>
         </div>

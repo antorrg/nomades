@@ -13,4 +13,10 @@ mediaRouter.get('/media/videos',  media.getMediaController)//Ruta libre
 
 mediaRouter.get('/media/admin/videos', media.getAdminMediaController)
 
+mediaRouter.get('/media/videos/:id',  media.getByIdMediaController)
+
+mediaRouter.put('/media/videos/update/:id',  media.updateMediaController)
+
+mediaRouter.delete('/media/videos/:id',  media.deleteMediaController)
+
 export default mediaRouter;

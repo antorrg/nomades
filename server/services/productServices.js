@@ -6,6 +6,7 @@ import help from "./helpers.js";
 
 const cache = new NodeCache({ stdTTL: 1800 }); // TTL (Time To Live) de media hora
 
+
 export default {
 createProduct : async (title1, landing1, info_header1, info_body1, items1 ) => {
     let transaction;
