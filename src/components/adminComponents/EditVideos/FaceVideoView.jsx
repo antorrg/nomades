@@ -1,42 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {Link} from 'react-router-dom'
 import { Container, Row, Col, Ratio, Button } from 'react-bootstrap';
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import * as Arr from '../utils/SlickCarousel'
+import * as Arr from '../../../utils/SlickCarousel'
 
-const FacebookVideo = () => {
-  const [mainVideo, setMainVideo] = useState({
-    id: 'fb1',
+const FaceVideoView = ({media}) => {
+  const videoList = media.filter(video => video.type === 'facebook');
+  let videos = videoList[0] || {
+    id: '01',
     type: 'facebook',
     title: 'Facebook',
-    text: 'Haga click en el boton verde para seleccionar el video principal.',
-    url: 'https://fb.watch/vQGCkbbS_y/',
-  });
-
-  const videoList = [
-    {
-      id: 'fb1',
-      type: 'facebook',
-      title: 'Facebook',
-      text: 'Haga click en el boton verde para seleccionar el video principal.',
-      url: 'https://fb.watch/vQGCkbbS_y/',
-    },
-    {
-      id: 'fb2',
-      type: 'facebook',
-      title: 'Facebook',
-      text: 'Haga click en el boton verde para seleccionar el video principal.',
-      url: 'https://www.facebook.com/reel/1274719967241755',
-    },
-    {
-      id: 'fb3',
-      type: 'facebook',
-      title: 'Facebook',
-      text: 'Haga click en el boton verde para seleccionar el video principal.',
-      url: 'https://fb.watch/v_aDfl8zZa/',
-    },
-  ];
+    text: 'Aguarde un momento...',
+    url: '',
+      }
+  const [isLoading, setIsLoading] = useState(true);
+  const [mainVideo, setMainVideo] = useState(videos);
+  
+  useEffect(() => {
+    if (isLoading && videoList.length > 0) {
+      setMainVideo(videoList[0]);
+      setIsLoading(false); // Marcar que ya no estamos cargando
+    }
+  }, [videoList, isLoading]);
+ 
 
   const handleVideoSelect = (video) => {
     setMainVideo(video);
@@ -48,6 +36,14 @@ const FacebookVideo = () => {
       {/* Video Principal */}
       <Row className="featurette mt-5">
         <Col xs={12} md={5}>
+        <Button
+            className="mt-2 me-3 w-20"
+            variant="outline-primary"
+            size="sm"
+            onClick={() => console.log(editar)}
+          >
+            Crear
+          </Button>
           <h2 className="featurette-heading fw-normal lh-1">
             {mainVideo.title}
             </h2>
@@ -84,13 +80,29 @@ const FacebookVideo = () => {
               />
             </Ratio>
             <Button
-              className="mt-2 w-20"
-              variant="outline-success"
-              size='sm'
-              onClick={() => handleVideoSelect(video)}
-            >
-              Ver video
-            </Button>
+                className="mt-2 me-3 w-20"
+                variant="outline-success"
+                size="sm"
+                onClick={() => handleVideoSelect(video)}
+              >
+                Ver video
+              </Button>
+              <Button
+                className="mt-2 me-3 w-20"
+                variant="outline-primary"
+                size="sm"
+                onClick={() => console.log(editar)}
+              >
+                Editar
+              </Button>
+              <Button
+                className="mt-2 me-3 w-20"
+                variant="outline-danger"
+                size="sm"
+                onClick={() => console.log("borrado")}
+              >
+                Eliminar
+              </Button>
           </div>
         ))}
           </Slider>
@@ -99,4 +111,4 @@ const FacebookVideo = () => {
   );
 };
 
-export default FacebookVideo;
+export default FaceVideoView;

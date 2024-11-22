@@ -2,7 +2,6 @@ import {useEffect} from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import {useDispatch, useSelector } from 'react-redux'
 import {getInfo} from '../../../redux/actions'
-import Edition from "../../../Auth/generalComponents/Edition/Edition";
 //import "../../../views/styles/item.css"
 
 
