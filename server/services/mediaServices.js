@@ -59,13 +59,8 @@ export default {
                 url : newData.url,
                 enable: Boolean(parsedEnable),
             }
-            await media.update(newMedia)
-            // Verificar si algún valor cambió
-            const updatedColumns = media.changed();
-            if (!updatedColumns || updatedColumns.length === 0) {
-                eh.throwError('No hubo cambios en el registro', 400);
-            }
-
+            const mediaUpdated = await media.update(newMedia)
+           if(!mediaUpdated){eh.throwError('Error al actualizar', 400)}
             return 'Item actualizado correctamente';
         } catch (error) {
             throw error;

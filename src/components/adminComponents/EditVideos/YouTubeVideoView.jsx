@@ -5,17 +5,22 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as Arr from "../../../utils/SlickCarousel";
+import {booleanState} from './helperVideo'
+import {deleteMedia} from '../../../utils/landingPageEndpoints'
+import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 
 const YouTubeVideoView = ({ media }) => {
   const navigate = useNavigate()
 
-  const videoList = media.filter((video) => video.type === "youTube");
+  const videoList = media.filter((video) => video.type === "youtube");
   let videos = videoList[0] || {
     id: "0",
     title: "Videos de you tube",
-    description: "Aguarde un momento...",
+    text: "Aguarde un momento...",
     url: "",
+    enable: true,
   };
+  
   const [isLoading, setIsLoading] = useState(true);
   const [mainVideo, setMainVideo] = useState(videos);
 
@@ -36,7 +41,17 @@ const YouTubeVideoView = ({ media }) => {
     );
     return match ? match[1] : null;
   };
-
+  //Borrar video:
+  const deleteVideo = async(id)=>{
+    const confirmed = await showConfirmationDialog(
+      "¿Está seguro de eliminar el item?"
+    );
+    if (confirmed) {
+      // Aquí iría la lógica para actualizar el elemento
+      
+       await deleteMedia(id)
+    }
+  }
   return (
     <Container>
       {/* Video principal */}
@@ -53,7 +68,10 @@ const YouTubeVideoView = ({ media }) => {
           <h2 className="featurette-heading fw-normal lh-1">
             {mainVideo.title}
           </h2>
-          <p className="lead">{mainVideo.description}</p>
+          <p className="lead">{mainVideo.text}</p>
+          <p className="lead">
+             <strong>Estado: </strong> {booleanState(mainVideo.enable)}
+            </p>
         </Col>
         <Col xs={12} md={7}>
           <Ratio aspectRatio="16x9">
@@ -98,7 +116,7 @@ const YouTubeVideoView = ({ media }) => {
                 className="mt-2 me-3 w-20"
                 variant="outline-danger"
                 size="sm"
-                onClick={() => console.log("borrado")}
+                onClick={()=>deleteVideo(video.id)}
               >
                 Eliminar
               </Button>

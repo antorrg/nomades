@@ -12,11 +12,11 @@ const YouTubeVideo = ({media}) => {
   const {authenticated}= useAuth()
   const navigate = useNavigate()
   
-  const videoList = media.filter(video => video.type === 'youTube');
+  const videoList = media.filter(video => video.type === 'youtube');
   let videos = videoList[0] || {
         id: '0',
         title: 'Videos de you tube',
-        description: 'Aguarde un momento...',
+        text: 'Aguarde un momento...',
         url: '',
       }
   const [isLoading, setIsLoading] = useState(true);
@@ -57,7 +57,7 @@ useEffect(() => {
             Crear
           </Button>:null}
           <h2 className="featurette-heading fw-normal lh-1">{mainVideo.title}</h2>
-          <p className="lead">{mainVideo.description}</p>
+          <p className="lead">{mainVideo.text}</p>
         </Col>
         <Col xs={12} md={7}>
           <Ratio aspectRatio="16x9">

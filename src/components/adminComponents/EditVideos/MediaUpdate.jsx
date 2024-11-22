@@ -6,6 +6,7 @@ import { getMediaById, cleanState } from "../../../redux/actions";
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 import InfoFormField from "../../../views/AdminViews/InfoFormField";
 import * as val from "../../../utils/videoValidate";
+import {updateMedia}from "../../../utils/landingPageEndpoints"
 
 const MediaUpdate = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const MediaUpdate = () => {
     instagram: val.instagram,
   };
 
-  const itemOnClose = () => {
+  const onClose = () => {
     navigate(-1);
   };
 
@@ -91,7 +92,7 @@ const MediaUpdate = () => {
     if (confirmed) {
       // Aquí iría la lógica para actualizar el elemento
       console.log("Elemento actualizado:", item);
-      // navigate(-1); // Navegar a la página anterior después de la actualización
+       await updateMedia(id, item, onClose)
     }
   };
 
@@ -158,7 +159,7 @@ const MediaUpdate = () => {
                   type="switch"
                   id="enable"
                   checked={item.enable}
-                  label="Desactive si no quiere mostrar ahora"
+                  label="Desactive para cambiar de estado"
                   onChange={handleSwitchChange}
                 />
               </div>
@@ -174,7 +175,7 @@ const MediaUpdate = () => {
                 <button
                   className="btn btn-md btn-secondary mb-3 me-2"
                   type="button"
-                  onClick={itemOnClose}
+                  onClick={onClose}
                 >
                   Cancelar
                 </button>

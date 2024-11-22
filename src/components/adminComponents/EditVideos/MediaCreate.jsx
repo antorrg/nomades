@@ -5,6 +5,7 @@ import {useDispatch, useSelector } from 'react-redux'
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 import InfoFormField from "../../../views/AdminViews/InfoFormField";
 import * as val from '../../../utils/videoValidate'
+import {createMedia} from '../../../utils/landingPageEndpoints'
 
 const MediaCreate = () => {
     const navigate = useNavigate();
@@ -21,7 +22,7 @@ const MediaCreate = () => {
       };
     console.log(validator)
     
-    const itemOnClose = () => {
+    const onClose = () => {
       navigate(-1);
     };
   
@@ -60,8 +61,8 @@ const MediaCreate = () => {
       );
       if (confirmed) {
         // Aquí iría la lógica para crear el producto
-        //await createItem(item, itemOnClose);
-        console.log('soy el nuevo item: ',item);
+        await createMedia(item, onClose);
+        
       }
     };
     const permit = (!item.url.trim() ||!item.title.trim() || !item.text.trim() || error.url)? true : false;
@@ -134,7 +135,7 @@ const MediaCreate = () => {
               >Crear</button>
               <button
                 className="btn btn-md btn-secondary mb-3 me-2"
-                onClick={itemOnClose}
+                onClick={onClose}
               >Cancelar</button>
             </div>
           </section>

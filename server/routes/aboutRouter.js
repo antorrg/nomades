@@ -5,13 +5,13 @@ import auth from '../middlewares/validation/index.js'
 
 const aboutRouter = express.Router()
 
-aboutRouter.post('/about/create', auth.verifyToken, midd.aboutWorkCreate, ctr.aboutCreate)
+aboutRouter.post('/about/create', auth.verifyToken, auth.verifyToken, midd.aboutWorkCreate, ctr.aboutCreate)
 
 aboutRouter.get('/about', auth.setAdminVar, ctr.aboutGet)
 
-aboutRouter.get('/about/:id', midd.middIntId, ctr.aboutById)
+aboutRouter.get('/about/:id', auth.verifyToken, midd.middIntId, ctr.aboutById)
 
-aboutRouter.put('/about/:id', auth.verifyToken, midd.middIntId, midd.aboutWorkUpd, ctr.aboutUpd)
+aboutRouter.put('/about/:id', auth.verifyToken, auth.verifyToken, midd.middIntId, midd.aboutWorkUpd, ctr.aboutUpd)
 
 aboutRouter.delete('/about/:id', auth.verifyToken, midd.middIntId, ctr.aboutDelete)
 

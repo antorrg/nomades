@@ -5,6 +5,9 @@ import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as Arr from '../../../utils/SlickCarousel'
+import {booleanState} from './helperVideo'
+import {deleteMedia} from '../../../utils/landingPageEndpoints'
+import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 
 const FaceVideoView = ({media}) => {
   const navigate =useNavigate()
@@ -16,7 +19,9 @@ const FaceVideoView = ({media}) => {
     title: 'Facebook',
     text: 'Aguarde un momento...',
     url: '',
+    enable: true,
       }
+ 
   const [isLoading, setIsLoading] = useState(true);
   const [mainVideo, setMainVideo] = useState(videos);
   
@@ -32,6 +37,16 @@ const FaceVideoView = ({media}) => {
     setMainVideo(video);
   };
 
+   //Borrar video:
+   const deleteVideo = async(id)=>{
+    const confirmed = await showConfirmationDialog(
+      "¿Está seguro de eliminar el item?"
+    );
+    if (confirmed) {
+      // Aquí iría la lógica para actualizar el elemento
+       await deleteMedia(id)
+    }
+  }
 
   return (
     <Container>
@@ -51,6 +66,9 @@ const FaceVideoView = ({media}) => {
             </h2>
           <p className="lead">
             {mainVideo.text}
+            </p>
+            <p className="lead">
+             <strong>Estado: </strong> {booleanState(mainVideo.enable)}
             </p>
         </Col>
         <Col xs={12} md={7}>
@@ -101,7 +119,7 @@ const FaceVideoView = ({media}) => {
                 className="mt-2 me-3 w-20"
                 variant="outline-danger"
                 size="sm"
-                onClick={() => console.log("borrado")}
+                onClick={()=>deleteVideo(video.id)}
               >
                 Eliminar
               </Button>

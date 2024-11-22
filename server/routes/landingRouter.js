@@ -5,16 +5,16 @@ import auth from '../middlewares/validation/index.js'
 
 const landingRouter = express.Router()
 
-landingRouter.post('/land', ctr.createLandingController)
+landingRouter.post('/land', auth.verifyToken, ctr.createLandingController)
 
 landingRouter.post("/land/emails", ctr.emailLandingController); //Ruta de subida de imagenes
 
-landingRouter.put('/land/:id', ctr.updLandingController)
+landingRouter.put('/land/:id', auth.verifyToken, ctr.updLandingController)
 
-landingRouter.delete('/land/:id', ctr.deleteLandingController)
+landingRouter.delete('/land/:id', auth.verifyToken, ctr.deleteLandingController)
 
 landingRouter.get('/land', auth.setAdminVar, ctr.getLandingController)//Ruta libre, solo verifica
 
-landingRouter.get('/land/:id', ctr.detailLandingController)
+landingRouter.get('/land/:id', auth.verifyToken, ctr.detailLandingController)
 
 export default landingRouter;

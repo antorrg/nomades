@@ -11,7 +11,8 @@ export const youtube = (item) => {
     const urlError = validateRequiredField(item.url, "URL");
     if (urlError) return { url: urlError };
   
-    const validUrl = /^(https:\/\/youtu\.be\/[a-zA-Z0-9_-]{11}|https:\/\/www\.youtube\.com\/watch\?v=[a-zA-Z0-9_-]{11}(&[a-zA-Z0-9=_-]+)*)$/;
+    const validUrl = /^(https:\/\/youtu\.be\/[a-zA-Z0-9_-]{11}(\?[a-zA-Z0-9=_&%-]*)?|https:\/\/www\.youtube\.com\/watch\?v=[a-zA-Z0-9_-]{11}(&[a-zA-Z0-9=_&%-]*)?)$/;
+
     if (!validUrl.test(item.url.trim())) {
       return { url: "Formato de URL inválido para YouTube" };
     }

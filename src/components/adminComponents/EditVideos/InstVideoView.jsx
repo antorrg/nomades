@@ -5,6 +5,9 @@ import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as Arr from '../../../utils/SlickCarousel'
+import {booleanState} from './helperVideo'
+import {deleteMedia} from '../../../utils/landingPageEndpoints'
+import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 
 const InstVideoView = ({media}) => {
   const navigate = useNavigate();
@@ -15,6 +18,7 @@ const InstVideoView = ({media}) => {
     title: 'Instagram',
     text: 'Aguarde un momento...',
     url: '',
+    enable: true,
       }
   const [isLoading, setIsLoading] = useState(true);
   const [mainVideo, setMainVideo] = useState(videos);
@@ -37,6 +41,17 @@ const InstVideoView = ({media}) => {
     return `https://www.instagram.com/reel/${videoId}/embed`;
   };
 
+   //Borrar video:
+   const deleteVideo = async(id)=>{
+    const confirmed = await showConfirmationDialog(
+      "¿Está seguro de eliminar el item?"
+    );
+    if (confirmed) {
+      // Aquí iría la lógica para actualizar el elemento
+       await deleteMedia(id)
+    }
+  }
+
   return (
     <Container>
       {/* Video Principal */}
@@ -55,6 +70,9 @@ const InstVideoView = ({media}) => {
             </h2>
           <p className="lead">
             {mainVideo.text}
+            </p>
+            <p className="lead">
+             <strong>Estado: </strong> {booleanState(mainVideo.enable)}
             </p>
         </Col>
         <Col xs={12} md={7}>
@@ -108,7 +126,7 @@ const InstVideoView = ({media}) => {
                 className="mt-2 me-3 w-20"
                 variant="outline-danger"
                 size="sm"
-                onClick={() => console.log('borrar')}
+                onClick={()=>deleteVideo(video.id)}
               >
                 Eliminar
               </Button>
