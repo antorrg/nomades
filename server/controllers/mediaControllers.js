@@ -3,11 +3,11 @@ import * as imgs from "../services/storage.js";
 import serv from "../services/mediaServices.js"
 
 export default {
-  getImagesController: eh.catchAsync(async (req, res) => {
+  getImagesController: eh.catchAsync(async (req, res) => {//Images
     const response = await imgs.getImages();
     res.status(200).json(response);
   }),
-  deleteImagesController: eh.catchAsync(async (req, res) => {
+  deleteImagesController: eh.catchAsync(async (req, res) => {//Images
     const { id } = req.params;
     const response = await imgs.deleteImage(id, true);
     res.status(200).json(response);

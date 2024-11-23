@@ -29,7 +29,8 @@ const FacebookVideo = ({media}) => {
       setIsLoading(false); // Marcar que ya no estamos cargando
     }
   }, [videoList, isLoading]);
- 
+  
+  const showCarousel = videoList.length >1? true : false;
 
   const handleVideoSelect = (video) => {
     setMainVideo(video);
@@ -73,6 +74,7 @@ const FacebookVideo = ({media}) => {
       </Row>
 
       {/* Lista de Miniaturas con Botones */}
+      {showCarousel? 
       <Row className="mt-4">
       <Slider {...Arr.sliderSettings}>
         {videoList.map((video) => (
@@ -96,7 +98,7 @@ const FacebookVideo = ({media}) => {
           </div>
         ))}
           </Slider>
-      </Row>
+      </Row> : null}
     </Container>
   );
 };

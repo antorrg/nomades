@@ -31,6 +31,8 @@ const InstagramVideo = ({media}) => {
     }
   }, [videoList, isLoading])
 
+  const showCarousel = videoList.length >1? true : false;
+
 
   const handleVideoSelect = (video) => {
     setMainVideo(video);
@@ -74,8 +76,8 @@ const InstagramVideo = ({media}) => {
           </Ratio>
         </Col>
       </Row>
-
       {/* Lista de Miniaturas */}
+      {showCarousel? 
       <Row className="mt-4">
         <Slider {...Arr.sliderSettings}>
         {videoList.map((video) => (
@@ -105,7 +107,7 @@ const InstagramVideo = ({media}) => {
           </div>
         ))}
         </Slider>
-      </Row>
+      </Row> :null}
     </Container>
   );
 };

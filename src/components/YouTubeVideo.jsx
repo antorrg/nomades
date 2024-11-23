@@ -29,7 +29,7 @@ useEffect(() => {
     setIsLoading(false); // Marcar que ya no estamos cargando
   }
 }, [videoList, isLoading])
-
+const showCarousel = videoList.length >1? true : false;
 
   const handleVideoSelect = (video) => {
     setMainVideo(video);
@@ -71,6 +71,8 @@ useEffect(() => {
       </Row>
 
       {/* Carrusel de miniaturas */}
+      {showCarousel?
+
       <Row className="mt-4">
         <Slider {...Arr.sliderSettings}>
           {videoList.map((video) => (
@@ -93,7 +95,7 @@ useEffect(() => {
             </div>
           ))}
         </Slider>
-      </Row>
+      </Row>: null}
     </Container>
   );
 };
