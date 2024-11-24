@@ -17,7 +17,7 @@ const Header = () => {
             {authenticated?
             <button className='nav-link fw-bold py-1 px-0 active' onClick={()=>{navigate('/admin')}}>Admin</button> : null
             }
-            <Link className='nav-link fw-bold py-1 px-0 active' to='/' >Videos</Link>
+            <Link className='nav-link fw-bold py-1 px-0 active' to='/videos' >Videos</Link>
             <Link className='nav-link fw-bold py-1 px-0 active' to='/contacto' >Contacto</Link>
             <Link className='nav-link fw-bold py-1 px-0 active' to='/acerca'>Acerca de </Link>
         </nav>

@@ -53,13 +53,6 @@ const Landing = () => {
       <Cp.FacebookVideo media={media}/>
       <hr></hr>
     </section>
-    <section>
-      <Cp.InstagramVideo media={media}/>
-      <hr></hr>
-    </section>
-    <section>
-      <Cp.YouTubeVideo media={media}/>
-    </section>
     <Cp.Footer/>
     
     </> 

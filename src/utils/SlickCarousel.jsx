@@ -6,7 +6,7 @@ export const CustomPrevArrow = ({ onClick }) => (
       className="custom-arrow prev-arrow"
       onClick={onClick}
       style={{
-        background: "white",
+        background: "transparent",
         border: "none",
         position: "absolute",
         left: "-30px",
@@ -16,7 +16,7 @@ export const CustomPrevArrow = ({ onClick }) => (
         cursor: "pointer",
       }}
     >
-      <i className="bi bi-chevron-left" style={{ fontSize: "2rem", color: "black" }}></i>
+      <i className="bi bi-chevron-left" style={{ fontSize: "3rem", color: "black" }}></i>
     </button>
   );
   
@@ -25,7 +25,7 @@ export const CustomPrevArrow = ({ onClick }) => (
       className="custom-arrow next-arrow"
       onClick={onClick}
       style={{
-        background: "white",
+        background: "transparent",
         border: "none",
         position: "absolute",
         right: "-30px",
@@ -35,7 +35,7 @@ export const CustomPrevArrow = ({ onClick }) => (
         cursor: "pointer",
       }}
     >
-      <i className="bi bi-chevron-right" style={{ fontSize: "2rem", color: "black", backgroundColor:'transparent' }}></i>
+      <i className="bi bi-chevron-right" style={{ fontSize: "3rem", color: "black", backgroundColor:'transparent' }}></i>
     </button>
   );
   
