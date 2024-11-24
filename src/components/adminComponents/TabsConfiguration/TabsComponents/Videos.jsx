@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react' 
+import {useNavigate, useLocation} from 'react-router-dom'
 import VideoLayout from './VideoLayout'
 import {useDispatch, useSelector} from 'react-redux'
 import {getAdminMedia} from '../../../../redux/actions'
@@ -8,12 +9,21 @@ import FaceVideoView from '../../EditVideos/FaceVideoView'
 
 const Videos = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const location = useLocation()
+
 const media = useSelector((state)=>state.MediaAd)
-const [activeTab, setActiveTab] = useState('facebook');
+
+// Lee el parámetro "tab" de la URL. Si no existe, usa un valor predeterminado.
+const queryParams = new URLSearchParams(location.search);
+const initialTab = queryParams.get('subtab') || 'facebook';
+
+const [activeTab, setActiveTab] = useState(initialTab);
   
 
-const handleTabChange = (tabName) => {
-  setActiveTab(tabName);
+const handleTabChange = (activeTab) => {
+  navigate(`/admin?tab=videos&subtab=${activeTab}`); // Actualiza la URL.
+  setActiveTab(activeTab);
 };
 useEffect(()=>{
   dispatch(getAdminMedia())

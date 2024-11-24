@@ -5,6 +5,7 @@ import Videos from './TabsComponents/Videos'
 import AdminAlbumWork from '../AdminWork/AdminAlbumWork'
 import ImagesComponent from '../MediaStorage/ImagesComponent'
 import LandingView from '../LandingComponents/LandingView'
+import HelpView from '../../../views/AdminViews/HelpView'
 
 export {
     Config,
@@ -14,4 +15,5 @@ export {
     AdminAlbumWork,
     ImagesComponent,
     LandingView,
+    HelpView
 }

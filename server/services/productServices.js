@@ -68,7 +68,7 @@ getProduct : async (admin) => {
         })
         if(!dataFound){eh.throwError('Dato no hallado', 404)}
         if(dataFound.length === 0)return help.dataEmptyPage()
-        const data = help.productCleaner(dataFound, false)
+        const data = help.productCleaner(dataFound, false, admin)
         if(!admin){cache.set('products', data);}
         return {products: data,
                 cache: false
@@ -244,7 +244,6 @@ delItem: async (id) => {
         await transaction.commit();
         return {
             message: 'Item borrado exitosamente',
-            imagenBorrada: !!resultadoCloudinary
         };
 
     } catch (error) {

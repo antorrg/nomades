@@ -22,6 +22,7 @@ const TabsPage = () => {
   
 
   const handleTabChange = (activeTab) => {
+    activeTab==='videos'? navigate(`/admin?tab=videos&subtab=facebook`):
     navigate(`/admin?tab=${activeTab}`); // Actualiza la URL.
     setActiveTab(activeTab);
   };
@@ -70,6 +71,9 @@ const TabsPage = () => {
       )}
       {activeTab === 'config' && (
         <Usuario/>
+      )}
+      {activeTab === 'ayuda' && (
+        <Comp.HelpView/>
       )}
     </TabsLayout>
     </>

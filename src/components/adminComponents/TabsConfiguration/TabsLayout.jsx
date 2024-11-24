@@ -52,6 +52,11 @@ const TabsLayout = ({ activeTab, handleTabChange, sessionCleaner, children }) =>
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
+              <Nav.Link onClick={() => handleTabChange('ayuda')} active={activeTab === 'ayuda'}>
+                  Ayuda
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
                 <Nav.Link onClick={sessionCleaner} active={activeTab === 'logout'}>
                   Cerrar sesión
                 </Nav.Link>

@@ -38,7 +38,7 @@ const HelpView = () => {
       </Accordion>
 
       <br />
-      <button className='btn btn-sm btn-secondary' onClick={() => navigate(-1)}>Volver</button>
+      <button className='btn btn-sm btn-secondary' onClick={() => navigate('/admin?tab=producto')}>Volver</button>
       <Ad.InfoFormField  action={'hover'}/>
     </div>
   </>
