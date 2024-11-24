@@ -58,9 +58,9 @@ const Album = ({ info, items }) => {
             <hr></hr>
                 <h4>Estado:</h4>
             <p className="lead text-muted">{booleanState(info?.enable)}</p>
-            <Link className="btn btn-secondary my-2" to='/admin/product'>
+            <button className="btn btn-secondary my-2" onClick={()=>navigate(-1)}>
               Volver
-            </Link>
+            </button>
                 <Edition
                   allowedRoles={["Super Admin", "Administrador"]}
                   onClick={toEdition}
