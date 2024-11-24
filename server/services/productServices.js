@@ -78,17 +78,18 @@ getProduct : async (admin) => {
 getById : async (id,admin) => {
     try {
         const data = await Product.findByPk(id,{
-            
                 include : [{
-                    where: admin ? {} :{ enable: true },
                     model: Item,
                     attributes: ['id', 'img', 'text', 'ProductId', 'enable'],
                 }]
         })
-        if(!data){eh.throwError('Dato no hallado', 404)}
-        const dataFound = help.productCleaner(data, true)
+        
+        const dataFound = help.productCleaner(data, true, admin)//parametros: data, isObj, isAdmin
         return dataFound
-    } catch (error) {throw error;}
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
 },
 getDetail : async (id) => {
     try {

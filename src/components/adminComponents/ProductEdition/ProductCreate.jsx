@@ -10,7 +10,7 @@ import { createProduct } from "../../../utils/productEndPoints";
 
 const ProductCreate = () => {
   const navigate = useNavigate();
-  const onClose = () => navigate("/admin");
+  const onClose = () => navigate(-1);
   const [imgUrl, setImgUrl] = useState(false)
   const [product, setProduct] = useState({
     title: "",

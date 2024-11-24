@@ -5,7 +5,7 @@ import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as Arr from '../../../utils/SlickCarousel'
-import {booleanState} from './helperVideo'
+import {booleanState} from '../../../utils/generalHelpers'
 import {deleteMedia} from '../../../utils/landingPageEndpoints'
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 

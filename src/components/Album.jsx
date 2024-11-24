@@ -1,7 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Album = ({ info, items }) => {
-  
+ const navigate = useNavigate()
+ 
+
+ 
  
  
 
@@ -35,9 +38,9 @@ const Album = ({ info, items }) => {
                      <p className="card-text">{item.text}</p>
                      <div className="d-flex justify-content-between align-items-center">
                        <div className="btn-group">
-                         <Link className="btn btn-sm btn-outline-secondary me-3" to={`/detalle/item/${item.id}`}>
+                         <button className="btn btn-sm btn-outline-secondary me-3" onClick={()=>navigate(`/detalle/item/${item.id}`)} disabled={item.id===0? true : false}>
                            Ver mas
-                         </Link>
+                         </button>
                        </div>
                      </div>
                    </div>

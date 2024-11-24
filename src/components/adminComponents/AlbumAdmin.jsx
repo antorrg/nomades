@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import showConfirmationDialog from '../../Auth/generalComponents/sweetAlert'
 import Edition from "../../Auth/generalComponents/Edition/Edition";
 import GenericButton from "../../Auth/generalComponents/GenericButton/GenericButton";
+import {booleanState} from '../../utils/generalHelpers'
 
 const Album = ({ info, items }) => {
  
@@ -54,6 +55,9 @@ const Album = ({ info, items }) => {
                 <hr></hr>
                 <h4>Descripcion:</h4>
             <p className="lead text-muted">{info?.infoBody}</p>
+            <hr></hr>
+                <h4>Estado:</h4>
+            <p className="lead text-muted">{booleanState(info?.enable)}</p>
             <Link className="btn btn-secondary my-2" to='/admin/product'>
               Volver
             </Link>
@@ -88,14 +92,16 @@ const Album = ({ info, items }) => {
                     <p className="card-text">{item.text}</p>
                     <div className="d-flex justify-content-between align-items-center">
                       <div className="btn-group">
-                        <Link className="btn btn-sm btn-outline-secondary me-3" to={`/admin/product/item/${item.id}`}>
-                          Ver mas
-                        </Link>
+                        <button className="btn btn-sm btn-outline-secondary me-3" onClick={()=>navigate(`/admin/product/item/${item.id}`)} disabled={item.id===0? true : false}>
+                           Ver mas
+                         </button>
                         <Edition 
                             allowedRoles={["Super Admin", "Administrador"]}
                             onClick={()=>{delItem(item.id)}}
                             text={"Borrar"}
-                            className="btn btn-sm btn-outline-danger"/>
+                            className="btn btn-sm btn-outline-danger"
+                            disabled={item.id===0? true : false}/>
+                            
                       </div>
                     </div>
                   </div>

@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate,useLocation} from 'react-router-dom'
 import {useAuth} from '../../../Auth/AuthContext/AuthContext'
 import { showSuccess } from '../../../Auth/generalComponents/HandlerError';
 import showConfirmationDialog from '../../../Auth/generalComponents/sweetAlert';
 import TabsLayout from './TabsLayout';
 import * as Comp from './Index'
+import Usuario from './TabsComponents/User'
+import Portada from './TabsComponents/Portada'
 
 
 const TabsPage = () => {
   const {logout }= useAuth()
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [activeTab, setActiveTab] = useState('portada');
+   // Lee el parámetro "tab" de la URL. Si no existe, usa un valor predeterminado.
+   const queryParams = new URLSearchParams(location.search);
+   const initialTab = queryParams.get('tab') || 'producto';
+
+  const [activeTab, setActiveTab] = useState(initialTab);
   
 
-  const handleTabChange = (tabName) => {
-    setActiveTab(tabName);
+  const handleTabChange = (activeTab) => {
+    navigate(`/admin?tab=${activeTab}`); // Actualiza la URL.
+    setActiveTab(activeTab);
   };
 
   const sessionCleaner = async()=>{
@@ -39,6 +47,9 @@ const TabsPage = () => {
       handleTabChange={handleTabChange}
       sessionCleaner={sessionCleaner}
     >
+      {activeTab === 'producto' && (
+        <Comp.Producto/>
+      )}
       {activeTab === 'portada' && (
         <Comp.LandingView/>
       )}
@@ -46,7 +57,10 @@ const TabsPage = () => {
         <Comp.AdminAlbumWork/>
       )}
       {activeTab === 'about' && (
-        <Comp.Producto/>
+        <Portada/>
+      )}
+      {activeTab === 'users' && (
+        <Usuario/>
       )}
       {activeTab === 'imagenes' && (
         <Comp.ImagesComponent/>
@@ -55,7 +69,7 @@ const TabsPage = () => {
         <Comp.Videos/>
       )}
       {activeTab === 'config' && (
-        <Comp.Config/>
+        <Usuario/>
       )}
     </TabsLayout>
     </>

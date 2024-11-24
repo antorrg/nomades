@@ -1,10 +1,12 @@
 import env from '../envConfig.js'
-const productCleaner = (data, isObj)=>{
-    return isObj? cleaner(data, true): data.map((dat)=>cleaner(dat, false))
+const productCleaner = (data, isObj, isAdmin)=>{
+    return isObj? cleaner(data, true, isAdmin): data.map((dat)=>cleaner(dat, false, isAdmin))
 }
 
-const cleaner = (cont, bl)=>{
-     const items  = bl? cont.Items.map((it)=> aux(it, false)): null
+const cleaner = (cont, bl, isAdmin)=>{
+    console.log('soy el cleaner: ', isAdmin)
+    const dataItems = bl? filterItem(cont.Items, isAdmin):null
+     const items = bl? dataItems.map((it)=> aux(it, false)): null
     const info = {
         id:cont.id,
         title:cont.title,
@@ -37,6 +39,22 @@ const aux = (info, detailItem,)=>{
         return text; }                //   const ejemplo = truncateText(text, 12);
     const truncatedWords = words.slice(0, wordLimit); 
     return truncatedWords.join(' ') + '...'; 
+}
+const filterItem = (data, isAdmin)=>{
+    const item = isAdmin? data : data.filter(item =>item.enable===true);
+    if(item.length===0){
+        return emptyItem()
+    }
+    return item;
+}
+const emptyItem = ()=>{
+    return [{
+        id: 0,
+        img: 'Not found',
+        text: 'Item borrado o bloqueado por admin.',
+        ProductId: 0,
+        enable: true,
+    }]
 }
 const dataEmptyPage = ()=> {
     return [{

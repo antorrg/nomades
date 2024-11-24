@@ -96,15 +96,41 @@ const AdminNav = () => {
         aria-label="Dark offcanvas navbar"
       >
         <div className="container-fluid">
-          <button
+          {/* <button
             className="navbar-toggler me-auto"
             type="button"
             onClick={abrirOffcanvas} // Usamos la función para abrir
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
-          </button>
-          <Link className="navbar-brand text-start" to="/">
+          </button> */}
+          <p className="navbar-brand text-start ms-5" >
+            Panel Administrador
+          </p>
+          <div className="d-flex justify-content-start">
+          <Dropdown align="end" className=''>
+                <Dropdown.Toggle
+                  as="a"
+                  className="d-flex align-items-center text-white text-decoration-none nav-link"
+                >
+                  <img
+                    src={user.picture}
+                    alt="Not found"
+                    width="32"
+                    height="32"
+                    className="rounded-circle me-2"
+                  />
+                  <strong>
+                    {user.given_name ? user.given_name : user.nickname}
+                  </strong>
+                </Dropdown.Toggle>
+                <Dropdown.Menu className="dropdown-menu-dark text-small shadow">
+                  <Dropdown.Item onClick={profile}>Perfil</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+              </div>
+           
+          <Link className="navbar-brand text-start ms-5" to="/">
             Ir a página principal
           </Link>
 

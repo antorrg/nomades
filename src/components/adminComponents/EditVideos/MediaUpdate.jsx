@@ -74,14 +74,7 @@ const MediaUpdate = () => {
     }
   };
 
-  // Manejar cambios en el interruptor de activación
-  const handleSwitchChange = (e) => {
-    const { checked, id } = e.target;
-    setItem((prevItem) => ({
-      ...prevItem,
-      [id]: checked,
-    }));
-  };
+
 
   // Enviar el formulario
   const handleSubmit = async (e) => {
@@ -154,15 +147,19 @@ const MediaUpdate = () => {
                   onChange={handleItemChange}
                 />
               </div>
-              <div className="mb-3 form-check form-switch">
-                <Form.Check
-                  type="switch"
-                  id="enable"
-                  checked={item.enable}
-                  label="Desactive para cambiar de estado"
-                  onChange={handleSwitchChange}
-                />
-              </div>
+              <label htmlFor="enable" className="form-label">
+                    Mostrar al publico
+                  </label>
+                  <select
+                    className="form-select mb-2"
+                    id="enable"
+                    name="enable"
+                    value={item.enable}
+                    onChange={handleItemChange}
+                  >
+                    <option value="true">Mostrar</option>
+                    <option value="false">No mostrar</option>
+                  </select>
               <div className="d-flex flex-row me-3">
                 <button
                   className="btn btn-md btn-primary mb-3 me-2"

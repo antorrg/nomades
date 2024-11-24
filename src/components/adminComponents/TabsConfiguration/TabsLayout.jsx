@@ -11,6 +11,11 @@ const TabsLayout = ({ activeTab, handleTabChange, sessionCleaner, children }) =>
           <Row>
             {/* Navegación por tabs */}
             <Nav variant="tabs" className="ms-2 mb-0" id="nav-tab" role="tablist">
+            <Nav.Item>
+                <Nav.Link onClick={() => handleTabChange('producto')} active={activeTab === 'producto'}>
+                  Productos
+                </Nav.Link>
+              </Nav.Item>
               <Nav.Item>
                 <Nav.Link onClick={() => handleTabChange('portada')} active={activeTab === 'portada'}>
                   Portada
@@ -24,6 +29,11 @@ const TabsLayout = ({ activeTab, handleTabChange, sessionCleaner, children }) =>
               <Nav.Item>
                 <Nav.Link onClick={() => handleTabChange('about')} active={activeTab === 'about'}>
                   Acerca
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link onClick={() => handleTabChange('users')} active={activeTab === 'users'}>
+                  Usuarios
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>

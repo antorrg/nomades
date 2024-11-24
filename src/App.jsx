@@ -40,7 +40,7 @@ function App() {
         <View.Admin />
       </ProtectedRoute>
       }>
-        <Route  index element={<Ad.WelcomeView/>} />
+        <Route  index element={<Ad.TabsPage/>} />
         <Route path='/admin/product' element={<Ad.ProductComp/>}/>
         <Route path='/admin/product/:id' element={<Ad.ProductComp/>}/>
         <Route path='/admin/product/create' element={<Ad.ProductCreate/>}/>
@@ -56,7 +56,7 @@ function App() {
         <Route path='/admin/users/update/:id' element={ <Ad.UserEdition/>}/> 
         <Route path='/admin/users/profile/:id' element={ <Ad.UserComp/>}/> 
         <Route path='/admin/media/images' element={ <Ad.ImagesComponent/>}/>
-        <Route path= '/admin/page' element={<Ad.TabsPage/>}/>
+        {/* <Route path= '/admin/page' element={<Ad.TabsPage/>}/> */}
         <Route path= '/admin/work/create' element={<Ad.TabsPage/>}/>
         <Route path= '/admin/work/update/:id' element={<Ad.OurWorkEdit/>}/>
         <Route path= '/admin/land/create' element={<Ad.CreateLanding/>}/>

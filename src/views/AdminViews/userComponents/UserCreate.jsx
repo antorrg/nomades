@@ -7,7 +7,7 @@ import * as endpoint from "../../../Auth/authHelpers/Auth";
 const UserCreate = () => {
   const navigate = useNavigate();
   const onClose = () => {
-    navigate("/admin");
+    navigate(-1);
   };
   const [input, setInput] = useState({
     email: "",
