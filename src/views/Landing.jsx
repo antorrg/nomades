@@ -50,7 +50,7 @@ const Landing = () => {
     <hr></hr>
     </section>
     <section>
-      <Cp.FacebookVideo media={media}/>
+      <Cp.SocialNetworks/>
       <hr></hr>
     </section>
     <Cp.Footer/>

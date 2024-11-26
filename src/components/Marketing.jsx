@@ -9,7 +9,7 @@ const Marketing = ({products, param}) => {
           <img className='bd-placeholder-img-fluid'  src={info?.landing} alt='Imagen' style={{maxWidth:'22rem'}}/>
           <h2 className='fw-normal'>{info?.title}</h2>
           <p>{info?.infoHeader}</p>
-          <p><Link className='btn btn-secondary' to={`/${param}/${info?.id}`}>Ver detalles</Link></p>
+          <p><Link className='btn btn-md btn-outline-secondary' to={`/${param}/${info?.id}`}>Ver detalles</Link></p>
         </div>
         )}
       </div>

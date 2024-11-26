@@ -7,6 +7,7 @@ import DinamicAbout from "./DinamicAbout";
 import FacebookVideo from "./FacebookVideo";
 import InstagramVideo from './InstagramVideo'
 import YouTubeVideo from "./YouTubeVideo";
+import SocialNetworks from "./SocialNetworks";
 
 export { 
     Album, 
@@ -18,4 +19,5 @@ export {
     FacebookVideo,
     InstagramVideo,
     YouTubeVideo,
+    SocialNetworks
 };
