@@ -77,8 +77,28 @@ min-height: 100vh; /* Asegura que ocupe al menos la altura completa de la pantal
   color: #333;
   text-shadow: none; /* Prevent inheritance from `body` */
 }
+.btn-outline-darkgray {
+  color: black;/*#2c2c2c;  Un gris más oscuro que el de secondary */
+  border-color: #3a3a3a;
+}
 
- 
+.btn-outline-darkgray:hover,
+.btn-outline-darkgray:focus {
+  color: white;
+  background-color: #5a5c5d; /* Cambia el fondo al gris oscuro en hover */
+  border-color: #4a4a4a;
+}
+.btn-outline-greenNomades {
+  color: #137f4d;/*#2c2c2c;  Un gris más oscuro que el de secondary */
+  border-color: #198754;
+}
+
+.btn-outline-greenNomades:hover,
+.btn-outline-greenNomades:focus {
+  color: black;
+  background-color: rgba(90, 255, 255, 0.5); /* Cambia el fondo al gris oscuro en hover */
+  border-color: rgb(90, 255, 255);
+}
 .nav-masthead .nav-link {
   color: rgba(255, 255, 255, .5);
   border-bottom: .25rem solid transparent;

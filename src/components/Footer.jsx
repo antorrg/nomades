@@ -12,6 +12,7 @@ const Footer = () => {
     <div className='container'>
     <button
       className="custom-arrow up-arrow float-end mt-3 mb-1"
+      aria-label="Volver a inicio de pagina"
       onClick={scrollToTop}
       style={{
         background: "rgb(178,178,178)",
