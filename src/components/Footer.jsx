@@ -10,7 +10,6 @@ const Footer = () => {
   return (
     <div className='text-muted py-5'>
     <div className='container'>
-    <hr></hr>
     <button
       className="custom-arrow up-arrow float-end mt-3 mb-1"
       onClick={scrollToTop}
