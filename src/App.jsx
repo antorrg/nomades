@@ -1,6 +1,6 @@
 import {Routes, Route, Navigate, useNavigate, Outlet}from 'react-router-dom'
 import {useAuth} from './Auth/AuthContext/AuthContext'
-import { useEffect, useCallback } from 'react'
+import { useEffect, useCallback, useState } from 'react'
 import interceptor from './Interceptor'
 import ProtectedRoute from './ProtectedRoutes'
 import * as View from './views/Index'
@@ -10,8 +10,7 @@ import SessionWarning from './Auth/AuthContext/SessionWarning'
 function App() {
   const {authenticated, logout, expirationTime}= useAuth()
   const navigate = useNavigate()
- //console.log('validado? :', authenticated)
- //console.log('user: ',user)
+
  
  const redirectToError = useCallback((status, message) => {
   navigate('/error', { state: { status, message }})
@@ -26,10 +25,10 @@ function App() {
 
 
   return (
-    <>
+    <div>
     <SessionWarning expirationTime={expirationTime}/>
     <Routes>
-      <Route path='/' element={<View.Landing/>}/>
+      <Route path='/' element={<View.Landing />}/>
       <Route path='/detalle/:id' element={<View.Detail/>}/>
       <Route path='/detalle/item/:id' element={<View.Item/>}/>
       <Route path='/contacto' element={<View.Contact/>}/>
@@ -70,7 +69,7 @@ function App() {
       <Route path='/error' element={<View.Error/>}/>
       <Route path='*' element={<View.Error  state={{ status: 404, message: "Página no encontrada" }}/>}/>
     </Routes>
-    </>
+    </div>
   )
 }
 

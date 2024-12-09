@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getInfoById} from "../../../../redux/actions";
-//import { updateItem } from "../../../../utils/productEndPoints";
+import { updateLanding } from "../../../../utils/landingPageEndpoints";
 import { Form } from "react-bootstrap";
 import showConfirmationDialog from "../../../../Auth/generalComponents/sweetAlert";
 import ImageUploader from "../../../../utils/ImageUploader";
@@ -89,7 +89,7 @@ const LandEdition = () => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      //await updateItem(id, item, onClose);
+      await updateLanding(id, item, onClose);
       console.log('actualizar : ', item)
       
     }

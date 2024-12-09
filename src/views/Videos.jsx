@@ -1,13 +1,12 @@
 import {useEffect} from 'react'
 import { Helmet } from 'react-helmet-async';
-import {Link} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {getInfo, getMedia} from '../redux/actions'
 import * as Cp from '../components/IndexComponents'
 
 
 
-const Landing = () => {
+const Videos = () => {
   const dispatch = useDispatch()
   const info = useSelector((state)=>state.Landing)
   const media = useSelector((state)=>state.Media)
@@ -55,4 +54,4 @@ const Landing = () => {
   )
 }
 
-export default Landing
+export default Videos

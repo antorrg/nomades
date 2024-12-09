@@ -4,7 +4,6 @@ import AlbumAdmin from "../../components/adminComponents/AlbumAdmin"
 import AdminItem from "../../components/adminComponents/AdminItems/AdminItem"
 import UserComp from "../AdminViews/userComponents/UserComp";
 import AdminNav from "./AdminNav";
-import WelcomeView from "./WelcomeView";
 import ProductEdition from "../../components/adminComponents/ProductEdition/ProductEdition";
 import LandEdition from "../../components/adminComponents/LandingComponents/LandingEdition/LandEdition";
 import DetailCardUpd from "../../components/adminComponents/AdminItems/edition/DetaiCardUpd";
@@ -30,7 +29,6 @@ export {
   AdminItem,
   UserComp,
   AdminNav,
-  WelcomeView,
   ProductEdition,
   LandEdition,
   DetailCardUpd,

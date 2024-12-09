@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import {Link, useNavigate } from "react-router-dom";
-import {useDispatch, useSelector } from 'react-redux'
+import React, { useState } from "react";
+import {useNavigate } from "react-router-dom";
 import GenericButton from "../../../../Auth/generalComponents/GenericButton/GenericButton";
 import showConfirmationDialog from "../../../../Auth/generalComponents/sweetAlert";
 import ImageUploader from "../../../../utils/ImageUploader";
-import { createItem } from "../../../../utils/productEndPoints";
+import {createLanding} from "../../../../utils/landingPageEndpoints";
 //import "./productstyle.css";
 
 
@@ -12,6 +11,7 @@ import { createItem } from "../../../../utils/productEndPoints";
 const CreateLanding = () => {
  
   const navigate = useNavigate();
+
   const itemOnClose = () => {
     navigate(-1);
   };
@@ -39,8 +39,8 @@ const CreateLanding = () => {
     );
     if (confirmed) {
       // Aquí iría la lógica para crear el producto
-      //await createItem(item, itemOnClose);
-      console.log('soy el nuevo item: ',item);
+      await createLanding(item, itemOnClose);
+      //console.log('soy el nuevo item: ',item);
     }
   };
 
