@@ -10,6 +10,19 @@ import SessionWarning from './Auth/AuthContext/SessionWarning'
 function App() {
   const {authenticated, logout, expirationTime}= useAuth()
   const navigate = useNavigate()
+  const [theme, setTheme] = useState('light')
+
+  //Cambiar tema
+  const toggleTheme = ()=>{
+    const newTheme = theme === 'light'? 'dark' : 'light';
+    setTheme(newTheme);
+    // Guardar preferencia en localStorage
+    //localStorage.setItem('theme', newTheme);
+  }
+  useEffect(()=>{
+    document.documentElement.setAttribute('data-bs-theme', theme);
+  },[theme])
+
 
  
  const redirectToError = useCallback((status, message) => {
@@ -25,10 +38,11 @@ function App() {
 
 
   return (
-    <div>
+    <div className={`app ${theme}-mode`}>
+     
     <SessionWarning expirationTime={expirationTime}/>
     <Routes>
-      <Route path='/' element={<View.Landing />}/>
+      <Route path='/' element={<View.Landing theme={theme} toggleTheme={toggleTheme}/>}/>
       <Route path='/detalle/:id' element={<View.Detail/>}/>
       <Route path='/detalle/item/:id' element={<View.Item/>}/>
       <Route path='/contacto' element={<View.Contact/>}/>

@@ -144,7 +144,7 @@ const LandEdition = () => {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="info_header" className="form-label">
-                    Texto:
+                    Info posicionamiento:
                   </label>
                   <textarea
                     className="form-control"

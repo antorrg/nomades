@@ -21,7 +21,7 @@ const Album = ({ info, items }) => {
                   style={{ maxWidth: "22rem" }}
                 />
             <p className="lead text-muted">{info?.infoBody}</p>
-            <Link className="btn btn-secondary my-2" to="/">
+            <Link className="btn btn-md btn-outline-darkgray my-2" to="/">
               Volver
             </Link>
           </div>
@@ -38,7 +38,7 @@ const Album = ({ info, items }) => {
                      <p className="card-text">{item.text}</p>
                      <div className="d-flex justify-content-between align-items-center">
                        <div className="btn-group">
-                         <button className="btn btn-sm btn-outline-secondary me-3" onClick={()=>navigate(`/detalle/item/${item.id}`)} disabled={item.id===0? true : false}>
+                         <button className="btn btn-sm btn-outline-darkgray me-3" onClick={()=>navigate(`/detalle/item/${item.id}`)} disabled={item.id===0? true : false}>
                            Ver mas
                          </button>
                        </div>

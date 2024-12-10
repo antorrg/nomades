@@ -19,7 +19,7 @@ const About = () => {
                <p className='cover-p'>
                Somos "Nomades, Cabañas de Pastores", un emprendimiento que comenzo hace algun tiempo y fue tomando forma con los años.
              </p>
-              <Link className="btn btn-secondary mb-3" to={'/'}>Volver</Link>
+              <Link className="btn btn-md btn-outline-darkgray mb-3" to={'/'}>Volver</Link>
             </div>
             <hr></hr>
             </div>

@@ -7,7 +7,7 @@ import * as Cp from '../components/IndexComponents'
 
 
 
-const Landing = () => {
+const Landing = ({theme, toggleTheme}) => {
   const dispatch = useDispatch()
   const info = useSelector((state)=>state.Landing)
   const products = useSelector((state)=>state.Products)
@@ -28,7 +28,7 @@ const Landing = () => {
         {/* Puedes agregar más etiquetas meta aquí */}
       </Helmet>
     <div className='min-vh-100 cover-container1 d-flex w-100 p-3 mx-auto flex-column' style={{backgroundImage:`url(${info.image}||https://img.freepik.com/foto-gratis/cascada-barco-limpio-china-natural_1417-1356.jpg)`}}>
-    <Cp.Header/>
+    <Cp.Header theme={theme} toggleTheme={toggleTheme}/>
     <section className='px-3'>
       <div className='caption-title'>
         <h1>{info?.title}</h1>

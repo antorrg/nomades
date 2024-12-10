@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 const SocialNetworks = () => {
   return (
     <>
-    <div className="container">
+    <div className="container bg-light">
       <div className="row featurette">
         <div className={"col-md-7 order-md-1"}>
           <h2 className="featurette-heading fw-normal lh-1">

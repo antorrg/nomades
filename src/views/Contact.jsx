@@ -121,7 +121,7 @@ const [error, setError] = useState({
              </div>
               <div className="d-flex flex-row me-3">
                 <button
-                  className="btn btn-primary mb-3 me-2"
+                  className="btn btn-md btn-primary mb-3 me-2"
                   type="button"
                   id="submitButton"
                   onClick={handleSubmit}
@@ -130,7 +130,7 @@ const [error, setError] = useState({
                   Enviar
                 </button>
                 <button
-                  className="btn btn-secondary mb-3"
+                  className="btn btn-md btn-outline-darkgray mb-3"
                   onClick={() => {
                     onClose();
                   }}
@@ -138,7 +138,7 @@ const [error, setError] = useState({
                   Cancelar
                 </button>
                 <button
-                className="btn btn-success mb-3 ms-5 me-2"
+                className="btn btn-md btn-outline-success mb-3 ms-5 me-2"
                 type="button"
                 onClick={handleWhatsApp}
               >

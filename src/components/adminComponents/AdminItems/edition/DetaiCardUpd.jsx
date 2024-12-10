@@ -8,6 +8,7 @@ import showConfirmationDialog from "../../../../Auth/generalComponents/sweetAler
 //import "./detailCardUpd.css";
 import ImageUploader from "../../../../utils/ImageUploader";
 import ImageSelector from "../../../../utils/ImageSelector";
+import InfoFormField from "../../../../views/AdminViews/InfoFormField";
 
 const DetailCardUpd = () => {
   const dispatch = useDispatch();
@@ -105,6 +106,7 @@ const DetailCardUpd = () => {
               {imgUrl ?
               <div className="col-md-6 mb-3">
                   <ImageSelector onImageSelect={handleImageChange}/>
+                  <InfoFormField/>
                 </div>
                 :
                 <div className="col-md-6 mb-3">
@@ -113,6 +115,7 @@ const DetailCardUpd = () => {
                     imageValue={item.img}
                     onImageUpload={handleImageChange}
                   />
+                  <InfoFormField/>
                 </div>
                 }
                 <div className="mb-3 form-check form-switch">
