@@ -5,11 +5,11 @@ import auth from '../middlewares/validation/index.js'
 
 const landingRouter = express.Router()
 
-landingRouter.post('/land', auth.verifyToken, ctr.createLandingController)
+landingRouter.post('/land', auth.verifyToken, mdd.landingCreate, ctr.createLandingController)
 
 landingRouter.post("/land/emails", ctr.emailLandingController); //Ruta de subida de imagenes
 
-landingRouter.put('/land/:id', auth.verifyToken, ctr.updLandingController)
+landingRouter.put('/land/:id', auth.verifyToken, mdd.landingUpdate, ctr.updLandingController)
 
 landingRouter.delete('/land/:id', auth.verifyToken, ctr.deleteLandingController)
 

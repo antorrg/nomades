@@ -7,6 +7,8 @@ import { Form } from "react-bootstrap";
 import showConfirmationDialog from "../../../../Auth/generalComponents/sweetAlert";
 import ImageUploader from "../../../../utils/ImageUploader";
 import ImageSelector from "../../../../utils/ImageSelector";
+import InfoFormField from "../../../../views/AdminViews/InfoFormField";
+import { aboutSeo } from "../../../../infoHelpers";
 
 
 const LandEdition = () => {
@@ -57,7 +59,7 @@ const LandEdition = () => {
   const handleImageChange = (imageUrl) => {
     setItem((prevItem) => ({
       ...prevItem,
-      img: imageUrl,
+      image: imageUrl,
     }));
   };
   const handleSwitchChange = (e) => {
@@ -146,6 +148,7 @@ const LandEdition = () => {
                   <label htmlFor="info_header" className="form-label">
                     Info posicionamiento:
                   </label>
+                  <InfoFormField info={aboutSeo} place={'bottom'}/>
                   <textarea
                     className="form-control"
                     type="text"

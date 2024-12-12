@@ -1,6 +1,6 @@
 import {Landing} from '../db.js'
 import eh from '../utils/errorHandlers.js'
-import { oldImagesHandler } from "./storage.js";
+import { oldImagesHandler, deleteImage } from "./storage.js";
 import help from './helpers.js'
 
 //ejemplo de implementacion eh.throwError('mensaje', 404)
@@ -62,6 +62,7 @@ export default {
     },
     updLanding : async(id, newData)=>{
         const options = help.optionImage(newData.saver)
+        const useImg = help.optionImage(newData.useImg)
         let imageUrl = "";
         try {
             const page = await Landing.findByPk(id)
@@ -69,10 +70,11 @@ export default {
 
            const isImageChanged = page.image !== newData.image;
              isImageChanged? imageUrl= page.image: "";
+             if(useImg){await deleteImage(newData.image, false)}
 
             const newPage = await page.update(newData)
 
-           if(isImageChanged){ await oldImagesHandler(imageUrl,options )}
+           if(isImageChanged){ await oldImagesHandler(imageUrl, options)}
             return newPage;
         } catch (error) {
             throw error;

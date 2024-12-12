@@ -163,7 +163,7 @@ landingCreate : eh.catchAsync((req, res, next)=>{
     const newData = req.body;
 
     if (!newData || Object.keys(newData).length === 0) {eh.throwError('Faltan elementos!!', 400)}
-    const requiredFields = ['title', 'image', 'info_header', 'description'];
+    const requiredFields = ['title', 'image', 'info_header', 'description', 'useImg'];
     const missingFields = requiredFields.filter(field => !(field in newData));
     if (missingFields.length > 0) {eh.throwError(`Parametros faltantes: ${missingFields.join(', ')}`, 400)}
 
@@ -177,7 +177,7 @@ landingUpdate : (req, res, next)=>{
     if (id && !idIsNumber) {eh.throwError('Parametros no permitidos', 400)}
 
     if (!newData || Object.keys(newData).length === 0) {eh.throwError('Faltan elementos!!', 400)}
-    const requiredFields = ['title', 'image', 'info_header', 'description', 'enable', 'saver', 'useImg'];
+    const requiredFields = ['title', 'image', 'info_header', 'description', 'saver', 'useImg'];
     const missingFields = requiredFields.filter(field => !(field in newData));
     if (missingFields.length > 0) {eh.throwError(`Parametros faltantes: ${missingFields.join(', ')}`, 400)}
 

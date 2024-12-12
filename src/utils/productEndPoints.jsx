@@ -75,7 +75,6 @@ export const deleteProduct = async (id) => {
   try {
     const response = await axios.delete(
       `/api/v1/product/${id}`,
-      item,
       setAuthHeader()
     );
     if (response.status === 200) {

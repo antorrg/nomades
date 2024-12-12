@@ -4,6 +4,8 @@ import GenericButton from "../../../Auth/generalComponents/GenericButton/Generic
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 import ImageUploader from "../../../utils/ImageUploader";
 import ImageSelector from "../../../utils/ImageSelector";
+import InfoFormField from "../../../views/AdminViews/InfoFormField"
+import {createItemProd, aboutSeo} from '../../../infoHelpers'
 import { Form } from "react-bootstrap";
 import { createProduct } from "../../../utils/productEndPoints";
 //import "./productstyle.css";
@@ -86,7 +88,7 @@ const ProductCreate = () => {
     );
     if (confirmed) {
       // Aquí iría la lógica para crear el producto
-      console.log(product)
+      //console.log(product)
       createProduct(product, onClose);
     }
   };
@@ -141,6 +143,7 @@ const ProductCreate = () => {
                 <label htmlFor="info_header" className="form-label">
                   Info posicionamiento:
                 </label>
+                <InfoFormField info={aboutSeo} place={'bottom'}/>
                 <textarea
                   className="form-control"
                   id="info_header"
@@ -164,7 +167,10 @@ const ProductCreate = () => {
                 />
               </div>
               <div>
+                <div className="d-flex justify-content-start align-items-center">
                 <h4>Items:</h4>
+                <InfoFormField info={createItemProd} place={'bottom'}/>
+                </div>
                 {product.items.map((item, index) => (
                   <div key={index}>
                     <div>
@@ -214,7 +220,7 @@ const ProductCreate = () => {
                   className="btn btn-md btn-primary mb-3 me-2"
                   type="button"
                   onClick={handleSubmit}
-                  buttonText="Enviar"
+                  buttonText="Crear"
                   disabled={permit}
                 />
               </div>

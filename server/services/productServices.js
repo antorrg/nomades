@@ -193,7 +193,7 @@ delProduct: async (id) => {
             // Borrar imagen principal del producto
             cloud.deleteFromCloudinary(product.landing),
             // Borrar todas las imágenes de items
-            ...itemImages.map(imgUrl => cloud.deleteFromCloudinary(imgUrl))
+            itemImages.map(imgUrl => cloud.deleteFromCloudinary(imgUrl))
         ];
 
         const results = await Promise.allSettled(deletePromises);
@@ -259,8 +259,8 @@ async function imageItemCapture (id){
         const data = await Item.findAll({
             where:{
                 ProductId : id,
-                attributes: ['img']
             },
+            attributes: ['img'] 
         })
         if(!data){eh.throwError('Error inesperado', 500)}
         return data.map(item => item.img);

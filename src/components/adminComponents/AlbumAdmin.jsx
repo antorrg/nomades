@@ -3,6 +3,7 @@ import showConfirmationDialog from '../../Auth/generalComponents/sweetAlert'
 import Edition from "../../Auth/generalComponents/Edition/Edition";
 import GenericButton from "../../Auth/generalComponents/GenericButton/GenericButton";
 import {booleanState} from '../../utils/generalHelpers'
+import {deleteProduct, deleteItem} from '../../utils/productEndPoints'
 
 const Album = ({ info, items }) => {
  
@@ -15,14 +16,15 @@ const Album = ({ info, items }) => {
   const itemCreate = () => {
     navigate(`/admin/product/item/create/${info.id}`);
   };
-  const deleteProduct = async() => {
+  const deleteCurrentProduct = async() => {
     const confirmed = await showConfirmationDialog(
       "¿Quiere eliminar este producto?"
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      //await deleteProduct(item.id);
+      await deleteProduct(info.id);
       console.log('soy el producto a borrar: ',info.id)
+      navigate('/admin?tab=producto')
       
     }
   };
@@ -32,8 +34,8 @@ const Album = ({ info, items }) => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      //await deleteProduct(item.id);
-      console.log('soy el item a borrar: ',id)
+      await deleteItem(id);
+      //console.log('soy el item a borrar: ',id)
       
     }
    }
@@ -76,7 +78,7 @@ const Album = ({ info, items }) => {
                 <GenericButton
                   className="btn btn-outline-danger my-2 ms-2"
                   buttonText={"Eliminar producto"}
-                  onClick={deleteProduct }
+                  onClick={deleteCurrentProduct}
                 />
           </div>
         </div>
