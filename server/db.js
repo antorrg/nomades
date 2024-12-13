@@ -23,6 +23,7 @@ const {
     Landing,
     Image,
     Media,
+    About,
     Work,
 }= sequelize.models;
 
@@ -37,6 +38,7 @@ export {
     Landing,
     Image,
     Media,
+    About,
     Work,
     sequelize,
 }
