@@ -6,7 +6,7 @@ import ImageUploader from "../../../utils/ImageUploader";
 import { createItem } from "../../../utils/productEndPoints";
 //import "./productstyle.css";
 
-const CreateLanding = () => {
+const CreateWork = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const itemOnClose = () => {
@@ -14,13 +14,13 @@ const CreateLanding = () => {
   };
 
   const [item, setItem] = useState({
-    img: "",
+    title: "",
     text: "",
-    id: id,
+    image: "",
   });
 
   const handleItemImageChange = (url) => {
-    setItem((prevItem) => ({ ...prevItem, img: url }));
+    setItem((prevItem) => ({ ...prevItem, image: url }));
   };
 
   const handleItemChange = (event) => {
@@ -49,8 +49,21 @@ const CreateLanding = () => {
               <div className="col-md-6 mb-3">
                 <ImageUploader
                   titleField="Imagen:"
-                  imageValue={item.img}
+                  imageValue={item.image}
                   onImageUpload={handleItemImageChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="title" className="form-label">
+                  Titulo:
+                </label>
+                <input
+                  className="form-control"
+                  id="title"
+                  name="title"
+                  value={item.title}
+                  onChange={handleItemChange}
+                  required
                 />
               </div>
               <div className="mb-3">
@@ -88,4 +101,4 @@ const CreateLanding = () => {
   );
 };
 
-export default CreateLanding;
+export default CreateWork;

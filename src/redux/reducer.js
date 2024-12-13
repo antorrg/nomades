@@ -10,7 +10,6 @@ import {
     IMAGES,
     WORKS,
     WORK_BY_ID,
-    ABOUT, 
     MEDIA,
     MEDIA_AD,
     MEDIA_BY_ID
@@ -28,7 +27,6 @@ const initialState = {
     Images : [],
     Works : [],
     WorkById: [],
-    About: [],
     Media: [],
     MediaAd:[],
     MediaById:[],
@@ -97,11 +95,6 @@ const reducer = (state = initialState, {type, payload})=>{
             return {
                 ...state,
                 WorkById : payload,
-            }
-        case ABOUT:
-            return {
-                ...state,
-                About: payload,
             }
         case MEDIA:
             return {

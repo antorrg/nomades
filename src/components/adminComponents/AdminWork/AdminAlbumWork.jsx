@@ -20,7 +20,7 @@ const AdminAlbumWork = () => {
         <div className="">
         <div className="col-lg-6 col-md-8 mx-auto text-center">
         <h2 className="fw-light">Nuestro trabajo</h2>
-        <Link className="btn btn-sm btn-outline-success mb-2">Crear Item</Link>
+        <Link to='/admin/work/create' className="btn btn-sm btn-outline-success mb-2">Crear Item</Link>
         </div>
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {featurettes?.map((work) => (

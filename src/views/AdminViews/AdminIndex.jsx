@@ -15,6 +15,7 @@ import ProductCreate from "../../components/adminComponents/ProductEdition/Produ
 import ItemCreate from "../../components/adminComponents/ProductEdition/ItemCreate";
 import ImagesComponent from "../../components/adminComponents/MediaStorage/ImagesComponent";
 import TabsPage from "../../components/adminComponents/TabsConfiguration/TabsPage";
+import CreateWork from "../../components/adminComponents/AdminWork/CreateWork"
 import OurWorkEdit from "../../components/adminComponents/AdminWork/OurWorkEdit";
 import CreateLanding from "../../components/adminComponents/LandingComponents/LandingEdition/CreateLanding";
 import InfoFormField from "./InfoFormField";
@@ -40,6 +41,7 @@ export {
   ItemCreate,
   ImagesComponent,
   TabsPage,
+  CreateWork,
   OurWorkEdit,
   CreateLanding,
   InfoFormField,

@@ -140,20 +140,6 @@ export const getWorkById = (id) => {
     }
   };
 };
-export const getAbout = (isAdmin) => {
-  return async (dispatch) => {
-    try {
-      const data = await axios("/api/v1/about", adminValidator(isAdmin));
-      return dispatch({
-        type: ABOUT,
-        payload: data.data,
-      });
-    } catch (error) {
-      HandlError(error) 
-      console.error(error);
-    }
-  };
-};
 
 //*====== Variables de usuario. =======
 
