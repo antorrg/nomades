@@ -49,27 +49,51 @@ async function uploadToCloudinary(file) {
   }
 }
 // Función para extraer el public_id de una URL de Cloudinary
+// function extractPublicIdFromUrl(url) {
+//   try {
+//     // La URL de Cloudinary sigue este patrón:
+//     // https://res.cloudinary.com/[cloud_name]/image/upload/v[version]/[public_id].[format]
+//     const urlParts = url.split('/');
+//     const lastPart = urlParts[urlParts.length - 1];
+//     // Eliminamos la extensión del archivo
+//     const publicId = lastPart.split('.')[-1];
+//     return publicId;
+//   } catch (error) {
+//     throw new Error('URL de Cloudinary inválida');
+//   }
+// }
 function extractPublicIdFromUrl(url) {
   try {
     // La URL de Cloudinary sigue este patrón:
     // https://res.cloudinary.com/[cloud_name]/image/upload/v[version]/[public_id].[format]
     const urlParts = url.split('/');
     const lastPart = urlParts[urlParts.length - 1];
-    // Eliminamos la extensión del archivo
-    const publicId = lastPart.split('.')[0];
+
+    // Buscamos el índice del último punto para separar la extensión
+    const lastDotIndex = lastPart.lastIndexOf('.');
+    if (lastDotIndex === -1) {
+      throw new Error('La URL no contiene una extensión válida');
+    }
+
+    // Extraemos el publicId sin dividir mal por puntos internos
+    const publicId = lastPart.substring(0, lastDotIndex);
+    console.log(publicId)
     return publicId;
   } catch (error) {
     throw new Error('URL de Cloudinary inválida');
   }
 }
 
+
 // Función para eliminar imagen de Cloudinary
 async function deleteFromCloudinary(imageUrl) {
   try {
-    const publicId = extractPublicIdFromUrl(imageUrl);
+    //const publicId = extractPublicIdFromUrl(imageUrl);
+    const publicId = decodeURIComponent(extractPublicIdFromUrl(imageUrl));
+    console.log('publicId:', publicId)
     
     const result = await cloudinary.uploader.destroy(publicId);
-    
+    console.log(result)
     if (result.result === 'ok') {
       console.log('eliminacion: ')
       return {
@@ -78,10 +102,10 @@ async function deleteFromCloudinary(imageUrl) {
         result
       };
     } else {
-     throw new Error(error.message)
+     throw new Error(result)
     }
   } catch (error) {
-    throw new Error(`Error al eliminar la imagen: ${error.message}`);
+    throw error;
   }
 }
 

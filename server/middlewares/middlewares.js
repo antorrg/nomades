@@ -97,7 +97,7 @@ createItem : (req, res, next) => {
     const newData = req.body;
     if (!newData || Object.keys(newData).length === 0) {eh.throwError('Faltan elementos!!', 400)}
 
-    const requiredFields = ['img', 'text', 'id'];
+    const requiredFields = ['img', 'text', 'id', 'useImg'];
     const missingFields = requiredFields.filter(field => !(field in newData));
     if (missingFields.length > 0) {eh.throwError(`Parametros faltantes: ${missingFields.join(', ')}`, 400)}
     next();
@@ -186,7 +186,7 @@ landingUpdate : (req, res, next)=>{
 aboutWorkCreate : (req, res, next)=>{
     const newData = req.body;
     if (!newData || Object.keys(newData).length === 0) {eh.throwError('Faltan elementos!!', 400)}
-    const requiredFields = ['title', 'image', 'text',];
+    const requiredFields = ['title', 'image', 'text', 'useImg'];
     const missingFields = requiredFields.filter(field => !(field in newData));
     if (missingFields.length > 0) {eh.throwError(`Parametros faltantes: ${missingFields.join(', ')}`, 400)}
 
@@ -195,7 +195,7 @@ aboutWorkCreate : (req, res, next)=>{
 aboutWorkUpd : (req, res, next)=>{
     const newData = req.body;
     if (!newData || Object.keys(newData).length === 0) {eh.throwError('Faltan elementos!!', 400)}
-    const requiredFields = ['title', 'image', 'text', 'enable', 'imgShow', 'saver', 'useImg'];
+    const requiredFields = ['title', 'image', 'text', 'enable', 'saver', 'useImg'];
     const missingFields = requiredFields.filter(field => !(field in newData));
     if (missingFields.length > 0) {eh.throwError(`Parametros faltantes: ${missingFields.join(', ')}`, 400)}
 

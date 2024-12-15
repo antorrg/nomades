@@ -1,7 +1,9 @@
 import {useEffect} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom'
-import {getWorks} from '../../../redux/actions'
+import {getWorks, getStoredImgs} from '../../../redux/actions'
+import showConfirmationDialog from '../../../Auth/generalComponents/sweetAlert'
+import { deleteWorks } from '../../../utils/landingPageEndpoints';
 
 
 const AdminAlbumWork = () => {
@@ -11,9 +13,19 @@ const AdminAlbumWork = () => {
     
     useEffect(()=>{
       dispatch(getWorks(isAdmin))
+      dispatch(getStoredImgs())
     },[])
-  
-
+    const deleteWorkItem = async(id)=>{
+    const confirmed = await showConfirmationDialog(
+        "¿Está seguro de eliminar este item?"
+      );
+      if (confirmed) {
+        // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
+        //await updateItem(id, item, onClose);
+         await deleteWorks (id)
+        
+      }
+    }
   return (
         <>
         <section className="container album py-5 bg-light mb-3">
@@ -33,9 +45,9 @@ const AdminAlbumWork = () => {
                     <p className="card-text text-truncate">{work.text}</p>
                     <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group">
-                        <Link className="btn btn-sm btn-outline-danger me-3" to={'/'}>
+                        <button className="btn btn-sm btn-outline-danger me-3" onClick={()=> deleteWorkItem(work.id)}>
                         Eliminar
-                        </Link>
+                        </button>
                         <Link className="btn btn-sm btn-outline-primary me-3" to={`/admin/work/update/${work.id}`}>
                         Editar
                         </Link>

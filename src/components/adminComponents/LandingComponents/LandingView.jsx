@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import {useDispatch, useSelector } from 'react-redux'
-import {getInfo} from '../../../redux/actions'
+import {getInfo, getStoredImgs} from '../../../redux/actions'
 //import "../../../views/styles/item.css"
 
 
@@ -14,6 +14,7 @@ const LandingView = () => {
 
  useEffect(()=>{
    dispatch(getInfo(isAdmin))
+   dispatch(getStoredImgs())
  },[])
 
   return (

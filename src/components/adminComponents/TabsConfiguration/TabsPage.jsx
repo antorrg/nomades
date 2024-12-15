@@ -7,6 +7,7 @@ import TabsLayout from './TabsLayout';
 import * as Comp from './Index'
 import Usuario from './TabsComponents/User'
 import Portada from './TabsComponents/Portada'
+import Config from './TabsComponents/Config'
 
 
 const TabsPage = () => {
@@ -70,7 +71,7 @@ const TabsPage = () => {
         <Comp.Videos/>
       )}
       {activeTab === 'config' && (
-        <Usuario/>
+        <Config/>
       )}
       {activeTab === 'ayuda' && (
         <Comp.HelpView/>

@@ -7,9 +7,11 @@ import help from './helpers.js'
 
 export default {
     createWork : async(newData)=>{
+        const useImgs = help.optionImage(newData.useImg)
         try {
             const work = await Work.findOne({where: {title: newData.title}})
             if(work){eh.throwError('Este titulo ya existe', 400)}
+            if(useImgs){await cloud.deleteImage(newData.image, false)}
             const newArticle =  await Work.create({
                     title: newData.title,
                     text: newData.text,
@@ -52,10 +54,10 @@ export default {
             if(!work){eh.throwError('Articulo no hallado',404)}
 
             //Capturar imagen y resolver posible actualizacion
-            const originalImage = itemFound.img;
-            const isImageChanged = originalImage !== newData.img;
+            const originalImage = work.image;
+            const isImageChanged = originalImage !== newData.image;
             isImageChanged ? imageUrl = originalImage: ''
-            if(useImgs){await cloud.deleteImage(newData.image)}
+            if(useImgs){await cloud.deleteImage(newData.image, false)}
             const newWork = {
                 title: newData.title,
                 text: newData.text,
@@ -63,7 +65,7 @@ export default {
                 enable: enabledParsed
             }
             const updWork = work.update(newWork)
-            if (isImageChanged) {
+            if (isImageChanged && imageUrl?.trim()) {
                 await cloud.oldImagesHandler(imageUrl, options);
             }
             return updWork;
@@ -77,7 +79,8 @@ export default {
             if(!work){eh.throwError('Articulo no hallado',404)}
             const imageUrl = work.image;
             await work.destroy();
-            await cloud.deleteFromCloudinary(imageUrl);
+            if(imageUrl?.trim()){
+            await cloud.deleteFromCloudinary(imageUrl);}
             
              return  'Item borrado exitosamente'
             

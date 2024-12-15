@@ -74,7 +74,7 @@ export default {
 
             const newPage = await page.update(newData)
 
-           if(isImageChanged){ await oldImagesHandler(imageUrl, options)}
+           if(isImageChanged && imageUrl?.trim()){ await oldImagesHandler(imageUrl, options)}
             return newPage;
         } catch (error) {
             throw error;

@@ -94,16 +94,14 @@ export const updateLanding = async (id, product, onClose) => {
   
 
   export const deleteWorks = async (id) => {
-    console.log(id);
     try {
       const response = await axios.delete(
         `/api/v1/work/${id}`,
-        item,
         setAuthHeader()
       );
       if (response.status === 200) {
         toast.showSuccess("Producto borrado correctamente");
-        await onClose(); // Cierra el modal después de guardar los cambios
+       // await onClose(); // Cierra el modal después de guardar los cambios
       }
     } catch (error) {
       toast.HandlError(error);
@@ -111,7 +109,7 @@ export const updateLanding = async (id, product, onClose) => {
   };
 //Endpoints media/video:
 export const updateMedia = async (id, product, onClose) => {
-    console.log(id);
+
     try {
       const response = await axios.put(
         `/api/v1/media/videos/update/${id}`,
@@ -147,7 +145,7 @@ export const updateMedia = async (id, product, onClose) => {
   
 
   export const deleteMedia = async (id) => {
-    console.log(id);
+   
     try {
       const response = await axios.delete(
         `/api/v1/media/videos/${id}`,

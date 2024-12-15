@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import GenericButton from "../../../Auth/generalComponents/GenericButton/GenericButton";
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 import ImageUploader from "../../../utils/ImageUploader";
+import ImageSelector from "../../../utils/ImageSelector";
+import { Form } from "react-bootstrap";
 import { createItem } from "../../../utils/productEndPoints";
 //import "./productstyle.css";
 
@@ -12,11 +14,12 @@ const ItemCreate = () => {
   const itemOnClose = () => {
     navigate(-1);
   };
-
+  const [imgUrl, setImgUrl] = useState(false)
   const [item, setItem] = useState({
     img: "",
     text: "",
     id: id,
+    useImg: false,
   });
 
   const handleItemImageChange = (url) => {
@@ -28,6 +31,21 @@ const ItemCreate = () => {
     setItem((prevItem) => ({ ...prevItem, [name]: value }));
   };
 
+  const handleImgUrlSwitchChange = () => {
+    setImgUrl(prev => {
+      const newValue = !prev; // Invertir el estado actual de imgUrl
+  
+      // Actualizar useImg según el nuevo valor de imgUrl
+      setItem(prevItem => ({
+        ...prevItem,
+        useImg: newValue, // Establecer useImg en true o false
+      }));
+  
+      return newValue; // Retornar el nuevo valor de imgUrl
+    });
+  };
+
+
   const handleSubmit = async (e) => {
     const confirmed = await showConfirmationDialog(
       "¿Está seguro de crear el item?"
@@ -38,6 +56,7 @@ const ItemCreate = () => {
       //console.log('soy el nuevo item: ',item);
     }
   };
+  const permit = !item.text.trim();
 
   return (
     <div className="imageBack">
@@ -46,11 +65,26 @@ const ItemCreate = () => {
           <div className="container mt-5">
             <h3>Creación de Item: </h3>
             <section className="needs-validation" id="updateForm" noValidate>
+              {imgUrl?
+                <div className="col-md-6 mb-3">
+                <ImageSelector onImageSelect={handleItemImageChange}/>
+              </div>
+              :
               <div className="col-md-6 mb-3">
                 <ImageUploader
                   titleField="Imagen:"
                   imageValue={item.img}
                   onImageUpload={handleItemImageChange}
+                />
+              </div>
+              }
+              <div className="mb-3 form-check form-switch">
+                <Form.Check 
+                  type="switch"
+                  id="imgUrlSwitch"
+                  checked={imgUrl}
+                  label="Active para elegir imagen guardada"
+                  onChange={handleImgUrlSwitchChange}
                 />
               </div>
               <div className="mb-3">
@@ -78,6 +112,7 @@ const ItemCreate = () => {
                   type="button"
                   onClick={handleSubmit}
                   buttonText="Crear"
+                  disabled={permit}
                 />
               </div>
             </section>

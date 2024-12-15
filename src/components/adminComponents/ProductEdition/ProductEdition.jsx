@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductById } from "../../../redux/actions";
+import { getProductById, getStoredImgs } from "../../../redux/actions";
 import { updateProduct } from "../../../utils/productEndPoints";
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 import { Form } from "react-bootstrap";
@@ -19,6 +19,7 @@ const ProductEdition = () => {
   const [imgUrl, setImgUrl] = useState(false)
   useEffect(() => {
     dispatch(getProductById(id));
+    dispatch(getStoredImgs())
   }, [id]);
 
   const onClose = () => {

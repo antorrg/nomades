@@ -94,7 +94,8 @@ const ProductCreate = () => {
   };
   const permit = !product.title.trim()||
                 !product.info_body.trim()||
-                !product.info_header.trim()
+                !product.info_header.trim()||
+                !product.items[0].text.trim();
   
   return (
     <div className="imageBack">

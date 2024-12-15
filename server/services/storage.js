@@ -34,8 +34,9 @@ const deleteImage = async(data, isId)=>{
     const image = isId? await Image.findByPk(data) : await Image.findOne({where: {imageUrl:data}})
     if (!image) { eh.throwError('Imagen no hallada', 404)}
     await image.destroy();
+    console.log('imagen borrada')
     return "Imagen borrada exitosamente";
-  } catch (error) { throw error;}
+  } catch (error) { console.error('no se pudo borrar'); throw error;}
   
 }
 

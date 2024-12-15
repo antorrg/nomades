@@ -86,7 +86,6 @@ export const deleteProduct = async (id) => {
   }
 };
 export const deleteItem = async (id) => {
-  console.log(id);
   try {
     const response = await axios.delete(
       `/api/v1/product/item/${id}`,

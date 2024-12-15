@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {getWorkById } from "../../../redux/actions";
-import { updateItem } from "../../../utils/productEndPoints";
+import {updateWorks} from '../../../utils/landingPageEndpoints';
 import { Form } from "react-bootstrap";
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 //import "../AdminItems/edition/detailCardUpd.css"
@@ -91,8 +91,7 @@ const OurWorkEdit = () => {
       if (confirmed) {
         // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
         //await updateItem(id, item, onClose);
-        alert('actualizando...')
-        console.log('work: ', item)
+         await updateWorks(id, item, onClose)
         
       }
     };

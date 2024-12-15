@@ -42,10 +42,13 @@ createProduct : async (title1, landing1, info_header1, info_body1, items1 ) => {
         if (transaction) { await transaction.rollback();}; throw error;}
 },
 
-addNewItem: async (img, text, id) => {
+addNewItem: async (img, text, id, useImg) => {
+    const useImgs = help.optionImage(useImg)
+    console.log(useImgs)
 try {
     const productFound = await Product.findByPk(id);
     if(!productFound){eh.throwError('Ocurrio un error, objeto no encontrado', 404)};
+    if(useImgs){await cloud.deleteImage(img, false)}; 
     const newItem = await Item.create({
         img:img,
         text: text,})
@@ -157,7 +160,7 @@ updItem: async (id, newData)=>{
 
     const itemUpd = await itemFound.update(parsedData)
 
-    if (isImageChanged) {
+    if (isImageChanged && imageUrl?.trim()) {
         await cloud.oldImagesHandler(imageUrl, options);
     }
     cache.del('products')
