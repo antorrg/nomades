@@ -70,7 +70,7 @@ export const createItem = async (item, onClose) => {
     console.error("Error al crear el item:", error);
   }
 };
-export const deleteProduct = async (id) => {
+export const deleteProduct = async (id, onClose) => {
   console.log(id);
   try {
     const response = await axios.delete(
@@ -85,7 +85,7 @@ export const deleteProduct = async (id) => {
     toast.HandlError(error);
   }
 };
-export const deleteItem = async (id) => {
+export const deleteItem = async (id, onClose) => {
   try {
     const response = await axios.delete(
       `/api/v1/product/item/${id}`,
@@ -100,7 +100,7 @@ export const deleteItem = async (id) => {
   }
 };
 //Endpoints media
-export const deleteImage = async (id) => {
+export const deleteImage = async (id, onClose) => {
   console.log(id);
   try {
     const response = await axios.delete(
@@ -109,7 +109,7 @@ export const deleteImage = async (id) => {
     );
     if (response.status === 200) {
       toast.showSuccess("Imagen eliminada correctamente");
-      //await onClose(); // Cierra el modal después de guardar los cambios
+      await onClose(); // Cierra el modal después de guardar los cambios
     }
   } catch (error) {
     toast.HandlError(error);

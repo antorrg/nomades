@@ -9,6 +9,7 @@ import * as Ad from "../../../views/AdminViews/AdminIndex"
 //import "./productstyle.css";
 import ImageUploader from "../../../utils/ImageUploader";
 import ImageSelector from "../../../utils/ImageSelector";
+import Loading from "../../Loading";
 import * as Inf from '../../../infoHelpers'
 
 const ProductEdition = () => {
@@ -17,6 +18,8 @@ const ProductEdition = () => {
   const { id } = useParams();
   const page = useSelector((state) => state.ProductId);
   const [imgUrl, setImgUrl] = useState(false)
+  const [load, setLoad] = useState(false)
+
   useEffect(() => {
     dispatch(getProductById(id));
     dispatch(getStoredImgs())
@@ -24,6 +27,7 @@ const ProductEdition = () => {
 
   const onClose = () => {
     navigate(-1);
+    setLoad(false)
   };
 
   const [product, setProduct] = useState({
@@ -95,10 +99,14 @@ const ProductEdition = () => {
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
       await updateProduct(id, product, onClose);
+      setLoad(true)
     }
   };
   return (
     <div className="imageBack">
+      {load?
+      <Loading/>
+      :
       <div className="coverBack">
         <div className="container-md modal-content colorBack formProductContainer rounded-4 shadow">
           <div className="container mt-5">
@@ -218,6 +226,7 @@ const ProductEdition = () => {
           </div>
         </div>
       </div>
+        }
     </div>
   );
 };

@@ -1,17 +1,23 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {Link} from 'react-router-dom'
 import { getStoredImgs} from '../../../redux/actions'
 import showConfirmationDialog from '../../../Auth/generalComponents/sweetAlert'
 import { deleteImage } from '../../../utils/productEndPoints'
+import Loading from '../../Loading'
 
 const ImagesComponent = () => {
     const dispatch = useDispatch()
     const images = useSelector((state)=>state.Images);
+    const [load, setLoad] = useState(false)
 
     useEffect(()=>{
-        dispatch(getStoredImgs())
-    },[])
+      dispatch(getStoredImgs())
+    },[load])
+
+    const onClose = ()=>{
+      setLoad(false)
+    }
 
     const delImage = async(id)=>{
       const confirmed = await showConfirmationDialog(
@@ -19,7 +25,8 @@ const ImagesComponent = () => {
       );
       if (confirmed) {
         // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-        await deleteImage(id);
+        setLoad(true)
+        await deleteImage(id, onClose);
         //console.log('soy la imagen a borrar: ',id)
         
       }
@@ -29,6 +36,9 @@ const ImagesComponent = () => {
     <>
     <section className="album py-5 bg-light mb-3">
     <div className="container ">
+    {load?
+      <Loading/>:
+      <>
     <div className="col-lg-6 col-md-8 mx-auto">
       <h2 className="fw-light">Imagenes guardadas</h2>
       </div>
@@ -51,6 +61,8 @@ const ImagesComponent = () => {
            </div>
         ))}
       </div>
+      </>
+        }
     </div>
   </section>
     </>

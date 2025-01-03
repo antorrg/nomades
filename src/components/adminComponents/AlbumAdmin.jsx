@@ -1,14 +1,20 @@
+import {useState} from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import showConfirmationDialog from '../../Auth/generalComponents/sweetAlert'
 import Edition from "../../Auth/generalComponents/Edition/Edition";
 import GenericButton from "../../Auth/generalComponents/GenericButton/GenericButton";
 import {booleanState} from '../../utils/generalHelpers'
+import Loading from "../Loading";
 import {deleteProduct, deleteItem} from '../../utils/productEndPoints'
 
 const Album = ({ info, items }) => {
- 
+ const [load, setLoad] = useState(false)
   const navigate = useNavigate();
 
+  const onClose = ()=>{
+      setLoad(false)
+      navigate('/admin?tab=producto')
+  }
 
   const toEdition = () => {
     navigate(`/admin/product/update/${info.id}`);
@@ -22,9 +28,9 @@ const Album = ({ info, items }) => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      await deleteProduct(info.id);
-      console.log('soy el producto a borrar: ',info.id)
-      navigate('/admin?tab=producto')
+      await deleteProduct(info.id, onClose);
+      //console.log('soy el producto a borrar: ',info.id)
+      setLoad(true)
       
     }
   };
@@ -34,13 +40,18 @@ const Album = ({ info, items }) => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      await deleteItem(id);
+      await deleteItem(id, onClose);
+      setLoad(true)
       //console.log('soy el item a borrar: ',id)
       
     }
    }
 
   return (
+    <>
+    {load?
+      <Loading/>
+    :
     <>
       <section className="py-5 text-center container">
         <div className="row py-lg-5">
@@ -112,8 +123,10 @@ const Album = ({ info, items }) => {
             ))}
           </div>
         </div>
-      </section>
+      </section> 
     </>
+          }
+          </>
   );
 };
 

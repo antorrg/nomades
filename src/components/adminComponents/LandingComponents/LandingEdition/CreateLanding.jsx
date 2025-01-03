@@ -3,17 +3,20 @@ import {useNavigate } from "react-router-dom";
 import GenericButton from "../../../../Auth/generalComponents/GenericButton/GenericButton";
 import showConfirmationDialog from "../../../../Auth/generalComponents/sweetAlert";
 import ImageUploader from "../../../../utils/ImageUploader";
+import Loading from "../../../Loading";
 import {createLanding} from "../../../../utils/landingPageEndpoints";
 //import "./productstyle.css";
 
 
 
 const CreateLanding = () => {
+  const [load, setLoad] = useState(false)
  
   const navigate = useNavigate();
 
   const itemOnClose = () => {
     navigate(-1);
+    setLoad(false)
   };
 
   const [item, setItem] = useState({
@@ -40,12 +43,16 @@ const CreateLanding = () => {
     if (confirmed) {
       // Aquí iría la lógica para crear el producto
       await createLanding(item, itemOnClose);
+      setLoad(true)
       //console.log('soy el nuevo item: ',item);
     }
   };
 
   return (
     <div className="imageBack">
+      {load?
+      <Loading/>
+      :
       <div className="coverBack">
         <div className="container-md modal-content colorBack formProductContainer rounded-4 shadow">
           <div className="container mt-5">
@@ -116,6 +123,7 @@ const CreateLanding = () => {
           </div>
         </div>
       </div>
+        }
     </div>
   );
 };

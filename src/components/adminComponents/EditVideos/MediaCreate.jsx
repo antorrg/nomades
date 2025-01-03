@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
 import {useNavigate, useLocation } from "react-router-dom";
-import {useDispatch, useSelector } from 'react-redux'
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 import InfoFormField from "../../../views/AdminViews/InfoFormField";
 import * as val from '../../../utils/videoValidate'
 import {createMedia} from '../../../utils/landingPageEndpoints'
+import Loading from '../../Loading'
 
 const MediaCreate = () => {
     const navigate = useNavigate();
     const location = useLocation();
+    const [load, setLoad] = useState(false)
   
     const queryParams = new URLSearchParams(location.search);
     const videoType = queryParams.get("type"); //Obtener el type
@@ -24,6 +24,7 @@ const MediaCreate = () => {
     
     const onClose = () => {
       navigate(-1);
+      setLoad(false)
     };
   
     const [item, setItem] = useState({
@@ -56,12 +57,16 @@ const MediaCreate = () => {
       if (confirmed) {
         // Aquí iría la lógica para crear el producto
         await createMedia(item, onClose);
+        setLoad(true)
         
       }
     };
     const permit = (!item.url.trim() ||!item.title.trim() || !item.text.trim() || error.url)? true : false;
   return (
     <div className="imageBack">
+      {load?
+      <Loading/>
+      :
     <div className="coverBack">
       <div className="container-md modal-content colorBack formProductContainer rounded-4 shadow">
         <div className="container mt-5">
@@ -140,6 +145,7 @@ const MediaCreate = () => {
         </div>
       </div>
     </div>
+      }
   </div>
   )
 }

@@ -170,6 +170,7 @@ updItem: async (id, newData)=>{
 
 delProduct: async (id) => {
     let transaction;
+    let imageUrl = ''
     try {
         transaction = await sequelize.transaction();
         
@@ -178,7 +179,7 @@ delProduct: async (id) => {
         if (!product) {
             eh.throwError('Producto no hallado', 404);
         }
-
+        (product.landing.trim())? imageUrl = product.landing : null;
         // Obtener todas las imágenes de items antes del borrado
         const itemImages = await imageItemCapture(id);
         
@@ -194,7 +195,7 @@ delProduct: async (id) => {
         // Después de operaciones exitosas en DB, borrar imágenes de Cloudinary
         const deletePromises = [
             // Borrar imagen principal del producto
-            cloud.deleteFromCloudinary(product.landing),
+            cloud.deleteFromCloudinary(imageUrl),
             // Borrar todas las imágenes de items
             itemImages.map(imgUrl => cloud.deleteFromCloudinary(imgUrl))
         ];
@@ -225,6 +226,7 @@ delProduct: async (id) => {
 
 delItem: async (id) => {
     let transaction;
+    let imageUrl = ""
     try {
         transaction = await sequelize.transaction();
 
@@ -233,18 +235,14 @@ delItem: async (id) => {
         if (!item) {
             eh.throwError('Item no hallado', 404);
         }
-
+        imageUrl = item.img
         // Borrar el Item de la base de datos
         await item.destroy({ transaction });
-
-        // Borrar la imagen de Cloudinary
-        const resultadoCloudinary = await cloud.deleteFromCloudinary(item.img);
-        if (!resultadoCloudinary) {
-            // Registrar el error pero no fallar la operación
-            console.error('Advertencia: No se pudo borrar la imagen de Cloudinary:', item.img);
-        }
-
+      
         await transaction.commit();
+
+        if(imageUrl.trim()){ await cloud.deleteFromCloudinary(imageUrl)}
+        
         return {
             message: 'Item borrado exitosamente',
         };

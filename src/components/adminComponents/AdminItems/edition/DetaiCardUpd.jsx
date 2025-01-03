@@ -8,12 +8,15 @@ import showConfirmationDialog from "../../../../Auth/generalComponents/sweetAler
 //import "./detailCardUpd.css";
 import ImageUploader from "../../../../utils/ImageUploader";
 import ImageSelector from "../../../../utils/ImageSelector";
+import Loading from "../../../Loading";
 import InfoFormField from "../../../../views/AdminViews/InfoFormField";
 
 const DetailCardUpd = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
+  const [load, setLoad] = useState(false)
+
   const [imgUrl, setImgUrl] = useState(false)
   const item1 = useSelector((state) => state.Item);
   useEffect(() => {
@@ -21,7 +24,9 @@ const DetailCardUpd = () => {
   }, [id]);
 
   const onClose = () => {
-    navigate(-1);
+    setLoad(false)
+      navigate(-1);
+    
   };
 
   const [item, setItem] = useState({
@@ -88,11 +93,15 @@ const DetailCardUpd = () => {
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
       await updateItem(id, item, onClose);
+      setLoad(true)
       
     }
   };
   return (
     <div className="imageBack">
+      {load?
+      <Loading/>
+      :
       <div className="coverBack">
         <div className="container-md modal-content colorBack formProductContainer rounded-4 shadow">
           <div className="container mt-5">
@@ -185,6 +194,7 @@ const DetailCardUpd = () => {
           </div>
         </div>
       </div>
+        }
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { Form } from "react-bootstrap";
 import showConfirmationDialog from "../../../../Auth/generalComponents/sweetAlert";
 import ImageUploader from "../../../../utils/ImageUploader";
 import ImageSelector from "../../../../utils/ImageSelector";
+import Loading from "../../../Loading";
 import InfoFormField from "../../../../views/AdminViews/InfoFormField";
 import { aboutSeo } from "../../../../infoHelpers";
 
@@ -15,6 +16,7 @@ const LandEdition = () => {
     const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
+  const [load, setLoad] = useState(false)
   const [imgUrl, setImgUrl] = useState(false)
   const item1 = useSelector((state) => state.LandingById);
 
@@ -24,6 +26,7 @@ const LandEdition = () => {
 
   const onClose = () => {
     navigate(-1);
+    setLoad(false)
   };
 
   const [item, setItem] = useState({
@@ -92,12 +95,16 @@ const LandEdition = () => {
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
       await updateLanding(id, item, onClose);
-      console.log('actualizar : ', item)
+      setLoad(true)
+      //console.log('actualizar : ', item)
       
     }
   };
   return (
        <div className="imageBack">
+        {load?
+        <Loading/>
+        :
       <div className="coverBack">
         <div className="container-md modal-content colorBack formProductContainer rounded-4 shadow">
           <div className="container mt-5">
@@ -204,6 +211,7 @@ const LandEdition = () => {
           </div>
         </div>
       </div>
+        }
     </div>
   )
 }

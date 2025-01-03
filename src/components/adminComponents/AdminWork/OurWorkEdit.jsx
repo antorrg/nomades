@@ -7,6 +7,7 @@ import { Form } from "react-bootstrap";
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 //import "../AdminItems/edition/detailCardUpd.css"
 import ImageUploader from "../../../utils/ImageUploader";
+import Loading from "../../Loading";
 import ImageSelector from "../../../utils/ImageSelector";
 
 
@@ -14,6 +15,7 @@ const OurWorkEdit = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams();
+    const [load, setLoad] = useState(false)
     const [imgUrl, setImgUrl] = useState(false)
     const item1 = useSelector((state) => state.WorkById);
 
@@ -23,6 +25,7 @@ const OurWorkEdit = () => {
   
     const onClose = () => {
       navigate(-1);
+      setLoad(false)
     };
   
     const [item, setItem] = useState({
@@ -92,11 +95,15 @@ const OurWorkEdit = () => {
         // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
         //await updateItem(id, item, onClose);
          await updateWorks(id, item, onClose)
+         setLoad(true)
         
       }
     };
   return (
     <div className="imageBack">
+    {load?
+    <Loading/>
+    :
     <div className="coverBack">
       <div className="container-md modal-content colorBack formProductContainer rounded-4 shadow">
         <div className="container mt-5">
@@ -198,6 +205,7 @@ const OurWorkEdit = () => {
         </div>
       </div>
     </div>
+    }
   </div>
   )
 }

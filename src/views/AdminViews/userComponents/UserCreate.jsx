@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 import { ValidCreate } from "../../../Auth/generalComponents/internalUtils/Validate";
+import Loading from "../../../components/Loading";
 import * as endpoint from "../../../Auth/authHelpers/Auth";
 
 const UserCreate = () => {
   const navigate = useNavigate();
+  const [load, setLoad] = useState(false)
+
   const onClose = () => {
     navigate(-1);
+    setLoad(false)
   };
   const [input, setInput] = useState({
     email: "",
@@ -37,11 +41,15 @@ const UserCreate = () => {
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
       await endpoint.createUser(input, onClose);
+      setLoad(true)
     }
   };
   const permit = !input.email.trim() || error.email;
   return (
     <div className="imageBack">
+      {load? 
+      <Loading/>
+      :
       <div className="coverBack">
         <div className="container-md modal-content colorBack formProductContainer rounded-4 shadow">
           <div className="container mt-5">
@@ -84,6 +92,7 @@ const UserCreate = () => {
           </div>
         </div>
       </div>
+        }
     </div>
   );
 };

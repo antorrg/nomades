@@ -4,6 +4,7 @@ import GenericButton from "../../../Auth/generalComponents/GenericButton/Generic
 import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
 import ImageUploader from "../../../utils/ImageUploader";
 import ImageSelector from "../../../utils/ImageSelector";
+import Loading from "../../Loading";
 import { Form } from "react-bootstrap";
 import { createItem } from "../../../utils/productEndPoints";
 //import "./productstyle.css";
@@ -11,8 +12,11 @@ import { createItem } from "../../../utils/productEndPoints";
 const ItemCreate = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [load, setLoad] = useState(false)
+
   const itemOnClose = () => {
     navigate(-1);
+    setLoad(false)
   };
   const [imgUrl, setImgUrl] = useState(false)
   const [item, setItem] = useState({
@@ -53,6 +57,7 @@ const ItemCreate = () => {
     if (confirmed) {
       // Aquí iría la lógica para crear el producto
       await createItem(item, itemOnClose);
+      setLoad(true)
       //console.log('soy el nuevo item: ',item);
     }
   };
@@ -60,6 +65,9 @@ const ItemCreate = () => {
 
   return (
     <div className="imageBack">
+      {load?
+      <Loading/>
+      :
       <div className="coverBack">
         <div className="container-md modal-content colorBack formProductContainer rounded-4 shadow">
           <div className="container mt-5">
@@ -119,6 +127,7 @@ const ItemCreate = () => {
           </div>
         </div>
       </div>
+        }
     </div>
   );
 };
