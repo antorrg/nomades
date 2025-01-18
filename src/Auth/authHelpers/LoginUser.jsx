@@ -5,7 +5,7 @@ import {
   showError,
 } from "../generalComponents/HandlerError";
 
-export default async function loginUser(userData, login, succesLogin) {
+export default async function loginUser(userData, login, succesLogin, onRetry) {
   const email = userData.email;
   const password = userData.password;
   try {
@@ -24,6 +24,7 @@ export default async function loginUser(userData, login, succesLogin) {
   } catch (error) {
     showError("Verificacion fallida");
     HandlError(error);
+    onRetry()
     throw error;
   }
 }

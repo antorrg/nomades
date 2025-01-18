@@ -20,6 +20,11 @@ const ProductCreate = () => {
     setLoad(false)
     navigate(-1)
   };
+  const onRetry = ()=>{
+    setTimeout(()=>{
+      onClose()
+    },3000)
+  }
 
   const [product, setProduct] = useState({
     title: "",
@@ -96,7 +101,7 @@ const ProductCreate = () => {
     if (confirmed) {
       // Aquí iría la lógica para crear el producto
       //console.log(product)
-      createProduct(product, onClose);
+      createProduct(product, onClose, onRetry);
       setLoad(true)
     }
   };

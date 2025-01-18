@@ -6,6 +6,7 @@ import ProtectedRoute from './ProtectedRoutes'
 import * as View from './views/Index'
 import * as Ad from './views/AdminViews/AdminIndex'
 import SessionWarning from './Auth/AuthContext/SessionWarning'
+import CookieConsent from "react-cookie-consent";
 
 function App() {
   const {authenticated, logout, expirationTime}= useAuth()
@@ -38,7 +39,20 @@ function App() {
 
 
   return (
-    <div className={`app ${theme}-mode`}>
+    <div>
+      {/* <div>
+      <CookieConsent
+        location="bottom"
+        buttonText="Aceptar"
+        cookieName="userConsent"
+        style={{ background: "#2B373B", color: "#fff" }}
+        buttonStyle={{ background: "#4CAF50", color: "#fff", fontSize: "13px" }}
+        expires={365}
+      >
+        Este sitio utiliza cookies para mejorar tu experiencia.{" "}
+        <span style={{ fontSize: "10px" }}>Lee más en nuestra Política de Cookies.</span>
+      </CookieConsent>
+    </div> */}
      
     <SessionWarning expirationTime={expirationTime}/>
     <Routes>

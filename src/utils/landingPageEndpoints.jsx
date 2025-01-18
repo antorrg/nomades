@@ -4,7 +4,7 @@ import {setAuthHeader} from "../Auth/generalComponents/axiosUtils";
 
 //Endpoinst landing page:
 
-export const sendEmail = async (body, onClose) => { //Envio de emails del visitante
+export const sendEmail = async (body, onClose, onRetry) => { //Envio de emails del visitante
   try {
     const response = await axios.post(
       `/api/v1/land/emails`,
@@ -16,10 +16,11 @@ export const sendEmail = async (body, onClose) => { //Envio de emails del visita
     }
   } catch (error) {
     toast.HandlError(error);
+    onRetry()
   }
 };
 
-export const updateLanding = async (id, product, onClose) => {
+export const updateLanding = async (id, product, onClose, onRetry) => {
     console.log(id);
     try {
       const response = await axios.put(
@@ -33,11 +34,12 @@ export const updateLanding = async (id, product, onClose) => {
       }
     } catch (error) {
       toast.HandlError(error);
+      onRetry()
       console.error("Error al actualizar la pagina:", error);
     }
   };
 
-  export const createLanding = async (product, onClose) => {
+  export const createLanding = async (product, onClose, onRetry) => {
     try {
       const response = await axios.post(
         `/api/v1/land/create`,
@@ -49,6 +51,7 @@ export const updateLanding = async (id, product, onClose) => {
         await onClose(); // Cierra el modal después de guardar los cambios
       }
     } catch (error) {
+      onRetry()
       toast.HandlError(error);
       //console.error("Error al crear el producto:", error);
     }
@@ -57,7 +60,7 @@ export const updateLanding = async (id, product, onClose) => {
 
   //Endpoints OurWork:
 
- export const updateWorks = async (id, product, onClose) => {
+ export const updateWorks = async (id, product, onClose, onRetry) => {
     console.log(id);
     try {
       const response = await axios.put(
@@ -71,11 +74,12 @@ export const updateLanding = async (id, product, onClose) => {
       }
     } catch (error) {
       toast.HandlError(error);
+      onRetry()
       console.error("Error al actualizar el item:", error);
     }
   };
 
-  export const createWorks = async (product, onClose) => {
+  export const createWorks = async (product, onClose, onRetry) => {
     try {
       const response = await axios.post(
         `/api/v1/work/create`,
@@ -87,13 +91,14 @@ export const updateLanding = async (id, product, onClose) => {
         await onClose(); // Cierra el modal después de guardar los cambios
       }
     } catch (error) {
+      onRetry()
       toast.HandlError(error);
       //console.error("Error al crear el producto:", error);
     }
   };
   
 
-  export const deleteWorks = async (id) => {
+  export const deleteWorks = async (id, onRetry) => {
     try {
       const response = await axios.delete(
         `/api/v1/work/${id}`,
@@ -104,11 +109,12 @@ export const updateLanding = async (id, product, onClose) => {
        // await onClose(); // Cierra el modal después de guardar los cambios
       }
     } catch (error) {
+      onRetry()
       toast.HandlError(error);
     }
   };
 //Endpoints media/video:
-export const updateMedia = async (id, product, onClose) => {
+export const updateMedia = async (id, product, onClose, onRetry) => {
 
     try {
       const response = await axios.put(
@@ -121,12 +127,13 @@ export const updateMedia = async (id, product, onClose) => {
         await onClose(); // Cierra el modal después de guardar los cambios
       }
     } catch (error) {
+      onRetry();
       toast.HandlError(error);
       console.error("Error al actualizar la pagina:", error);
     }
   };
 
-  export const createMedia = async (product, onClose) => {
+  export const createMedia = async (product, onClose, onRetry) => {
     try {
       const response = await axios.post(
         `/api/v1/media/videos/create`,
@@ -138,13 +145,14 @@ export const updateMedia = async (id, product, onClose) => {
         await onClose(); // Cierra el modal después de guardar los cambios
       }
     } catch (error) {
+      onRetry()
       toast.HandlError(error);
       //console.error("Error al crear el producto:", error);
     }
   };
   
 
-  export const deleteMedia = async (id) => {
+  export const deleteMedia = async (id, onRetry) => {
    
     try {
       const response = await axios.delete(
@@ -156,6 +164,7 @@ export const updateMedia = async (id, product, onClose) => {
         //await onClose(); // Cierra el modal después de guardar los cambios
       }
     } catch (error) {
+      onRetry()
       toast.HandlError(error);
     }
   };

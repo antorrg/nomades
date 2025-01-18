@@ -28,6 +28,11 @@ const DetailCardUpd = () => {
       navigate(-1);
     
   };
+  const onRetry = ()=>{
+    setTimeout(()=>{
+      onClose()
+    },3000)
+  }
 
   const [item, setItem] = useState({
     text: "",
@@ -92,7 +97,7 @@ const DetailCardUpd = () => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      await updateItem(id, item, onClose);
+      await updateItem(id, item, onClose, onRetry);
       setLoad(true)
       
     }

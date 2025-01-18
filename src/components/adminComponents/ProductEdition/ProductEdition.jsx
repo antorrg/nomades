@@ -29,6 +29,11 @@ const ProductEdition = () => {
     navigate(-1);
     setLoad(false)
   };
+  const onRetry = ()=>{
+    setTimeout(()=>{
+      onClose()
+    },3000)
+  }
 
   const [product, setProduct] = useState({
     title: "",
@@ -98,7 +103,7 @@ const ProductEdition = () => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      await updateProduct(id, product, onClose);
+      await updateProduct(id, product, onClose, onRetry);
       setLoad(true)
     }
   };

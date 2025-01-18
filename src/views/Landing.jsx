@@ -12,6 +12,7 @@ const Landing = ({theme, toggleTheme}) => {
   const info = useSelector((state)=>state.Landing)
   const products = useSelector((state)=>state.Products)
   const media = useSelector((state)=>state.Media)
+  const uri = import.meta.env.VITE_URL
   useEffect(()=>{
     dispatch(getInfo())
     dispatch(getProduct())
@@ -25,6 +26,22 @@ const Landing = ({theme, toggleTheme}) => {
         <title>Nomades Cabañas de pastores</title>
         <meta name="description" content={info.info_header} />
         <meta name="keywords" content="cabañas, pastores, vagon" />
+        <meta name="author" content="Nomades Team" />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Nomades Cabañas de pastores" />
+        <meta property="og:description" content={info.info_header} />
+        <meta property="og:image" content={info.image} />
+        <meta property="og:url" content={uri} />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="es_ES" />
+        
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Nomades Cabañas de pastores" />
+        <meta name="twitter:description" content={info.info_header} />
+        <meta name="twitter:image" content={info.image}/>
         {/* Puedes agregar más etiquetas meta aquí */}
       </Helmet>
     <div className='min-vh-100 cover-container1 d-flex w-100 p-3 mx-auto flex-column' style={{backgroundImage:`url(${info.image}||https://img.freepik.com/foto-gratis/cascada-barco-limpio-china-natural_1417-1356.jpg)`}}>

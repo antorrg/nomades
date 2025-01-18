@@ -6,7 +6,7 @@ import {
 } from "../generalComponents/HandlerError";
 import {setAuthHeader} from "../generalComponents/axiosUtils";
 
-export default async function onDeleteUser(id, onClose) {
+export default async function onDeleteUser(id, onClose, onRetry) {
   try {
     const response = await axios.delete(`api/v1/user/${id}`, setAuthHeader());
     if (response.status === 200) {
@@ -15,5 +15,6 @@ export default async function onDeleteUser(id, onClose) {
     }
   } catch (error) {
     HandlError(error);
+    onRetry()
   }
 }

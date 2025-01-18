@@ -27,7 +27,11 @@ const OurWorkEdit = () => {
       navigate(-1);
       setLoad(false)
     };
-  
+    const onRetry = ()=>{
+      setTimeout(()=>{
+        onClose()
+      },3000)
+    }
     const [item, setItem] = useState({
       title: "",
       text: "",
@@ -94,7 +98,7 @@ const OurWorkEdit = () => {
       if (confirmed) {
         // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
         //await updateItem(id, item, onClose);
-         await updateWorks(id, item, onClose)
+         await updateWorks(id, item, onClose, onRetry)
          setLoad(true)
         
       }

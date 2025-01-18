@@ -18,6 +18,11 @@ const ItemCreate = () => {
     navigate(-1);
     setLoad(false)
   };
+  const onRetry = ()=>{
+    setTimeout(()=>{
+      itemOnClose()
+    },3000)
+  }
   const [imgUrl, setImgUrl] = useState(false)
   const [item, setItem] = useState({
     img: "",
@@ -56,7 +61,7 @@ const ItemCreate = () => {
     );
     if (confirmed) {
       // Aquí iría la lógica para crear el producto
-      await createItem(item, itemOnClose);
+      await createItem(item, itemOnClose, onRetry);
       setLoad(true)
       //console.log('soy el nuevo item: ',item);
     }

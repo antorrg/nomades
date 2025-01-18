@@ -29,7 +29,7 @@ const verifyPassword = async (userData, setVerify) => {
   }
 };
 
-const changePassword = async (id, passChange, setVerify, onClose, logout) => {
+const changePassword = async (id, passChange, setVerify, onClose, logout, onRetry) => {
   try {
     // Realiza la solicitud PUT con Axios
     const response = await axios.put(
@@ -50,10 +50,11 @@ const changePassword = async (id, passChange, setVerify, onClose, logout) => {
     }
   } catch (error) {
     HandlError({ error: error.message });
+    onRetry()
   }
 };
 
-const onResetPass = async (id, onClose) => {
+const onResetPass = async (id, onClose, onRetry) => {
   try {
     const response = await axios.post(
       `/api/v1/user/change`,
@@ -66,6 +67,7 @@ const onResetPass = async (id, onClose) => {
     }
   } catch (error) {
     HandlError(error);
+    onRetry()
   }
 };
 

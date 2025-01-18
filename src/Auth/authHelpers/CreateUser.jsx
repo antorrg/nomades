@@ -6,7 +6,7 @@ import {
 } from "../generalComponents/HandlerError";
 import {setAuthHeader} from "../generalComponents/axiosUtils";
 
-export default async function createUser(userData, onClose) {
+export default async function createUser(userData, onClose, onRetry) {
   const email = userData.email;
 
   try {
@@ -26,6 +26,7 @@ export default async function createUser(userData, onClose) {
     }
   } catch (error) {
     HandlError(error);
+    onRetry()
     throw error;
   }
 }

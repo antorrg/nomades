@@ -23,7 +23,11 @@ const UserEdition = () => {
     navigate(-1);
     setLoad(false)
   };
-
+  const onRetry = ()=>{
+    setTimeout(()=>{
+      onClose()
+    },3000)
+  }
   const [user, setUser] = useState({
     email: "",
     picture: "",
@@ -64,7 +68,7 @@ const UserEdition = () => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      await endpoint.updateUser(id, user, onClose);
+      await endpoint.updateUser(id, user, onClose, onRetry);
       setLoad(true)
     }
   };

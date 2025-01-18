@@ -3,12 +3,15 @@ import ctr from '../controllers/usersControllers.js'
 import mdd from '../middlewares/middlewares.js'
 import auth from '../middlewares/validation/index.js'
 import cont from '../controllers/landingController.js'
+import {createLogLimiter} from "../utils/rateLimits.js"
 
+
+const logLimiter2 = createLogLimiter(2)//El numero es el tiempo de espera en minutos
 
 const userRouter = express.Router()
 
 userRouter.post('/user/create', auth.verifyToken,  auth.checkRole([0, 9]),mdd.createUser ,ctr.userCreateController)
-userRouter.post('/user/login', mdd.loginUser ,ctr.loginController)
+userRouter.post('/user/login', logLimiter2, mdd.loginUser ,ctr.loginController)
 userRouter.get('/user',  auth.verifyToken, auth.checkRole([0, 9]), ctr.getUserController)
 userRouter.get('/user/:id', auth.verifyToken, mdd.middUuid, ctr.getUserByIdController)
 userRouter.put('/user/updprofile/:id', auth.verifyToken, ctr.updUserCtr)

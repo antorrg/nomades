@@ -21,7 +21,12 @@ const User = ({ user, isSingleUser }) => {
     setLoad(false)
     navigate("/admin")
   };
-
+  const onRetry = ()=>{
+    setTimeout(()=>{
+      onClose()
+    },3000)
+  }
+  
  
   const goToPassUpd = () => {
     if (isProfileRoute) {
@@ -36,7 +41,7 @@ const User = ({ user, isSingleUser }) => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      us.onResetPass(user.id, onClose);
+      us.onResetPass(user.id, onClose, onRetry);
       setLoad(true)
     }
   };

@@ -6,7 +6,7 @@ import {
 } from "../generalComponents/HandlerError";
 import {setAuthHeader} from "../generalComponents/axiosUtils";
 
-export async function upgradeUser(userId, user, onClose) {
+export async function upgradeUser(userId, user, onClose, onRetry) {
   try {
     const response = await axios.patch(
       `/api/v1/user/upgrade/${userId}`,
@@ -21,9 +21,10 @@ export async function upgradeUser(userId, user, onClose) {
     }
   } catch (error) {
     HandlError(error);
+    onRetry()
   }
 }
-export async function updateUser(userId, editedUser, onClose) {
+export async function updateUser(userId, editedUser, onClose, onRetry) {
   const { email, picture, country, given_name } = editedUser;
   try {
     const response = await axios.put(
@@ -39,5 +40,6 @@ export async function updateUser(userId, editedUser, onClose) {
     }
   } catch (error) {
     HandlError(error);
+    onRetry()
   }
 }

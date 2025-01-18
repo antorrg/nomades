@@ -28,6 +28,11 @@ const LandEdition = () => {
     navigate(-1);
     setLoad(false)
   };
+  const onRetry = ()=>{
+    setTimeout(()=>{
+      onClose()
+    },3000)
+  }
 
   const [item, setItem] = useState({
     title: "",
@@ -94,7 +99,7 @@ const LandEdition = () => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      await updateLanding(id, item, onClose);
+      await updateLanding(id, item, onClose, onRetry);
       setLoad(true)
       //console.log('actualizar : ', item)
       

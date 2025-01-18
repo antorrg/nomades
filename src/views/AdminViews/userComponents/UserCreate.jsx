@@ -13,6 +13,11 @@ const UserCreate = () => {
     navigate(-1);
     setLoad(false)
   };
+  const onRetry = ()=>{
+    setTimeout(()=>{
+      onClose()
+    },3000)
+  }
   const [input, setInput] = useState({
     email: "",
   });
@@ -40,7 +45,7 @@ const UserCreate = () => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      await endpoint.createUser(input, onClose);
+      await endpoint.createUser(input, onClose, onRetry);
       setLoad(true)
     }
   };

@@ -30,6 +30,11 @@ const MediaUpdate = () => {
     navigate(-1);
     setLoad(false)
   };
+  const onRetry = ()=>{
+    setTimeout(()=>{
+      onClose()
+    },3000)
+  }
 
   const [item, setItem] = useState({
     title: "",
@@ -87,7 +92,7 @@ const MediaUpdate = () => {
     if (confirmed) {
       // Aquí iría la lógica para actualizar el elemento
       //console.log("Elemento actualizado:", item);
-       await updateMedia(id, item, onClose)
+       await updateMedia(id, item, onClose, onRetry)
        setLoad(true)
     }
   };

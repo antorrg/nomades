@@ -18,6 +18,11 @@ const ImagesComponent = () => {
     const onClose = ()=>{
       setLoad(false)
     }
+    const onRetry = ()=>{
+      setTimeout(()=>{
+        onClose()
+      },3000)
+    }
 
     const delImage = async(id)=>{
       const confirmed = await showConfirmationDialog(
@@ -26,7 +31,7 @@ const ImagesComponent = () => {
       if (confirmed) {
         // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
         setLoad(true)
-        await deleteImage(id, onClose);
+        await deleteImage(id, onClose, onRetry);
         //console.log('soy la imagen a borrar: ',id)
         
       }

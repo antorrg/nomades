@@ -2,7 +2,7 @@ import axios from "axios";
 import * as toast from "../Auth/generalComponents/HandlerError";
 import {setAuthHeader} from "../Auth/generalComponents/axiosUtils";
 
-export const updateProduct = async (id, product, onClose) => {
+export const updateProduct = async (id, product, onClose, onRetry) => {
   console.log(id);
   try {
     const response = await axios.put(
@@ -16,11 +16,12 @@ export const updateProduct = async (id, product, onClose) => {
     }
   } catch (error) {
     toast.HandlError(error);
+    onRetry()
     console.error("Error al actualizar el producto:", error);
   }
 };
 
-export const updateItem = async (id, item, onClose) => {
+export const updateItem = async (id, item, onClose, onRetry) => {
   try {
     const response = await axios.put(
       `/api/v1/product/item/${id}`,
@@ -33,11 +34,12 @@ export const updateItem = async (id, item, onClose) => {
       await onClose(); // Cierra el modal después de guardar los cambios
     }
   } catch (error) {
+    onRetry()
     toast.HandlError({ error: error.message });
     console.error("Error al actualizar el item:", error);
   }
 };
-export const createProduct = async (product, onClose) => {
+export const createProduct = async (product, onClose, onRetry) => {
   try {
     const response = await axios.post(
       `/api/v1/product/create`,
@@ -49,12 +51,13 @@ export const createProduct = async (product, onClose) => {
       await onClose(); // Cierra el modal después de guardar los cambios
     }
   } catch (error) {
+    onRetry()
     toast.HandlError(error);
     //console.error("Error al crear el producto:", error);
   }
 };
 
-export const createItem = async (item, onClose) => {
+export const createItem = async (item, onClose, onRetry) => {
   try {
     const response = await axios.post(
       `/api/v1/product/item/create`,
@@ -67,10 +70,11 @@ export const createItem = async (item, onClose) => {
     }
   } catch (error) {
     toast.HandlError({ error: error.message });
+    onRetry()
     console.error("Error al crear el item:", error);
   }
 };
-export const deleteProduct = async (id, onClose) => {
+export const deleteProduct = async (id, onClose, onRetry) => {
   console.log(id);
   try {
     const response = await axios.delete(
@@ -82,10 +86,11 @@ export const deleteProduct = async (id, onClose) => {
       await onClose(); // Cierra el modal después de guardar los cambios
     }
   } catch (error) {
+    onRetry()
     toast.HandlError(error);
   }
 };
-export const deleteItem = async (id, onClose) => {
+export const deleteItem = async (id, onClose, onRetry) => {
   try {
     const response = await axios.delete(
       `/api/v1/product/item/${id}`,
@@ -97,10 +102,11 @@ export const deleteItem = async (id, onClose) => {
     }
   } catch (error) {
     toast.HandlError(error);
+    onRetry()
   }
 };
 //Endpoints media
-export const deleteImage = async (id, onClose) => {
+export const deleteImage = async (id, onClose, onRetry) => {
   console.log(id);
   try {
     const response = await axios.delete(
@@ -113,5 +119,6 @@ export const deleteImage = async (id, onClose) => {
     }
   } catch (error) {
     toast.HandlError(error);
+    onRetry()
   }
 };

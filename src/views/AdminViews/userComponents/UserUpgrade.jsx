@@ -23,7 +23,11 @@ const UserUpgrade = () => {
     navigate(-1);
     setLoad(false)
   };
-
+  const onRetry = ()=>{
+    setTimeout(()=>{
+      onClose()
+    },3000)
+  }
   const [user, setUser] = useState({
     role: "",
     enable: "",
@@ -54,7 +58,7 @@ const UserUpgrade = () => {
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
       //console.log(user);
-      await endpoint.upgradeUser(id, user, onClose);
+      await endpoint.upgradeUser(id, user, onClose, onRetry);
       setLoad(true)
     }
   };
