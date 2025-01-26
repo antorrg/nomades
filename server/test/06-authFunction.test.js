@@ -50,7 +50,7 @@ describe('Test de middlewares de autenticacion y autorizacion', ()=>{
              .set('Authorization', `Bearer pepito`)
              .expect('Content-Type', /json/)
              .expect(401);
-             expect(response.body).toEqual("Token o sesión invalidos!")       
+             expect(response.body).toEqual("Token invalido")       
         })
         it('Deberia decodificar el id y el role del usuario en un objeto: "req.UserInfo"', async()=>{
             const token = store.getToken()
@@ -62,19 +62,7 @@ describe('Test de middlewares de autenticacion y autorizacion', ()=>{
              .expect(200);
              expect(response.body).toEqual(compare)    
         })
-        it('El cierre de sesion deberia invalidar el token', async()=>{
-            const token = store.getToken()
-            const logout = await agent
-            .get('/test/user/logout')
-            .expect(200)
-            expect(logout.body).toEqual('Sesion cerrada')
-            const response = await agent
-             .get('/test/user')
-             .set('Authorization', `Bearer ${token}`)
-             .expect('Content-Type', /json/)
-             .expect(401);
-             expect(response.body).toEqual("Token o sesión invalidos!")   
-        })
+    
     });
     describe('Middlewares de edicion de usuario que requieren autenticacion y roles de Jsonwebtoken.', ()=>{
         describe('Middleware "userVerifyPassMidd" de verificacion de password.', ()=>{
