@@ -1,3 +1,4 @@
+import eh from "../utils/errorHandlers.js"
 
 export default {
     errorEndWare :(err, req, res, next)=>{
@@ -7,11 +8,12 @@ export default {
         res.status(status).send(message)
     },
     lostRoute :(req, res, next)=> {
-        res.status(404).json('Ruta no encontrada')},
+        return next(eh.middError("Ruta no encontrada", 404))
+    },
     
     validJson : (err, req, res, next)=>{
         if(err instanceof SyntaxError && err.status === 400 && 'body' in err){
-            res.status(400).json({error: 'Formato JSON invalido'});
+            return next(eh.middError("Formato JSON invalido", 400))
         }else{next()};
     },
     // sanitizeBody : [

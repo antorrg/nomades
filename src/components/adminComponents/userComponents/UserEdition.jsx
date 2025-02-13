@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import ImageUploader from "../../../utils/ImageUploader";
-import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
+import showConfirmationDialog from "../../../Endpoints/sweetAlert";
 import Loading from "../../../components/Loading";
-import * as endpoint from "../../../Auth/authHelpers/Auth";
+import {userProfile} from "../../../Endpoints/endpoints";
 import { getUserById } from "../../../redux/actions";
 
-const UserUpgrade = () => {
+const UserEdition = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -29,15 +29,19 @@ const UserUpgrade = () => {
     },3000)
   }
   const [user, setUser] = useState({
-    role: "",
-    enable: "",
+    email: "",
+    picture: "",
+    given_name: "",
+    country: "",
   });
 
   useEffect(() => {
     if (user1) {
       setUser({
-        role: user1.role || "",
-        enable: user1.enable || "",
+        email: user1.email || "",
+        picture: user1.picture || "",
+        given_name: user1.given_name || "",
+        country: user1.country || "",
       });
     }
   }, [user1]);
@@ -50,6 +54,13 @@ const UserUpgrade = () => {
     }));
   };
 
+  const handleImageChange = (imageUrl) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      picture: imageUrl,
+    }));
+  };
+
   const handleSubmit = async () => {
     // Lógica para actualizar el producto
     const confirmed = await showConfirmationDialog(
@@ -57,12 +68,10 @@ const UserUpgrade = () => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      //console.log(user);
-      await endpoint.upgradeUser(id, user, onClose, onRetry);
+      await userProfile(id, user, onClose, onRetry);
       setLoad(true)
     }
   };
-
   return (
     <div className="imageBack">
       {load?
@@ -71,44 +80,60 @@ const UserUpgrade = () => {
       <div className="coverBack">
         <div className="container-md modal-content colorBack formProductContainer rounded-4 shadow">
           <div className="container mt-5">
-            <h1>Cambio de roles, bloqueo:</h1>
+            <h1>Actualizacion de usuario:</h1>
             <section
               className="needs-validation"
               id="updateItemForm"
               noValidate
             >
               <div className="row">
+                <div className="col-md-6 mb-3">
+                  <ImageUploader
+                    titleField={"Imagen:"}
+                    imageValue={user.picture}
+                    onImageUpload={handleImageChange}
+                  />
+                </div>
                 <div className="col-md-6 mb-3"></div>
                 <div className="mb-3">
-                  <label htmlFor="role" className="form-label">
-                    Rol:
+                  <label htmlFor="email" className="form-label">
+                    Email:
                   </label>
-                  <select
-                    name="role"
+                  <input
                     className="form-control"
-                    value={user.role}
+                    type="text"
+                    id="email"
+                    name="email"
+                    value={user.email}
                     onChange={handleInputChange}
-                  >
-                    <option value={"Administrador"}>Administrador</option>
-                    <option value={"Usuario"}>Usuario</option>
-                    <option value={"Moderador"}>Moderador</option>
-                  </select>
+                  />
+                </div>{" "}
+                <div className="mb-3">
+                  <label htmlFor="given_name" className="form-label">
+                    Nombre:
+                  </label>
+                  <input
+                    className="form-control"
+                    type="text"
+                    id="given_name"
+                    name="given_name"
+                    value={user.given_name}
+                    onChange={handleInputChange}
+                  />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="enable" className="form-label">
-                    Estado:
+                  <label htmlFor="country" className="form-label">
+                    Pais:
                   </label>
-                  <select
-                    name="enable"
+                  <input
                     className="form-control"
-                    value={user.enable}
+                    type="text"
+                    id="country"
+                    name="country"
+                    value={user.country}
                     onChange={handleInputChange}
-                  >
-                    <option value={true}>Activo</option>
-                    <option value={false}>Bloqueado</option>
-                  </select>
+                  />
                 </div>
-
                 <div className="d-flex flex-row me-3">
                   <button
                     className="btn btn-md btn-primary mb-3 me-2"
@@ -137,4 +162,4 @@ const UserUpgrade = () => {
   );
 };
 
-export default UserUpgrade;
+export default UserEdition;

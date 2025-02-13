@@ -1,8 +1,8 @@
 import {useState} from 'react'
 import { useNavigate, useLocation } from "react-router-dom";
-import Edition from "../../../Auth/generalComponents/Edition/Edition";
-import * as us from "../../../Auth/authHelpers/Auth";
-import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
+import Edition from "../../../components/generalComponents/Edition/Edition";
+import {userResetPass,userDelete } from "../../../Endpoints/endpoints";
+import showConfirmationDialog from "../../../Endpoints/sweetAlert";
 import Loading from "../../../components/Loading";
 //import "./user.css";
 
@@ -41,7 +41,7 @@ const User = ({ user, isSingleUser }) => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      us.onResetPass(user.id, onClose, onRetry);
+      userResetPass(user.id, onClose, onRetry);
       setLoad(true)
     }
   };
@@ -52,7 +52,7 @@ const User = ({ user, isSingleUser }) => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      us.onDeleteUser(user.id, onClose);
+      userDelete(user.id, onClose);
       setLoad(true)
     }
   };

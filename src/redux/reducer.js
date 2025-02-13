@@ -17,17 +17,24 @@ import {
 } from './actions'
 
 const initialState = {
+    LandingPublic:[],
+    LandingByIdPublic: [],
+    ProductsPublic:[],
+    ProductIdPublic:[],
+    ItemPublic:[],
+    MediaPublic: [],
+//Protected States:
     Landing:[],
     LandingById: [],
     Products:[],
     ProductId:[],
     Item:[],
+    Media: [],
     Users:[],
     UserById: [],
     Images : [],
     Works : [],
     WorkById: [],
-    Media: [],
     MediaAd:[],
     MediaById:[],
 

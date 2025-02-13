@@ -5,13 +5,13 @@ import userRouter from "./userRouterRest.js";
 import landingRouter from "./landingRouter.js";
 import aboutRouter from "./aboutRouter.js";
 import { upload, controllerUploader } from "../utils/cloudinary.js";
-//import mid from "../middlewares/middlewares.js";
+import auth from "../middlewares/validation/sessionMiddle.js";
 
 const mainRouter = express.Router();
 //mainRouter.use(mid.sanitizeBody);
 //mainRouter.use(mid.sanitizeQuery);
 
-mainRouter.post("/api/v1/imgupload",upload.single("image"),controllerUploader); //Ruta de subida de imagenes
+mainRouter.post("/api/v1/imgupload", auth.verifyToken , upload.single("image"),controllerUploader); //Ruta de subida de imagenes
 
 
 mainRouter.use("/api/v1", productRouter);

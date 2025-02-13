@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
-import { ValidCreate } from "../../../Auth/generalComponents/internalUtils/Validate";
+import showConfirmationDialog from "../../../Endpoints/sweetAlert";
+import { ValidCreate } from "../../../utils/Validate";
 import Loading from "../../../components/Loading";
-import * as endpoint from "../../../Auth/authHelpers/Auth";
+import {userCreate} from "../../../Endpoints/endpoints";
 
 const UserCreate = () => {
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ const UserCreate = () => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      await endpoint.createUser(input, onClose, onRetry);
+      await userCreate(input, onClose, onRetry);
       setLoad(true)
     }
   };

@@ -2,7 +2,7 @@ import { User } from "../db.js";
 import eh from '../utils/errorHandlers.js'
 import { oldImagesHandler } from "./storage.js";
 import bcrypt from "bcrypt";
-import jwt from '../middlewares/validation/index.js'
+import jwt from '../middlewares/validation/sessionMiddle.js'
 import env from "../envConfig.js";
 import help from "./helpers.js";
 import NodeCache from "node-cache";

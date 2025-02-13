@@ -1,6 +1,6 @@
 import axios from "axios";
-import * as toast from "../Auth/generalComponents/HandlerError";
-import {setAuthHeader} from "../Auth/generalComponents/axiosUtils";
+import * as toast from "../Endpoints/HandlerError";
+import { setAuthHeader } from "../Endpoints/axiosUtils";
 
 export const updateProduct = async (id, product, onClose, onRetry) => {
   console.log(id);
@@ -16,7 +16,7 @@ export const updateProduct = async (id, product, onClose, onRetry) => {
     }
   } catch (error) {
     toast.HandlError(error);
-    onRetry()
+    onRetry();
     console.error("Error al actualizar el producto:", error);
   }
 };
@@ -34,7 +34,7 @@ export const updateItem = async (id, item, onClose, onRetry) => {
       await onClose(); // Cierra el modal después de guardar los cambios
     }
   } catch (error) {
-    onRetry()
+    onRetry();
     toast.HandlError({ error: error.message });
     console.error("Error al actualizar el item:", error);
   }
@@ -51,7 +51,7 @@ export const createProduct = async (product, onClose, onRetry) => {
       await onClose(); // Cierra el modal después de guardar los cambios
     }
   } catch (error) {
-    onRetry()
+    onRetry();
     toast.HandlError(error);
     //console.error("Error al crear el producto:", error);
   }
@@ -70,7 +70,7 @@ export const createItem = async (item, onClose, onRetry) => {
     }
   } catch (error) {
     toast.HandlError({ error: error.message });
-    onRetry()
+    onRetry();
     console.error("Error al crear el item:", error);
   }
 };
@@ -86,7 +86,7 @@ export const deleteProduct = async (id, onClose, onRetry) => {
       await onClose(); // Cierra el modal después de guardar los cambios
     }
   } catch (error) {
-    onRetry()
+    onRetry();
     toast.HandlError(error);
   }
 };
@@ -102,7 +102,7 @@ export const deleteItem = async (id, onClose, onRetry) => {
     }
   } catch (error) {
     toast.HandlError(error);
-    onRetry()
+    onRetry();
   }
 };
 //Endpoints media
@@ -119,6 +119,6 @@ export const deleteImage = async (id, onClose, onRetry) => {
     }
   } catch (error) {
     toast.HandlError(error);
-    onRetry()
+    onRetry();
   }
 };
