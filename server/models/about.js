@@ -9,15 +9,15 @@ export default (sequelize) => {
           },
           title: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
           },
           image: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
           },
           text: {
             type: DataTypes.TEXT,
-            allowNull: false,
+            allowNull: true,
           },
         enable:{
           type: DataTypes.BOOLEAN,

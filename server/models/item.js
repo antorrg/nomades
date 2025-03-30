@@ -9,11 +9,11 @@ export default (sequelize) => {
           },
         img: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
           },
           text: {
             type: DataTypes.TEXT,
-            allowNull: false,
+            allowNull: true,
           },
         enable:{
           type: DataTypes.BOOLEAN,

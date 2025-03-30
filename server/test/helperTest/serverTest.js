@@ -1,5 +1,6 @@
 import express from 'express'
-import mid from '../../src/middlewares/middlewares.js'
+import * as mid from '../../src/middlewares/middleware.js'
+import * as user from '../../src/middlewares/baseMiddFunctions.js'
 import auth from '../../src/middlewares/validation/index.js'
 import * as store from './testStore.js'
 
@@ -9,7 +10,7 @@ serverTest.use(express.json())
 serverTest.post('/test/user/create', mid.loginUser, (req, res) => {
     res.status(200).json({ message: 'Passed middleware' })})
 
-serverTest.get('/test/users/:id', mid.middUuid, (req, res) => {
+serverTest.get('/test/users/:id', user.middUuid, (req, res) => {
         res.status(200).json({ message: 'Passed middleware' })})
 
 serverTest.put('/test/user/:id', mid.updUserMidd, (req, res) => {
@@ -30,7 +31,7 @@ serverTest.post('/test/item', mid.createItem, (req, res) => {
 serverTest.put('/test/item/:id', mid.updateItem, (req, res) => {
     res.status(200).json({ message: 'Passed middleware' })})
 
-serverTest.get('/test/:id', mid.middIntId, (req, res) => {
+serverTest.get('/test/:id', user.middIntId, (req, res) => {
     res.status(200).json({ message: 'Passed middleware' })})
 
 serverTest.put('/test/page/:id', mid.updProduct, (req, res) => {
