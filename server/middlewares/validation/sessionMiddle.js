@@ -41,15 +41,15 @@ export const generateToken = (user)=>{
     };
 export const verifyToken = (req, res, next)=>{
      let token = req.headers['x-access-token'] || req.headers.authorization;
-            if(!token){eh.throwError('Acceso no autorizado. Token no proporcionado', 401)}
+            if(!token){return next(eh.middError('Acceso no autorizado. Token no proporcionado', 401))}
             if (token.startsWith('Bearer')) {
             // Eliminar el prefijo 'Bearer ' del token
             token = token.slice(7, token.length);
               }
             pkg.verify(token, env.SecretKey, (err, decoded)=>{
             if(err){
-                if(err.name === 'TokenExpiredError'){eh.throwError('Token expirado', 401)
-                }eh.throwError('Token invalido', 401)
+                if(err.name === 'TokenExpiredError'){return next(eh.middError('Token expirado', 401))
+                }return next(eh.middError('Token invalido', 401))
             }
             req.user = decoded;
             const userId = decoded.userId;
@@ -97,47 +97,16 @@ export const checkRole = (allowedRoles) => {
             next();
           } else {
             // El usuario no tiene el rol necesario, rechazar la solicitud
-            eh.throwError('Acceso no autorizado', 403)
+            return next(eh.middError('Acceso no autorizado', 403))
           }
         };
       };
 
 //Este es un modelo de como recibe el parámetro checkRole:
   //todo   app.get('/ruta-protegida', checkRole(['admin']), (req, res) => {
-
-
-
-
-
-// import session from 'express-session';
-// import  connectMongo from 'connect-mongodb-session'
-// import env from '../../envConfig.js';
-// const MongoDBStore = connectMongo(session);
-
-// export const myStore = new MongoDBStore({
-//     uri:env.DbUri,
-//     autoReconnect: true,
-//     collection: 'sessions', // Nombre de la colección donde se guardarán las sesiones
-//     autoRemove: 'interval', // Eliminar automáticamente las sesiones expiradas
-//     autoRemoveInterval: 10, // Intervalo en minutos para eliminar las sesiones expiradas
-//     touchAfter: 24 * 3600 // Tiempo en segundos después del cual se actualiza la fecha de acceso de la sesión
-// });
-
-// myStore.on('error', (error) => {
-//     console.error(error);
-//   });
-
-// export const sessionMiddle = session({
-//     secret: env.Secret,
-//     resave: false,
-//     saveUninitialized: false,
-//     store: myStore,
-//     cookie: {
-//         secure: false,
-//         httpOnly: true,
-//         sameSite: 'strict',
-//         maxAge: 1000 * 60 * 60
-//     }
-// });
-
-
+export default { 
+  generateToken,
+  verifyToken,
+  checkRole,
+  setAdminVar
+};

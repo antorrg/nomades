@@ -1,10 +1,11 @@
-import { ValidPass } from "../../../Auth/generalComponents/internalUtils/Validate";
-import { useAuth } from "../../../Auth/AuthContext/AuthContext";
-import * as us from "../../../Auth/authHelpers/Auth";
+import { ValidPass } from "../../../utils/Validate";
+import { useAuth } from "../../../Auth/AuthContext";
+import {userVerify, userChangePass}from "../../../Endpoints/endpoints";
 import { useState } from "react";
-import showConfirmationDialog from "../../../Auth/generalComponents/sweetAlert";
-import GenericButton from "../../../Auth/generalComponents/GenericButton/GenericButton";
+import showConfirmationDialog from "../../../Endpoints/sweetAlert";
+import GenericButton from "../../generalComponents/GenericButton/GenericButton";
 import { useNavigate, useParams } from "react-router-dom";
+import Loading from "../../Loading";
 //import "../../styles/login.css";
 //import "../../styles/forms.css";
 
@@ -12,22 +13,33 @@ const EditPassword = () => {
   const { logout } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
+  const [load, setLoad] = useState(false);
+  const [verify, setVerify] = useState(true);
+
   const closeLogin = () => {
     navigate(-1);
   };
   const onClose = () => {
+    setVerify(true);
+      setTimeout(() => {
+        logout();
+      }, 5000);
+    setLoad(false);
     navigate(-1);
   };
+
+  const verifySuccess = () => {
+    setVerify(false);
+  }
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword1, setShowPassword1] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
 
-  const [verify, setVerify] = useState(true);
   const [inputPass, setInputPass] = useState({
     id: id,
     password: "",
   });
-
+ 
   const [input, setInput] = useState({
     newPassword: "",
     confirmPassword: "",
@@ -72,7 +84,7 @@ const EditPassword = () => {
     );
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      us.verifyPassword(userData, setVerify);
+      userVerify(userData, verifySuccess);
     }
   };
 
@@ -86,8 +98,9 @@ const EditPassword = () => {
       "¿Está seguro cambiar la contraseña?"
     );
     if (confirmed) {
+      setLoad(true);
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      us.changePassword(id, passChange, setVerify, onClose, logout);
+      userChangePass(id, passChange, onClose);
     }
   };
 
@@ -104,6 +117,7 @@ const EditPassword = () => {
       <div className="coverBack">
         <div className="container-md modal-content colorBack passContainer rounded-4 shadow">
           <div className="form-signin m-auto p-3">
+              {load? <Loading/> : 
             <section>
               <div className="d-flex justify-content-between align-items-center">
                 <h5>Editar contraseña:</h5>
@@ -212,6 +226,7 @@ const EditPassword = () => {
                 disabled={disabledBy}
               />
             </section>
+              }
           </div>
         </div>
       </div>

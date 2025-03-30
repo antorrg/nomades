@@ -2,8 +2,8 @@
 import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {Header} from '../components/IndexComponents'
-import { ValidContact } from '../Auth/generalComponents/internalUtils/Validate'
-import showConfirmationDialog from '../Auth/generalComponents/sweetAlert'
+import { ValidContact } from '../utils/Validate'
+import showConfirmationDialog from '../Endpoints/sweetAlert'
 import { sendEmail } from '../utils/landingPageEndpoints'
 
 const Contact = () => {
