@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Form } from "react-bootstrap";
 import { getInfoById } from "../../../../redux/actions";
 import {landingUpdate} from "../../../../Endpoints/endpoints";
-import showConfirmationDialog from "../../../../Endpoints/sweetalert";
+import showConfirmationDialog from "../../../../Endpoints/sweetAlert";
 import ImageUploader from "../../../../utils/ImageUploader";
 import ImageSelector from "../../../../utils/ImageSelector";
 import Loading from "../../../Loading";
