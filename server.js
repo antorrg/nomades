@@ -68,7 +68,7 @@ server.use(sm.errorEndWare);
 
 server.listen(env.Port, async()=>{
     try {
-        await sequelize.sync({alter:true})
+        await sequelize.sync({force:true})
         console.log('Database connect succesfully 😉!!')
         await initialUser()
         console.log(`Server is listening at http://localhost:${env.Port}\nServer in ${env.Status}`)
