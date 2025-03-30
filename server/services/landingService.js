@@ -25,13 +25,13 @@ export default {
     },
     getLandings : async(admin)=>{
         try {
-            const pageFound = await Landing.findAll({
+            let pageFound = await Landing.findAll({
                 raw: true,
                 where: admin ? {} :{ enable: true },
             })
             if(!pageFound ){eh.throwError('Elemento no encontrado', 404)}
             console.log(pageFound)
-            if(pageFound.length===0){return help.dataEmptyLanding()}
+            if(pageFound.length===0){pageFound = help.dataEmptyLanding()}
             return help.cleanerLanding(pageFound, false)
         } catch (error) {
             throw error;

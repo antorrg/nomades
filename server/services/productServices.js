@@ -65,12 +65,12 @@ getProduct : async (admin) => {
                                cache: true 
                               }
                         }// Devolver los datos en caché si existen}
-        const dataFound = await Product.findAll({
+        let dataFound = await Product.findAll({
             raw:true,
             where: admin ? {} :{ enable: true },
         })
         if(!dataFound){eh.throwError('Dato no hallado', 404)}
-        if(dataFound.length === 0)return help.dataEmptyPage()
+        if(dataFound.length === 0){dataFound = help.dataEmptyPage()}
         const data = help.productCleaner(dataFound, false, admin)
         if(!admin){cache.set('products', data);}
         return {products: data,
