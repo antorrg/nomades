@@ -9,11 +9,11 @@ export default (sequelize) => {
           },
         image: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
           },
           title: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
           },
           info_header:{
             type: DataTypes.STRING,
@@ -21,7 +21,7 @@ export default (sequelize) => {
           },
           description: {
             type: DataTypes.TEXT,
-            allowNull: false,
+            allowNull: true,
           },
         enable:{
           type: DataTypes.BOOLEAN,

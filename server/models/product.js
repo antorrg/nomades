@@ -7,9 +7,9 @@ export default (sequelize) => {
             primaryKey: true,
             autoIncrement: true,
           },
-        title: { type: DataTypes.STRING, allowNull: false },
-        landing: { type: DataTypes.STRING, allowNull: false },
-        info_header: {type:DataTypes.STRING, allowNull: false},
+        title: { type: DataTypes.STRING, allowNull: true },
+        landing: { type: DataTypes.STRING, allowNull: true },
+        info_header: {type:DataTypes.STRING, allowNull: true},
         info_body:{type: DataTypes.TEXT, allowNull: true},
         to_show: {
             type: DataTypes.BOOLEAN,

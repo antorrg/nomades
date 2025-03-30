@@ -11,8 +11,8 @@ import {fileURLToPath} from 'url'
 import path from 'path'
 import initialUser from './server/services/initialUser.js'
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+
+const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 
 

@@ -171,6 +171,7 @@ updItem: async (id, newData)=>{
 delProduct: async (id) => {
     let transaction;
     let imageUrl = ''
+    let results = [];
     try {
         transaction = await sequelize.transaction();
         
@@ -191,24 +192,27 @@ delProduct: async (id) => {
 
         // Borrar el Producto
         await product.destroy({ transaction });
+  // Después de operaciones exitosas en DB, borrar imágenes de Cloudinary
 
-        // Después de operaciones exitosas en DB, borrar imágenes de Cloudinary
-        const deletePromises = [
-            // Borrar imagen principal del producto
-            cloud.deleteFromCloudinary(imageUrl),
-            // Borrar todas las imágenes de items
-            itemImages.map(imgUrl => cloud.deleteFromCloudinary(imgUrl))
-        ];
-
-        const results = await Promise.allSettled(deletePromises);
+    // Borrado de imagen principal si existe
+    if (imageUrl.trim()) {
+        // Si la función deleteFromCloudinary devuelve una promesa, puedes esperar su resolución
+        await cloud.deleteFromCloudinary(imageUrl);
+      }
+      
+      // Borrar imágenes de items si existen
+      if (itemImages.length > 0) {
+        // NOTA: Usamos map directamente para crear un array plano de promesas
+        const deletePromises = itemImages.map(imgUrl => cloud.deleteFromCloudinary(imgUrl));
+        results = await Promise.allSettled(deletePromises);
         
         // Verificar si hubo fallos en los borrados
         const fallosEnBorrado = results.filter(result => result.status === 'rejected');
         if (fallosEnBorrado.length > 0) {
-            console.error('Algunas imágenes no se pudieron borrar de Cloudinary:', fallosEnBorrado);
-            // Puedes querer registrar estos fallos pero no fallar toda la operación
+          console.error('Algunas imágenes no se pudieron borrar de Cloudinary:', fallosEnBorrado);
+          // Se puede registrar el error pero seguir con la operación
         }
-
+      }
         await transaction.commit();
         cache.del('products')
         return { 
@@ -263,8 +267,9 @@ async function imageItemCapture (id){
             },
             attributes: ['img'] 
         })
-        if(!data){eh.throwError('Error inesperado', 500)}
-        return data.map(item => item.img);
+        const images = data.map(item => item.img.trim());
+        if(images.length === 0){return []}
+        return images;
     } catch (error) {
         throw error
     }

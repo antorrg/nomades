@@ -8,8 +8,8 @@ export default (sequelize) => {
             allowNull: false,
             primaryKey: true
         },
-        email: { type: DataTypes.STRING, allowNull: false },
-        password: {type:DataTypes.STRING, allowNull: false},
+        email: { type: DataTypes.STRING, allowNull: true },
+        password: {type:DataTypes.STRING, allowNull: true},
         nickname:{type: DataTypes.STRING, allowNull: true},
         given_name: { type: DataTypes.STRING, allowNull: true },
         picture: { type: DataTypes.STRING, allowNull: true,},

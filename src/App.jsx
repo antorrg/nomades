@@ -1,11 +1,11 @@
 import {Routes, Route, Navigate, useNavigate, Outlet}from 'react-router-dom'
-import {useAuth} from './Auth/AuthContext/AuthContext'
+import {useAuth} from './Auth/AuthContext'
 import { useEffect, useCallback, useState } from 'react'
 import interceptor from './Interceptor'
 import ProtectedRoute from './ProtectedRoutes'
 import * as View from './views/Index'
-import * as Ad from './views/AdminViews/AdminIndex'
-import SessionWarning from './Auth/AuthContext/SessionWarning'
+import * as Ad from './components/adminComponents/AdminIndex'
+import SessionWarning from './Auth/SessionWarning'
 import CookieConsent from "react-cookie-consent";
 
 function App() {

@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct, getProductById } from "../../redux/actions";
-import GenericButton from "../../Auth/generalComponents/GenericButton/GenericButton";
-import * as Comp from "../../components/IndexComponents";
+import GenericButton from "../generalComponents/GenericButton/GenericButton";
+import * as Comp from "../IndexComponents";
 import * as Ad from "./AdminIndex";
 
 const ProductComp = () => {
@@ -14,8 +14,8 @@ const ProductComp = () => {
   const info = response.info;
   const items = response.items;
   const { id } = useParams();
-  const goBack = ()=>navigate(-1)
-  const isAdmin = true
+  const goBack = () => navigate(-1);
+  const isAdmin = true;
   useEffect(() => {
     if (id) {
       dispatch(getProductById(id, isAdmin));
@@ -29,10 +29,7 @@ const ProductComp = () => {
     <div>
       <div className="container marketing">
         {id ? (
-          <Ad.AlbumAdmin
-            info={info}
-            items={items}
-          />
+          <Ad.AlbumAdmin info={info} items={items} />
         ) : (
           <>
             <div className="featurette-divider"></div>

@@ -2,7 +2,7 @@ import serverTest from './helperTest/serverTest.js'
 import session from 'supertest'
 const agent = session(serverTest)
 import * as store from './helperTest/testStore.js'
-import midd from '../middlewares/middlewares.js'
+import * as midd from '../middlewares/baseMiddFunctions.js'
 
 
 

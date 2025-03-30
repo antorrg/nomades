@@ -1,9 +1,9 @@
 import axios from "axios";
-import {setAuthHeader, adminValidator} from "../Auth/generalComponents/axiosUtils";
-import { HandlError } from "../Auth/generalComponents/HandlerError";
+import { setAuthHeader, adminValidator } from "../Endpoints/axiosUtils";
+import { HandlError } from "../Endpoints/HandlerError";
 
 export const LANDING = "LANDING";
-export const LANDING_BY_ID = 'LANDING_BY_ID';
+export const LANDING_BY_ID = "LANDING_BY_ID";
 export const PRODUCT = "PRODUCT";
 export const PRODUCT_BY_ID = "PRODUCT_BY_ID";
 export const ITEM = "ITEM";
@@ -14,10 +14,9 @@ export const IMAGES = "IMAGES";
 export const WORKS = "WORKS";
 export const WORK_BY_ID = "WORK_BY_ID";
 export const ABOUT = "ABOUT";
-export const MEDIA = 'MEDIA';
-export const MEDIA_AD = 'MEDIA_AD';
-export const MEDIA_BY_ID = 'MEDIA_BY_ID'
-   
+export const MEDIA = "MEDIA";
+export const MEDIA_AD = "MEDIA_AD";
+export const MEDIA_BY_ID = "MEDIA_BY_ID";
 
 //*%%%%%%% Rutas libres %%%%%%%%
 export const getInfo = (isAdmin) => {
@@ -42,7 +41,7 @@ export const getInfoById = (id) => {
         payload: data.data,
       });
     } catch (error) {
-      HandlError(error) 
+      HandlError(error);
       console.error(error);
     }
   };
@@ -56,14 +55,14 @@ export const getProduct = (isAdmin) => {
         payload: data.data,
       });
     } catch (error) {
-      HandlError(error) 
+      HandlError(error);
       console.error(error);
     }
   };
 };
 
-export const getMedia = ()=>{
-  return async (dispatch)=>{
+export const getMedia = () => {
+  return async (dispatch) => {
     try {
       const data = await axios(`/api/v1/media/videos`);
       return dispatch({
@@ -71,22 +70,25 @@ export const getMedia = ()=>{
         payload: data.data,
       });
     } catch (error) {
-      HandlError(error) 
+      HandlError(error);
       console.error(error);
     }
-  }
-}
+  };
+};
 
 export const getProductById = (id, isAdmin) => {
   return async (dispatch) => {
     try {
-      const data = await axios(`/api/v1/product/${id}`, adminValidator(isAdmin));
+      const data = await axios(
+        `/api/v1/product/${id}`,
+        adminValidator(isAdmin)
+      );
       return dispatch({
         type: PRODUCT_BY_ID,
         payload: data.data,
       });
     } catch (error) {
-      HandlError(error) 
+      HandlError(error);
       console.error(error);
     }
   };
@@ -94,13 +96,16 @@ export const getProductById = (id, isAdmin) => {
 export const getItem = (id, isAdmin) => {
   return async (dispatch) => {
     try {
-      const data = await axios(`/api/v1/product/item/${id}`, adminValidator(isAdmin));
+      const data = await axios(
+        `/api/v1/product/item/${id}`,
+        adminValidator(isAdmin)
+      );
       return dispatch({
         type: ITEM,
         payload: data.data,
       });
     } catch (error) {
-      HandlError(error) 
+      HandlError(error);
       console.error(error);
     }
   };
@@ -121,7 +126,7 @@ export const getWorks = (isAdmin) => {
         payload: data.data,
       });
     } catch (error) {
-      HandlError(error) 
+      HandlError(error);
       console.error(error);
     }
   };
@@ -135,7 +140,7 @@ export const getWorkById = (id) => {
         payload: data.data,
       });
     } catch (error) {
-      HandlError(error) 
+      HandlError(error);
       console.error(error);
     }
   };
@@ -181,8 +186,8 @@ export const getStoredImgs = () => {
   };
 };
 
-export const getAdminMedia = ()=>{
-  return async (dispatch)=>{
+export const getAdminMedia = () => {
+  return async (dispatch) => {
     try {
       const data = await axios(`/api/v1/media/admin/videos`, setAuthHeader());
       return dispatch({
@@ -190,10 +195,10 @@ export const getAdminMedia = ()=>{
         payload: data.data,
       });
     } catch (error) {
-      HandlError(error) 
+      HandlError(error);
       console.error(error);
     }
-  }
+  };
 };
 export const getMediaById = (id) => {
   return async (dispatch) => {
@@ -204,7 +209,7 @@ export const getMediaById = (id) => {
         payload: data.data,
       });
     } catch (error) {
-      HandlError(error) 
+      HandlError(error);
       console.error(error);
     }
   };
