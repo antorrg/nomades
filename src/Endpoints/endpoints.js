@@ -135,10 +135,10 @@ export const userDelete = (id, aux, auxReject) =>
 
 //todo Endpoints Media:
 const media = new BaseEndpoints("/api/v1/media", true);
-export const getImages = () => media.get("img", null, null,);
+export const getImages = () => media.get("imgs", null, null,);
 
 export const deleteImage = (id, aux, auxReject) =>
-  media.delete(`img/${id}`, aux, auxReject);
+  media.delete(`imgs/${id}`, aux, auxReject);
 
 export const createVideo = (data, aux, auxReject) =>
   media.post(
@@ -173,4 +173,4 @@ export const createWorks = (data, aux, auxReject) => workAdmin.post(`create`, da
 
 export const updateWorks = (id, data, aux, auxReject) => workAdmin.put(`${id}`, data, aux, auxReject) 
 
-export const deleteWorks = (id, auxReject) => workAdmin.delete(`${id}`, null, auxReject)
+export const deleteWorks = (id, aux, auxReject) => workAdmin.delete(`${id}`, aux, auxReject)

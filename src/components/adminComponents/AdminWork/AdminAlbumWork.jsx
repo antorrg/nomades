@@ -14,6 +14,9 @@ const AdminAlbumWork = () => {
     dispatch(getWorks(isAdmin));
     dispatch(getStoredImgs());
   }, []);
+  const onDeleted = ()=>{
+    dispatch(getWorks())
+  }
   const deleteWorkItem = async (id) => {
     const confirmed = await showConfirmationDialog(
       "¿Está seguro de eliminar este item?"
@@ -21,7 +24,7 @@ const AdminAlbumWork = () => {
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
       //await updateItem(id, item, onClose);
-      await deleteWorks(id);
+      await deleteWorks(id, onDeleted);
     }
   };
   return (

@@ -9,7 +9,7 @@ const createItemProd = [{name:'img', type: 'string'}, {name:'text', type: 'strin
 const updateProduct = [{name:'title', type: 'string'}, {name:'landing',type: 'string'}, {name:'info_header',type: 'string'}, {name:'info_body',type: 'string'},{ name:'saver',type: 'boolean'}, {name:'enable', type: 'boolean'}, {name:'useImg',type: 'boolean'}];
 
 const createItem = [{name:'img', type: 'string'}, {name:'text', type: 'string'}, {name:'id', type: 'int'}, {name:'useImg',type: 'boolean'}]
-const updateItem = [{name:'img', type: 'string'}, {name:'text', type: 'string'}, {name:'id', type: 'int'}, { name:'saver',type: 'boolean'}, {name: 'enable', type:'boolean'},{name:'useImg',type: 'boolean'}];
+const updateItem = [{name:'img', type: 'string'}, {name:'text', type: 'string'}, { name:'saver',type: 'boolean'}, {name: 'enable', type:'boolean'},{name:'useImg',type: 'boolean'}];
 
 
 const productRouter = express.Router()

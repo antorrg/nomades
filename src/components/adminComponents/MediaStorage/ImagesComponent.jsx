@@ -16,6 +16,7 @@ const ImagesComponent = () => {
 
   const onClose = () => {
     setLoad(false);
+    dispatch(getStoredImgs())
   };
   const onRetry = () => {
     setTimeout(() => {

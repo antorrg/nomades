@@ -29,9 +29,15 @@ const resaveImageFromStorage = async(imageUrl)=>{
     throw error;
   }
 };
+const dataParsed = (info)=>{
+  if(info ==='L'){ eh.throwError('No puede eliminarse, imagen referencial', 404)}
+  return info
+}
+
 const deleteImage = async(data, isId)=>{
+ 
   try {
-    const image = isId? await Image.findByPk(data) : await Image.findOne({where: {imageUrl:data}})
+    const image = isId? await Image.findByPk( dataParsed(data)) : await Image.findOne({where: {imageUrl: dataParsed(data)}})
     if (!image) { eh.throwError('Imagen no hallada', 404)}
     await image.destroy();
     console.log('imagen borrada')
@@ -44,7 +50,7 @@ const getImages = async()=>{
   try {
     const images = await Image.findAll()
     if(!images){eh.throwError('Server error in Images', 500)}
-    if(images.length===0){return [{id: 1, imageUrl : 'https://res.cloudinary.com/dt1lpgumr/image/upload/c_scale,w_auto/f_auto,q_auto/verde1.webp?_a=BAMAH2TE0'}]}
+    if(images.length===0){return [{id: 'L', imageUrl : 'https://res.cloudinary.com/dt1lpgumr/image/upload/c_scale,w_auto/f_auto,q_auto/roja13.webp?_a=BAMAH2TE0'}]}
     return images;
   } catch (error) {
     throw error;

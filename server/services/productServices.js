@@ -233,7 +233,9 @@ delItem: async (id) => {
         // Borrar el Item de la base de datos
         await item.destroy({ transaction: t });
       
-        if(useImages){ await cloud.deleteFromCloudinary(imageUrl)}
+        if(useImages && imageUrl.trim()){ 
+            await cloud.deleteFromCloudinary(imageUrl)
+        }
         await t.commit();
 
         
