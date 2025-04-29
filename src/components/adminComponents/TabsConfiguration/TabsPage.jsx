@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../../Auth/AuthContext";
-import { showSuccess } from "../../../Endpoints/HandlerError";
+import { showSuccess } from "../../../Endpoints/mainFunctions/HandlerError";
 import showConfirmationDialog from "../../../Endpoints/sweetAlert";
 import TabsLayout from "./TabsLayout";
 import * as Comp from "./Index";

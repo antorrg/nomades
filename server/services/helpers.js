@@ -4,7 +4,7 @@ const productCleaner = (data, isObj, isAdmin)=>{
 }
 
 const cleaner = (cont, bl, isAdmin)=>{
-    console.log('soy el cleaner: ', isAdmin)
+    //console.log('soy el cleaner: ', isAdmin)
     const dataItems = bl? filterItem(cont.Items, isAdmin):null
      const items = bl? dataItems.map((it)=> aux(it, false)): null
     const info = {

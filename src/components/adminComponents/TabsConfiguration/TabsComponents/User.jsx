@@ -3,18 +3,29 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../../../redux/actions";
 import { booleanState } from "../../../../utils/generalHelpers";
+import showConfirmationDialog from "../../../../Endpoints/sweetAlert";
+import { userDelete } from "../../../../Endpoints/endpoints";
 
 const Usuario = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const users = useSelector((state) => state.Users);
-
-  const { id } = useParams();
-  const goBack = () => navigate(-1);
-  const isAdmin = true;
   useEffect(() => {
-    dispatch(getAllUsers(isAdmin));
-  }, [id]);
+    dispatch(getAllUsers());
+  }, []);
+
+  const onSuccess = ()=>{
+    dispatch(getAllUsers())
+  }
+ 
+  const deleteUser = async(id)=>{
+    const confirmed = await showConfirmationDialog(
+      "¿Está seguro de eliminar el usuario?"
+    );
+    if (confirmed) {
+      await userDelete(id, onSuccess)
+    }
+
+  }
   return (
     <section className="container album py-1 bg-light mb-3 ">
       <div className=" row py-lg-5">
@@ -50,6 +61,11 @@ const Usuario = () => {
                     {booleanState(info.enable)}
                   </p>
                 </div>
+                <div className="mt-3 mt-lg-0">
+                  <button className="btn btn-sm btn-outline-danger me-3" onClick={()=> deleteUser(info.id)}>
+                    Eliminar 
+                  </button>
+                </div>
                 <p className="mt-3 mt-lg-0">
                   <Link
                     className="btn btn-sm btn-outline-secondary me-3"
@@ -58,6 +74,7 @@ const Usuario = () => {
                     Ver detalles
                   </Link>
                 </p>
+                
               </div>
             </div>
           ))}

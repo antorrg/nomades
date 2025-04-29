@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import * as Arr from "../../../utils/SlickCarousel";
 import { booleanState } from "../../../utils/generalHelpers";
-import { deleteMedia } from "../../../utils/landingPageEndpoints";
+import {deleteVideo } from "../../../Endpoints/endpoints"
 import showConfirmationDialog from "../../../Endpoints/sweetAlert";
 
 const YouTubeVideoView = ({ media }) => {
@@ -42,14 +42,14 @@ const YouTubeVideoView = ({ media }) => {
     return match ? match[1] : null;
   };
   //Borrar video:
-  const deleteVideo = async (id) => {
+  const delVideo = async (id) => {
     const confirmed = await showConfirmationDialog(
       "¿Está seguro de eliminar el item?"
     );
     if (confirmed) {
       // Aquí iría la lógica para actualizar el elemento
 
-      await deleteMedia(id);
+      await deleteVideo(id);
     }
   };
   return (
@@ -118,7 +118,7 @@ const YouTubeVideoView = ({ media }) => {
                 className="mt-2 me-3 w-20"
                 variant="outline-danger"
                 size="sm"
-                onClick={() => deleteVideo(video.id)}
+                onClick={() => delVideo(video.id)}
               >
                 Eliminar
               </Button>

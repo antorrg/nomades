@@ -3,13 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Form } from "react-bootstrap";
 import { getItem } from "../../../../redux/actions";
-import { updateItem } from "../../../../utils/productEndPoints";
+import { updateItem } from "../../../../Endpoints/endpoints";
 import showConfirmationDialog from "../../../../Endpoints/sweetAlert";
 //import "./detailCardUpd.css";
 import ImageUploader from "../../../../utils/ImageUploader";
 import ImageSelector from "../../../../utils/ImageSelector";
 import Loading from "../../../Loading";
-import InfoFormField from "../../InfoFormField";
+
 
 const DetailCardUpd = () => {
   const dispatch = useDispatch();
@@ -19,6 +19,7 @@ const DetailCardUpd = () => {
 
   const [imgUrl, setImgUrl] = useState(false);
   const item1 = useSelector((state) => state.Item);
+
   useEffect(() => {
     dispatch(getItem(id));
   }, [id]);

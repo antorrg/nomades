@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getStoredImgs } from "../../../redux/actions";
 import showConfirmationDialog from "../../../Endpoints/sweetAlert";
-import { deleteImage } from "../../../utils/productEndPoints";
+import { deleteImage } from "../../../Endpoints/endpoints";
 import Loading from "../../Loading";
 
 const ImagesComponent = () => {

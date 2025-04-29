@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import GenericButton from "../../generalComponents/GenericButton/GenericButton";
 import showConfirmationDialog from "../../../Endpoints/sweetAlert";
 import Loading from "../../Loading";
 import ImageUploader from "../../../utils/ImageUploader";
 import ImageSelector from "../../../utils/ImageSelector";
-import { createWorks } from "../../../utils/landingPageEndpoints";
+import { createWorks } from "../../../Endpoints/endpoints";
 import { Form } from "react-bootstrap";
 //import "./productstyle.css";
 

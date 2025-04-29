@@ -1,5 +1,5 @@
 import express from 'express'
-import auth from '../../middlewares/validation/index.js'
+import auth from '../../middlewares/validation/sessionMiddle.js'
 import mid from '../../middlewares/middlewares.js'
 import * as store from './testStore.js'
 import { v4 as uuidv4 } from 'uuid';

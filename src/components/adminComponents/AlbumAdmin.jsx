@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import showConfirmationDialog from "../../Endpoints/sweetAlert";
 import Edition from "../generalComponents/Edition/Edition";
 import GenericButton from "../generalComponents/GenericButton/GenericButton";

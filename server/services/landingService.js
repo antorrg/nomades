@@ -2,6 +2,9 @@ import {Landing} from '../db.js'
 import eh from '../utils/errorHandlers.js'
 import { oldImagesHandler, deleteImage } from "./storage.js";
 import help from './helpers.js'
+import env from '../envConfig.js'
+
+const useImages = (env.Status === 'testing')? false: true;
 
 //ejemplo de implementacion eh.throwError('mensaje', 404)
 
@@ -74,7 +77,7 @@ export default {
 
             const newPage = await page.update(newData)
 
-           if(isImageChanged && imageUrl?.trim()){ await oldImagesHandler(imageUrl, options)}
+           if(useImages && isImageChanged && imageUrl?.trim()){ await oldImagesHandler(imageUrl, options)}
             return newPage;
         } catch (error) {
             throw error;
@@ -87,8 +90,9 @@ export default {
 
             const imageUrl = page.image;
             await page.destroy(page)
-            
-            await oldImagesHandler(imageUrl, false);
+            if(useImages){
+            await oldImagesHandler(imageUrl, false)
+            }
 
             return 'Portada borrada exitosamente';
         } catch (error) {

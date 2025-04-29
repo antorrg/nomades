@@ -9,7 +9,6 @@ const userCreate = [{name:'email', type: 'string'}]
 const userLogin = [{name:'email', type: 'string'}, {name:'password', type: 'string'}]
 const userUpd = [{name:'email', type: 'string'}, {name:'given_name', type: 'string'}, {name:'picture', type: 'string'}, {name:'country', type: 'string'},]
 const userUpgrade = [{name:'role', type: 'string'}, {name:'enable', type: 'boolean'}]
-const resetPassword = [{name:'id', type: 'string'}];
 const changePassword = [{name:'password', type: 'string'}]
 
 
@@ -22,11 +21,11 @@ userRouter.post('/user/create', auth.verifyToken,  auth.checkRole([0, 9]), valid
 userRouter.post('/user/login', logLimiter2, validateFields(userLogin), mdd.loginUser ,ctr.loginController)
 userRouter.get('/user',  auth.verifyToken, auth.checkRole([0, 9]), ctr.getUserController)
 userRouter.get('/user/:id', auth.verifyToken, middUuid, ctr.getUserByIdController)
-userRouter.put('/user/updprofile/:id', auth.verifyToken, middUuid, validateFields(userUpd), ctr.updUserCtr)
+userRouter.put('/user/profile/:id', auth.verifyToken, middUuid, validateFields(userUpd), ctr.updUserCtr)
 userRouter.post('/user/update', auth.verifyToken,  mdd.userVerifyPassMidd, ctr.verifyPassCtr)
 userRouter.put('/user/update/:id', auth.verifyToken,  middUuid, validateFields(changePassword), mdd.userChangePassMidd, ctr.changePassCtr)
-userRouter.patch('/user/upgrade/:id', auth.verifyToken, auth.checkRole([0, 9]), middUuid, validateFields(userUpgrade), ctr.changeStateUserCtr)
-userRouter.post('/user/change', auth.verifyToken, auth.checkRole([0, 9]), validateFields(resetPassword), ctr.resetPassCtr)
+userRouter.put('/user/upgrade/:id', auth.verifyToken, auth.checkRole([0, 9]), middUuid, validateFields(userUpgrade), ctr.changeStateUserCtr)
+userRouter.put('/user/reset/:id', auth.verifyToken, auth.checkRole([0, 9]), middUuid, ctr.resetPassCtr)
 userRouter.delete('/user/:id', auth.verifyToken, middUuid, ctr.delUserCtr)
 
 export default userRouter;

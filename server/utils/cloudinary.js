@@ -102,7 +102,7 @@ async function deleteFromCloudinary(imageUrl) {
         result
       };
     } else {
-     throw new Error(result)
+      eh.throwError('Error al eliminar imagen', 500)
     }
   } catch (error) {
     throw error;

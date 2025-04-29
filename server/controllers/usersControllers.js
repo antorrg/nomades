@@ -40,7 +40,7 @@ export default {
     res.status(200).json(response);
   }),
   resetPassCtr: eh.catchAsync(async (req, res) => {
-    const { id } = req.body;
+    const { id } = req.params;
     const response = await sv.userResetPass(id);
     res.status(200).json(response);
   }),

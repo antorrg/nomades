@@ -2,16 +2,35 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
  
  
-   const HandlError = (error) => {
+  //  const HandlError = (error) => {
+  //   if (error.response) {
+  //     const status = error.response.status;
+  //     const data = error.response.data;
+  //     toast.error(`Error ${status}. ${data}`);
+  //   } else if (error.request) {
+  //     // La solicitud fue realizada pero no se recibió respuesta
+  //     toast.error('No se recibió respuesta del servidor.');
+  //    } 
+  // };
+  const HandlError = (error) => {
     if (error.response) {
       const status = error.response.status;
       const data = error.response.data;
-      toast.error(`Error ${status}. ${data}`);
+      const msg = typeof data === 'string' ? data : data?.message || 'Error desconocido';
+      toast.error(`Error ${status}. ${msg}`, {
+        toastId: `error-${status}-${msg}`,
+      });
     } else if (error.request) {
-      // La solicitud fue realizada pero no se recibió respuesta
-      toast.error('No se recibió respuesta del servidor.');
-     } 
+      toast.error('No se recibió respuesta del servidor.', {
+        toastId: 'no-response',
+      });
+    } else {
+      toast.error('Ocurrió un error inesperado.', {
+        toastId: 'unexpected',
+      });
+    }
   };
+  
 
 
 

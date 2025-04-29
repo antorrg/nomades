@@ -1,0 +1,7 @@
+{
+    "watch": ["server"],
+    "ignore": ["node_modules", "public", "dist", "client", "src", "vite.config.js"],
+    "ext": "js,json",
+    "verbose": false
+}
+  

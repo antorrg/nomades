@@ -3,8 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct, getProductById } from "../../redux/actions";
 import GenericButton from "../generalComponents/GenericButton/GenericButton";
-import * as Comp from "../IndexComponents";
-import * as Ad from "./AdminIndex";
+import {Marketing} from "../IndexComponents";
+import {AlbumAdmin} from "./AdminIndex";
 
 const ProductComp = () => {
   const navigate = useNavigate();
@@ -29,11 +29,11 @@ const ProductComp = () => {
     <div>
       <div className="container marketing">
         {id ? (
-          <Ad.AlbumAdmin info={info} items={items} />
+          <AlbumAdmin info={info} items={items} />
         ) : (
           <>
             <div className="featurette-divider"></div>
-            <Comp.Marketing products={products} param={"admin/product"} />
+            <Marketing products={products} param={"admin/product"} />
           </>
         )}
         <GenericButton

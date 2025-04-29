@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getWorkById } from "../../../redux/actions";
-import { updateWorks } from "../../../utils/landingPageEndpoints";
+import { updateWorks } from "../../../Endpoints/endpoints";
 import { Form } from "react-bootstrap";
 import showConfirmationDialog from "../../../Endpoints/sweetAlert";
-//import "../AdminItems/edition/detailCardUpd.css"
 import ImageUploader from "../../../utils/ImageUploader";
 import Loading from "../../Loading";
 import ImageSelector from "../../../utils/ImageSelector";

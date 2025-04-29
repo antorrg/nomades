@@ -1,0 +1,29 @@
+         LandingPublic
+         ProductsPublic
+         ProductIdPublic
+         ItemPublic
+         MediaPublic
+         WorksPublic
+
+    PUB_LANDING,
+    PUB_PRODUCT,
+    PUB_PROD_ID,
+    PUB_ITEM,
+    PUB_MEDIA,
+    PUB_WORKS,
+
+
+    actions:
+
+    getLanding
+    getProducts
+    getProductDetail
+    getPubItem
+    getPubMedia
+    getPubMediaDet
+    getPubworks
+    pubClean
+
+    resumen de imports:
+  TabsPage, ProductComp, ProductCreate, ProductEdition, AdminItem, ItemCreate, DetailCardUpd, UserComp, UserCreate, UserUpgrade, EditPassword, UserComp, UserEdition, UserComp, ImagesComponent, CreateWork, OurWorkEdit, CreateLanding, LandEdition, MediaCreate,MediaUpdate, HelpView  
+

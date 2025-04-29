@@ -46,11 +46,19 @@ server.use(
           fontSrc: ["'self'", "data:", "https://res.cloudinary.com"],
           objectSrc: ["'none'"], // Desactiva objetos (Flash, etc.)
           upgradeInsecureRequests: [], // Fuerza HTTPS
+          frameAncestors: ["'none'"], // Esto impide que OTROS sitios te embezan
+          frameSrc: [
+            "https://www.youtube.com",
+            "https://www.instagram.com",
+            "https://www.facebook.com"
+          ]
         },
       },
     })
   );
-
+server.use(
+    helmet.frameguard({ action: "deny" })
+  );
 server.use(express.json());
 server.use(sm.validJson);
 server.use(express.static(path.join(dirname, 'dist')))

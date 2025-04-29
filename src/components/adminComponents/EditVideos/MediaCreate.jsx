@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import showConfirmationDialog from "../../../Endpoints/sweetAlert";
 import InfoFormField from "../../adminComponents/InfoFormField";
 import * as val from "../../../utils/videoValidate";
-import { createMedia } from "../../../utils/landingPageEndpoints";
+import {createVideo} from '../../../Endpoints/endpoints'
 import Loading from "../../Loading";
 
 const MediaCreate = () => {
@@ -54,7 +54,7 @@ const MediaCreate = () => {
     );
     if (confirmed) {
       // Aquí iría la lógica para crear el producto
-      await createMedia(item, onClose);
+      await createVideo(item, onClose);
       setLoad(true);
     }
   };

@@ -1,13 +1,9 @@
 import { User } from "../db.js";
 import eh from '../utils/errorHandlers.js'
-import { oldImagesHandler } from "./storage.js";
 import bcrypt from "bcrypt";
 import jwt from '../middlewares/validation/sessionMiddle.js'
 import env from "../envConfig.js";
 import help from "./helpers.js";
-import NodeCache from "node-cache";
-
-const cache = new NodeCache({ stdTTL: 3600 }); // TTL (Time To Live) de una hora
 
 export default {
   userCreate: async (email1, password1, role1) => {
@@ -65,16 +61,11 @@ export default {
   },
 
   getUsersById: async (id) => {
-     // Intento obtener los datos del caché
-    //  let cachedUser = cache.get(`userById_${id}`);
-    //  if (cachedUser) {
-    //    return cachedUser;
-    //  }
+   
     try {
       const userFound = await User.findByPk(id);
       if (!userFound) {eh.throwError('Usuario no hallado', 404)}
       const userDetail =  help.userParser(userFound, true, true);
-      //cache.set(`userById_${id}`, userDetail);
       return userDetail;
     } catch (error) {
       throw error;
@@ -82,16 +73,12 @@ export default {
   },
 
   userUpd: async (id, newData) => {
-    //let imageStore = "";
     const options = help.optionImage(newData.saver)
     try {
       const user = await User.findByPk(id);
       if (!user) {eh.throwError('Usuario no hallado', 404)}
       const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion
       const nickname1 =  newData.email.split("@")[0];
-      //Verifica si se esta actualizando la imagen
-      // if (newData.picture !== user.picture) {
-      //         imageStore = user.picture}
       const updInfo = {
         email: edit? user.email : newData.email,
         nickname: edit? user.nickname : nickname1,
@@ -100,11 +87,6 @@ export default {
         country: newData.country,
       };
       const userUpdated = await user.update(updInfo);
-      //const pictureOld = await oldImagesHandler(imageStore, options)
-      //if(pictureOld.success===false){eh.throwError('Error al procesar imagen antigua', 500)}
-      //       if (userUpdated) {
-      //    cache.del(`userById_${id}`);
-      //  }
      
       return help.userParser(userUpdated, true, true);
     } catch (error) { throw error; }
@@ -130,8 +112,7 @@ export default {
       if(edit){eh.throwError('No se puede cambiar la contraseña a este usuario. Accion no permitida', 403)}
       const hashedPassword = await bcrypt.hash(password, 12);
       const newData = { password: hashedPassword };
-      const newUser = await user.update(newData);
-      //if (newUser) {cache.del(`userById_${id}`)}
+      await user.update(newData);
       return "Contraseña actualizada exitosamente";
     } catch (error) { throw error; }
   },
@@ -146,7 +127,7 @@ export default {
       const hashedPassword = await bcrypt.hash(password, 12);
       const newData = { password: hashedPassword };
       const newUser = await user.update(newData);
-      if (newUser) //{cache.del(`userById_${id}`)}
+      if (newUser) 
       return "Contraseña reiniciada exitosamente";
     } catch (error) { throw error; }
   },
@@ -171,7 +152,6 @@ export default {
       };
       const userUpdated = await user.update(updInfo);
       if (userUpdated) {
-        //cache.del(`userById_${id}`);
       }
       return help.userParser(userUpdated, true, true);
     } catch (error) { throw error; }
@@ -184,7 +164,6 @@ export default {
       const edit = help.protectProtocol(user) // Proteger al superusuario contra edicion
       if(edit){eh.throwError('No se puede eliminar a este usuario', 403)}
       await user.destroy(id);
-      //cache.del(`userById_${id}`)
       return { message: "Usuario borrado exitosamente" };
     } catch (error) { throw error;}
   },

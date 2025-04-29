@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getWorks, getStoredImgs } from "../../../redux/actions";
 import showConfirmationDialog from "../../../Endpoints/sweetAlert";
-import { deleteWorks } from "../../../utils/landingPageEndpoints";
+import { deleteWorks } from "../../../Endpoints/endpoints";
 
 const AdminAlbumWork = () => {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { showSuccess, showError } from "../Endpoints/HandlerError";
+import { showSuccess, showError } from "../Endpoints/mainFunctions/HandlerError";
 import InfoFormField from "../components/adminComponents/InfoFormField";
 import { imageUpladmessage } from "../infoHelpers";
 

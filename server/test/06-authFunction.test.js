@@ -1,8 +1,6 @@
 import validServer from './helperTest/validServer.js'
 import request from 'supertest'
 import * as store from './helperTest/testStore.js'
-import { v4 as uuidv4 } from 'uuid';
-import auth from '../middlewares/validation/index.js'
 
 
 describe('Test de middlewares de autenticacion y autorizacion', ()=>{

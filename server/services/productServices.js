@@ -1,10 +1,10 @@
 import { Product, Item, sequelize } from "../db.js";
 import eh from '../utils/errorHandlers.js'
 import * as cloud from "./storage.js";
-import NodeCache from "node-cache";
 import help from "./helpers.js";
+import env from '../envConfig.js'
 
-const cache = new NodeCache({ stdTTL: 1800 }); // TTL (Time To Live) de media hora
+const useImages = (env.Status === 'testing')? false: true;
 
 
 export default {
@@ -59,12 +59,7 @@ try {
 
 getProduct : async (admin) => {
     try {
-        let products = cache.get('products');
-        if (products &&!admin) {
-                       return {products: products,
-                               cache: true 
-                              }
-                        }// Devolver los datos en caché si existen}
+        
         let dataFound = await Product.findAll({
             raw:true,
             where: admin ? {} :{ enable: true },
@@ -72,7 +67,6 @@ getProduct : async (admin) => {
         if(!dataFound){eh.throwError('Dato no hallado', 404)}
         if(dataFound.length === 0){dataFound = help.dataEmptyPage()}
         const data = help.productCleaner(dataFound, false, admin)
-        if(!admin){cache.set('products', data);}
         return {products: data,
                 cache: false
                 }
@@ -106,9 +100,10 @@ updProduct : async (id, newData) => {
     const options = help.optionImage(newData.saver)
     const useImgs = help.optionImage(newData.useImg)
     let imageUrl= ''
+    
     try {
         const productFound = await Product.findByPk(id);
-        if(!productFound){eh.throwError('Error inesperado, dato no hallado!',404)}
+        if(!productFound){eh.throwError('Error inesperado, producto no hallado!',404)}
         //Capturar imagen y resolver posible actualizacion
         const originalImage = productFound.landing;
         const isImageChanged = originalImage !== newData.landing;
@@ -117,7 +112,6 @@ updProduct : async (id, newData) => {
         if(useImgs){await cloud.deleteImage(newData.landing, false)}; 
         const parsedData = {
             title: newData.title,
-            logo: newData.logo,
             landing: newData.landing,
             info_header: newData.info_header,
             info_body: newData.info_body,
@@ -127,13 +121,10 @@ updProduct : async (id, newData) => {
 
         const productUpd = await productFound.update(parsedData)
 
-        if (isImageChanged) {
+        if (useImages && isImageChanged) {
             await cloud.oldImagesHandler(imageUrl, options);
         }
-
-        if (productUpd) {
-            cache.del('products');
-            }
+ 
         return productUpd;
     } catch (error) {throw error;}
 },
@@ -160,10 +151,10 @@ updItem: async (id, newData)=>{
 
     const itemUpd = await itemFound.update(parsedData)
 
-    if (isImageChanged && imageUrl?.trim()) {
+    if (useImages && isImageChanged && imageUrl?.trim()) {
         await cloud.oldImagesHandler(imageUrl, options);
     }
-    cache.del('products')
+
     return itemUpd
     } catch (error) {throw error;}
 },
@@ -195,13 +186,13 @@ delProduct: async (id) => {
   // Después de operaciones exitosas en DB, borrar imágenes de Cloudinary
 
     // Borrado de imagen principal si existe
-    if (imageUrl.trim()) {
+    if (useImages && imageUrl.trim()) {
         // Si la función deleteFromCloudinary devuelve una promesa, puedes esperar su resolución
         await cloud.deleteFromCloudinary(imageUrl);
       }
       
       // Borrar imágenes de items si existen
-      if (itemImages.length > 0) {
+      if (useImages && itemImages.length > 0) {
         // NOTA: Usamos map directamente para crear un array plano de promesas
         const deletePromises = itemImages.map(imgUrl => cloud.deleteFromCloudinary(imgUrl));
         results = await Promise.allSettled(deletePromises);
@@ -214,10 +205,9 @@ delProduct: async (id) => {
         }
       }
         await transaction.commit();
-        cache.del('products')
         return { 
             message: 'Producto y sus items asociados borrados exitosamente',
-            imagenesBorradas: results.filter(r => r.status === 'fulfilled').length
+            imagenesBorradas: results.filter(r => r.status === 'fulfilled').length|| null
         };
 
     } catch (error) {
@@ -229,10 +219,10 @@ delProduct: async (id) => {
 },
 
 delItem: async (id) => {
-    let transaction;
+    let t;
     let imageUrl = ""
     try {
-        transaction = await sequelize.transaction();
+        t = await sequelize.transaction();
 
         // Buscar el Item
         const item = await Item.findByPk(id);
@@ -241,19 +231,19 @@ delItem: async (id) => {
         }
         imageUrl = item.img
         // Borrar el Item de la base de datos
-        await item.destroy({ transaction });
+        await item.destroy({ transaction: t });
       
-        await transaction.commit();
+        if(useImages){ await cloud.deleteFromCloudinary(imageUrl)}
+        await t.commit();
 
-        if(imageUrl.trim()){ await cloud.deleteFromCloudinary(imageUrl)}
         
         return {
             message: 'Item borrado exitosamente',
         };
 
     } catch (error) {
-        if (transaction) {
-            await transaction.rollback();
+        if (error && t) {
+            await t.rollback();
         }
         throw error;
     }

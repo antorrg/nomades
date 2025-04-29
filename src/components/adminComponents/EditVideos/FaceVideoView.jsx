@@ -4,9 +4,9 @@ import { Container, Row, Col, Ratio, Button } from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import * as Arr from "../../../utils/SlickCarousel";
+import {sliderSettings} from "../../../utils/SlickCarousel";
 import { booleanState } from "../../../utils/generalHelpers";
-import { deleteMedia } from "../../../utils/landingPageEndpoints";
+import {deleteVideo } from "../../../Endpoints/endpoints"
 import showConfirmationDialog from "../../../Endpoints/sweetAlert";
 
 const FaceVideoView = ({ media }) => {
@@ -37,13 +37,13 @@ const FaceVideoView = ({ media }) => {
   };
 
   //Borrar video:
-  const deleteVideo = async (id) => {
+  const delVideo = async (id) => {
     const confirmed = await showConfirmationDialog(
       "¿Está seguro de eliminar el item?"
     );
     if (confirmed) {
       // Aquí iría la lógica para actualizar el elemento
-      await deleteMedia(id);
+      await deleteVideo(id);
     }
   };
 
@@ -86,7 +86,7 @@ const FaceVideoView = ({ media }) => {
 
       {/* Lista de Miniaturas con Botones */}
       <Row className="mt-4">
-        <Slider {...Arr.sliderSettings}>
+        <Slider {...sliderSettings}>
           {videoList.map((video) => (
             <div key={video.id} xs={4} md={3} className="p-2">
               <Ratio aspectRatio="16x9">
@@ -121,7 +121,7 @@ const FaceVideoView = ({ media }) => {
                 className="mt-2 me-3 w-20"
                 variant="outline-danger"
                 size="sm"
-                onClick={() => deleteVideo(video.id)}
+                onClick={() => delVideo(video.id)}
               >
                 Eliminar
               </Button>

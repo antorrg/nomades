@@ -5,12 +5,12 @@ import { getProductById, getStoredImgs } from "../../../redux/actions";
 import { updateProduct } from "../../../Endpoints/endpoints";
 import showConfirmationDialog from "../../../Endpoints/sweetAlert";
 import { Form } from "react-bootstrap";
-import * as Ad from "../../adminComponents/AdminIndex";
+import {InfoFormField} from "../../adminComponents/AdminIndex";
 //import "./productstyle.css";
 import ImageUploader from "../../../utils/ImageUploader";
 import ImageSelector from "../../../utils/ImageSelector";
 import Loading from "../../Loading";
-import * as Inf from "../../../infoHelpers";
+import {aboutSeo} from "../../../infoHelpers";
 
 const ProductEdition = () => {
   const dispatch = useDispatch();
@@ -103,6 +103,7 @@ const ProductEdition = () => {
     if (confirmed) {
       // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
       await updateProduct(id, product, onClose, onRetry);
+      console.log('update: ',product)
       setLoad(true);
     }
   };
@@ -159,7 +160,7 @@ const ProductEdition = () => {
                   <label htmlFor="info_header" className="form-label">
                     Info posicionamiento:
                   </label>
-                  <Ad.InfoFormField action={"hover"} info={Inf.aboutSeo} />
+                  <InfoFormField action={"hover"} info={aboutSeo} />
                   <textarea
                     className="form-control"
                     type="text"

@@ -66,8 +66,7 @@ export default {
 
   getItemById: eh.catchAsync(async (req, res) => {
     const { id } = req.params;
-    const admin = req.admin;
-    const response = await serv.getDetail(id, admin);
+    const response = await serv.getDetail(id);
     res.status(200).json(response);
   }),
 };

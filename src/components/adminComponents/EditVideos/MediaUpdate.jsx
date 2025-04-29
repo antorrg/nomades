@@ -5,7 +5,7 @@ import { getMediaById, cleanState } from "../../../redux/actions";
 import showConfirmationDialog from "../../../Endpoints/sweetAlert";
 import InfoFormField from "../../adminComponents/InfoFormField";
 import * as val from "../../../utils/videoValidate";
-import { updateMedia } from "../../../utils/landingPageEndpoints";
+import {updateVideo} from '../../../Endpoints/endpoints'
 import Loading from "../../Loading";
 
 const MediaUpdate = () => {
@@ -90,7 +90,7 @@ const MediaUpdate = () => {
     if (confirmed) {
       // Aquí iría la lógica para actualizar el elemento
       //console.log("Elemento actualizado:", item);
-      await updateMedia(id, item, onClose, onRetry);
+      await updateVideo(id, item, onClose, onRetry);
       setLoad(true);
     }
   };

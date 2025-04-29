@@ -84,18 +84,18 @@ describe('Funciones de Service/ product. CRUD basico completo de ambas tablas.',
             }) 
         })
     })
-    xdescribe('Funcion de borrado "delItem".', ()=>{
+    describe('Funcion de borrado "delItem".', ()=>{
         it('Deberia borrar un item especifico (borrado fisico)', async()=>{
             const id = 1
             const response = await prd.delItem(id)
             expect(response).toEqual({ message: 'Item borrado exitosamente' })
         })
     })
-    xdescribe('Funcion de borrado "delProduct".', ()=>{
+    describe('Funcion de borrado "delProduct".', ()=>{
         it('Deberia borrar a product y todos sus items asociados (borrado fisico)', async()=>{
             const id = 1
             const response = await prd.delProduct(id)
-            expect(response).toEqual({ message: 'Producto y sus items asociados borrados exitosamente' })
+            expect(response.message).toBe('Producto y sus items asociados borrados exitosamente' )
         })
     })
     
