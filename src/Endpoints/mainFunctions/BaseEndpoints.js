@@ -51,7 +51,7 @@ class BaseEndpoints {
     }
   }
 
-  async put(endpoint, data = {}, auxFunction = null, rejectFunction = null, message = 'Actualización exitosa') {
+  async put(endpoint, data = {}, auxFunction = null, rejectFunction = null, message ='Actualización exitosa') {
     try {
       const config = this.setAuthHeader();
       const response = await axios.put(`${this.baseURL}/${endpoint}`, data, config);
