@@ -46,13 +46,10 @@ export const landingUpdate = (id, data, aux, auxReject) =>
     `${id}`,
     data,
     aux,
-    true,
     auxReject,
     "Portada actualizada exitosamente"
   );
 
-export const landingDelete = (id, aux, auxReject) =>
-  landingAdmin.delete(`/${id}`, aux, true, auxReject);
 
 //todo Endpoints Product:
 

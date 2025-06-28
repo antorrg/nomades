@@ -50,7 +50,7 @@ const LandEdition = () => {
         info_header: item1.info_header || "",
         description: item1.description || "",
         saver: item1.saver || false,
-        useImg: item1.useImg || false,
+        useImg: item1.useImg || false
       });
     }
   }, [item1]);

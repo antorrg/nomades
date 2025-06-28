@@ -4,7 +4,7 @@ import auth from '../middlewares/validation/sessionMiddle.js'
 import {validateFields, middIntId} from "../middlewares/baseMiddFunctions.js"
 
 const landCreate = [{name:'title', type:'string'}, {name:'image', type:'string'}, {name:'info_header', type:'string'}, {name:'description', type:'string'},{name: 'useImg', type:'boolean'}]
-const landUpdate = [{name:'title', type:'string'}, {name:'image', type:'string'}, {name:'info_header', type:'string'}, {name:'description', type:'string'}, {name:'saver', type: 'boolean'}, {name: 'useImg', type:'boolean'}, {mame:'enable', type:'boolean'}]
+const landUpdate = [{name:'title', type:'string'}, {name:'image', type:'string'}, {name:'info_header', type:'string'}, {name:'description', type:'string'}, {name:'saver', type: 'boolean'}, {name: 'useImg', type:'boolean'}]
 
 
 const landingRouter = express.Router()
