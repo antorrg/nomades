@@ -16,7 +16,7 @@ const MailReject = ({retry}) => {
                 Por favor, inténtelo nuevamente en unos minutos...
               </p>
               <button
-                  className="btn btn-md btn-danger mb-3 me-2"
+                  className="btn btn-sm btn-danger mb-3 me-2"
                   type="button" 
                   onClick={retry}
                 >

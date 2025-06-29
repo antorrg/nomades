@@ -37,19 +37,32 @@ const CreateWork = () => {
     const { name, value } = event.target;
     setItem((prevItem) => ({ ...prevItem, [name]: value }));
   };
+  // const handleImgUrlSwitchChange = () => {
+  //   setImgUrl((prev) => {
+  //     const newValue = !prev; // Invertir el estado actual de imgUrl
+
+  //     // Actualizar useImg según el nuevo valor de imgUrl
+  //     setItem((prevItem) => ({
+  //       ...prevItem,
+  //       useImg: newValue, // Establecer useImg en true o false
+  //     }));
+
+  //     return newValue; // Retornar el nuevo valor de imgUrl
+  //   });
+  // };
   const handleImgUrlSwitchChange = () => {
-    setImgUrl((prev) => {
-      const newValue = !prev; // Invertir el estado actual de imgUrl
+  setImgUrl((prev) => {
+    const newValue = !prev;
 
-      // Actualizar useImg según el nuevo valor de imgUrl
-      setItem((prevItem) => ({
-        ...prevItem,
-        useImg: newValue, // Establecer useImg en true o false
-      }));
+    setItem((prevItem) => ({
+      ...prevItem,
+      useImg: newValue,
+      image: newValue ? "" : "", // Resetear la imagen al cambiar de modo
+    }));
 
-      return newValue; // Retornar el nuevo valor de imgUrl
-    });
-  };
+    return newValue;
+  });
+};
 
   const handleSubmit = async (e) => {
     const confirmed = await showConfirmationDialog(
@@ -125,16 +138,16 @@ const CreateWork = () => {
                 </div>
                 <div className="d-flex flex-row me-3">
                   <GenericButton
-                    className="btn btn-secondary mb-3 me-2"
-                    buttonText="Cancelar"
-                    onClick={itemOnClose}
-                  />
-                  <GenericButton
-                    className="btn btn-primary mb-3 me-2"
+                    className="btn btn-md btn-primary mb-3 me-2"
                     type="button"
                     onClick={handleSubmit}
                     buttonText="Crear"
                     disabled={permit}
+                  />
+                  <GenericButton
+                    className="btn btn-md btn-secondary mb-3 me-2"
+                    buttonText="Cancelar"
+                    onClick={itemOnClose}
                   />
                 </div>
               </section>

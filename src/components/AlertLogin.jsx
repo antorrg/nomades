@@ -27,10 +27,10 @@ function AlertLogout({logout}) {
         </p>
         <hr />
         <div className="d-flex flex-row justify-content-between items-center">
-          <Button onClick={() => navigate('/')} variant="outline-secondary">
+          <Button onClick={() => navigate('/')} variant="outline-secondary" size="sm">
             Salir
           </Button>
-          <Button onClick={() => sessionCleaner()} variant="outline-primary">
+          <Button onClick={() => sessionCleaner()} variant="outline-primary" size="sm">
             Cerrar sesion
           </Button>
         </div>

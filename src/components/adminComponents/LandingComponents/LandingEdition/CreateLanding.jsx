@@ -110,13 +110,13 @@ const CreateLanding = () => {
                 </div>
                 <div className="d-flex flex-row me-3">
                   <GenericButton
-                    className="btn btn-primary mb-3 me-2"
+                    className="btn btn-md btn-primary mb-3 me-2"
                     type="button"
                     onClick={handleSubmit}
                     buttonText="Crear"
                   />
                   <GenericButton
-                    className="btn btn-secondary mb-3 me-2"
+                    className="btn btn-md btn-secondary mb-3 me-2"
                     buttonText="Cancelar"
                     onClick={itemOnClose}
                   />

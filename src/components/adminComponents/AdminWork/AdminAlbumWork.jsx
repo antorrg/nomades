@@ -10,6 +10,7 @@ const AdminAlbumWork = () => {
   const featurettes = useSelector((state) => state.Works);
   const isAdmin = true;
 
+
   useEffect(() => {
     dispatch(getWorks(isAdmin));
     dispatch(getStoredImgs());
@@ -22,11 +23,10 @@ const AdminAlbumWork = () => {
       "¿Está seguro de eliminar este item?"
     );
     if (confirmed) {
-      // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      //await updateItem(id, item, onClose);
       await deleteWorks(id, onDeleted);
     }
   };
+
   return (
     <>
       <section className="container album py-5 bg-light mb-3">
@@ -45,7 +45,7 @@ const AdminAlbumWork = () => {
               <div className="col" key={work.id}>
                 <div className="card shadow-sm">
                   <img
-                    className="card-img-top"
+                    className={`card-img-top ${!work.enable ? 'deactivate' : ''}`}
                     src={work.image}
                     alt="Card image"
                     style={{ maxWidth: "fit-content", height: "auto" }}
@@ -54,6 +54,7 @@ const AdminAlbumWork = () => {
                     <p className="card-text">{work.title}</p>
                     <hr></hr>
                     <p className="card-text text-truncate">{work.text}</p>
+                  
                     <div className="d-flex justify-content-between align-items-center">
                       <div className="btn-group">
                         <button

@@ -9,7 +9,7 @@ const AdminNav = () => {
 
   const profile = () => {
     navigate(`/admin/users/profile/${user.id}`);
-    cerrarOffcanvas();
+    //cerrarOffcanvas();
   };
 
   return (
@@ -31,7 +31,7 @@ const AdminNav = () => {
                   alt="Not found"
                   width="32"
                   height="32"
-                  className="rounded-circle me-2"
+                  className={`rounded-circle me-2 ${user && !user.enable ? 'deactivate' : ''}`}
                 />
                 <strong>
                   {user.given_name ? user.given_name : user.nickname}

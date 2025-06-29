@@ -47,9 +47,9 @@ const DetailCardUpd = () => {
       setItem({
         text: item1.text || "",
         img: item1.img || "",
-        enable: item1.enable || false,
-        saver: item1.saver || false,
-        useImg: item1.useImg || false,
+        enable: typeof item1.enable === "boolean" ? item1.enable : true,
+        saver: typeof item1.saver === "boolean" ? item1.saver : false,
+        useImg: typeof item1.useImg === "boolean"? item1.useImg : false,
       });
     }
   }, [item1]);
@@ -75,20 +75,20 @@ const DetailCardUpd = () => {
       [id]: checked,
     }));
   };
-  const handleImgUrlSwitchChange = () => {
-    setImgUrl((prev) => {
-      const newValue = !prev; // Invertir el estado actual de imgUrl
+   const handleImgUrlSwitchChange = () => {
+  setImgUrl((prev) => {
+    const newValue = !prev;
 
-      // Actualizar useImg según el nuevo valor de imgUrl
-      setItem((prevItem) => ({
-        ...prevItem,
-        useImg: newValue, // Establecer useImg en true o false
-      }));
+    setItem((prevItem) => ({
+      ...prevItem,
+      useImg: newValue,
+      img: newValue ? "" : "", // Resetear la imagen al cambiar de modo
+    }));
 
-      return newValue; // Retornar el nuevo valor de imgUrl
-    });
-  };
-
+    return newValue;
+  });
+};
+ 
   const handleSubmit = async () => {
     // Lógica para actualizar el producto
     const confirmed = await showConfirmationDialog(
@@ -169,7 +169,7 @@ const DetailCardUpd = () => {
                       type="switch"
                       id="saver"
                       checked={item.saver}
-                      label="Active para conservar imagen antigua"
+                      label={item.saver? "Desactive para eliminar imagen antigua": "Active para conservar imagen antigua"}
                       onChange={handleSwitchChange}
                     />
                   </div>

@@ -45,9 +45,9 @@ const OurWorkEdit = () => {
         title: item1.title || "",
         text: item1.text || "",
         image: item1.image || "",
-        enable: item1.enable || true,
-        saver: item1.saver || false,
-        useImg: item1.useImg || false,
+        enable: typeof item1.enable === "boolean" ? item1.enable : true,
+        saver: typeof item1.saver === "boolean" ? item1.saver : false,
+        useImg: typeof item1.useImg === "boolean"? item1.useImg : false,
       });
     }
   }, [item1]);
@@ -73,19 +73,19 @@ const OurWorkEdit = () => {
       [id]: checked,
     }));
   };
-  const handleImgUrlSwitchChange = () => {
-    setImgUrl((prev) => {
-      const newValue = !prev; // Invertir el estado actual de imgUrl
+   const handleImgUrlSwitchChange = () => {
+  setImgUrl((prev) => {
+    const newValue = !prev;
 
-      // Actualizar useImg según el nuevo valor de imgUrl
-      setItem((prevItem) => ({
-        ...prevItem,
-        useImg: newValue, // Establecer useImg en true o false
-      }));
+    setItem((prevItem) => ({
+      ...prevItem,
+      useImg: newValue,
+      image: newValue ? "" : "", // Resetear la imagen al cambiar de modo
+    }));
 
-      return newValue; // Retornar el nuevo valor de imgUrl
-    });
-  };
+    return newValue;
+  });
+};
 
   const handleSubmit = async () => {
     // Lógica para actualizar el producto
@@ -93,8 +93,6 @@ const OurWorkEdit = () => {
       "¿Está seguro de actualizar este item?"
     );
     if (confirmed) {
-      // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
-      //await updateItem(id, item, onClose);
       await updateWorks(id, item, onClose, onRetry);
       setLoad(true);
     }
@@ -168,7 +166,7 @@ const OurWorkEdit = () => {
                       type="switch"
                       id="saver"
                       checked={item.saver}
-                      label="Active para conservar imagen antigua"
+                      label={item.saver? "Desactive para eliminar imagen antigua": "Active para conservar imagen antigua"}
                       onChange={handleSwitchChange}
                     />
                   </div>
@@ -177,14 +175,14 @@ const OurWorkEdit = () => {
                       type="switch"
                       id="enable"
                       checked={item.enable}
-                      label="Desactive para no mostrar"
+                      label={item.enable? "Desactive para no mostrar" : "Active para mostrar"}
                       onChange={handleSwitchChange}
                     />
                   </div>
 
                   <div className="d-flex flex-row me-3">
                     <button
-                      className="btn btn-primary mb-3 me-2"
+                      className="btn btn-md btn-primary mb-3 me-2"
                       type="button"
                       id="submitButton"
                       onClick={handleSubmit}
@@ -192,7 +190,7 @@ const OurWorkEdit = () => {
                       Actualizar
                     </button>
                     <button
-                      className="btn btn-secondary mb-3"
+                      className="btn btn-md btn-secondary mb-3"
                       onClick={() => {
                         onClose();
                       }}

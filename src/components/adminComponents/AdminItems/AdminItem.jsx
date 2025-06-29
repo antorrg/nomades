@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getItem } from "../../../redux/actions";
-import Edition from "../../generalComponents/Edition/Edition";
 import { booleanState } from "../../../utils/generalHelpers";
 //import "../../../views/styles/item.css"
 
@@ -28,7 +27,7 @@ const AdminItem = () => {
           <div className="modal-content">
             <div className="modal-body p-5 text-center">
               <img
-                className="d-block.mx-auto mb-4"
+                className={`d-block.mx-auto mb-4 ${!item.enable? 'deactivate' : ''}`}
                 src={item?.img}
                 alt="image not found"
               />
@@ -40,19 +39,17 @@ const AdminItem = () => {
                 <strong>Estado: </strong> {booleanState(item?.enable)}
               </p>
               <Link
-                className="btn btn-md btn-secondary mt-3 mx-auto w-25"
+                className="btn btn-sm btn-secondary mt-3 mx-auto w-25"
                 to={`/admin/product/${item?.ProductId}`}
               >
                 Cerrar
               </Link>
-              <Edition
-                allowedRoles={["Super Admin", "Administrador"]}
-                onClick={() => {
-                  navigate(`/admin/product/item/update/${item.id}`);
-                }}
-                text={"Editar"}
-                className={"btn btn-md btn-primary mt-3 ms-2 mx-auto w-25"}
-              />
+              <Link 
+                to={`/admin/product/item/update/${item.id}`} 
+                className="btn btn-sm btn-primary mt-3 ms-2 mx-auto w-25"
+                >
+                Editar
+              </Link>
             </div>
           </div>
         </div>

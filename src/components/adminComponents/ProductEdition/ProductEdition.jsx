@@ -52,9 +52,9 @@ const ProductEdition = () => {
         landing: page.info.landing || "",
         info_header: page.info.infoHeader || "",
         info_body: page.info.infoBody || "",
-        enable: page.info.enable || false,
-        saver: page.info.saver || false,
-        useImg: page.info.useImg || false,
+        enable: typeof page.enable === "boolean" ? page.enable : true,
+        saver: typeof page.saver === "boolean" ? page.saver : false,
+        useImg: typeof page.useImg === "boolean"? page.useImg : false,
       });
     }
   }, [page.info]);
@@ -81,19 +81,32 @@ const ProductEdition = () => {
     }));
   };
 
-  const handleImgUrlSwitchChange = () => {
-    setImgUrl((prev) => {
-      const newValue = !prev; // Invertir el estado actual de imgUrl
+  // const handleImgUrlSwitchChange = () => {
+  //   setImgUrl((prev) => {
+  //     const newValue = !prev; // Invertir el estado actual de imgUrl
 
-      // Actualizar useImg según el nuevo valor de imgUrl
-      setProduct((prevProduct) => ({
-        ...prevProduct,
-        useImg: newValue, // Establecer useImg en true o false
-      }));
+  //     // Actualizar useImg según el nuevo valor de imgUrl
+  //     setProduct((prevProduct) => ({
+  //       ...prevProduct,
+  //       useImg: newValue, // Establecer useImg en true o false
+  //     }));
 
-      return newValue; // Retornar el nuevo valor de imgUrl
-    });
-  };
+  //     return newValue; // Retornar el nuevo valor de imgUrl
+  //   });
+  // };
+   const handleImgUrlSwitchChange = () => {
+  setImgUrl((prev) => {
+    const newValue = !prev;
+
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      useImg: newValue,
+      landing: newValue ? "" : "", // Resetear la imagen al cambiar de modo
+    }));
+
+    return newValue;
+  });
+};
 
   const handleSubmit = async () => {
     // Lógica para actualizar el producto
@@ -101,7 +114,6 @@ const ProductEdition = () => {
       "¿Está seguro de actualizar el producto?"
     );
     if (confirmed) {
-      // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
       await updateProduct(id, product, onClose, onRetry);
       console.log('update: ',product)
       setLoad(true);
@@ -205,7 +217,7 @@ const ProductEdition = () => {
                     type="switch"
                     id="saver"
                     checked={product.saver}
-                    label="Active para conservar imagen antigua"
+                    label={product.saver? "Desactive para eliminar imagen antigua": "Active para conservar imagen antigua"}
                     onChange={handleSwitchChange}
                   />
                 </div>

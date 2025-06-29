@@ -168,6 +168,26 @@ min-height: 100vh; /* Asegura que ocupe al menos la altura completa de la pantal
   line-height: 1.6;
 }
 
+.badge-darkgray {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #fff;
+  background-color: #3a3a3a;
+  border: 1px solid #3a3a3a;
+  border-radius: 0.25rem;
+  opacity: 0.6; /* Atenuación visual */
+  pointer-events: none; /* Evita clics si es puramente informativo */
+  user-select: none;
+  text-align: center;
+  vertical-align: middle
+}
+.deactivate {
+  opacity: 0.5;
+  pointer-events: none; /* Opcional: evita interacción */
+}
+
 @media (max-width: 768px){
   .loader {
     width: 30vw;

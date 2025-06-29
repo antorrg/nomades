@@ -8,7 +8,6 @@ import {getInfo, getStoredImgs} from '../../../redux/actions'
 
 const LandingView = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   const info = useSelector((state)=>state.Landing)
   const isAdmin = true
 

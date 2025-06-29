@@ -15,13 +15,13 @@ const Album = ({ info, items }) => {
           <div className="col-lg-6 col-md-8 mx-auto">
             <h1 className="fw-light">Proyecto: {info?.title}</h1>
             <img
-                  className="bd-placeholder-img-fluid"
+                  className={`bd-placeholder-img-fluid ${info && !info.enable? 'deactivate' : ''}`}
                   src={info?.landing}
                   alt="Imagen"
                   style={{ maxWidth: "22rem" }}
                 />
             <p className="lead text-muted">{info?.infoBody}</p>
-            <Link className="btn btn-md btn-outline-darkgray my-2" to="/">
+            <Link className="btn btn-sm btn-outline-darkgray my-2" to="/">
               Volver
             </Link>
           </div>
@@ -33,7 +33,7 @@ const Album = ({ info, items }) => {
             {items?.map((item) => (
                  <div key={item.id} className="col">
                  <div className="card shadow-sm">
-                   <img className="card-img-top" src={item.img} alt="Card image" />
+                   <img className={`card-img-top ${item && !item.enable? 'deactivate' : ''}`} src={item.img} alt="Card image" />
                    <div className="card-body">
                      <p className="card-text">{item.text}</p>
                      <div className="d-flex justify-content-between align-items-center">

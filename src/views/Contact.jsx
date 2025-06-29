@@ -137,10 +137,10 @@ const [error, setError] = useState({
              </div>
              {load?
               <div className="d-flex flex-row me-3">
-              <button className="btn btn-md btn-primary mb-3 me-2" disabled>
+              <button className="btn btn-sm btn-primary mb-3 me-2" disabled>
                 Enviando...
               </button>
-              <button className="btn btn-md btn-outline-darkgray mb-3 me-2" >
+              <button className="btn btn-sm btn-outline-darkgray mb-3 me-2" >
                 <span
                   className="spinner-border spinner-border-sm"
                   role="status"
@@ -153,7 +153,7 @@ const [error, setError] = useState({
             :
               <div className="d-flex flex-row me-3">
                 <button
-                  className="btn btn-md btn-primary mb-3 me-2"
+                  className="btn btn-sm btn-primary mb-3 me-2"
                   type="button"
                   id="submitButton"
                   onClick={handleSubmit}
@@ -162,7 +162,7 @@ const [error, setError] = useState({
                   Enviar
                 </button>
                 <button
-                  className="btn btn-md btn-outline-darkgray mb-3"
+                  className="btn btn-sm btn-outline-darkgray mb-3"
                   onClick={() => {
                     onClose();
                   }}
@@ -170,7 +170,7 @@ const [error, setError] = useState({
                   Cancelar
                 </button>
                 <button
-                className="btn btn-md btn-outline-success mb-3 ms-5 me-2"
+                className="btn btn-sm btn-outline-success mb-3 ms-5 me-2"
                 type="button"
                 onClick={handleWhatsApp}
               >

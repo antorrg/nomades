@@ -81,14 +81,14 @@ const UserCreate = () => {
                 {error.email && <p className="errorMsg">{error.email}</p>}
               </div>
               <button
-                className="btn btn-md btn-primary mb-3 me-2"
+                className="btn btn-sm btn-primary mb-3 me-2"
                 onClick={handleSubmit}
                 disabled={permit}
               >
                 Crear
               </button>
               <button
-                className="btn btn-md btn-secondary mb-3 me-2"
+                className="btn btn-sm btn-secondary mb-3 me-2"
                 onClick={onClose}
               >
                 Volver

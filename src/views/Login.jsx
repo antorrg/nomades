@@ -98,7 +98,7 @@ const Login = () => {
               </button>
               {error.password && <p className='errorMsg'>{error.password}</p>}
             </div>
-            <button className="btn btn-primary w-100 py-2" onClick={handleSubmit} disabled={permit}>Iniciar</button>
+            <button className="btn btn-sm btn-primary w-100 py-2" onClick={handleSubmit} disabled={permit}>Iniciar</button>
             <br></br>
             <br></br>
             <br></br>

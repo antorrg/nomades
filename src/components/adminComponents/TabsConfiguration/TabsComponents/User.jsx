@@ -46,7 +46,7 @@ const Usuario = () => {
               style={{ borderRadius: "0.5rem" }}
             >
               <img
-                className="bd-placeholder-img-fluid ms-2"
+                className={`bd-placeholder-img-fluid ms-2 ${info && !info.enable ? 'deactivate' : ''}`}
                 src={info?.picture}
                 alt="Imagen"
                 style={{ maxWidth: "10rem", borderRadius: "0.5rem 0 0 0.5rem" }}

@@ -154,7 +154,7 @@ const EditPassword = () => {
               </div>
               <GenericButton
                 type="submit"
-                className="btn btn-primary w-80 py-1"
+                className="btn btn-sm btn-primary w-80 py-1"
                 onClick={handleSubmitVerify}
                 buttonText={"Verificar contraseña"}
                 disabled={!inputPass.password}
@@ -220,7 +220,7 @@ const EditPassword = () => {
               </div>
               <GenericButton
                 type="submit"
-                className="btn btn-primary w-80 py-1"
+                className="btn btn-sm btn-primary w-80 py-1"
                 onClick={handleSubmitChange}
                 buttonText={"Cambiar contraseña"}
                 disabled={disabledBy}

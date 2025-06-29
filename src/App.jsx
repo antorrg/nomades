@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, useNavigate, Outlet } from "react-router-dom";
+import { Routes, Route, useNavigate} from "react-router-dom";
 import { useAuth } from "./Auth/AuthContext";
 import { useEffect, useCallback, useState } from "react";
 import interceptor from "./Interceptor";
@@ -123,7 +123,6 @@ function App() {
             path="/admin/product/item/update/:id"
             element={<DetailCardUpd />}
           />
-          <Route path="/admin/users" element={<UserComp />} />
           <Route path="/admin/users/create" element={<UserCreate />} />
           <Route path="/admin/users/upgrade/:id" element={<UserUpgrade />} />
           <Route
@@ -134,7 +133,6 @@ function App() {
           <Route path="/admin/users/update/:id" element={<UserEdition />} />
           <Route path="/admin/users/profile/:id" element={<UserComp />} />
           <Route path="/admin/media/images" element={<ImagesComponent />} />
-          {/* <Route path= '/admin/page' element={<Ad.TabsPage/>}/> */}
           <Route path="/admin/work/create" element={<CreateWork />} />
           <Route path="/admin/work/update/:id" element={<OurWorkEdit />} />
           <Route path="/admin/land/create" element={<CreateLanding />} />

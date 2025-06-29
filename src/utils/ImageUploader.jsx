@@ -94,7 +94,7 @@ const ImageUploader = ({ titleField, imageValue, onImageUpload }) => {
               {file && (
                 <button
                   type="button"
-                  className="btn btn-outline-danger mr-3"
+                  className="btn btn-sm btn-outline-danger mr-3 mt-1 mb-1"
                   onClick={handleDelete}
                 >
                   Borrar selección
@@ -104,7 +104,7 @@ const ImageUploader = ({ titleField, imageValue, onImageUpload }) => {
           )}
           <button
             onClick={handleSubmit}
-            className="btn btn-outline-primary"
+            className="btn btn-sm btn-outline-primary mt-1 mb-1"
             disabled={!file}
           >
             Subir

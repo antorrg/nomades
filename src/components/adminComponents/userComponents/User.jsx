@@ -1,10 +1,9 @@
 import {useState} from 'react'
 import { useNavigate, useLocation } from "react-router-dom";
-import Edition from "../../../components/generalComponents/Edition/Edition";
-import {userResetPass,userDelete } from "../../../Endpoints/endpoints";
+import Edition from "../../generalComponents/Edition/Edition";
+import {userResetPass} from "../../../Endpoints/endpoints";
 import showConfirmationDialog from "../../../Endpoints/sweetAlert";
-import Loading from "../../../components/Loading";
-//import "./user.css";
+import Loading from "../../Loading";
 
 const User = ({ user, isSingleUser }) => {
   const navigate = useNavigate();
@@ -40,7 +39,6 @@ const User = ({ user, isSingleUser }) => {
       "¿Quiere reiniciar su contraseña?"
     );
     if (confirmed) {
-      // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
       userResetPass(user.id, onClose, onRetry);
       setLoad(true)
     }
@@ -51,7 +49,6 @@ const User = ({ user, isSingleUser }) => {
       "¿Quiere eliminar su usuario? \n¡Esta accion no podra deshacerse!"
     );
     if (confirmed) {
-      // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
       userDelete(user.id, onClose);
       setLoad(true)
     }
@@ -71,7 +68,7 @@ const User = ({ user, isSingleUser }) => {
       <Loading/>: null}
       <div className="card shadow-sm p-2">
         <img
-          className="card-img-top"
+          className={`card-img-top ${user && !user.enable ? 'deactivate' : ''}`}
           src={user.picture}
           alt={`${user.nickname}'s profile`}
         />
@@ -91,35 +88,38 @@ const User = ({ user, isSingleUser }) => {
 
           <div className="d-flex justify-content-between align-items-center">
             {isSingleUser ? (
-              <>
+              <div className='userButtons'>
                 <button
-                  className="btn btn-sm btn-outline-success"
+                  className="btn btn-sm btn-outline-success me-2 mb-2 fixed-btn"
                   onClick={goToBack}
+                  title="Volver"
                 >
                   Volver
                 </button>
                 <Edition
                   allowedRoles={["Super Admin", "Administrador"]}
-                  className="btn btn-sm btn-outline-success"
+                  className="btn btn-sm btn-outline-success me-2 mb-2 fixed-btn"
                   userEditId={user.id}
-                  text={isProfileRoute ? "Contraseña" : "Reset Contr"}
+                  text={isProfileRoute ? "Contraseña" : "Reset Contraseña"}
                   onClick={goToPassUpd}
                 />
                 {!isProfileRoute && (
                   <Edition
                     allowedRoles={["Super Admin", "Administrador"]}
-                    className="btn btn-sm btn-outline-danger"
-                    text="Rol-Bloqueo"
+                    className="btn btn-sm btn-outline-danger me-2 mb-2 fixed-btn"
+                    text="Rol-Bloquear"
                     onClick={goToUpgrade}
                   />
                 )}
-                <button
-                  className="btn btn-sm btn-outline-primary"
-                  onClick={goToEdition}
-                >
-                  Editar
-                </button>
-              </>
+                 <Edition
+                    allowedRoles={["Super Admin", "Administrador"]}
+                    userEditId={user.id}
+                    className="btn btn-sm btn-outline-primary me-2 mb-2 fixed-btn"
+                    text="Editar"
+                    onClick={goToEdition}
+                    isDualCondition={true}
+                 />
+              </div>
             ) : (
               <>
                 <button
@@ -127,6 +127,12 @@ const User = ({ user, isSingleUser }) => {
                   onClick={goToDetail}
                 >
                   Detalles
+                </button>
+                 <button
+                  className="btn btn-sm btn-outline-danger"
+                  onClick={userDelete}
+                >
+                  Eliminar
                 </button>
                 <Edition
                   allowedRoles={["Super Admin", "Administrador"]}

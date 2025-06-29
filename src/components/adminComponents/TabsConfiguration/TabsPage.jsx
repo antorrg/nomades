@@ -23,7 +23,7 @@ const TabsPage = () => {
   const handleTabChange = (activeTab) => {
     activeTab === "videos"
       ? navigate(`/admin?tab=videos&subtab=facebook`)
-      : navigate(`/admin?tab=${activeTab}`); // Actualiza la URL.
+      : navigate(`/admin?tab=${activeTab}`);
     setActiveTab(activeTab);
   };
 
@@ -32,7 +32,6 @@ const TabsPage = () => {
       "¿Está seguro de cerrar sesión?"
     );
     if (confirmed) {
-      // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
       showSuccess("Sesión cerrada");
       navigate("/");
       setTimeout(() => {

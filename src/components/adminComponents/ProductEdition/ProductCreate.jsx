@@ -81,19 +81,21 @@ const ProductCreate = () => {
     }));
   };
 
-  const handleImgUrlSwitchChange = () => {
-    setImgUrl((prev) => {
-      const newValue = !prev; // Invertir el estado actual de imgUrl
+ 
+   const handleImgUrlSwitchChange = () => {
+  setImgUrl((prev) => {
+    const newValue = !prev;
 
-      // Actualizar useImg según el nuevo valor de imgUrl
-      setProduct((prevProduct) => ({
-        ...prevProduct,
-        useImg: newValue, // Establecer useImg en true o false
-      }));
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      useImg: newValue,
+      landing: newValue ? "" : "", // Resetear la imagen al cambiar de modo
+    }));
 
-      return newValue; // Retornar el nuevo valor de imgUrl
-    });
-  };
+    return newValue;
+  });
+};
+
   const handleSubmit = async () => {
     const confirmed = await showConfirmationDialog(
       "¿Está seguro de crear el producto?"
@@ -224,7 +226,7 @@ const ProductCreate = () => {
                 </div>
                 <div className="d-flex flex-row me-3">
                   <GenericButton
-                    className="btn btn-outline-success mb-3 me-2"
+                    className="btn btn-md btn-outline-success mb-3 me-2"
                     type="button"
                     onClick={addItem}
                     buttonText="Agregar Item"

@@ -35,7 +35,7 @@ const Producto = () => {
               style={{ borderRadius: "0.5rem" }}
             >
               <img
-                className="bd-placeholder-img-fluid ms-2 mx-auto mx-lg-0"
+                className={`bd-placeholder-img-fluid ms-2 mx-auto mx-lg-0 ${info && !info.enable ? 'deactivate' : ''}`}
                 src={info?.landing}
                 alt="Imagen"
                 style={{ maxWidth: "10rem", borderRadius: "0.5rem 0 0 0.5rem" }}

@@ -56,7 +56,7 @@ const Album = ({ info, items }) => {
               <div className="col-lg-6 col-md-8 mx-auto">
                 <h1 className="fw-light">Proyecto: {info?.title}</h1>
                 <img
-                  className="bd-placeholder-img-fluid"
+                  className={`bd-placeholder-img-fluid ${info && !info.enable ? 'deactivate' : ''}`}
                   src={info?.landing}
                   alt="Imagen"
                   style={{ maxWidth: "22rem" }}
@@ -70,28 +70,29 @@ const Album = ({ info, items }) => {
                 <h4>Estado:</h4>
                 <p className="lead text-muted">{booleanState(info?.enable)}</p>
                 <button
-                  className="btn btn-secondary my-2"
+                  className="btn btn-sm btn-secondary my-2"
                   onClick={() => navigate("/admin?tab=producto")}
                 >
                   Volver
                 </button>
-                <Edition
-                  allowedRoles={["Super Admin", "Administrador"]}
+                <button
+                  className="btn btn-sm btn-primary my-2 ms-2"
                   onClick={toEdition}
-                  text={"Editar"}
-                  className="btn btn-primary my-2 ms-2"
-                />
-                <Edition
-                  allowedRoles={["Super Admin", "Administrador"]}
+                >
+                  Editar
+                </button>
+                 <button
+                  className="btn btn-sm btn-outline-success my-2 ms-2"
                   onClick={itemCreate}
-                  text={"Crear Item"}
-                  className="btn btn-outline-success my-2 ms-2"
-                />
-                <GenericButton
-                  className="btn btn-outline-danger my-2 ms-2"
-                  buttonText={"Eliminar producto"}
+                >
+                  Crear Item
+                </button>
+                 <button
+                  className="btn btn-sm btn-outline-danger my-2 ms-2"
                   onClick={deleteCurrentProduct}
-                />
+                >
+                  Eliminar producto
+                </button>
               </div>
             </div>
           </section>
@@ -102,7 +103,7 @@ const Album = ({ info, items }) => {
                   <div className="col" key={item.id}>
                     <div className="card shadow-sm">
                       <img
-                        className="card-img-top"
+                        className={`card-img-top ${!item.enable ? 'deactivate' : ''}`}
                         src={item.img}
                         alt="Card image"
                       />
@@ -119,15 +120,15 @@ const Album = ({ info, items }) => {
                             >
                               Ver mas
                             </button>
-                            <Edition
-                              allowedRoles={["Super Admin", "Administrador"]}
+                            <button
+                              className="btn btn-sm btn-outline-danger"
                               onClick={() => {
                                 delItem(item.id);
                               }}
-                              text={"Borrar"}
-                              className="btn btn-sm btn-outline-danger"
                               disabled={item.id === 0 ? true : false}
-                            />
+                            >
+                              Borrar
+                            </button>
                           </div>
                         </div>
                       </div>

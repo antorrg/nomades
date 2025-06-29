@@ -33,7 +33,7 @@ const Item = () => {
               />
               <p className="text-muted">{item?.text}</p>
               <Link
-                className="btn btn-md btn-outline-darkgray mt-3 mx-auto w-20"
+                className="btn btn-sm btn-outline-darkgray mt-3 mx-auto w-20"
                 to={`/detalle/${item?.ProductId}`}
               >
                 Cerrar

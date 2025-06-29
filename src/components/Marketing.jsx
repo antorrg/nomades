@@ -6,10 +6,10 @@ const Marketing = ({products, param}) => {
       <div className='row'>
         {products?.map((info)=>
         <div className='col-lg-5' key={info?.id}>
-          <img className='bd-placeholder-img-fluid'  src={info?.landing} alt='Imagen' style={{maxWidth:'22rem'}}/>
+          <img className={`bd-placeholder-img-fluid ${!info.enable? 'deactivate' : ''}`}  src={info?.landing} alt='Imagen' style={{maxWidth:'22rem'}}/>
           <h3 className='fw-normal mt-1'>{info?.title}</h3>
           <p>{info?.infoHeader}</p>
-          <p><Link className='btn btn-md btn-outline-darkgray' to={`/${param}/${info?.id}`}>Ver detalles</Link></p>
+          <p><Link className='btn btn-sm btn-outline-darkgray' to={`/${param}/${info?.id}`}>Ver detalles</Link></p>
         </div>
         )}
       </div>

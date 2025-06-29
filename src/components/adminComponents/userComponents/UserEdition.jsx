@@ -62,12 +62,10 @@ const UserEdition = () => {
   };
 
   const handleSubmit = async () => {
-    // Lógica para actualizar el producto
     const confirmed = await showConfirmationDialog(
       "¿Está seguro de actualizar este usuario?"
     );
     if (confirmed) {
-      // Si el usuario hace clic en "Aceptar", ejecutar la funcion:
       await userProfile(id, user, onClose, onRetry);
       setLoad(true)
     }
@@ -136,7 +134,7 @@ const UserEdition = () => {
                 </div>
                 <div className="d-flex flex-row me-3">
                   <button
-                    className="btn btn-md btn-primary mb-3 me-2"
+                    className="btn btn-sm btn-primary mb-3 me-2"
                     type="button"
                     id="submitButton"
                     onClick={handleSubmit}
@@ -144,7 +142,7 @@ const UserEdition = () => {
                     Actualizar
                   </button>
                   <button
-                    className="btn btn-md btn-secondary mb-3"
+                    className="btn btn-sm btn-secondary mb-3"
                     onClick={() => {
                       onClose();
                     }}

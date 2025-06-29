@@ -12,7 +12,7 @@ const SocialNetworks = () => {
           <p className="lead">
             Puede vernos tambien en Facebook e instagram...
           </p>
-          <Link className="btn btn-md btn-outline-darkgray" to='/videos'>Ver videos...</Link>
+          <Link className="btn btn-sm btn-outline-darkgray" to='/videos'>Ver videos...</Link>
         </div>
         <div className={"col-md-5 order-md-1"}>
           <img

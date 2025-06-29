@@ -49,8 +49,8 @@ const LandEdition = () => {
         image: item1.image || "",
         info_header: item1.info_header || "",
         description: item1.description || "",
-        saver: item1.saver || false,
-        useImg: item1.useImg || false
+        saver: typeof item1.saver === "boolean" ? item1.saver : false,
+        useImg: typeof item1.useImg === "boolean"? item1.useImg : false,
       });
     }
   }, [item1]);
@@ -62,6 +62,19 @@ const LandEdition = () => {
       [name]: value,
     }));
   };
+ const handleImgUrlSwitchChange = () => {
+  setImgUrl((prev) => {
+    const newValue = !prev;
+
+    setItem((prevItem) => ({
+      ...prevItem,
+      useImg: newValue,
+      image: newValue ? "" : "", // Resetear la imagen al cambiar de modo
+    }));
+
+    return newValue;
+  });
+};
 
   const handleImageChange = (imageUrl) => {
     setItem((prevItem) => ({
@@ -75,19 +88,6 @@ const LandEdition = () => {
       ...prevItem,
       [id]: checked,
     }));
-  };
-  const handleImgUrlSwitchChange = () => {
-    setImgUrl((prev) => {
-      const newValue = !prev; // Invertir el estado actual de imgUrl
-
-      // Actualizar useImg según el nuevo valor de imgUrl
-      setItem((prevItem) => ({
-        ...prevItem,
-        useImg: newValue, // Establecer useImg en true o false
-      }));
-
-      return newValue; // Retornar el nuevo valor de imgUrl
-    });
   };
 
   const handleSubmit = async () => {
@@ -192,7 +192,7 @@ const LandEdition = () => {
 
                   <div className="d-flex flex-row me-3">
                     <button
-                      className="btn btn-primary mb-3 me-2"
+                      className="btn btn-md btn-primary mb-3 me-2"
                       type="button"
                       id="submitButton"
                       onClick={handleSubmit}
@@ -200,7 +200,7 @@ const LandEdition = () => {
                       Editar
                     </button>
                     <button
-                      className="btn btn-secondary mb-3"
+                      className="btn btn-md btn-secondary mb-3"
                       onClick={() => {
                         onClose();
                       }}
