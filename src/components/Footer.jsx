@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { handleWhatsApp } from '../Endpoints/publicEndpoints';
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -8,6 +9,10 @@ const Footer = () => {
     });
   };
 
+  const urlFace= import.meta.env.VITE_URL_FACEBOOK;
+  const urlInstagram = import.meta.env.VITE_URL_INSTAGRAM;
+
+
   return (
     <div className='text-muted py-5'>
       <div className='container'>
@@ -15,15 +20,15 @@ const Footer = () => {
           <div className="col-12">
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
               <div className="d-flex flex-column flex-md-row gap-3 mb-3 mb-md-0">
-                <a href='#' className="d-flex align-items-center text-decoration-none">
-                  <i className="bi bi-facebook text-primary me-2" style={{ fontSize: "1.5rem" }}></i>
+                <a href={urlFace} target="_blank" rel="noopener noreferrer"  className="d-flex align-items-center text-decoration-none">
+                  <i className="bi bi-facebook text-primary me-2" style={{ fontSize: "1.5rem"}}></i>
                   Facebook
                 </a>
-                <a href='#' className="d-flex align-items-center text-decoration-none">
+                <a href={urlInstagram} target="_blank" rel="noopener noreferrer" className="d-flex align-items-center text-decoration-none">
                   <i className="bi bi-instagram text-danger me-2" style={{ fontSize: "1.5rem" }}></i>
                   Instagram
                 </a>
-                <a href='#' className="d-flex align-items-center text-decoration-none">
+                <a href='#' onClick={()=>handleWhatsApp()} className="d-flex align-items-center text-decoration-none">
                   <i className="bi bi-whatsapp text-success me-2" style={{ fontSize: "1.5rem" }}></i>
                   WhatsApp
                 </a>

@@ -24,3 +24,16 @@ export const pbItem = (id) => publicProduct.get(`item/${id}`, null, null)
 export const pbMedia = () => publicMedia.get('', null, null)
 
 export const pbWorks = () => publicWork.get('', null, null)
+
+
+export const handleWhatsApp = () => {
+    const phoneNumber = import.meta.env.VITE_PHONE; // Reemplaza con tu número (incluye código de país)
+    const message = import.meta.env.VITE_MESSAGE // Mensaje predeterminado
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+    window.open(whatsappUrl, '_blank')
+  }
+export const handleFacebook = ()=>{}
+
+export const handleInstagram = ()=> {
+    
+}

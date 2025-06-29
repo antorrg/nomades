@@ -5,7 +5,8 @@ import {Header} from '../components/IndexComponents'
 import { ValidContact } from '../utils/Validate'
 import showConfirmationDialog from '../Endpoints/sweetAlert'
 import MailReject from '../components/MailReject'
-import { sendEmails } from '../Endpoints/publicEndpoints'
+import { sendEmails, handleWhatsApp } from '../Endpoints/publicEndpoints'
+
 
 const Contact = () => {
 const navigate = useNavigate()
@@ -67,14 +68,7 @@ const [error, setError] = useState({
                       error.issue ||
                       error.message;
 
- 
 
-  const handleWhatsApp = () => {
-    const phoneNumber = import.meta.env.VITE_PHONE; // Reemplaza con tu número (incluye código de país)
-    const message = import.meta.env.VITE_MESSAGE // Mensaje predeterminado
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
-    window.open(whatsappUrl, '_blank')
-  }
 
   return (
     <div className="imageBack">
