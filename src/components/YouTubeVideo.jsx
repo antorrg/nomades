@@ -65,8 +65,9 @@ const YouTubeVideo = ({ media }) => {
             <iframe
               src={`https://www.youtube-nocookie.com/embed/${videoId(mainVideo.url)}`}
               title={mainVideo.title}
-                allow="autoplay; fullscreen; encrypted-media"
-                referrerpolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              referrerPolicy="strict-origin-when-cross-origin"
             />
           </Ratio>
         </Col>
@@ -80,9 +81,11 @@ const YouTubeVideo = ({ media }) => {
               <div key={video.id} className="p-2">
                 <Ratio aspectRatio="16x9">
                   <iframe
-                    src={`https://www.youtube.com/embed/${videoId(video.url)}`}
+                    src={`https://www.youtube-nocookie.com/embed/${videoId(video.url)}`}
                     title={`Miniatura ${video.id}`}
                     allowFullScreen
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    referrerPolicy="strict-origin-when-cross-origin"
                   />
                 </Ratio>
                 <Button
