@@ -106,6 +106,7 @@ const Album = ({ info, items }) => {
                         className={`card-img-top ${!item.enable ? 'deactivate' : ''}`}
                         src={item.img}
                         alt="Card image"
+                        style={{maxWidth: '25rem', height:'15rem', objectFit:'cover', objectPosition:'center'}}
                       />
                       <div className="card-body">
                         <p className="card-text">{item.text}</p>
