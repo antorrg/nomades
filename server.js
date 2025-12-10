@@ -31,7 +31,7 @@ server.use(
           defaultSrc: [
             "'self'",
             "https://res.cloudinary.com",
-            "https://www.youtube.com",
+            "https://www.youtube-nocookie.com",
             "https://www.instagram.com",
             "https://www.facebook.com",
           ],
@@ -48,7 +48,7 @@ server.use(
           upgradeInsecureRequests: [], // Fuerza HTTPS
           frameAncestors: ["'none'"], // Esto impide que OTROS sitios te embezan
           frameSrc: [
-            "https://www.youtube.com",
+            "https://www.youtube-nocookie.com",
             "https://www.instagram.com",
             "https://www.facebook.com"
           ]
@@ -57,7 +57,7 @@ server.use(
     })
   );
 server.use(
-    helmet.frameguard({ action: "deny" })
+    helmet.frameguard({ action: "sameorigin" })
   );
 server.use(express.json());
 server.use(sm.validJson);
