@@ -63,9 +63,10 @@ const YouTubeVideo = ({ media }) => {
         <Col xs={12} md={7}>
           <Ratio aspectRatio="16x9">
             <iframe
-              src={`https://www.youtube.com/embed/${videoId(mainVideo.url)}`}
+              src={`https://www.youtube-nocookie.com/embed/${videoId(mainVideo.url)}`}
               title={mainVideo.title}
-              allowFullScreen
+                allow="autoplay; fullscreen; encrypted-media"
+                referrerpolicy="strict-origin-when-cross-origin"
             />
           </Ratio>
         </Col>
