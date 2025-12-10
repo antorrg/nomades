@@ -23,7 +23,7 @@ const cleaner = (cont, bl, isAdmin)=>{
     
 };
 const aux = (info, detailItem,)=>{
-    let trunc = detailItem? info.text : truncateText(info.text, 12)
+    let trunc = detailItem? info.text : truncateText(info.text, 8)
     return {
         id: info.id,
         img: info.img,
